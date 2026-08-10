@@ -33,6 +33,26 @@ them as `titleTa: null` and the topic page renders the English alone.
 
 ## Deviations from the source notes
 
+### Additions this app wrote
+
+The source names the ten topics, their groups and their lessons, and gives
+example sentences. It never says **when** a form is used — so a learner who has
+read a topic's table still does not know when the topic is theirs to reach for.
+
+`USAGE` in `common/api/content.api.ts` adds one sentence per topic saying
+exactly that, in both languages. It is this app's writing, not a transcription:
+
+- **English and Tamil are both authored here.** Nothing was glossed from the
+  notes, so nothing has been put into their mouth.
+- **The Tamil is deliberately plain.** The reader is learning English; a line
+  that explains English must not itself need explaining.
+- It is shown on the topic page only. The topic cards stay at the question and
+  the source's own summary, so ten of them still scan.
+
+The other line the app writes is the question that leads each description —
+"What are Tenses?" — assembled in `describeTopic` from the source's own title
+and summary plus the words `What are` / `என்றால் என்ன`.
+
 ### Corrections carried over from the source
 
 The notes contain mistakes. The app teaches the correct form and records where

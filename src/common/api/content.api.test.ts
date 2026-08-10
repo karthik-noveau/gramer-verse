@@ -5,6 +5,7 @@ import {
   lessonsOfTopic,
   loadContent,
   loadTopics,
+  usageOfTopic,
 } from 'common/api/content.api';
 import { loadLexicon } from 'common/api/props.api';
 import { TAMIL_CASES } from 'common/api/validate';
@@ -314,6 +315,32 @@ describe('the shipped content', () => {
         expect(describeTopic(topic).ta).toContain(String(topic.title.ta));
         expect(describeTopic(topic).ta).toContain(String(topic.summary.ta));
         expect(describeTopic(topic).ta).toContain('என்றால் என்ன?');
+      });
+    });
+  });
+
+  describe('when to use a topic', () => {
+    /* The line is authored per topic and keyed by id, so a topic renamed in
+       the content and not here would quietly lose it. */
+    it('has a line for every one of the ten, in both languages', async () => {
+      const { topics } = await loadContent();
+      const missing = topics.filter((topic) => usageOfTopic(topic) === undefined);
+
+      expect(missing.map((topic) => String(topic.id))).toEqual([]);
+      topics.forEach((topic) => {
+        const usage = usageOfTopic(topic);
+        expect(usage?.en.length ?? 0).toBeGreaterThan(20);
+        expect(usage?.ta.length ?? 0).toBeGreaterThan(10);
+        /* Tamil, not a Latin placeholder standing in for it. */
+        expect(usage?.ta).toMatch(/[஀-௿]/);
+      });
+    });
+
+    it('says when, not what — it does not repeat the summary', async () => {
+      const { topics } = await loadContent();
+
+      topics.forEach((topic) => {
+        expect(usageOfTopic(topic)?.en).not.toBe(String(topic.summary.en));
       });
     });
   });

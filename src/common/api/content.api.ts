@@ -182,6 +182,70 @@ export const outlineOfTopic = (
  * is — which is allowed, and is not the same as inventing a gloss for a row of
  * somebody else's table.
  */
+/**
+ * When you reach for each topic, in one sentence.
+ *
+ * AUTHORED, not from the notes. The source names the topics, groups and
+ * lessons and gives example sentences; it never says when a form is used, so
+ * there was nothing to transcribe and this is written for this app. It is
+ * recorded as an addition in `content/README.md`, which is the rule for
+ * anything invented beyond the source.
+ *
+ * Kept beside `describeTopic` because it is the second half of the same
+ * paragraph, and a topic's prose in two places is a topic's prose that will
+ * disagree with itself.
+ *
+ * Plain Tamil on purpose: the reader is learning English, so the line that
+ * explains English must not itself need explaining.
+ */
+const USAGE: Readonly<Record<string, { readonly en: string; readonly ta: string }>> = Object.freeze({
+  tenses: {
+    en: 'Use it to say whether something is happening now, happened before, or will happen later.',
+    ta: 'இப்போது, முன்பு, பிறகு — எப்போது நடக்கிறது என்பதைச் சொல்ல.',
+  },
+  verbs: {
+    en: 'Use it to name what someone does, or simply is.',
+    ta: 'ஒருவர் என்ன செய்கிறார் என்பதைச் சொல்ல.',
+  },
+  nouns: {
+    en: 'Use it to name a person, place or thing — and to stand in for one you have already named.',
+    ta: 'ஆள், இடம், பொருளின் பெயரைச் சொல்ல; சொன்னதை மீண்டும் சொல்லாமல் இருக்க.',
+  },
+  articles: {
+    en: 'Use it to say whether you mean any one of a thing, or the particular one.',
+    ta: 'ஏதேனும் ஒன்றா, அந்தக் குறிப்பிட்ட ஒன்றா என்பதைச் சொல்ல.',
+  },
+  prepositions: {
+    en: 'Use it to place one thing against another — where it is, or when.',
+    ta: 'ஒரு பொருள் எங்கே, எப்போது இருக்கிறது என்பதைச் சொல்ல.',
+  },
+  'wh-words': {
+    en: 'Use it to ask for the one piece you do not have — who, what, where or why.',
+    ta: 'தெரியாத ஒன்றைக் கேட்க — யார், என்ன, எங்கே, ஏன்.',
+  },
+  adjectives: {
+    en: 'Use it to say which one you mean, by how a thing looks or measures.',
+    ta: 'பொருளின் நிறம், அளவு, தன்மையைச் சொல்ல.',
+  },
+  adverbs: {
+    en: 'Use it to say how, when, or how often the action happens.',
+    ta: 'செயல் எப்படி, எப்போது, எத்தனை முறை நடக்கிறது என்பதைச் சொல்ல.',
+  },
+  conjunctions: {
+    en: 'Use it to join two thoughts into one sentence, and to say how they are related.',
+    ta: 'இரண்டு கருத்தை ஒரே வாக்கியமாக இணைக்க.',
+  },
+  sentences: {
+    en: 'Use it to put the words in the order English expects, which is not the order Tamil uses.',
+    ta: 'ஆங்கிலம் எதிர்பார்க்கும் சொல் வரிசையில் அடுக்க — தமிழின் வரிசை அல்ல.',
+  },
+});
+
+/** When to reach for this topic, or nothing if it has no line written. */
+export const usageOfTopic = (
+  topic: Topic,
+): { readonly en: string; readonly ta: string } | undefined => USAGE[String(topic.id)];
+
 export const describeTopic = (topic: Topic): { readonly en: string; readonly ta: string } => {
   const title = String(topic.title.en);
 

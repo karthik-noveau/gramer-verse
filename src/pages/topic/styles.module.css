@@ -13,7 +13,11 @@
   gap: var(--s-4);
   margin-bottom: var(--s-5);
 }
-.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); }
+/* The accent on the topic's own name. Everywhere else the accent marks the
+   thing that changed or the primary action; on a page that is about one topic,
+   its name is that thing. The Tamil beside it stays muted so the pair still
+   reads as a name and its gloss rather than as two headings. */
+.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); color: var(--accent); }
 
 /* Baseline-aligned, so the two scripts sit on one line rather than one being
    centred against the other's cap height. Wraps on a narrow screen instead of
@@ -36,6 +40,18 @@
 .ta { font-family: var(--tamil); color: var(--muted); }
 
 .sub { margin-top: var(--s-2); display: flex; flex-direction: column; gap: 1px; color: var(--soft); max-width: 60ch; }
+
+/* When to reach for it. Set below the description and quieter than it: it is
+   the second thing read, not the first. */
+.use {
+  margin-top: var(--s-2);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  max-width: 60ch;
+}
 
 .cta { margin-left: auto; display: flex; gap: var(--s-2); flex-wrap: wrap; }
 @media (max-width: 640px) { .cta { margin-left: 0; } }

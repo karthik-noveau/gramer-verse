@@ -2,7 +2,13 @@ import { useMemo } from 'react';
 import type { JSX } from 'react';
 import { useParams } from 'react-router';
 
-import { describeTopic, formationFor, outlineOfTopic, tablesOfTopic } from 'common/api/content.api';
+import {
+  describeTopic,
+  formationFor,
+  outlineOfTopic,
+  tablesOfTopic,
+  usageOfTopic,
+} from 'common/api/content.api';
 import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
 import { Button } from 'common/components/Button/Button';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
@@ -91,6 +97,7 @@ function Topic({ topic, lessons, curriculum }: TopicProps): JSX.Element {
     [lessons, topic],
   );
   const first = [...mine].sort((a, b) => a.order - b.order)[0];
+  const usage = usageOfTopic(topic);
 
   return (
     <>
@@ -117,6 +124,17 @@ function Topic({ topic, lessons, curriculum }: TopicProps): JSX.Element {
               {describeTopic(topic).ta}
             </span>
           </p>
+
+          {/* When you reach for it. The line above says what the topic is; a
+              learner still has to know when it is theirs to use. */}
+          {usage ? (
+            <p className={styles.use}>
+              <span lang="en">{usage.en}</span>
+              <span className={styles.ta} lang="ta">
+                {usage.ta}
+              </span>
+            </p>
+          ) : null}
         </div>
 
         {/* There is no progress record, so there is no "resume" — this is the
