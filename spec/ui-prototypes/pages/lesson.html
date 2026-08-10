@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Where it is — Prepositions — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="lesson" data-topic="prepositions">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+
+    <nav class="breadcrumbs" aria-label="Breadcrumb"
+         data-crumbs="Topics|pages/topics.html,Prepositions|pages/topic.html,Where it is|"></nav>
+
+    <div class="lesson">
+
+      <div class="lesson-main">
+        <div class="page-head" style="margin-bottom:var(--s-3)">
+          <h1>Where it is</h1>
+          <p class="sub" lang="ta">ஒரு பொருள் எங்கே இருக்கிறது</p>
+        </div>
+
+        <div class="callout callout--idea" style="margin-bottom:var(--s-4)">
+          <b>in</b> a container &middot; <b>on</b> a surface &middot; <b>at</b> a point.
+          <span lang="ta">உள்ளே &middot; மேற்பரப்பில் &middot; ஒரு புள்ளியில்.</span>
+        </div>
+
+        <!-- predict-then-reveal, shown before the knobs unlock -->
+        <section class="card predict" id="predictCard" style="margin-bottom:var(--s-4)">
+          <div>
+            <span class="badge badge--accent">Predict first</span>
+          </div>
+          <p class="q">The ball rests on top of the table. Which word?</p>
+          <p class="q" lang="ta" style="font-size:var(--fs-base);color:var(--soft)">
+            எந்தச் சொல்?</p>
+          <div class="btn-row" id="predictOpts">
+            <button class="chip" data-answer="in">in</button>
+            <button class="chip" data-answer="on">on</button>
+            <button class="chip" data-answer="under">under</button>
+            <button class="chip" data-answer="above">above</button>
+          </div>
+        </section>
+
+        <section class="card predict-result" id="predictResult" hidden style="margin-bottom:var(--s-4)">
+          <div class="compare">
+            <div class="yours">
+              <b>What you said</b>
+              <div id="yoursText"></div>
+            </div>
+            <div class="correct">
+              <b>What is true here</b>
+              <div id="correctText"></div>
+            </div>
+          </div>
+          <p style="font-size:var(--fs-sm);color:var(--soft)">
+            <b>on</b> = touching the surface, held up by it.
+            <span lang="ta">மேற்பரப்பைத் தொட்டு இருப்பது.</span>
+          </p>
+        </section>
+
+        <!-- how much text is layered over the pictures -->
+        <div class="steps" id="steps" style="margin-bottom:var(--s-3)">
+          <button class="btn btn--sm" data-step="1">Pictures</button>
+          <button class="btn btn--sm" data-step="2">+ Tamil</button>
+          <button class="btn btn--sm" data-step="3">+ Pronunciation</button>
+          <button class="btn btn--sm btn--primary" data-step="4">+ English</button>
+        </div>
+
+        <!-- the sentence as pictures, then as text -->
+        <div class="picsent" id="picsent" style="margin-bottom:var(--s-4)"></div>
+        <p class="sentence" id="sentenceEn"></p>
+        <p class="sentence-ta" id="sentenceTa" lang="ta"></p>
+
+        <!-- the picture -->
+        <div class="stage" id="stage">
+          <svg id="scene" viewBox="0 0 720 420" role="img" aria-labelledby="sceneDesc"></svg>
+        </div>
+        <p id="sceneDesc" class="sr-only"></p>
+
+        <!-- the knobs -->
+        <div class="knobs" id="knobs" data-locked="true"></div>
+
+        <nav class="lesson-nav" aria-label="Lesson">
+          <a class="btn" href="topic.html?topic=prepositions">← All prepositions</a>
+          <span class="spacer"></span>
+          
+          <a class="btn btn--primary" href="lesson.html">Next lesson →</a>
+        </nav>
+      </div>
+
+      <!-- right rail -->
+      <aside class="lesson-rail">
+        <div class="card why">
+          <h3>Why the picture looks like that</h3>
+          <p class="card-note" id="whyEn"></p>
+          <p class="card-note" lang="ta" id="whyTa"></p>
+        </div>
+
+        <div class="card">
+          <h3>In this topic</h3>
+          <div class="btn-row" style="margin-top:var(--s-3)">
+            <button class="btn btn--sm" data-drawer-open="notesDrawer">Open notes</button>
+            <a class="btn btn--sm" href="visualizer.html">Try your own</a>
+          </div>
+        </div>
+
+        <div class="card card--muted">
+          <p class="card-note">Source: Spoken English notes.
+            <a href="reference.html">Table</a></p>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+<!-- side drawer: lesson notes -->
+<aside class="drawer" id="notesDrawer" data-open="false" aria-label="Lesson notes">
+  <h2>Prepositions of place</h2>
+  <p style="color:var(--soft);font-size:var(--fs-sm)">The Tamil case each one governs.</p>
+  <div class="table-wrap" style="margin-top:var(--s-4)">
+    <table class="table">
+      <thead><tr><th>Word</th><th>Tamil</th><th>Case</th></tr></thead>
+      <tbody>
+        <tr><td>in</td><td><span lang="ta">பெட்டியில்</span></td><td>locative</td></tr>
+        <tr><td>on</td><td><span lang="ta">மேசையின் மீது</span></td><td>genitive + மீது</td></tr>
+        <tr><td>under</td><td><span lang="ta">மேசைக்கு கீழே</span></td><td>dative + கீழே</td></tr>
+        <tr><td>above</td><td><span lang="ta">மேசைக்கு மேலே</span></td><td>dative + மேலே</td></tr>
+        <tr><td>behind</td><td><span lang="ta">மேசைக்கு பின்னால்</span></td><td>dative + பின்னால்</td></tr>
+        <tr><td>beside</td><td><span lang="ta">மேசைக்கு அருகில்</span></td><td>dative + அருகில்</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="btn-row" style="margin-top:var(--s-4)">
+    <button class="btn" data-drawer-close>Close</button>
+  </div>
+</aside>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script src="../assets/js/scene.js"></script>
+<script src="../assets/js/icons-extra.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var STATE = { det:'the', num:1, adj:'', figure:'ball', prep:'on', ground:'table' };
+
+  var KNOBS = [
+    { key:'det',    en:'Article',     ta:'ஒரு / அந்த', opts:[['the','the','அந்த'],['a','a','ஒரு']] },
+    { key:'num',    en:'How many',    ta:'எத்தனை',     opts:[[1,'one','ஒன்று'],[2,'two','இரண்டு'],[3,'three','மூன்று']] },
+    { key:'adj',    en:'Adjective',   ta:'பெயரடை',     opts:[['','—',''],['red','red','சிவப்பு'],['big','big','பெரிய'],['small','small','சிறிய']] },
+    { key:'figure', en:'The thing',   ta:'பொருள்',     opts:[['ball','ball','பந்து'],['apple','apple','ஆப்பிள்'],['cup','cup','கோப்பை'],['cat','cat','பூனை']] },
+    { key:'prep',   en:'Preposition', ta:'இடைச்சொல்',   opts:[['in','in','உள்ளே'],['on','on','மீது'],['under','under','கீழே'],['above','above','மேலே'],['behind','behind','பின்னால்'],['beside','beside','அருகில்']] },
+    { key:'ground', en:'The place',   ta:'இடம்',       opts:[['table','table','மேசை'],['box','box','பெட்டி'],['chair','chair','நாற்காலி']] }
+  ];
+
+  var WHY = {
+    in:     ['<b>in</b> = surrounded by walls.',       'உள்ளே, சுவர்களுக்கு நடுவே.'],
+    on:     ['<b>on</b> = touching the surface.',      'மேற்பரப்பைத் தொட்டு.'],
+    under:  ['<b>under</b> = lower, and covered.',     'கீழே, மறைக்கப்பட்டு.'],
+    above:  ['<b>above</b> = higher, with a gap.',     'மேலே, இடைவெளியுடன்.'],
+    behind: ['<b>behind</b> = the other thing hides it.', 'மற்றொன்று மறைக்கிறது.'],
+    beside: ['<b>beside</b> = right at the side.',     'பக்கத்தில்.']
+  };
+
+  var $ = function (id) { return document.getElementById(id); };
+  var lastKey = null;
+
+  function renderSentence() {
+    var s = GV_Scene.sentencePlace(STATE);
+    function line(parts) {
+      return parts.map(function (p, i) {
+        var cls = 'w' + (p.k ? ' tunable' : '') + (p.k && p.k === lastKey ? ' flash' : '');
+        var text = p.t + (i === parts.length - 1 ? '.' : '');
+        return '<span class="' + cls + '"' + (p.k ? ' data-k="' + p.k + '"' : '') + '>' + text + '</span>';
+      }).join(' ');
+    }
+    $('sentenceEn').innerHTML = line(s.en);
+    $('sentenceTa').innerHTML = line(s.ta);
+  }
+
+  function describe() {
+    var n = STATE.num === 1 ? 'A' : STATE.num;
+    return n + ' ' + (STATE.adj ? STATE.adj + ' ' : '') + STATE.figure +
+      (STATE.num > 1 ? 's' : '') + ' ' + STATE.prep + ' the ' + STATE.ground + '.';
+  }
+
+  var step = 4;
+
+  /* Every lesson carries the picture layer, not just the Tamil-first page.
+     A learner with no English can follow any lesson by the images alone. */
+  function renderPics() {
+    $('picsent').innerHTML = GV_Scene.picSentenceHtml(STATE, step);
+    $('sentenceEn').style.display = step >= 4 ? '' : 'none';
+    $('sentenceTa').style.display = step >= 2 ? '' : 'none';
+    [].forEach.call($('steps').children, function (b) {
+      b.classList.toggle('btn--primary', +b.dataset.step === step);
+    });
+  }
+
+  /* touch a picture-word, the matching part of the drawing lights up */
+  function lightRole(role) {
+    document.querySelectorAll('.picword').forEach(function (w) {
+      w.classList.toggle('lit', role !== null && w.dataset.role === role);
+    });
+    var node = role === 'figure' ? 'figure-0' : role === 'ground' ? 'ground' : null;
+    var stage = $('stage');
+    stage.classList.toggle('dim', !!node);
+    stage.querySelectorAll('[data-node]').forEach(function (n) {
+      n.classList.toggle('lit', !!node && n.dataset.node === node);
+    });
+  }
+  ['mouseover','focusin'].forEach(function (e) {
+    $('picsent').addEventListener(e, function (ev) {
+      var w = ev.target.closest('.picword'); if (w) lightRole(w.dataset.role);
+    });
+  });
+  $('picsent').addEventListener('mouseleave', function () { lightRole(null); });
+  $('steps').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-step]'); if (!b) return;
+    step = +b.dataset.step; renderPics();
+  });
+
+  function render() {
+    $('scene').innerHTML = GV_Scene.renderPlace(STATE);
+    $('scene').setAttribute('aria-label', describe());
+    $('sceneDesc').textContent = describe();
+    renderSentence();
+    renderPics();
+    $('whyEn').innerHTML = WHY[STATE.prep][0];
+    $('whyTa').innerHTML = WHY[STATE.prep][1];
+  }
+
+  function buildKnobs() {
+    $('knobs').innerHTML = KNOBS.map(function (k) {
+      return '<div class="knob-group"><span class="k-label">' + k.en +
+        ' <span lang="ta">' + k.ta + '</span></span>' +
+        '<div class="knob-opts" role="group" aria-label="' + k.en + '" data-key="' + k.key + '">' +
+        k.opts.map(function (o) {
+          /* Disable combinations that describe no real situation — you cannot be
+             under a box, or in a table. Better to grey the option out than to
+             draw a picture that contradicts the sentence. */
+          var off = (k.key === 'prep' && !GV_Scene.allows(o[0], STATE.ground)) ||
+                    (k.key === 'ground' && !GV_Scene.allows(STATE.prep, o[0]));
+          /* Options that have a picture are shown as pictures — the control
+             works before any word is known. */
+          var kind = k.key === 'prep' ? 'prep'
+                   : (k.key === 'figure' || k.key === 'ground') ? 'thing'
+                   : (k.key === 'num' || k.key === 'det' || k.key === 'adj') ? k.key : null;
+          var art = kind ? GV_Scene.icon(kind, o[0], { size: 34, label: o[1] }) : '';
+          return '<button type="button" class="chip" data-v="' + o[0] + '" aria-pressed="' +
+            (String(STATE[k.key]) === String(o[0])) + '"' +
+            (off ? ' disabled title="Nothing can be ' + STATE.prep + ' that"' : '') + '>' +
+            art + o[1] +
+            (o[2] ? ' <span class="ta" lang="ta">' + o[2] + '</span>' : '') + '</button>';
+        }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  $('knobs').addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button[data-v]');
+    if (!btn) return;
+    var key = btn.parentNode.dataset.key;
+    var val = btn.dataset.v;
+    STATE[key] = key === 'num' ? Number(val) : val;
+    lastKey = key;
+    /* Changing the ground can invalidate the current preposition; fall back to a
+       relation that ground supports rather than rendering an impossible scene. */
+    if (!GV_Scene.allows(STATE.prep, STATE.ground)) {
+      STATE.prep = GV_Scene.PROPS[STATE.ground].inside ? 'in' : 'on';
+    }
+    buildKnobs();
+    render();
+  });
+
+  /* keyboard: arrow keys move within a knob group */
+  $('knobs').addEventListener('keydown', function (ev) {
+    if (ev.key !== 'ArrowRight' && ev.key !== 'ArrowLeft') return;
+    var btn = ev.target.closest('button[data-v]');
+    if (!btn) return;
+    var sibs = [].slice.call(btn.parentNode.children);
+    var next = sibs[sibs.indexOf(btn) + (ev.key === 'ArrowRight' ? 1 : -1)];
+    if (next) { next.focus(); next.click(); }
+    ev.preventDefault();
+  });
+
+  /* ---- predict-then-reveal ---- */
+  $('predictOpts').addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button[data-answer]');
+    if (!btn) return;
+    var picked = btn.dataset.answer;
+    var correct = 'on';
+
+    $('yoursText').innerHTML = 'The ball is <b>' + picked + '</b> the table.' +
+      '<div lang="ta" style="margin-top:4px">' +
+      (picked === correct ? 'சரி!' : 'நீங்கள் சொன்னது இதுதான்.') + '</div>';
+    $('correctText').innerHTML = 'The ball is <b>' + correct + '</b> the table.' +
+      '<div lang="ta" style="margin-top:4px">பந்து மேசையின் மீது உள்ளது.</div>';
+
+    $('predictCard').hidden = true;
+    $('predictResult').hidden = false;
+    $('knobs').dataset.locked = 'false';
+    $('stage').classList.remove('stage--question');
+
+    /* wrong answer: show the picture they described first, then the truth */
+    if (picked !== correct) {
+      STATE.prep = picked;
+      render();
+      setTimeout(function () {
+        STATE.prep = correct;
+        lastKey = 'prep';
+        buildKnobs();
+        render();
+      }, 1400);
+    } else {
+      GV_toast('Correct — on it is');
+      render();
+    }
+  });
+
+  $('stage').classList.add('stage--question');
+  buildKnobs();
+  render();
+})();
+</script>
+</body>
+</html>

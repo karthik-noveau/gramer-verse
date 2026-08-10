@@ -1,0 +1,21 @@
+/* The control that changes the picture. Everything the learner touches to move
+   something in a scene is one of these, so the pressed state carries the accent
+   and nothing else in the row does. */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px var(--s-3); border-radius: var(--r-pill);
+  border: 1px solid var(--line); background: var(--surface); color: var(--soft);
+  font-size: var(--fs-sm); cursor: pointer;
+}
+.chip:hover { border-color: var(--line-strong); color: var(--ink); }
+
+.chip[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent);
+  color: var(--accent-ink); font-weight: 600;
+}
+.chip[disabled] { opacity: .4; cursor: not-allowed; }
+
+.ta { font-size: var(--fs-xs); opacity: .75; }
+
+.chip:has(.leading) { padding-left: 6px; }
+.leading { margin-right: 2px; }

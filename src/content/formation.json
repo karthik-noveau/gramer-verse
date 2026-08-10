@@ -1,0 +1,810 @@
+{
+  "rows": {
+    "sentence-types#0": {
+      "en": "I play cricket",
+      "ta": "நான் cricket விளையாடுறேன்",
+      "enAlign": "I:figure | play:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாடுறேன்:be"
+    },
+    "sentence-types#1": {
+      "en": "I am playing cricket",
+      "ta": "நான் cricket விளையாடிக்கிட்டிருக்கேன்",
+      "enAlign": "I:figure | am playing:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாடிக்கிட்டிருக்கேன்:be"
+    },
+    "sentence-types#2": {
+      "en": "I played cricket",
+      "ta": "நான் cricket விளையாடினேன்",
+      "enAlign": "I:figure | played:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாடினேன்:be"
+    },
+    "sentence-types#3": {
+      "en": "I will play cricket",
+      "ta": "நான் cricket விளையாட போறேன்",
+      "enAlign": "I:figure | will play:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாட போறேன்:be"
+    },
+    "sentence-types#4": {
+      "en": "I do not play cricket",
+      "ta": "நான் cricket விளையாட மாட்டேன்",
+      "enAlign": "I:figure | do not play:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாட மாட்டேன்:be"
+    },
+    "sentence-types#5": {
+      "en": "I am not playing cricket",
+      "ta": "நான் cricket விளையாடல",
+      "enAlign": "I:figure | am not playing:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாடல:be"
+    },
+    "sentence-types#6": {
+      "en": "I did not play cricket",
+      "ta": "நான் cricket விளையாடல",
+      "enAlign": "I:figure | did not play:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாடல:be"
+    },
+    "sentence-types#7": {
+      "en": "I will not play cricket",
+      "ta": "நான் cricket விளையாட மாட்டேன்",
+      "enAlign": "I:figure | will not play:be | cricket:ground",
+      "taAlign": "நான்:figure | cricket:ground | விளையாட மாட்டேன்:be"
+    },
+    "sentence-types#8": {
+      "en": "Where do you play cricket ?",
+      "ta": "நீ எங்கே cricket விளையாடுறா ?",
+      "enAlign": "Where:det | do | you:figure | play:be | cricket:ground",
+      "taAlign": "நீ:figure | எங்கே:det | cricket:ground | விளையாடுறா:be"
+    },
+    "sentence-types#9": {
+      "en": "Where are you playing cricket ?",
+      "ta": "நீ எங்கே cricket விளையாடிக்கிட்டிருக்கா?",
+      "enAlign": "Where:det | are | you:figure | playing:be | cricket:ground",
+      "taAlign": "நீ:figure | எங்கே:det | cricket:ground | விளையாடிக்கிட்டிருக்கா:be"
+    },
+    "sentence-types#10": {
+      "en": "Where did you play cricket ?",
+      "ta": "நீ எங்கே cricket விளையாடினா ?",
+      "enAlign": "Where:det | did | you:figure | play:be | cricket:ground",
+      "taAlign": "நீ:figure | எங்கே:det | cricket:ground | விளையாடினா:be"
+    },
+    "sentence-types#11": {
+      "en": "Where will you play cricket ?",
+      "ta": "நீ எங்கே cricket விளையாட போறா ?",
+      "enAlign": "Where:det | will | you:figure | play:be | cricket:ground",
+      "taAlign": "நீ:figure | எங்கே:det | cricket:ground | விளையாட போறா:be"
+    },
+    "sentence-types#12": {
+      "en": "Do you play cricket ?",
+      "ta": "நீ எங்கே cricket விளையாடுறா ?",
+      "enAlign": "Do | you:figure | play:be | cricket:ground",
+      "taAlign": "நீ:figure | எங்கே | cricket:ground | விளையாடுறா:be"
+    },
+    "sentence-types#13": {
+      "en": "Are you playing cricket ?",
+      "ta": "நீ cricket விளையாடிக்கிட்டிருக்கியா ?",
+      "enAlign": "Are | you:figure | playing:be | cricket:ground",
+      "taAlign": "நீ:figure | cricket:ground | விளையாடிக்கிட்டிருக்கியா:be"
+    },
+    "sentence-types#14": {
+      "en": "Did you play cricket ?",
+      "ta": "நீ cricket விளையாடினியா ?",
+      "enAlign": "Did | you:figure | play:be | cricket:ground",
+      "taAlign": "நீ:figure | cricket:ground | விளையாடினியா:be"
+    },
+    "sentence-types#15": {
+      "en": "Will you play cricket ?",
+      "ta": "நீ cricket விளையாட போறியா ?",
+      "enAlign": "Will | you:figure | play:be | cricket:ground",
+      "taAlign": "நீ:figure | cricket:ground | விளையாட போறியா:be"
+    },
+    "sentence-types#16": {
+      "en": "Close the door",
+      "ta": "கதவு மூடு",
+      "enAlign": "Close:be | the door:ground",
+      "taAlign": "கதவு:ground | மூடு:be"
+    },
+    "sentence-types#17": {
+      "en": "Please open the window",
+      "ta": "தயவு செய்து ஜன்னல் திற",
+      "enAlign": "Please:det | open:be | the window:ground",
+      "taAlign": "தயவு செய்து:det | ஜன்னல்:ground | திற:be"
+    },
+    "sentence-types#18": {
+      "en": "What a beautiful place!",
+      "ta": "என்ன ஒரு அழகான இடம்!",
+      "enAlign": "What a:det | beautiful:rel | place:ground",
+      "taAlign": "என்ன ஒரு:det | அழகான:rel | இடம்:ground"
+    },
+    "sentence-types#19": {
+      "en": "Wow! It's amazing",
+      "ta": "வாவ்! இது அருமை!",
+      "enAlign": "Wow!:det | It's:figure | amazing:rel",
+      "taAlign": "வாவ்!:det | இது:figure | அருமை:rel"
+    },
+    "articles#0": {
+      "en": "I have a pen.",
+      "ta": "எனக்கு ஒரு பேனா இருக்கிறது.",
+      "enAlign": "I:figure | have:be | a:det | pen:ground",
+      "taAlign": "எனக்கு:figure | ஒரு:det | பேனா:ground | இருக்கிறது:be"
+    },
+    "articles#1": {
+      "en": "She eats an apple.",
+      "ta": "அவள் ஒரு ஆப்பிள் சாப்பிட்டாள்.",
+      "enAlign": "She:figure | eats:be | an:det | apple:ground",
+      "taAlign": "அவள்:figure | ஒரு:det | ஆப்பிள்:ground | சாப்பிட்டாள்:be"
+    },
+    "articles#2": {
+      "en": "The sun is bright.",
+      "ta": "அந்த சூரியன் பிரகாசமாக உள்ளது.",
+      "enAlign": "The:det | sun:figure | is:be | bright:ground",
+      "taAlign": "அந்த:det | சூரியன்:figure | பிரகாசமாக:ground | உள்ளது:be"
+    },
+    "prep-common#0": {
+      "en": "The ball is in the box",
+      "ta": "பந்து பெட்டியில் உள்ளது.",
+      "enAlign": "The | ball:figure | is:be | in:rel | the box:ground",
+      "taAlign": "பந்து:figure | பெட்டியில்:rel:ground | உள்ளது:be"
+    },
+    "prep-common#1": {
+      "en": "I was born in 2000",
+      "ta": "நான் 2000 ஆம் ஆண்டில் பிறந்தேன்.",
+      "enAlign": "I:figure | was born:be | in:rel | 2000:ground",
+      "taAlign": "நான்:figure | 2000 ஆம் ஆண்டில்:rel:ground | பிறந்தேன்:be"
+    },
+    "prep-common#2": {
+      "en": "She is at school",
+      "ta": "அவள் பள்ளியில் இருக்கிறாள்.",
+      "enAlign": "She:figure | is:be | at:rel | school:ground",
+      "taAlign": "அவள்:figure | பள்ளியில்:rel:ground | இருக்கிறாள்:be"
+    },
+    "prep-common#3": {
+      "en": "The train arrives at 5 PM",
+      "ta": "ரயில் மாலை 5 மணிக்கு வருகிறது.",
+      "enAlign": "The | train:figure | arrives:be | at:rel | 5 PM:ground",
+      "taAlign": "ரயில்:figure | மாலை 5 மணிக்கு:rel:ground | வருகிறது:be"
+    },
+    "prep-common#4": {
+      "en": "The book is on the table",
+      "ta": "புத்தகம் மேசையின் மீது உள்ளது.",
+      "enAlign": "The | book:figure | is:be | on:rel | the table:ground",
+      "taAlign": "புத்தகம்:figure | மேசையின்:ground | மீது:rel | உள்ளது:be"
+    },
+    "prep-common#5": {
+      "en": "The meeting is on Monday",
+      "ta": "கூட்டம் திங்கட்கிழமை நடைபெறும்.",
+      "enAlign": "The | meeting:figure | is:be | on:rel | Monday:ground",
+      "taAlign": "கூட்டம்:figure | திங்கட்கிழமை:rel:ground | நடைபெறும்:be"
+    },
+    "prep-place#0": {
+      "en": "The cat is under the table",
+      "ta": "பூனை மேசைய கீழே உள்ளது.",
+      "enAlign": "The | cat:figure | is:be | under:rel | the table:ground",
+      "taAlign": "பூனை:figure | மேசைய:ground | கீழே:rel | உள்ளது:be"
+    },
+    "prep-place#1": {
+      "en": "The clock is above the door",
+      "ta": "கடிகாரம் கதவின் மேலே உள்ளது.",
+      "enAlign": "The | clock:figure | is:be | above:rel | the door:ground",
+      "taAlign": "கடிகாரம்:figure | கதவின்:ground | மேலே:rel | உள்ளது:be"
+    },
+    "prep-place#2": {
+      "en": "The temperature is below zero",
+      "ta": "வெப்பநிலை பூஜ்ஜியத்திற்கு கீழே உள்ளது.",
+      "enAlign": "The | temperature:figure | is:be | below:rel | zero:ground",
+      "taAlign": "வெப்பநிலை:figure | பூஜ்ஜியத்திற்கு:ground | கீழே:rel | உள்ளது:be"
+    },
+    "prep-place#3": {
+      "en": "The dog is behind the car",
+      "ta": "நாய் காரின் பின்புறம் உள்ளது.",
+      "enAlign": "The | dog:figure | is:be | behind:rel | the car:ground",
+      "taAlign": "நாய்:figure | காரின்:ground | பின்புறம்:rel | உள்ளது:be"
+    },
+    "prep-place#4": {
+      "en": "He is standing in front of the shop",
+      "ta": "அவன் கடையின் முன்னால் நிற்கிறான்.",
+      "enAlign": "He:figure | is standing:be | in front of:rel | the shop:ground",
+      "taAlign": "அவன்:figure | கடையின்:ground | முன்னால்:rel | நிற்கிறான்:be"
+    },
+    "prep-place#5": {
+      "en": "The park is between the school and the hospital",
+      "ta": "பூங்கா பள்ளி மற்றும் மருத்துவமனைக்கு நடுவில் உள்ளது.",
+      "enAlign": "The | park:figure | is:be | between:rel | the school and the hospital:ground",
+      "taAlign": "பூங்கா:figure | பள்ளி மற்றும் மருத்துவமனைக்கு:ground | நடுவில்:rel | உள்ளது:be"
+    },
+    "prep-place#6": {
+      "en": "The library is near the college",
+      "ta": "நூலகம் கல்லூரிக்கு அருகில் உள்ளது.",
+      "enAlign": "The | library:figure | is:be | near:rel | the college:ground",
+      "taAlign": "நூலகம்:figure | கல்லூரிக்கு:ground | அருகில்:rel | உள்ளது:be"
+    },
+    "prep-place#7": {
+      "en": "He is sitting beside his friend",
+      "ta": "அவன் தனது நண்பரின் அருகில் உட்கார்ந்துள்ளான்.",
+      "enAlign": "He:figure | is sitting:be | beside:rel | his:det | friend:ground",
+      "taAlign": "அவன்:figure | தனது:det | நண்பரின்:ground | அருகில்:rel | உட்கார்ந்துள்ளான்:be"
+    },
+    "prep-place#8": {
+      "en": "He is standing there",
+      "ta": "அவன் அங்கே நிற்கிறான்.",
+      "enAlign": "He:figure | is standing:be | there:ground",
+      "taAlign": "அவன்:figure | அங்கே:ground | நிற்கிறான்:be"
+    },
+    "prep-place#9": {
+      "en": "He is standing here",
+      "ta": "அவன் இங்கே நிற்கிறான்",
+      "enAlign": "He:figure | is standing:be | here:ground",
+      "taAlign": "அவன்:figure | இங்கே:ground | நிற்கிறான்:be"
+    },
+    "prep-time#0": {
+      "en": "Come before 8 AM",
+      "ta": "காலை 8 மணிக்கு முன்னால் வா.",
+      "enAlign": "Come:be | before:rel | 8 AM:ground",
+      "taAlign": "காலை 8 மணிக்கு:ground | முன்னால்:rel | வா:be"
+    },
+    "prep-time#1": {
+      "en": "We’ll meet after lunch",
+      "ta": "மதிய உணவுக்குப் பிறகு நாம் சந்திப்போம்.",
+      "enAlign": "We’ll:figure | meet:be | after:rel | lunch:ground",
+      "taAlign": "மதிய உணவுக்குப்:ground | பிறகு:rel | நாம்:figure | சந்திப்போம்:be"
+    },
+    "prep-time#2": {
+      "en": "Finish the work by 6 PM",
+      "ta": "வேலையை மாலை 6 மணிக்குள் முடிக்கவும்.",
+      "enAlign": "Finish:be | the work:figure | by:rel | 6 PM:ground",
+      "taAlign": "வேலையை:figure | மாலை 6 மணிக்குள்:rel:ground | முடிக்கவும்:be"
+    },
+    "prep-time#3": {
+      "en": "I’ve lived here since 2010",
+      "ta": "நான் 2010 முதல் இங்கே வசிக்கிறேன்.",
+      "enAlign": "I’ve:figure | lived:be | here:ground2 | since:rel | 2010:ground",
+      "taAlign": "நான்:figure | 2010:ground | முதல்:rel | இங்கே:ground2 | வசிக்கிறேன்:be"
+    },
+    "prep-time#4": {
+      "en": "I slept during the movie",
+      "ta": "நான் படத்தின் போது தூங்கினேன்.",
+      "enAlign": "I:figure | slept:be | during:rel | the movie:ground",
+      "taAlign": "நான்:figure | படத்தின்:ground | போது:rel | தூங்கினேன்:be"
+    },
+    "prep-time#5": {
+      "en": "Wait until I come",
+      "ta": "நான் வரும் வரை காத்திரு.",
+      "enAlign": "Wait:be | until:rel | I come:ground",
+      "taAlign": "நான் வரும்:ground | வரை:rel | காத்திரு:be"
+    },
+    "prep-dir#0": {
+      "en": "He is going to school",
+      "ta": "அவன் பள்ளிக்கு செல்கிறான்.",
+      "enAlign": "He:figure | is going:be | to:rel | school:ground",
+      "taAlign": "அவன்:figure | பள்ளிக்கு:rel:ground | செல்கிறான்:be"
+    },
+    "prep-dir#1": {
+      "en": "The dog ran into the room",
+      "ta": "நாய் அறைக்குள் ஓடியது.",
+      "enAlign": "The | dog:figure | ran:be | into:rel | the room:ground",
+      "taAlign": "நாய்:figure | அறைக்குள்:rel:ground | ஓடியது:be"
+    },
+    "prep-dir#2": {
+      "en": "Walk towards the station",
+      "ta": "நிலையத்தைக் நோக்கி நடந்தேறு",
+      "enAlign": "Walk:be | towards:rel | the station:ground",
+      "taAlign": "நிலையத்தைக்:ground | நோக்கி:rel | நடந்தேறு:be"
+    },
+    "prep-dir#3": {
+      "en": "They walked along the river",
+      "ta": "அவர்கள் ஆற்றின் ஓரமாக நடந்தனர்.",
+      "enAlign": "They:figure | walked:be | along:rel | the river:ground",
+      "taAlign": "அவர்கள்:figure | ஆற்றின்:ground | ஓரமாக:rel | நடந்தனர்:be"
+    },
+    "prep-dir#4": {
+      "en": "He ran across the road",
+      "ta": "அவன் சாலையை கடந்து ஓடினான்.",
+      "enAlign": "He:figure | ran:be | across:rel | the road:ground",
+      "taAlign": "அவன்:figure | சாலையை:ground | கடந்து:rel | ஓடினான்:be"
+    },
+    "prep-dir#5": {
+      "en": "The plane flew over the city",
+      "ta": "விமானம் நகரத்தின் மேலே பறந்தது.",
+      "enAlign": "The | plane:figure | flew:be | over:rel | the city:ground",
+      "taAlign": "விமானம்:figure | நகரத்தின்:ground | மேலே:rel | பறந்தது:be"
+    },
+    "prep-dir#6": {
+      "en": "We drove past the park",
+      "ta": "நாங்கள் பூங்காவை தாண்டி ஓட்டிச் சென்றோம்.",
+      "enAlign": "We:figure | drove:be | past:rel | the park:ground",
+      "taAlign": "நாங்கள்:figure | பூங்காவை:ground | தாண்டி:rel | ஓட்டிச் சென்றோம்:be"
+    },
+    "prep-dir#7": {
+      "en": "He came from the office",
+      "ta": "அவன் அலுவலகத்திலிருந்து வந்தான்.",
+      "enAlign": "He:figure | came:be | from:rel | the office:ground",
+      "taAlign": "அவன்:figure | அலுவலகத்திலிருந்து:rel:ground | வந்தான்:be"
+    },
+    "prep-other#0": {
+      "en": "This book is about history",
+      "ta": "இந்த புத்தகம் வரலாற்றைப் பற்றி.",
+      "enAlign": "This:det | book:figure | is | about:rel | history:ground",
+      "taAlign": "இந்த:det | புத்தகம்:figure | வரலாற்றைப்:ground | பற்றி:rel"
+    },
+    "prep-other#1": {
+      "en": "The gift is for you",
+      "ta": "இந்த பரிசு உங்களுக்காக.",
+      "enAlign": "The:det | gift:figure | is | for:rel | you:ground",
+      "taAlign": "இந்த:det | பரிசு:figure | உங்களுக்காக:rel:ground"
+    },
+    "prep-other#2": {
+      "en": "I will go with my friend",
+      "ta": "நான் என் நண்பருடன் போவேன்.",
+      "enAlign": "I:figure | will go:be | with:rel | my:det | friend:ground",
+      "taAlign": "நான்:figure | என்:det | நண்பருடன்:rel:ground | போவேன்:be"
+    },
+    "prep-other#3": {
+      "en": "He works as a driver",
+      "ta": "அவன் ஒரு டிரைவராக வேலை செய்கிறான்.",
+      "enAlign": "He:figure | works:be | as:rel | a:det | driver:ground",
+      "taAlign": "அவன்:figure | ஒரு:det | டிரைவராக:rel:ground | வேலை செய்கிறான்:be"
+    },
+    "prep-other#4": {
+      "en": "She sings like a bird",
+      "ta": "அவள் பறவையைப் போன்று பாடுகிறாள்.",
+      "enAlign": "She:figure | sings:be | like:rel | a bird:ground",
+      "taAlign": "அவள்:figure | பறவையைப்:ground | போன்று:rel | பாடுகிறாள்:be"
+    },
+    "prep-other#5": {
+      "en": "The price is $10 per kg",
+      "ta": "1 கிலோக்கு விலை $10.",
+      "enAlign": "The | price:figure | is | $10:ground2 | per:rel | kg:ground",
+      "taAlign": "1 கிலோக்கு:rel:ground | விலை:figure | $10:ground2"
+    },
+    "tense-forms#0": {
+      "en": "I am a writer",
+      "ta": "நான் ஒரு எழுத்தாளன்.",
+      "enAlign": "I:figure | am | a:det | writer:ground",
+      "taAlign": "நான்:figure | ஒரு:det | எழுத்தாளன்:ground"
+    },
+    "tense-forms#1": {
+      "en": "I am writing now..",
+      "ta": "நான் இப்போது எழுதுகிறேன்.",
+      "enAlign": "I:figure | am writing:be | now:qual",
+      "taAlign": "நான்:figure | இப்போது:qual | எழுதுகிறேன்:be"
+    },
+    "tense-forms#2": {
+      "en": "He has been writing for an hour",
+      "ta": "அவன் ஒரு மணி நேரமாக எழுதிவருகிறான்.",
+      "enAlign": "He:figure | has been writing:be | for an hour:qual",
+      "taAlign": "அவன்:figure | ஒரு மணி நேரமாக:qual | எழுதிவருகிறான்:be"
+    },
+    "tense-forms#4": {
+      "en": "I was a writer.",
+      "ta": "நான் ஒரு எழுத்தாளன் இருந்தேன்",
+      "enAlign": "I:figure | was:be | a:det | writer:ground",
+      "taAlign": "நான்:figure | ஒரு:det | எழுத்தாளன்:ground | இருந்தேன்:be"
+    },
+    "tense-forms#5": {
+      "en": "I was writing yesterday.",
+      "ta": "நேற்று எழுதிக் கொண்டிருந்தேன்.",
+      "enAlign": "I | was writing:be | yesterday:qual",
+      "taAlign": "நேற்று:qual | எழுதிக் கொண்டிருந்தேன்:be"
+    },
+    "tense-forms#6": {
+      "en": "I had been writing for an hour..",
+      "ta": "நான் ஒரு மணி நேரமாக எழுதி வந்தேன்.",
+      "enAlign": "I:figure | had been writing:be | for an hour:qual",
+      "taAlign": "நான்:figure | ஒரு மணி நேரமாக:qual | எழுதி வந்தேன்:be"
+    },
+    "tense-forms#8": {
+      "en": "I will be a writer.",
+      "ta": "நான் ஒரு எழுத்தாளன் ஆக இருப்பேன்.",
+      "enAlign": "I:figure | will be:be | a:det | writer:ground",
+      "taAlign": "நான்:figure | ஒரு:det | எழுத்தாளன்:ground | ஆக இருப்பேன்:be"
+    },
+    "tense-forms#10": {
+      "en": "I will have been writing for an hour.",
+      "ta": "நான் ஒரு மணி நேரமாக எழுதி முடித்திருப்பேன்.",
+      "enAlign": "I:figure | will have been writing:be | for an hour:qual",
+      "taAlign": "நான்:figure | ஒரு மணி நேரமாக:qual | எழுதி முடித்திருப்பேன்:be"
+    },
+    "modals#0": {
+      "en": "I can write.",
+      "ta": "நான் எழுத முடியும்.",
+      "enAlign": "I:figure | can:be1 | write:be2",
+      "taAlign": "நான்:figure | எழுத:be2 | முடியும்:be1"
+    },
+    "modals#1": {
+      "en": "I could go.",
+      "ta": "நான் போக முடியும்.",
+      "enAlign": "I:figure | could:be1 | go:be2",
+      "taAlign": "நான்:figure | போக:be2 | முடியும்:be1"
+    },
+    "modals#2": {
+      "en": "I will write",
+      "ta": "நான் எழுதப் போகிறேன்.",
+      "enAlign": "I:figure | will:be1 | write:be2",
+      "taAlign": "நான்:figure | எழுதப்:be2 | போகிறேன்:be1"
+    },
+    "modals#3": {
+      "en": "I would like tea.",
+      "ta": "நான் தேனீர் விரும்புகிறேன்.",
+      "enAlign": "I:figure | would like:be | tea:ground",
+      "taAlign": "நான்:figure | தேனீர்:ground | விரும்புகிறேன்:be"
+    },
+    "modals#4": {
+      "en": "I may come",
+      "ta": "நான் வர வாய்ப்பு இருக்கிறது",
+      "enAlign": "I:figure | may:be1 | come:be2",
+      "taAlign": "நான்:figure | வர:be2 | வாய்ப்பு இருக்கிறது:be1"
+    },
+    "modals#5": {
+      "en": "It might rain today.",
+      "ta": "இன்று மழை பெய்யலாம்",
+      "enAlign": "It | might:be1 | rain:be2 | today:qual",
+      "taAlign": "இன்று:qual | மழை:be2 | பெய்யலாம்:be1"
+    },
+    "modals#6": {
+      "en": "You must come.",
+      "ta": "நீ வர வேண்டும்.",
+      "enAlign": "You:figure | must:be1 | come:be2",
+      "taAlign": "நீ:figure | வர:be2 | வேண்டும்:be1"
+    },
+    "modals#7": {
+      "en": "I shall help you",
+      "ta": "நான் உங்களுக்கு உதவப்போகிறேன்.",
+      "enAlign": "I:figure | shall:be1 | help:be2 | you:ground",
+      "taAlign": "நான்:figure | உங்களுக்கு:ground | உதவப்போகிறேன்:be2:be1"
+    },
+    "modals#8": {
+      "en": "You should study.",
+      "ta": "நீ படிக்க வேண்டும்.",
+      "enAlign": "You:figure | should:be1 | study:be2",
+      "taAlign": "நீ:figure | படிக்க:be2 | வேண்டும்:be1"
+    },
+    "modals#9": {
+      "en": "You ought to help.",
+      "ta": "நீ உதவ வேண்டும்.",
+      "enAlign": "You:figure | ought to:be1 | help:be2",
+      "taAlign": "நீ:figure | உதவ:be2 | வேண்டும்:be1"
+    },
+    "wh-words#0": {
+      "en": "What is your name?",
+      "ta": "உங்கள் பெயர் என்ன?",
+      "enAlign": "What:ask | is | your:det | name:ground",
+      "taAlign": "உங்கள்:det | பெயர்:ground | என்ன:ask"
+    },
+    "wh-words#1": {
+      "en": "When is your birthday?",
+      "ta": "உங்கள் பிறந்த நாள் எப்போது?",
+      "enAlign": "When:ask | is | your:det | birthday:ground",
+      "taAlign": "உங்கள்:det | பிறந்த நாள்:ground | எப்போது:ask"
+    },
+    "wh-words#2": {
+      "en": "Where is the bus stop?",
+      "ta": "பேருந்து நிறுத்தம் எங்கே?",
+      "enAlign": "Where:ask | is | the | bus stop:ground",
+      "taAlign": "பேருந்து நிறுத்தம்:ground | எங்கே:ask"
+    },
+    "wh-words#3": {
+      "en": "Why are you sad?",
+      "ta": "நீங்கள் ஏன் சோகமாக இருக்கிறீர்கள்?",
+      "enAlign": "Why:ask | are:be | you:figure | sad:qual",
+      "taAlign": "நீங்கள்:figure | ஏன்:ask | சோகமாக:qual | இருக்கிறீர்கள்:be"
+    },
+    "wh-words#4": {
+      "en": "Who is calling?",
+      "ta": "யார் அழைக்கிறார்?",
+      "enAlign": "Who:ask | is calling:be",
+      "taAlign": "யார்:ask | அழைக்கிறார்:be"
+    },
+    "wh-words#5": {
+      "en": "Whose book is this?",
+      "ta": "இது யாருடைய புத்தகம்?",
+      "enAlign": "Whose:ask | book:ground | is | this:det",
+      "taAlign": "இது:det | யாருடைய:ask | புத்தகம்:ground"
+    },
+    "wh-words#6": {
+      "en": "Which color do you like?",
+      "ta": "எந்த நிறத்தை நீங்கள் விரும்புகிறீர்கள்?",
+      "enAlign": "Which:ask | color:ground | do | you:figure | like:be",
+      "taAlign": "எந்த:ask | நிறத்தை:ground | நீங்கள்:figure | விரும்புகிறீர்கள்:be"
+    },
+    "wh-words#7": {
+      "en": "How do you come to school?",
+      "ta": "நீங்கள் எப்படி பள்ளிக்கு வருகிறீர்கள்?",
+      "enAlign": "How:ask | do | you:figure | come:be | to school:ground",
+      "taAlign": "நீங்கள்:figure | எப்படி:ask | பள்ளிக்கு:ground | வருகிறீர்கள்:be"
+    },
+    "wh-words#8": {
+      "en": "How much is this pen?",
+      "ta": "இந்த பேனா எவ்வளவு?",
+      "enAlign": "How much:ask | is | this:det | pen:ground",
+      "taAlign": "இந்த:det | பேனா:ground | எவ்வளவு:ask"
+    },
+    "wh-words#9": {
+      "en": "How many apples are there?",
+      "ta": "அங்கே எத்தனை ஆப்பிள்கள் உள்ளன?",
+      "enAlign": "How many:ask | apples:ground | are:be | there:qual",
+      "taAlign": "அங்கே:qual | எத்தனை:ask | ஆப்பிள்கள்:ground | உள்ளன:be"
+    },
+    "wh-words#10": {
+      "en": "How long will it take?",
+      "ta": "எவ்வளவு நேரம் ஆகும்?",
+      "enAlign": "How long:ask | will | it | take:be",
+      "taAlign": "எவ்வளவு நேரம்:ask | ஆகும்:be"
+    },
+    "wh-words#11": {
+      "en": "How far is the station?",
+      "ta": "நிலையம் எவ்வளவு தூரம்?",
+      "enAlign": "How far:ask | is | the | station:ground",
+      "taAlign": "நிலையம்:ground | எவ்வளவு தூரம்:ask"
+    },
+    "wh-words#12": {
+      "en": "How old are you?",
+      "ta": "உங்கள் வயது என்ன?",
+      "enAlign": "How old:ask | are | you:figure",
+      "taAlign": "உங்கள்:figure | வயது | என்ன:ask"
+    },
+    "wh-words#13": {
+      "en": "How often do you exercise?",
+      "ta": "நீங்கள் எவ்வளவு முறை உடற்பயிற்சி செய்கிறீர்கள்?",
+      "enAlign": "How often:ask | do | you:figure | exercise:be",
+      "taAlign": "நீங்கள்:figure | எவ்வளவு முறை:ask | உடற்பயிற்சி செய்கிறீர்கள்:be"
+    },
+    "adjectives#0": {
+      "en": "This is a big house.",
+      "ta": "இது ஒரு பெரிய வீடு",
+      "enAlign": "This:figure | is | a:det | big:qual | house:ground",
+      "taAlign": "இது:figure | ஒரு:det | பெரிய:qual | வீடு:ground"
+    },
+    "adjectives#1": {
+      "en": "It is a small cat.",
+      "ta": "அது ஒரு சிறிய பூனை",
+      "enAlign": "It:figure | is | a:det | small:qual | cat:ground",
+      "taAlign": "அது:figure | ஒரு:det | சிறிய:qual | பூனை:ground"
+    },
+    "adjectives#2": {
+      "en": "He is tall.",
+      "ta": "அவன் உயரமானவன்.",
+      "enAlign": "He:figure | is:be | tall:qual",
+      "taAlign": "அவன்:figure | உயரமானவன்:qual:be"
+    },
+    "adjectives#3": {
+      "en": "She is short.",
+      "ta": "அவள் குறுகியவள்.",
+      "enAlign": "She:figure | is:be | short:qual",
+      "taAlign": "அவள்:figure | குறுகியவள்:qual:be"
+    },
+    "adjectives#4": {
+      "en": "I am happy.",
+      "ta": "நான் மகிழ்ச்சியாக இருக்கிறேன்.",
+      "enAlign": "I:figure | am:be | happy:qual",
+      "taAlign": "நான்:figure | மகிழ்ச்சியாக:qual | இருக்கிறேன்:be"
+    },
+    "adjectives#5": {
+      "en": "He looks sad.",
+      "ta": "அவன் சோகமாக தெரிகிறான்",
+      "enAlign": "He:figure | looks:be | sad:qual",
+      "taAlign": "அவன்:figure | சோகமாக:qual | தெரிகிறான்:be"
+    },
+    "adjectives#6": {
+      "en": "She is beautiful",
+      "ta": "அவள் அழகானவள்.",
+      "enAlign": "She:figure | is:be | beautiful:qual",
+      "taAlign": "அவள்:figure | அழகானவள்:qual:be"
+    },
+    "adjectives#7": {
+      "en": "He is a good boy.",
+      "ta": "அவன் ஒரு நல்ல பையன்.",
+      "enAlign": "He:figure | is | a:det | good:qual | boy:ground",
+      "taAlign": "அவன்:figure | ஒரு:det | நல்ல:qual | பையன்:ground"
+    },
+    "adjectives#8": {
+      "en": "That is a bad idea.",
+      "ta": "அது ஒரு மோசமான யோசனை",
+      "enAlign": "That:figure | is | a:det | bad:qual | idea:ground",
+      "taAlign": "அது:figure | ஒரு:det | மோசமான:qual | யோசனை:ground"
+    },
+    "adjectives#9": {
+      "en": "He is strong.",
+      "ta": "அவன் வலிமையானவன்.",
+      "enAlign": "He:figure | is:be | strong:qual",
+      "taAlign": "அவன்:figure | வலிமையானவன்:qual:be"
+    },
+    "adjectives#10": {
+      "en": "She is weak.",
+      "ta": "அவள் பலவீனமானவள்.",
+      "enAlign": "She:figure | is:be | weak:qual",
+      "taAlign": "அவள்:figure | பலவீனமானவள்:qual:be"
+    },
+    "adjectives#11": {
+      "en": "It is a fast car.",
+      "ta": "அது ஒரு வேகமான கார்.",
+      "enAlign": "It:figure | is | a:det | fast:qual | car:ground",
+      "taAlign": "அது:figure | ஒரு:det | வேகமான:qual | கார்:ground"
+    },
+    "adjectives#12": {
+      "en": "It is a slow turtle.",
+      "ta": "அது ஒரு மெதுவான ஆமை.",
+      "enAlign": "It:figure | is | a:det | slow:qual | turtle:ground",
+      "taAlign": "அது:figure | ஒரு:det | மெதுவான:qual | ஆமை:ground"
+    },
+    "adjectives#13": {
+      "en": "He is clever.",
+      "ta": "அவன் புத்திசாலி.",
+      "enAlign": "He:figure | is | clever:qual",
+      "taAlign": "அவன்:figure | புத்திசாலி:qual"
+    },
+    "adjectives#14": {
+      "en": "She is kind.",
+      "ta": "அவள் தயாளமானவள்.",
+      "enAlign": "She:figure | is:be | kind:qual",
+      "taAlign": "அவள்:figure | தயாளமானவள்:qual:be"
+    },
+    "adjectives#15": {
+      "en": "He is brave.",
+      "ta": "அவன் தைரியமானவன்.",
+      "enAlign": "He:figure | is:be | brave:qual",
+      "taAlign": "அவன்:figure | தைரியமானவன்:qual:be"
+    },
+    "adjectives#16": {
+      "en": "She is honest",
+      "ta": "அவள் நேர்மையானவள்",
+      "enAlign": "She:figure | is:be | honest:qual",
+      "taAlign": "அவள்:figure | நேர்மையானவள்:qual:be"
+    },
+    "adverbs#0": {
+      "en": "He runs quickly.",
+      "ta": "அவன் விரைவாக ஓடுகிறான்.",
+      "enAlign": "He:figure | runs:be | quickly:qual",
+      "taAlign": "அவன்:figure | விரைவாக:qual | ஓடுகிறான்:be"
+    },
+    "adverbs#1": {
+      "en": "She speaks slowly.",
+      "ta": "அவள் மெதுவாக பேசுகிறாள்",
+      "enAlign": "She:figure | speaks:be | slowly:qual",
+      "taAlign": "அவள்:figure | மெதுவாக:qual | பேசுகிறாள்:be"
+    },
+    "adverbs#2": {
+      "en": "He sings loudly.",
+      "ta": "அவன் சத்தமாக பாடுகிறான்.",
+      "enAlign": "He:figure | sings:be | loudly:qual",
+      "taAlign": "அவன்:figure | சத்தமாக:qual | பாடுகிறான்:be"
+    },
+    "adverbs#3": {
+      "en": "She speaks softly.",
+      "ta": "அவள் மென்மையாக பேசுகிறாள்.",
+      "enAlign": "She:figure | speaks:be | softly:qual",
+      "taAlign": "அவள்:figure | மென்மையாக:qual | பேசுகிறாள்:be"
+    },
+    "adverbs#4": {
+      "en": "I always help you.",
+      "ta": "நான் எப்போதும் உனக்கு உதவுகிறேன்.",
+      "enAlign": "I:figure | always:qual | help:be | you:ground",
+      "taAlign": "நான்:figure | எப்போதும்:qual | உனக்கு:ground | உதவுகிறேன்:be"
+    },
+    "adverbs#5": {
+      "en": "I never lie.",
+      "ta": "நான் ஒருபோதும் பொய் பேசுவதில்லை.",
+      "enAlign": "I:figure | never:qual | lie:be",
+      "taAlign": "நான்:figure | ஒருபோதும்:qual | பொய் பேசுவதில்லை:be"
+    },
+    "adverbs#6": {
+      "en": "We often go there.",
+      "ta": "நாங்கள் அடிக்கடி அங்கே செல்கிறோம்.",
+      "enAlign": "We:figure | often:qual | go:be | there:ground",
+      "taAlign": "நாங்கள்:figure | அடிக்கடி:qual | அங்கே:ground | செல்கிறோம்:be"
+    },
+    "adverbs#7": {
+      "en": "I sometimes sing.",
+      "ta": "நான் சில சமயம் பாடுகிறேன்.",
+      "enAlign": "I:figure | sometimes:qual | sing:be",
+      "taAlign": "நான்:figure | சில சமயம்:qual | பாடுகிறேன்:be"
+    },
+    "adverbs#8": {
+      "en": "He usually eats early.",
+      "ta": "அவன் வழக்கமாக விரைவாக சாப்பிடுகிறான்",
+      "enAlign": "He:figure | usually:qual1 | eats:be | early:qual2",
+      "taAlign": "அவன்:figure | வழக்கமாக:qual1 | விரைவாக:qual2 | சாப்பிடுகிறான்:be"
+    },
+    "adverbs#9": {
+      "en": "I met him yesterday.",
+      "ta": "நான் அவனை நேற்று சந்தித்தேன்.",
+      "enAlign": "I:figure | met:be | him:ground | yesterday:qual",
+      "taAlign": "நான்:figure | அவனை:ground | நேற்று:qual | சந்தித்தேன்:be"
+    },
+    "adverbs#10": {
+      "en": "I will go today.",
+      "ta": "நான் இன்று செல்லப் போகிறேன்.",
+      "enAlign": "I:figure | will go:be | today:qual",
+      "taAlign": "நான்:figure | இன்று:qual | செல்லப் போகிறேன்:be"
+    },
+    "adverbs#11": {
+      "en": "We will play tomorrow.",
+      "ta": "நாங்கள் நாளை விளையாடுவோம்",
+      "enAlign": "We:figure | will play:be | tomorrow:qual",
+      "taAlign": "நாங்கள்:figure | நாளை:qual | விளையாடுவோம்:be"
+    },
+    "adverbs#12": {
+      "en": "He speaks well.",
+      "ta": "அவன் நன்றாக பேசுகிறான்.",
+      "enAlign": "He:figure | speaks:be | well:qual",
+      "taAlign": "அவன்:figure | நன்றாக:qual | பேசுகிறான்:be"
+    },
+    "adverbs#13": {
+      "en": "She sings badly.",
+      "ta": "அவள் மோசமாக பாடுகிறாள்.",
+      "enAlign": "She:figure | sings:be | badly:qual",
+      "taAlign": "அவள்:figure | மோசமாக:qual | பாடுகிறாள்:be"
+    },
+    "conjunctions#0": {
+      "en": "I like tea and coffee.",
+      "ta": "எனக்கு தேனீர் மற்றும் காபி பிடிக்கும்.",
+      "enAlign": "I:figure | like:be | tea:ground1 | and:join | coffee:ground2",
+      "taAlign": "எனக்கு:figure | தேனீர்:ground1 | மற்றும்:join | காபி:ground2 | பிடிக்கும்:be"
+    },
+    "conjunctions#1": {
+      "en": "She is small but strong.",
+      "ta": "அவள் சிறியவள் ஆனால் வலிமையானவள்.",
+      "enAlign": "She:figure | is | small:qual1 | but:join | strong:qual2",
+      "taAlign": "அவள்:figure | சிறியவள்:qual1 | ஆனால்:join | வலிமையானவள்:qual2"
+    },
+    "conjunctions#2": {
+      "en": "Do you want tea or coffee?",
+      "ta": "உங்களுக்கு தேனீர் அல்லது காபி வேண்டுமா?",
+      "enAlign": "Do | you:figure | want:be | tea:ground1 | or:join | coffee:ground2",
+      "taAlign": "உங்களுக்கு:figure | தேனீர்:ground1 | அல்லது:join | காபி:ground2 | வேண்டுமா:be"
+    },
+    "conjunctions#3": {
+      "en": "I came because of you",
+      "ta": "நான் வந்தேன் ஏனெனில் நீ தான் அழைத்தாய்.",
+      "enAlign": "I:figure | came:be | because of:join | you:ground",
+      "taAlign": "நான்:figure | வந்தேன்:be | ஏனெனில்:join | நீ தான் அழைத்தாய்:ground"
+    },
+    "conjunctions#4": {
+      "en": "I was tired, so I slept",
+      "ta": "நான் களைத்துவிட்டேன், ஆகவே நான் தூங்கினேன்.",
+      "enAlign": "I:figure1 | was tired:be1 | so:join | I:figure2 | slept:be2",
+      "taAlign": "நான்:figure1 | களைத்துவிட்டேன்,:be1 | ஆகவே:join | நான்:figure2 | தூங்கினேன்:be2"
+    }
+  },
+  "words": {
+    "i": {
+      "en": "I am here.",
+      "ta": "நான் இங்கே இருக்கிறேன்.",
+      "enAlign": "I:figure | am:be | here:ground",
+      "taAlign": "நான்:figure | இங்கே:ground | இருக்கிறேன்:be"
+    },
+    "we": {
+      "en": "We are here.",
+      "ta": "நாம் இங்கே இருக்கிறோம்.",
+      "enAlign": "We:figure | are:be | here:ground",
+      "taAlign": "நாம்:figure | இங்கே:ground | இருக்கிறோம்:be"
+    },
+    "you": {
+      "en": "You are here.",
+      "ta": "நீ இங்கே இருக்கிறாய்.",
+      "enAlign": "You:figure | are:be | here:ground",
+      "taAlign": "நீ:figure | இங்கே:ground | இருக்கிறாய்:be"
+    },
+    "he": {
+      "en": "He is here.",
+      "ta": "அவன் இங்கே இருக்கிறான்.",
+      "enAlign": "He:figure | is:be | here:ground",
+      "taAlign": "அவன்:figure | இங்கே:ground | இருக்கிறான்:be"
+    },
+    "she": {
+      "en": "She is here.",
+      "ta": "அவள் இங்கே இருக்கிறாள்.",
+      "enAlign": "She:figure | is:be | here:ground",
+      "taAlign": "அவள்:figure | இங்கே:ground | இருக்கிறாள்:be"
+    },
+    "it": {
+      "en": "It is here.",
+      "ta": "அது இங்கே இருக்கிறது.",
+      "enAlign": "It:figure | is:be | here:ground",
+      "taAlign": "அது:figure | இங்கே:ground | இருக்கிறது:be"
+    },
+    "they": {
+      "en": "They are here.",
+      "ta": "அவர்கள் இங்கே இருக்கிறார்கள்.",
+      "enAlign": "They:figure | are:be | here:ground",
+      "taAlign": "அவர்கள்:figure | இங்கே:ground | இருக்கிறார்கள்:be"
+    }
+  }
+}

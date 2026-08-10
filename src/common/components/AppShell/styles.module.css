@@ -1,0 +1,146 @@
+/* ============================================================
+   The frame every page renders inside.
+
+   Two columns. There was a third — a rail showing whatever row
+   you were touching — but a row's picture belongs in the row,
+   beside its word, not in a panel the eye has to travel to and
+   back from.
+   ============================================================ */
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  grid-template-rows: var(--header-h) 1fr auto;
+  grid-template-areas:
+    "header  header"
+    "sidebar main"
+    "sidebar footer";
+  min-height: 100vh;
+}
+.shell[data-sidebar="collapsed"] { grid-template-columns: 64px minmax(0, 1fr); }
+
+/* ---- header ------------------------------------------------ */
+.header {
+  grid-area: header;
+  position: sticky; top: 0; z-index: 30;
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: 0 var(--s-4);
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.spacer { flex: 1; }
+
+.topNav { display: flex; gap: var(--s-1); }
+.topNav a {
+  padding: var(--s-2) var(--s-3); border-radius: var(--r-pill);
+  color: var(--soft); font-size: var(--fs-sm); text-decoration: none;
+}
+.topNav a:hover { background: var(--surface-sunk); color: var(--ink); text-decoration: none; }
+.topNav a[aria-current="page"] { background: var(--ink); color: var(--bg); font-weight: 600; }
+
+/* ---- sidebar ----------------------------------------------- */
+.sidebar {
+  grid-area: sidebar;
+  position: sticky; top: var(--header-h);
+  align-self: start;
+  height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  padding: var(--s-3);
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+}
+.sidebar h4 {
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: .01em;
+  color: var(--muted);
+  padding: 0 var(--s-3); margin: var(--s-4) 0 var(--s-2);
+}
+.sidebar h4:first-child { margin-top: 0; }
+.sidebar a {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-2) var(--s-3); border-radius: var(--r-md);
+  color: var(--soft); text-decoration: none; font-size: var(--fs-sm);
+}
+.sidebar a:hover { background: var(--surface-sunk); color: var(--ink); text-decoration: none; }
+.sidebar a[aria-current="page"] {
+  background: var(--accent-soft); color: var(--accent); font-weight: 600;
+}
+.num {
+  width: 22px; height: 22px; flex: none; border-radius: var(--r-sm);
+  display: grid; place-items: center;
+  background: var(--surface-sunk); color: var(--muted);
+  font-size: var(--fs-xs); font-weight: 700;
+}
+.sidebar a[aria-current="page"] .num { background: var(--accent); color: var(--accent-ink); }
+
+/* Collapsed: the labels go, the numbers and icons stay. The link keeps its
+   accessible name from the label, which is still in the accessibility tree —
+   it is `.sr-only`, not removed. */
+.shell[data-sidebar="collapsed"] .sidebar h4 { display: none; }
+
+/* ---- main + footer ----------------------------------------- */
+.main {
+  grid-area: main;
+  padding: var(--s-4) var(--s-5) var(--s-6);
+  max-width: var(--content-max);
+  width: 100%;
+}
+.footer {
+  grid-area: footer;
+  padding: var(--s-3) var(--s-5);
+  border-top: 1px solid var(--line);
+  color: var(--muted); font-size: var(--fs-sm);
+  display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center;
+}
+
+.skipLink {
+  position: absolute; left: var(--s-4); top: -100px; z-index: 100;
+  background: var(--accent); color: var(--accent-ink);
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-sm);
+}
+.skipLink:focus { top: var(--s-4); }
+
+/* ---- mobile ------------------------------------------------ */
+.mobileNav { display: none; }
+
+.scrim {
+  position: fixed; inset: 0; z-index: 50;
+  background: var(--scrim);
+  transition: opacity var(--t-base) var(--ease);
+}
+
+/* tablet and below: the sidebar becomes a drawer and a bottom bar appears */
+@media (max-width: 900px) {
+  .shell,
+  .shell[data-sidebar="collapsed"] {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "header" "main" "footer";
+  }
+  .sidebar {
+    position: fixed; top: 0; left: 0; z-index: 60;
+    height: 100vh; width: 280px;
+    transform: translateX(-100%);
+    transition: transform var(--t-base) var(--ease);
+    box-shadow: var(--shadow-3);
+  }
+  .shell[data-drawer="open"] .sidebar { transform: none; }
+  .topNav { display: none; }
+  .main { padding: var(--s-4) var(--s-4) var(--s-8); }
+
+  .mobileNav {
+    display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+    background: var(--surface); border-top: 1px solid var(--line);
+    padding: var(--s-2) var(--s-2) calc(var(--s-2) + env(safe-area-inset-bottom));
+  }
+  .mobileNav a {
+    flex: 1; display: grid; justify-items: center; gap: 2px;
+    padding: var(--s-2); border-radius: var(--r-md);
+    color: var(--muted); font-size: var(--fs-xs); text-decoration: none;
+  }
+  .mobileNav a[aria-current="page"] { color: var(--accent); font-weight: 700; }
+
+  /* Clear the fixed bar, or the last footer line sits under it. */
+  .footer { padding-bottom: 84px; }
+}
+
+@media (min-width: 1600px) {
+  .shell { --content-max: 1360px; }
+}

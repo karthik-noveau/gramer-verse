@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Visualizer — Prepositions — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="prepositions">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"
+         data-crumbs="Topics|pages/topics.html,Prepositions|pages/topic.html?topic=prepositions,Visualizer|"></nav>
+
+    <div class="page-head">
+      <h1>Preposition visualizer</h1>
+    </div>
+
+    <!-- Navigation, so it sits above the thing it navigates rather than inside
+         it. The five preposition tables become the chips: they are the grouping
+         the source itself uses, and the grouping the authored word-order
+         diagrams are keyed to, so a chip always has rows behind it. -->
+    <nav class="chips" id="groupChips" aria-label="Preposition group"></nav>
+
+    <div class="practice">
+      <!-- What there is to read: the sentence in both scripts, and how the two
+           languages order it. -->
+      <div class="practice-main">
+        <!-- Typing, at the top of the reading column. It is the fastest way to
+                 a specific sentence and it drives the controls under the drawing:
+                 submit "a red apple is under the chair" and the group, the
+                 preposition and every knob move to match. It stays in this column
+                 rather than spanning the page, so the drawing keeps the full
+                 height of the one beside it. Its failure state, the cannot-draw
+                 panel, stays with it. -->
+        <div class="type-block" id="typeBlock">
+          <!-- No submit button: a form with a single text input submits on
+               Enter on its own, so the button was a second control for the one
+               action the field already performs. -->
+          <form class="practice-input" id="vizForm" role="search">
+            <label class="sr-only" for="sentenceInput">Sentence to draw</label>
+            <input class="input" id="sentenceInput" type="text"
+                   value="the ball is in the box"
+                   placeholder="the ball is in the box"
+                   autocomplete="off">
+          </form>
+          <!-- Built from whichever preposition is chosen: a suggestion for a
+               relation you are not looking at is a suggestion to leave. -->
+          <div class="try-these" id="tryThese"></div>
+
+          <!-- cannot draw: a first-class outcome, not an error -->
+          <div id="cannotPanel" hidden>
+            <div class="state state--cannot-draw">
+              <div class="state-icon" aria-hidden="true">✎</div>
+              <h3>We cannot draw this one yet</h3>
+              <p>Not in the drawing library: <b id="unknownWords"></b>.</p>
+              <p id="gapNote" style="color:var(--warn);font-weight:600"></p>
+              <p lang="ta">இந்தச் சொற்களை வரைய முடியவில்லை.</p>
+              <div class="btn-row">
+                <button class="btn btn--primary" id="useSuggestion">Draw the nearest</button>
+                <a class="btn" href="reference.html">What can be drawn</a>
+              </div>
+              <p style="font-size:var(--fs-xs);color:var(--muted)">
+                Nearest drawable: <code id="suggestion"></code>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lines" id="lines">
+          <div class="line line--ta" id="lineTa" lang="ta"></div>
+          <div class="line line--en" id="lineEn"></div>
+        </div>
+
+        <div id="orderCard" class="fm-card"></div>
+      </div>
+
+      <!-- The picture and the controls that drive it, together: choose a group,
+           then a relation, then turn a knob — each one directly under the
+           drawing it changes. -->
+      <aside class="practice-stage">
+        <div class="stage-z" id="stage">
+          <svg id="scene" viewBox="0 0 720 420" role="img" aria-labelledby="sceneDesc"></svg>
+        </div>
+        <p id="sceneDesc" class="sr-only"></p>
+
+        <div class="viz-pick" id="prepPick" role="group" aria-label="Preposition"></div>
+
+        <!-- Only shown for the relations the scene can actually stage. A knob
+             that changes nothing is worse than no knob. -->
+        <section class="build" id="buildBlock" aria-labelledby="buildHead">
+          <h2 id="buildHead" class="build-head">Change the picture</h2>
+          <div class="pick" id="pick"></div>
+        </section>
+
+        <!-- Shown instead, when the relation has a diagram but no stageable
+             scene. Saying so is better than a picker that does nothing. -->
+        <div class="callout" id="diagramNote" hidden>
+          <b>This one is a diagram, not a scene.</b>
+          <span id="diagramWhy"></span>
+          <span lang="ta" style="display:block">இது படவிளக்கம் — மாற்ற முடியாது.</span>
+        </div>
+      </aside>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script src="../assets/js/scene.js"></script>
+<script src="../assets/js/icons-extra.js"></script>
+<script src="../assets/js/art.js"></script>
+<script src="../assets/js/formation.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---- the two modes ----------------------------------------
+     SCENE  — the six place relations the engine can stage. Everything is
+              live: knobs, generated sentence, generated word order.
+     DIAGRAM— every other preposition. It has a drawing, and the notes give it
+              a sentence with an authored word-order map. Both are real; only
+              the scene's knobs are missing, and the page says so rather than
+              offering controls that do nothing. */
+  var STATE = { det:'the', num:1, adj:'', figure:'ball', prep:'in', ground:'box',
+                ground2:'chair', tense:'present' };
+  var NODE_FOR = { figure: 'figure-0', ground: 'ground' };
+
+  /* The chips are the source's own preposition tables. Using the tables rather
+     than the topic's lesson groups matters: the word-order diagrams are keyed
+     tableId#rowIndex, so every chip item is guaranteed to have one. */
+  var TABLES = GV_CONTENT.tables.filter(function (t) { return t.topic === 'prepositions'; });
+  var group = 0, itemIndex = 0;
+
+  function rowsOf(t) { return GV_Table.normalise(t); }
+
+  /* The source repeats a preposition across senses — "in / Place" then "Time".
+     The word is whichever cell of the row the art library recognises. */
+  function wordOf(row) {
+    for (var i = 0; i < row.length; i++) {
+      if (GV_Art.lookup(row[i])) return String(row[i]).split('\n')[0].trim();
+    }
+    return String(row[0]).split('\n')[0].trim();
+  }
+  function stageable(t, row) {
+    /* "in 2000" is the same word as "in the box" and a different relation.
+       Only the place tables get a scene. */
+    if (t.id === 'prep-time' || t.id === 'prep-dir' || t.id === 'prep-other') return false;
+    if (t.id === 'prep-common' && /time/i.test(String(row[1] || ''))) return false;
+    return !!GV_Scene.PREPS[wordOf(row).toLowerCase()];
+  }
+
+  var PREP_TA = { 'in':'உள்ளே', on:'மீது', under:'கீழே',
+                  above:'மேலே', behind:'பின்னால்', beside:'அருகில்' };
+  var NUM_TA  = { 1:'ஒன்று', 2:'இரண்டு', 3:'மூன்று' };
+  var ADJ_TA  = { red:'சிவப்பு', green:'பச்சை', big:'பெரிய', small:'சிறிய' };
+
+  /* Four knobs, in the order the sentence reads: how many, what, where, when.
+     The article and the adjective are gone — they change a word without
+     changing the relation this page is about, and the typed input still sets
+     them for anyone who wants "a red apple". */
+  var PICK = [
+    { key:'num',    kind:'num',   ta:'எத்தனை',  en:'How many',
+      opts:[[1,'ஒன்று'],[2,'இரண்டு'],[3,'மூன்று']] },
+    { key:'figure', kind:'thing', ta:'பொருள்',  en:'Thing',
+      opts:[['ball','பந்து'],['apple','ஆப்பிள்'],['cup','கோப்பை'],['cat','பூனை']] },
+    { key:'ground', kind:'thing', ta:'இடம்',    en:'Place',
+      opts:[['table','மேசை'],['box','பெட்டி'],['chair','நாற்காலி']] },
+    /* Only "between" needs somewhere else to be between. */
+    { key:'ground2', kind:'thing', ta:'இரண்டாம் இடம்', en:'and',
+      only:'between',
+      opts:[['table','மேசை'],['box','பெட்டி'],['chair','நாற்காலி']] },
+    { key:'tense',  kind:'when', ta:'காலம்',  en:'When',
+      opts:[['present','நிகழ்காலம்'],['past','கடந்த காலம்'],['future','எதிர்காலம்']] }
+  ];
+
+  /* ---- the typed way in, unchanged from the practice page ---- */
+  var FIGURES = { ball:1, apple:1, cup:1, cat:1 };
+  var GROUNDS = { table:1, box:1, chair:1 };
+  var ADJS    = { red:1, green:1, big:1, small:1 };
+  var NUMS    = { one:1, two:2, three:3 };
+
+  function resolve(text) {
+    var words = text.toLowerCase().replace(/[.,!?]/g, '').split(/\s+/).filter(Boolean);
+    var st = { det:'the', num:1, adj:'', figure:null, prep:null, ground:null,
+               ground2: STATE.ground2, tense: STATE.tense };
+    /* The verb was thrown away with the other stop words. Now that there is a
+       tense knob, "was" and "will" have to move it, or a typed sentence and
+       the control beside it would disagree about when. */
+    var TENSE = { is:'present', are:'present', was:'past', were:'past', will:'future' };
+    var unknown = [], STOP = { be:1, of:1, front:1, and:1 };
+    words.forEach(function (w) {
+      if (TENSE[w]) { st.tense = TENSE[w]; return; }
+      if (STOP[w]) return;
+      if (w === 'a' || w === 'an') { st.det = 'a'; return; }
+      if (w === 'the') { st.det = 'the'; return; }
+      if (NUMS[w]) { st.num = NUMS[w]; return; }
+      if (ADJS[w]) { st.adj = w; return; }
+      if (GV_Scene.PREPS[w]) { st.prep = w; return; }
+      var sing = w.replace(/s$/, '');
+      if (FIGURES[sing] && !st.figure) { st.figure = sing; if (w !== sing) st.num = Math.max(st.num, 2); return; }
+      /* A second ground is not a mistake — "between the table and the box"
+         names two of them, and overwriting the first lost half the sentence. */
+      if (GROUNDS[sing]) {
+        if (!st.ground) st.ground = sing; else st.ground2 = sing;
+        return;
+      }
+      unknown.push(w);
+    });
+    var gaps = [];
+    if (!st.figure) gaps.push('nothing to place');
+    if (!st.ground) gaps.push('nowhere to put it');
+    if (!st.prep) st.prep = 'on';
+    return { state: st, unknown: unknown, gaps: gaps };
+  }
+
+  /* ---- suggestions for the chosen relation -------------------
+     Only grounds the relation actually allows: offering "the ball is in the
+     table" would be suggesting the one thing the picker already greys out.
+     Hidden entirely when the relation has no scene, since every sentence the
+     resolver can draw is a place sentence. */
+  var TRY = [
+    { det:'the', num:'',      fig:'ball',  verb:'is'   },
+    { det:'a',   num:'',      fig:'apple', verb:'is',  adj:'red' },
+    { det:'',    num:'three', fig:'cups',  verb:'are'  },
+    { det:'the', num:'',      fig:'cat',   verb:'was'  }
+  ];
+  /* The relation is passed in, not read from STATE: STATE.prep holds the last
+     one the scene could stage, so in diagram mode it still names a drawable
+     relation and the suggestions for it survived onto a page showing something
+     else entirely. */
+  function buildTry(p) {
+    var host = $('tryThese');
+    var grounds = !p ? [] : ['box', 'table', 'chair'].filter(function (g) {
+      return GV_Scene.allows(p, g);
+    });
+    if (!p || !GV_Scene.PREPS[p] || !grounds.length) { host.hidden = true; return; }
+    host.hidden = false;
+    host.innerHTML = '<span class="try-lab">Try:</span>' +
+      TRY.map(function (t, i) {
+        var g = grounds[i % grounds.length];
+        var sentence = [t.num || t.det, t.adj, t.fig, t.verb, p, 'the', g]
+          .filter(Boolean).join(' ');
+        return '<button type="button" class="chip" data-try="' + sentence + '">' +
+          sentence + '</button>';
+      }).join('');
+  }
+
+  /* ---- chips and the preposition picker ---------------------- */
+  /* aria-current, not aria-selected: these moved out of the panel and into a
+     <nav>, and a tab outside a tablist is a lie to a screen reader. */
+  function buildChips() {
+    $('groupChips').innerHTML = TABLES.map(function (t, i) {
+      return '<button type="button" class="chip" data-g="' + i + '"' +
+        (i === group ? ' aria-current="true"' : '') + '>' + t.en +
+        '<span class="chip-n">' + rowsOf(t).length + '</span></button>';
+    }).join('');
+  }
+
+  var TAMIL = /[\u0b80-\u0bff]/;
+
+  /* The word, and nothing else. The drawing is on the stage at full size, so a
+     40px copy of it on every button was the same picture twice; the Tamil gloss
+     is on the sentence lines below for whichever one is chosen.
+
+     The second line survives only where it disambiguates — the source lists
+     "in" twice, once for Place and once for Time, and without that label the
+     two buttons are identical. In the other tables that cell holds the Tamil
+     meaning, which is a gloss rather than a distinction, so it is dropped. */
+  function buildPrepPick() {
+    var t = TABLES[group], rows = rowsOf(t);
+    $('prepPick').innerHTML = rows.map(function (r, i) {
+      var w = wordOf(r), live = stageable(t, r);
+      var sense = String(r[1] || '').split('\n')[0].trim();
+      var show = sense && sense !== w && !TAMIL.test(sense);
+      return '<button type="button" data-i="' + i + '" aria-pressed="' + (i === itemIndex) + '"' +
+        ' class="viz-item' + (live ? ' is-live' : '') + '">' +
+        '<span class="viz-w">' + w + '</span>' +
+        (show ? '<span class="viz-s">' + sense + '</span>' : '') +
+        '</button>';
+    }).join('');
+  }
+
+  /* ---- render ------------------------------------------------ */
+  function describe() {
+    return (STATE.num === 1 ? 'A ' : STATE.num + ' ') + (STATE.adj ? STATE.adj + ' ' : '') +
+      STATE.figure + (STATE.num > 1 ? 's' : '') + ' ' + STATE.prep + ' the ' + STATE.ground + '.';
+  }
+
+  /* Two lines now, Tamil and English. The pronunciation line between them —
+     the English respelled in Tamil letters — is gone, so the renderer has no
+     transliterating mode left either. */
+  /* No label in front of the line. Which language it is in is legible from
+     the script itself, and the label was the widest thing in a column that
+     had none to spare. The line carries lang on its own element instead, so
+     it is still announced correctly. */
+  function line(host, parts, mode) {
+    host.innerHTML = parts.map(function (p, i) {
+      var roles = p.r || [];
+      return '<span class="zw"' + (roles.length ? ' data-role="' + roles[0] +
+        '" data-roles="' + roles.join(' ') + '"' : '') +
+        (roles.length > 1 ? ' data-fused="true"' : '') +
+        (mode === 'ta' ? ' lang="ta"' : '') + '>' +
+        p.t + (i === parts.length - 1 ? '.' : '') + '</span>';
+    }).join(' ');
+  }
+
+  function renderScene() {
+    $('scene').innerHTML = GV_Scene.renderPlace(STATE);
+    $('scene').setAttribute('aria-label', describe());
+    $('sceneDesc').textContent = describe();
+    var spec = GV_Formation.fromScene(STATE);
+    line($('lineTa'), spec.ta, 'ta');
+    line($('lineEn'), spec.en, 'en');
+    $('orderCard').innerHTML = GV_Formation.card(spec);
+    $('buildBlock').hidden = false;
+    $('diagramNote').hidden = true;
+    buildTry(STATE.prep);
+  }
+
+  /* A relation with no scene still has a drawing and a sentence. Show the
+     drawing at stage size, and the row's own sentence with the word-order map
+     authored for it. */
+  function renderDiagram(t, rows, i) {
+    var r = rows[i], w = wordOf(r);
+    $('scene').innerHTML =
+      '<g transform="translate(240,90) scale(5)">' +
+      (GV_Scene.icon('prep', w.toLowerCase(), { size: 48 }) || '')
+        .replace(/^<svg[^>]*>/, '').replace(/<\/svg>$/, '') + '</g>';
+    $('scene').setAttribute('aria-label', 'A diagram of "' + w + '".');
+    $('sceneDesc').textContent = 'A diagram of "' + w + '".';
+
+    var spec = GV_Formation.forRow(t.id, i, r);
+    if (spec) {
+      line($('lineTa'), spec.ta, 'ta');
+      line($('lineEn'), spec.en, 'en');
+      $('orderCard').innerHTML = GV_Formation.card(spec);
+    } else {
+      $('orderCard').innerHTML = '';
+    }
+    $('buildBlock').hidden = true;
+    $('diagramNote').hidden = false;
+    /* Counted from the engine, not written down. This said "the six place
+       relations" long after there were eleven, because the number lived in
+       the copy instead of in the thing it described. */
+    var staged = Object.keys(GV_Scene.PREPS);
+    $('diagramWhy').innerHTML =
+      'The scene engine stages the ' + staged.length + ' place relations a figure and ' +
+      'a ground can really be in — ' +
+      staged.map(function (x) { return '<code>' + x + '</code>'; }).join(', ') +
+      '. The rest are drawn as diagrams and shown with the sentence the notes ' +
+      'give for them.';
+    buildTry(null);
+  }
+
+  function render() {
+    var t = TABLES[group], rows = rowsOf(t), r = rows[itemIndex];
+    var live = stageable(t, r);
+
+    if (live) {
+      STATE.prep = wordOf(r).toLowerCase();
+      /* A relation and a ground that cannot go together is the one thing this
+         page must never draw. */
+      if (!GV_Scene.allows(STATE.prep, STATE.ground)) {
+        STATE.ground = STATE.prep === 'in' ? 'box' : 'table';
+      }
+      /* Between two of the same thing is one thing. */
+      if (STATE.ground2 === STATE.ground) {
+        STATE.ground2 = STATE.ground === 'box' ? 'chair' : 'box';
+      }
+    }
+
+    /* Everything, every time. Each control used to refresh only itself and
+       whatever it thought it affected, so a knob could leave the text box
+       describing the previous picture. One render from one state cannot
+       disagree with itself. */
+    buildChips();
+    buildPrepPick();
+    buildPick();
+    if (live) renderScene(); else renderDiagram(t, rows, itemIndex);
+
+    /* Typing only ever produces a place scene, so where there is no scene the
+       box and its suggestions are hidden rather than left describing something
+       the picture is not showing. */
+    $('typeBlock').hidden = !live;
+    if (live) $('sentenceInput').value = asTyped();
+  }
+
+  /* The drawn sentence, written the way the resolver reads it — so what the
+     box says and what the picture shows are the same sentence, and pressing
+     Enter on it is a no-op rather than a surprise. Digits are spelled out
+     because the resolver knows "three" and not "3". */
+  var NUM_WORD = { 1: 'one', 2: 'two', 3: 'three' };
+  function asTyped() {
+    var n = STATE.num, plural = n > 1;
+    var verb = STATE.tense === 'past'   ? (plural ? 'were' : 'was')
+             : STATE.tense === 'future' ? 'will be'
+             : (plural ? 'are' : 'is');
+    var two = (GV_Scene.PREPS[STATE.prep] || {}).two;
+    return [plural ? NUM_WORD[n] : (STATE.det === 'a' ? 'a' : 'the'),
+            STATE.adj,
+            STATE.figure + (plural ? 's' : ''),
+            verb, STATE.prep, 'the', STATE.ground,
+            two ? 'and the ' + STATE.ground2 : ''].filter(Boolean).join(' ');
+  }
+
+  /* ---- highlight: word <-> picture ---- */
+  function lightRole(role) {
+    document.querySelectorAll('.zw').forEach(function (w) {
+      w.classList.toggle('lit',
+        role !== null && (w.dataset.roles || '').split(' ').indexOf(role) > -1);
+    });
+    var stage = $('stage'), node = role && NODE_FOR[role];
+    stage.classList.toggle('dim', !!node);
+    stage.querySelectorAll('[data-node]').forEach(function (n) {
+      n.classList.toggle('lit', !!node && n.dataset.node === node);
+    });
+  }
+  ['mouseover', 'focusin'].forEach(function (e) {
+    $('lines').addEventListener(e, function (ev) {
+      var w = ev.target.closest('.zw'); if (w) lightRole(w.dataset.role);
+    });
+  });
+  ['mouseleave', 'focusout'].forEach(function (e) {
+    $('lines').addEventListener(e, function () { lightRole(null); });
+  });
+
+  /* ---- the scene knobs ---- */
+  function buildPick() {
+    $('pick').innerHTML = PICK.filter(function (k) {
+      /* A knob that only one relation uses appears only for it. */
+      return !k.only || k.only === STATE.prep;
+    }).map(function (k) {
+      return '<div class="pick-row" data-key="' + k.key + '">' +
+        '<span class="lbl"><span lang="ta">' + k.ta + '</span>' +
+          '<span class="en">' + k.en + '</span></span><span class="picpick">' +
+        k.opts.map(function (o) {
+          var off = k.key === 'ground' && !GV_Scene.allows(STATE.prep, o[0]);
+          var art = GV_Scene.icon(k.kind, o[0], { size: 40, label: o[1] });
+          return '<button type="button" data-v="' + o[0] + '" aria-pressed="' +
+            (String(STATE[k.key]) === String(o[0])) + '"' + (off ? ' disabled' : '') +
+            ' aria-label="' + (o[1] || 'none') + '">' +
+            (art || '<span class="no-art" aria-hidden="true">—</span>') +
+            '<span class="lab" lang="ta">' + o[1] + '</span></button>';
+        }).join('') + '</span></div>';
+    }).join('');
+  }
+
+  /* ---- events ---- */
+  $('groupChips').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-g]'); if (!b) return;
+    group = +b.dataset.g; itemIndex = 0;
+    render();
+  });
+  $('prepPick').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-i]'); if (!b) return;
+    itemIndex = +b.dataset.i;
+    render();
+  });
+  $('pick').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-v]'); if (!b) return;
+    var key = b.parentNode.parentNode.dataset.key;
+    STATE[key] = key === 'num' ? Number(b.dataset.v) : b.dataset.v;
+    $('cannotPanel').hidden = true;
+    render();
+  });
+
+  function submit(text) {
+    var r = resolve(text);
+    if (r.unknown.length || r.gaps.length) {
+      $('cannotPanel').hidden = false;
+      $('unknownWords').textContent = r.unknown.length ? r.unknown.join(', ') : 'none';
+      $('gapNote').textContent = r.gaps.length
+        ? 'The sentence also leaves ' + r.gaps.join(' and ') + '.' : '';
+      $('suggestion').textContent = 'the ' + (r.state.figure || 'ball') + ' is ' +
+        r.state.prep + ' the ' + (r.state.ground || 'table');
+      return;
+    }
+    $('cannotPanel').hidden = true;
+    STATE = r.state;
+    if (!GV_Scene.allows(STATE.prep, STATE.ground)) {
+      STATE.ground = GV_Scene.PROPS[STATE.ground] && STATE.prep === 'in' ? 'box' : 'table';
+    }
+    /* Typing jumps the chips to wherever that preposition lives, so the
+       controls never disagree with the picture. */
+    TABLES.some(function (t, gi) {
+      return rowsOf(t).some(function (row, ri) {
+        if (stageable(t, row) && wordOf(row).toLowerCase() === STATE.prep) {
+          group = gi; itemIndex = ri; return true;
+        }
+        return false;
+      });
+    });
+    render();
+  }
+
+  $('vizForm').addEventListener('submit', function (ev) {
+    ev.preventDefault(); submit($('sentenceInput').value);
+  });
+  document.querySelector('.try-these').addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-try]'); if (!b) return;
+    $('sentenceInput').value = b.dataset.try; submit(b.dataset.try);
+  });
+  $('useSuggestion').addEventListener('click', function () {
+    $('sentenceInput').value = $('suggestion').textContent;
+    submit($('suggestion').textContent);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

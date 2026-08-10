@@ -1,0 +1,33 @@
+/* ============================================================
+   /topics/:topicId — one topic, whole.
+
+   The table first, the outline under it. Reading a topic at once
+   is faster than stepping through it one word at a time, which
+   is why the table is not tucked behind the lessons.
+   ============================================================ */
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--s-4);
+  margin-bottom: var(--s-5);
+}
+.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); }
+
+.ta { font-family: var(--tamil); color: var(--muted); }
+
+.sub { margin-top: var(--s-2); display: flex; flex-direction: column; gap: 1px; color: var(--soft); max-width: 60ch; }
+
+.cta { margin-left: auto; }
+@media (max-width: 640px) { .cta { margin-left: 0; } }
+
+.tables { margin-bottom: var(--s-6); }
+
+.listHead { font: 600 var(--fs-lg) / 1.2 var(--serif); margin-bottom: var(--s-2); }
+
+.rows { margin: 0; padding: 0; list-style: none; }
+
+/* Said plainly rather than left as an empty region: a topic with no table is a
+   fact about the notes, not a page that failed to load. */
+.none { color: var(--muted); font-size: var(--fs-sm); }

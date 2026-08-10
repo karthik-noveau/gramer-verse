@@ -1,0 +1,155 @@
+[
+  {
+    "id": "eat",
+    "en": { "base": "eat", "third": "eats", "past": "ate", "ing": "eating" },
+    "ta": "சாப்பிடு",
+    "drawable": true,
+    "anchor": "mouth",
+    "cue": "chomp",
+    "transitive": true
+  },
+  {
+    "id": "drink",
+    "en": { "base": "drink", "third": "drinks", "past": "drank", "ing": "drinking" },
+    "ta": "குடி",
+    "drawable": true,
+    "anchor": "mouth",
+    "cue": "chomp",
+    "transitive": true
+  },
+  {
+    "id": "read",
+    "en": { "base": "read", "third": "reads", "past": "read", "ing": "reading" },
+    "ta": "படி",
+    "drawable": true,
+    "anchor": "hand",
+    "cue": "gaze",
+    "transitive": true
+  },
+  {
+    "id": "see",
+    "en": { "base": "see", "third": "sees", "past": "saw", "ing": "seeing" },
+    "ta": "பார்",
+    "drawable": true,
+    "anchor": "eye",
+    "cue": "gaze",
+    "transitive": true
+  },
+  {
+    "id": "throw",
+    "en": { "base": "throw", "third": "throws", "past": "threw", "ing": "throwing" },
+    "ta": "எறி",
+    "drawable": true,
+    "anchor": "hand",
+    "cue": "arc",
+    "transitive": true
+  },
+  {
+    "id": "give",
+    "en": { "base": "give", "third": "gives", "past": "gave", "ing": "giving" },
+    "ta": "கொடு",
+    "drawable": true,
+    "anchor": "hand",
+    "cue": "arc",
+    "transitive": true
+  },
+  {
+    "id": "open",
+    "en": { "base": "open", "third": "opens", "past": "opened", "ing": "opening" },
+    "ta": "திற",
+    "drawable": true,
+    "anchor": "hand",
+    "cue": "impact",
+    "transitive": true
+  },
+  {
+    "id": "kick",
+    "en": { "base": "kick", "third": "kicks", "past": "kicked", "ing": "kicking" },
+    "ta": "உதை",
+    "drawable": true,
+    "anchor": "foot",
+    "cue": "impact",
+    "transitive": true
+  },
+  {
+    "id": "stand",
+    "en": { "base": "stand", "third": "stands", "past": "stood", "ing": "standing" },
+    "ta": "நில்",
+    "drawable": true,
+    "anchor": "foot",
+    "cue": "impact",
+    "transitive": false
+  },
+  {
+    "id": "laugh",
+    "en": { "base": "laugh", "third": "laughs", "past": "laughed", "ing": "laughing" },
+    "ta": "சிரி",
+    "drawable": true,
+    "anchor": "mouth",
+    "cue": "chomp",
+    "transitive": false
+  },
+  {
+    "id": "sit",
+    "en": { "base": "sit", "third": "sits", "past": "sat", "ing": "sitting" },
+    "ta": "உட்கார்",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": false
+  },
+  {
+    "id": "sleep",
+    "en": { "base": "sleep", "third": "sleeps", "past": "slept", "ing": "sleeping" },
+    "ta": "தூங்கு",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": false
+  },
+  {
+    "id": "work",
+    "en": { "base": "work", "third": "works", "past": "worked", "ing": "working" },
+    "ta": "வேலை செய்",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": false
+  },
+  {
+    "id": "remember",
+    "en": { "base": "remember", "third": "remembers", "past": "remembered", "ing": "remembering" },
+    "ta": "நினை",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": true
+  },
+  {
+    "id": "like",
+    "en": { "base": "like", "third": "likes", "past": "liked", "ing": "liking" },
+    "ta": "விரும்பு",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": true
+  },
+  {
+    "id": "force",
+    "en": { "base": "force", "third": "forces", "past": "forced", "ing": "forcing" },
+    "ta": "வலியுறுத்து",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": true
+  },
+  {
+    "id": "get",
+    "en": { "base": "get", "third": "gets", "past": "got", "ing": "getting" },
+    "ta": "பெறு",
+    "drawable": false,
+    "anchor": null,
+    "cue": null,
+    "transitive": true
+  }
+]

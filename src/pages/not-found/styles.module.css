@@ -1,0 +1,30 @@
+.state {
+  display: grid; justify-items: center; gap: var(--s-3);
+  margin-top: var(--s-6);
+  padding: var(--s-7) var(--s-4);
+  text-align: center;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+
+.icon {
+  width: 52px; height: 52px; border-radius: var(--r-lg);
+  display: grid; place-items: center;
+  background: var(--surface-sunk); color: var(--muted);
+  font-size: var(--fs-lg);
+}
+
+.title { font: 600 var(--fs-xl)/1.2 var(--serif); }
+.body { color: var(--soft); font-size: var(--fs-sm); max-width: 52ch; }
+
+/* The attempted path, verbatim and selectable — it is the one piece of
+   evidence the reader has. */
+.path {
+  font-family: var(--mono); font-size: var(--fs-xs);
+  background: var(--surface-sunk);
+  padding: 2px 6px; border-radius: var(--r-sm);
+  overflow-wrap: anywhere;
+}
+
+.actions { display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: center; }

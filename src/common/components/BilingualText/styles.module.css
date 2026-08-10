@@ -1,0 +1,15 @@
+.bi { display: grid; gap: 2px; }
+.en { color: var(--ink); }
+.ta { color: var(--soft); font-size: var(--fs-sm); }
+
+.inline { display: inline; }
+.inline .ta::before { content: " · "; color: var(--muted); }
+
+/* The production fallback when Tamil is missing. It is deliberately ugly: a
+   half-rendered bilingual string is a content bug, and the one thing it must
+   never do is look finished. */
+.missing {
+  color: var(--danger);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}

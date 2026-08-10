@@ -1,0 +1,59 @@
+/* Side by side, so the two sentences can be read against each other. Stacked
+   on a narrow screen — one above the other still compares; two columns 140px
+   wide do not. */
+.result {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-3);
+}
+
+@media (min-width: 640px) {
+  .result { grid-template-columns: 1fr 1fr; }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+
+/* What was said is marked as a claim that did not hold — with the warn
+   colour, which this app uses for "cannot draw" rather than for an error.
+   Being wrong here is not a failure; it is the lesson. */
+.said { border-color: var(--warn); }
+.truth { border-color: var(--accent); }
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+
+.choice {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.line {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--soft);
+}
+
+.ta {
+  font-family: var(--tamil);
+  text-transform: none;
+  letter-spacing: normal;
+}

@@ -1,0 +1,47 @@
+/* The two lines under the picture. One paragraph, because they are one
+   sentence said twice — not two paragraphs that happen to be adjacent. */
+.sentence {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.line {
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.ta {
+  font-family: var(--tamil);
+  color: var(--soft);
+}
+
+/* A word a knob owns is underlined, so it is visibly one of the things that
+   can change before anything has changed. Dotted rather than solid: a solid
+   underline reads as a link. */
+.bound {
+  border-bottom: 2px dotted var(--line-strong);
+}
+
+/* The word that just changed. Colour and weight as well as the wash, because a
+   flash carried by colour alone is invisible to a learner who cannot see it. */
+.flash {
+  animation: flash .62s ease-out;
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+@keyframes flash {
+  0%   { background: var(--accent-soft); }
+  70%  { background: var(--accent-soft); }
+  100% { background: transparent; }
+}
+
+/* The word still marks itself out — it keeps the colour and the weight — but
+   nothing moves or blinks. */
+@media (prefers-reduced-motion: reduce) {
+  .flash { animation: none; }
+}

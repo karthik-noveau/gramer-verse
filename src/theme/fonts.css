@@ -1,0 +1,94 @@
+/* ============================================================
+   fonts.css — the type stacks, the type scale, the spacing
+   scale, and the Tamil webfont.
+
+   Spacing lives with type on purpose: they are one rhythm, and
+   splitting them is how a 13px line ends up in a 12px gap.
+
+   The Tamil face ships with the app. A Tamil learner on a device
+   with no Tamil family installed is exactly the reader this
+   product exists for, and "install a font first" is not an
+   answer. See assets/fonts/LICENCE.md — SIL OFL 1.1, subset,
+   redistribution permitted.
+   ============================================================ */
+
+/* One file, weight axis kept variable 100–900, so bold Tamil costs no second
+   download. `swap` because a blank sentence teaches nothing while a
+   fallback-rendered one does. */
+@font-face {
+  font-family: "Noto Sans Tamil";
+  src: url("../assets/fonts/noto-sans-tamil-subset.woff2") format("woff2-variations"),
+       url("../assets/fonts/noto-sans-tamil-subset.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* `swap` costs a reflow when the real face arrives, and a sentence that jumps
+   while it is being read is worse than one that starts plain. So the fallbacks
+   are measured against Noto rather than guessed: size-adjust matches the mean
+   Tamil advance width, and the ascent/descent overrides pin the line box, so
+   the swap changes the letterforms and nothing else.
+
+   The ratios were measured in the browser, on real Tamil sentences from the
+   content, rather than computed from the fonts' advance-width tables: Tamil
+   shapes, so per-glyph widths add up to the wrong answer — that arithmetic
+   said Tamil MN needed 98.4% when shaped text needs 112.3%. The overrides are
+   divided by the size-adjust because size-adjust scales the line box with
+   everything else.
+
+   The Windows families are listed after these, unadjusted: they could not be
+   measured on this machine, and a guessed number is worse than none. */
+@font-face {
+  font-family: "Tamil MN adjusted";
+  src: local("Tamil MN");
+  size-adjust: 112.3%;
+  ascent-override: 77.5%;
+  descent-override: 33.0%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Tamil Sangam adjusted";
+  src: local("Tamil Sangam MN");
+  size-adjust: 124.2%;
+  ascent-override: 70.0%;
+  descent-override: 29.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "InaiMathi adjusted";
+  src: local("InaiMathi");
+  size-adjust: 129.9%;
+  ascent-override: 67.0%;
+  descent-override: 28.5%;
+  line-gap-override: 0%;
+}
+
+:root {
+  /* --- stacks ----------------------------------------------- */
+  --font:   system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --serif:  "Iowan Old Style", Palatino, Georgia, serif;
+  --tamil:  "Noto Sans Tamil", "Tamil MN adjusted", "Tamil Sangam adjusted",
+            "InaiMathi adjusted", "Nirmala UI", "Latha", system-ui, sans-serif;
+  --mono:   ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* --- type scale ------------------------------------------- */
+  --fs-xs:   11px;
+  --fs-sm:   13px;
+  --fs-base: 15px;
+  --fs-md:   17px;
+  --fs-lg:   21px;
+  --fs-xl:   26px;
+  --fs-2xl:  32px;
+  --fs-3xl:  42px;
+
+  /* --- spacing ---------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+}

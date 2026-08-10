@@ -1,0 +1,377 @@
+/* ============================================================
+   pages.css — layout that belongs to one page only.
+   In React each block becomes that page's styles.module.css.
+   ============================================================ */
+
+/* The home screen lives in home.css — it does not use the app shell. */
+
+/* ============================================================
+   lesson (pages/lesson.html) — the product
+   ============================================================ */
+.lesson {
+  display: grid; gap: var(--s-4);
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+}
+@media (max-width: 1100px) { .lesson { grid-template-columns: minmax(0, 1fr); } }
+
+.lesson-main { min-width: 0; }
+
+/* How much text is layered over the pictures. Practice used to carry the same
+   control; it now shows every layer at once, so this is the lesson's alone. */
+.steps { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* the sentence, in both languages */
+/* Words are inline with real spaces between them, not flex items with a gap.
+   A flex gap is visual only — screen readers read textContent, and a gap-only
+   sentence is read as one unbroken word. */
+.sentence {
+  font: 500 var(--fs-xl)/1.4 var(--serif);
+  min-height: 40px;
+}
+.sentence .w { display: inline-block; padding: 1px 3px; border-radius: var(--r-sm); }
+.sentence .w.tunable { border-bottom: 2px solid var(--accent); }
+.sentence .w.flash { animation: flash .55s var(--ease); }
+@keyframes flash { from { background: var(--accent-soft); } to { background: transparent; } }
+.sentence-ta {
+  font-family: var(--tamil); color: var(--soft);
+  font-size: var(--fs-md); margin-top: var(--s-2);
+}
+.sentence-ta .w { display: inline-block; padding: 1px 3px; border-radius: var(--r-sm); }
+.sentence-ta .w.flash { animation: flash .55s var(--ease); border-radius: var(--r-sm); }
+
+/* the picture */
+/* The stage is the most important surface on the page — it gets the most lift. */
+.stage {
+  margin-top: var(--s-4);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: var(--s-2);
+  max-width: 820px;
+  box-shadow: var(--shadow-2);
+}
+.stage svg { display: block; width: 100%; height: auto; }
+.stage--question { border-style: dashed; border-color: var(--warn); }
+
+/* the knobs */
+.knobs {
+  display: grid; gap: var(--s-3); margin-top: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.knob-group { display: grid; gap: var(--s-2); align-content: start; }
+.knob-group > .k-label {
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: .01em;
+  color: var(--muted);
+}
+.knob-group > .k-label [lang="ta"] { text-transform: none; letter-spacing: 0; }
+.knob-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+.knobs[data-locked="true"] { opacity: .45; pointer-events: none; }
+
+/* right rail */
+.lesson-rail { display: grid; gap: var(--s-4); position: sticky; top: calc(var(--header-h) + var(--s-4)); }
+@media (max-width: 1100px) { .lesson-rail { position: static; } }
+.lesson-rail .why b { color: var(--ink); }
+
+.lesson-nav {
+  display: flex; align-items: center; gap: var(--s-3);
+  margin-top: var(--s-5); padding-top: var(--s-3); border-top: 1px solid var(--line);
+}
+.lesson-nav .spacer { flex: 1; }
+
+/* predict-then-reveal */
+.predict { display: grid; gap: var(--s-3); }
+.predict .q { font: 500 var(--fs-md)/1.4 var(--serif); }
+.predict-result { display: grid; gap: var(--s-2); }
+.predict-result .compare {
+  display: grid; gap: var(--s-3); grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 700px) { .predict-result .compare { grid-template-columns: minmax(0, 1fr); } }
+.predict-result .compare > div { padding: var(--s-3); border-radius: var(--r-md); font-size: var(--fs-sm); }
+.predict-result .yours   { background: var(--warn-soft);   border: 1px solid var(--warn); }
+.predict-result .correct { background: var(--accent-soft); border: 1px solid var(--accent); }
+
+/* ============================================================
+   topics + topic
+   ============================================================ */
+.topic-card { display: grid; gap: var(--s-3); }
+.topic-card .t-head { display: flex; align-items: flex-start; gap: var(--s-3); }
+.topic-card .t-num {
+  width: 34px; height: 34px; flex: none; border-radius: var(--r-md);
+  background: var(--accent-soft); color: var(--accent);
+  display: grid; place-items: center; font-weight: 700;
+}
+.topic-card .t-foot { display: flex; align-items: center; gap: var(--s-3); font-size: var(--fs-xs); color: var(--muted); }
+
+.lesson-row {
+  display: flex; align-items: center; gap: var(--s-4);
+  padding: var(--s-3) var(--s-4); border-radius: var(--r-md);
+  border: 1px solid var(--line); background: var(--surface);
+  text-decoration: none; color: inherit;
+  box-shadow: var(--shadow-1);
+}
+.lesson-row:hover { border-color: var(--line-strong); text-decoration: none; }
+.lesson-row .l-num { width: 26px; color: var(--muted); font-size: var(--fs-sm); font-weight: 700; }
+.lesson-row .l-body { flex: 1; min-width: 0; }
+.lesson-row .l-title { font-weight: 600; }
+.lesson-row .l-ta { font-family: var(--tamil); color: var(--soft); font-size: var(--fs-sm); }
+.lesson-list { display: grid; gap: var(--s-2); }
+
+/* ============================================================
+   the prepositions visualizer
+
+   One page, two ways in. The picture picker works with no English at all;
+   the text box is beside it for anyone who would rather type. Both feed the
+   same drawing — this was three pages once (practice, "Tamil-first", and a
+   standalone practice route) rendering the same sentence with the same
+   engine. It now lives under Prepositions, which is the only topic the scene
+   engine has anything to stage for.
+   ============================================================ */
+
+/* ---- the chips, and the preposition picker ------------------
+   The chips are the source's own preposition tables, so a chip always has
+   rows behind it. The picker below shows every preposition in that table;
+   the ones the scene can stage carry an accent underline, because "this one
+   is live and the rest are diagrams" is worth seeing before clicking. */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-6); }
+.chips .chip[aria-current] {
+  background: var(--accent); border-color: var(--accent); color: var(--accent-ink);
+  font-weight: 600;
+}
+.chips .chip-n { margin-left: 6px; font-size: var(--fs-xs); color: var(--muted); }
+.chips .chip[aria-current] .chip-n { color: var(--accent-ink); opacity: .8; }
+
+/* Every item the same size. They were sized by their contents, so the row
+   came out ragged — 78px for "under / \u0b95\u0bc0\u0bb4\u0bcd" against 120px for
+   "beside / \u0baa\u0b95\u0bcd\u0b95\u0ba4\u0bcd\u0ba4\u0bbf\u0bb2\u0bcd / \u0b85\u0bb0\u0bc1\u0b95\u0bbf\u0bb2\u0bcd" — and a picker of unequal
+   boxes reads as a list of unequal things. A grid of one track size fixes
+   the width and the rows align; the labels wrap inside it. */
+/* The picker belongs to the picture above it, so it sits close to that and
+   further from what follows. It had no top margin at all — flush against the
+   card — which grouped it with the section below instead. The row gap is
+   larger than the column gap, or a wrapped second row reads as a continuation
+   of the first rather than as more of the same list. */
+.viz-pick {
+  display: flex; flex-wrap: wrap; gap: 8px 6px;
+  margin-top: var(--s-3); margin-bottom: var(--s-5);
+}
+
+/* A word, not a tile. This was an icon over a word over a Tamil gloss, in a
+   fixed 96px grid so the rows would align — with the drawing and the gloss
+   gone there is nothing left to align, and the box shrinks to its word.
+   The drawing is on the stage at full size; the Tamil is on the sentence
+   lines below, for whichever word is chosen. */
+.viz-item {
+  display: inline-flex; align-items: baseline; gap: 6px; cursor: pointer;
+  padding: 6px var(--s-3) 5px; border-radius: var(--r-md);
+  background: var(--surface); border: 1px solid var(--line);
+  border-bottom-width: 3px;
+}
+.viz-item:hover { border-color: var(--line-strong); }
+.viz-item[aria-pressed="true"] { border-color: var(--accent); box-shadow: var(--shadow-1); }
+/* The underline marks a relation the scene can actually stage, so which are
+   live is visible before clicking. */
+.viz-item.is-live { border-bottom-color: var(--accent); }
+.viz-item .viz-w { font: 500 var(--fs-md)/1.2 var(--serif); color: var(--ink); }
+/* Kept only where it disambiguates — the source lists "in" for both Place and
+   Time, and the two buttons are otherwise identical. */
+.viz-item .viz-s { font-size: var(--fs-xs); color: var(--muted); }
+
+/* Reading left, doing right. The right column now carries the picture and
+   everything that changes it, so the drawing sits directly above the control
+   that moves it; the left column is the sentence and the word order, which
+   are read rather than operated.
+
+   It is the wider of the two for that reason — the knob rows are six-across
+   at their widest and were wrapping at the 38% the column used to be. And it
+   no longer sticks: a column holding the picker and five knob rows is taller
+   than the viewport, so pinning it only fought the scroll. */
+.practice {
+  display: grid; gap: var(--s-6);
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 44%);
+  align-items: start;
+}
+.practice-main { min-width: 0; }
+/* One column below 1100px, with the picture and its controls first: they are
+   what the page is for, and the sentence reads perfectly well underneath. */
+@media (max-width: 1100px) {
+  .practice { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); }
+  .practice-stage { order: -1; }
+}
+
+/* ---- the stage ---- */
+.stage-z {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-lg); padding: var(--s-2); box-shadow: var(--shadow-2);
+}
+.stage-z svg { display: block; width: 100%; height: auto; }
+.stage-z [data-node] { transition: opacity var(--t-base) var(--ease); }
+.stage-z.dim [data-node] { opacity: .22; }
+.stage-z.dim [data-node].lit { opacity: 1; }
+
+/* One step between the control groups down the right column: the picture, its
+   hint, the words, then a ruled break before the knobs. The picker sat 24
+   below, which made it look attached to the knobs rather than to what it
+   feeds; it is 16 like the rest. The group chips above the columns keep a
+   wider gap of their own — they separate two sections, not two controls. */
+
+/* ---- the sentence as pictures ------------------------------
+   The component itself lives in components.css — this whole block was a second
+   copy of it, which is two definitions of one thing waiting to disagree. Only
+   the visualizer's departures from it are here.
+
+   English only on the card. The Tamil for every word is directly below, on its
+   own line and larger, so printing it on the card too said the same thing
+   twice. The lesson page still shows both, because there the card is the only
+   place the word appears. */
+.practice .picsent { margin-top: 0; }
+.practice .picword .cap,
+.practice .picword .cap-tr { display: none; }
+.practice .picword .cap-en { font-size: var(--fs-md); color: var(--ink); }
+
+/* ---- the two scripts, aligned ----
+   One colour per job, used identically in the picture, the Tamil and the
+   English. For a learner with no English that colour IS the explanation — it
+   is the only thing tying the two scripts together.
+
+   Sized to fit. At 28px the Tamil wrapped for every sentence longer than
+   "the ball is in the box", and a wrapped sentence puts its last word — the
+   verb, the one the diagram is about — alone on a line of its own. 22px
+   clears the longest sentence in the set with room to spare, and the English
+   follows it down so the pair still reads as one over the other. */
+.lines { display: grid; gap: var(--s-2); margin-top: var(--s-4); }
+.line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 5px; }
+.line--ta { font-family: var(--tamil); font-size: 22px; font-weight: 600;
+  line-height: 1.5; }
+.line--en { font: 500 19px/1.5 var(--serif); }
+.line--en .zw { font-family: var(--serif); }
+
+.zw {
+  padding: 1px 5px; border-radius: 5px; cursor: pointer; white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: background var(--t-fast) var(--ease);
+}
+.zw[data-role="figure"] { color: var(--r-figure); border-bottom-color: var(--r-figure); }
+.zw[data-role="ground"] { color: var(--r-ground); border-bottom-color: var(--r-ground); }
+.zw[data-role="rel"]    { color: var(--r-rel);    border-bottom-color: var(--r-rel); }
+.zw[data-role="det"]    { color: var(--r-det);    border-bottom-color: var(--r-det); }
+.zw[data-role="be"]     { color: var(--r-be); }
+.zw.lit { background: var(--accent-soft); }
+/* two roles in one word — Tamil fuses place and relation */
+.zw[data-fused] { border-bottom-style: double; border-bottom-width: 4px; }
+
+/* ---- the formation card, outside a table ---- */
+.fm-card { margin-top: var(--s-4); }
+.fm-card .fm {
+  background: var(--fm-bg); border: 1px solid var(--line);
+  border-left: 3px solid var(--accent); border-radius: var(--r-lg);
+}
+
+/* ---- choosing what to draw ---- */
+.build { margin-top: var(--s-6); border-top: 1px solid var(--line); padding-top: var(--s-4); }
+.build-head { font: 600 var(--fs-lg)/1.2 var(--serif); margin-bottom: var(--s-3); }
+.build-head [lang="ta"] { font-family: var(--tamil); }
+.build-head .en { display: block; font-size: var(--fs-sm); font-weight: 400; color: var(--muted); }
+
+.pick { display: grid; gap: var(--s-3); }
+.pick-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pick-row > .lbl { flex: 0 0 108px; font-size: var(--fs-sm); color: var(--muted); }
+.pick-row > .lbl [lang="ta"] { font-family: var(--tamil); display: block; }
+.pick-row > .lbl .en { font-size: var(--fs-xs); }
+/* The label sits above its row on a phone rather than beside it. Held to one
+   side it took 108 of the 350px a knob row has to work with, and the pictures
+   it names wrapped two-and-one instead of three across. */
+@media (max-width: 560px) {
+  .pick-row { display: grid; gap: var(--s-2); }
+  .pick-row > .lbl { flex: none; }
+  .pick-row > .lbl [lang="ta"] { display: inline; }
+  .pick-row > .lbl .en::before { content: " · "; }
+}
+
+/* Choose by picture. The Tamil word is a caption under the image, not the
+   control itself, so the picker works before any word is known. */
+.picpick { display: flex; flex-wrap: wrap; gap: 8px; }
+.picpick button {
+  display: grid; justify-items: center; gap: 4px; cursor: pointer;
+  padding: 8px 10px; border-radius: var(--r-md);
+  background: var(--surface); border: 2px solid var(--line);
+}
+.picpick button:hover { border-color: var(--line-strong); }
+.picpick button[aria-pressed="true"] { border-color: var(--accent); box-shadow: var(--shadow-1); }
+.picpick button[disabled] { opacity: .3; cursor: not-allowed; }
+.picpick .lab { font-family: var(--tamil); font-size: var(--fs-xs); color: var(--soft); }
+.picpick .no-art { display: grid; place-items: center; width: 40px; height: 40px; color: var(--muted); }
+
+/* The separator hangs below it now: the box is the first thing in the
+   column, so a rule above it would have sat against the page head. */
+/* It sits above the chips now, so the rule that separated it from the picker
+   below moved to its underside. */
+.type-block { margin-bottom: var(--s-5); padding-bottom: var(--s-4);
+              border-bottom: 1px dashed var(--line); }
+.practice-input { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.practice-input .input { flex: 1; min-width: 260px; font: 500 var(--fs-md)/1.4 var(--serif); }
+.try-these { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--s-3); }
+.try-these .try-lab { color: var(--muted); font-size: var(--fs-sm); align-self: center; }
+#cannotPanel { margin-top: var(--s-4); }
+
+/* No colour legend and no side rail. The colours are already legible in
+   place — the same colour on the word, the line and the drawing — and a
+   key naming them in Tamil was a caption for something already shown. */
+
+/* ============================================================
+   reference
+   ============================================================ */
+.ref-layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: var(--s-4); align-items: start; }
+.ref-nav { display: grid; gap: var(--s-1); position: sticky; top: calc(var(--header-h) + var(--s-4)); }
+.ref-nav a { padding: var(--s-2) var(--s-3); border-radius: var(--r-md);
+  color: var(--soft); font-size: var(--fs-sm); text-decoration: none; }
+.ref-nav a:hover { background: var(--surface-sunk); color: var(--ink); }
+.ref-nav a[aria-current="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+
+/* One column below 900px — and the nav stops being a column of fifteen stacked
+   links, which pushed the first table off the bottom of a phone screen. It
+   becomes one scrolling row of pills, sticky under the header, so the table
+   under it starts at the top of the page and jumping between tables stays a
+   thumb's reach away. */
+@media (max-width: 900px) {
+  .ref-layout { grid-template-columns: minmax(0, 1fr); }
+  .ref-nav {
+    grid-auto-flow: column; grid-auto-columns: max-content;
+    gap: 6px; overflow-x: auto; overscroll-behavior-x: contain;
+    top: var(--header-h); z-index: 20;
+    margin: 0 calc(-1 * var(--s-4)); padding: var(--s-2) var(--s-4);
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+  .ref-nav::-webkit-scrollbar { display: none; }
+  .ref-nav a {
+    white-space: nowrap; border: 1px solid var(--line);
+    border-radius: var(--r-pill); background: var(--surface);
+  }
+  .ref-nav a[aria-current="true"] { border-color: var(--accent); }
+}
+
+/* ============================================================
+   settings
+   ============================================================ */
+.settings-row {
+  display: flex; align-items: center; gap: var(--s-4);
+  padding: var(--s-4) 0; border-bottom: 1px solid var(--line);
+}
+.settings-row:last-child { border-bottom: 0; }
+.settings-row .s-body { flex: 1; }
+.settings-row .s-title { font-weight: 600; }
+.settings-row .s-note { color: var(--soft); font-size: var(--fs-sm); }
+
+/* ============================================================
+   components gallery
+   ============================================================ */
+.gallery-block { margin-bottom: var(--s-7); }
+.gallery-block > h2 {
+  font: 600 var(--fs-lg)/1.2 var(--serif);
+  padding-bottom: var(--s-2); border-bottom: 1px solid var(--line); margin-bottom: var(--s-4);
+}
+.gallery-note { color: var(--muted); font-size: var(--fs-sm); margin-bottom: var(--s-3); }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--s-3); }
+.swatch { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+.swatch i { display: block; height: 56px; }
+.swatch span { display: block; padding: 6px var(--s-2); font-size: var(--fs-xs); color: var(--muted);
+  font-family: var(--mono); }

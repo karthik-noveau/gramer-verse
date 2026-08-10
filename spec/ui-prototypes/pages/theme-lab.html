@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Theme lab — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+<style>
+  .lab { display:grid; grid-template-columns: 300px 1fr; gap: var(--s-5); align-items:start; }
+  @media (max-width: 1000px) { .lab { grid-template-columns:1fr; } }
+  .lab-panel { position:sticky; top:calc(var(--header-h) + var(--s-4)); display:grid; gap:var(--s-4); }
+  .presets { display:grid; gap:6px; }
+  .preset {
+    display:flex; align-items:center; gap:var(--s-3); width:100%;
+    padding:8px 10px; border-radius:var(--r-md); cursor:pointer;
+    border:1px solid var(--line); background:var(--surface); text-align:left;
+  }
+  .preset:hover { border-color:var(--line-strong); }
+  .preset[aria-pressed="true"] { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
+  .preset .dots { display:flex; gap:3px; flex:none; }
+  .preset .dots i { width:14px; height:14px; border-radius:4px; display:block; border:1px solid rgba(0,0,0,.12); }
+  .preset .nm { font-size:var(--fs-sm); font-weight:600; }
+  .preset .sub { font-size:var(--fs-xs); color:var(--muted); }
+  .sliders { display:grid; gap:8px; }
+  .sl { display:grid; grid-template-columns:88px 1fr 66px; align-items:center; gap:8px; font-size:var(--fs-xs); }
+  .sl input[type=color] { width:100%; height:26px; padding:0; border:1px solid var(--line);
+    border-radius:6px; background:none; cursor:pointer; }
+  .sl code { font-size:10px; color:var(--muted); }
+  .readout { font-size:var(--fs-xs); }
+  .readout div { display:flex; justify-content:space-between; padding:2px 0; }
+  .ok { color:var(--accent); font-weight:700; }
+  .bad { color:var(--danger); font-weight:700; }
+  .demo-grid { display:grid; gap:var(--s-4); }
+</style>
+</head>
+<body data-page="theme-lab">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb" data-crumbs="Theme lab|"></nav>
+
+    <div class="page-head">
+      <h1>Theme lab</h1>
+      <p class="sub">Click a preset, or nudge any colour. Everything below is the real UI.
+        <span lang="ta">உண்மையான வடிவமைப்பு. நிறத்தை மாற்றிப் பாருங்கள்.</span></p>
+    </div>
+
+    <div class="lab">
+      <!-- ============ controls ============ -->
+      <aside class="lab-panel">
+        <div class="card">
+          <h3 style="font-size:var(--fs-sm);margin-bottom:var(--s-3)">Presets</h3>
+          <div class="presets" id="presets"></div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:var(--fs-sm);margin-bottom:var(--s-3)">Nudge</h3>
+          <div class="sliders" id="sliders"></div>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:var(--fs-sm);margin-bottom:var(--s-3)">Check</h3>
+          <div class="readout" id="readout"></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn--primary btn--sm" id="applyAll">Use everywhere</button>
+          <button class="btn btn--sm" id="clearAll">Reset</button>
+          <button class="btn btn--sm" id="copyCss">Copy CSS</button>
+        </div>
+        <p style="font-size:var(--fs-xs);color:var(--muted)">
+          "Use everywhere" keeps this theme while you browse the other pages.
+        </p>
+      </aside>
+
+      <!-- ============ live preview ============ -->
+      <div class="demo-grid">
+        <div>
+          <p class="sentence" id="demoEn"></p>
+          <p class="sentence-ta" id="demoTa" lang="ta"></p>
+          <div class="stage" style="max-width:none">
+            <svg id="demoScene" viewBox="170 150 380 215" role="img" aria-label="A ball in a box."></svg>
+          </div>
+          <div class="knobs" style="margin-top:var(--s-3)">
+            <div class="knob-group">
+              <span class="k-label">Preposition <span lang="ta">இடைச்சொல்</span></span>
+              <div class="knob-opts" data-key="prep">
+                <button class="chip" data-v="in" aria-pressed="true">in <span class="ta" lang="ta">உள்ளே</span></button>
+                <button class="chip" data-v="on" aria-pressed="false">on <span class="ta" lang="ta">மீது</span></button>
+                <button class="chip" data-v="under" aria-pressed="false">under <span class="ta" lang="ta">கீழே</span></button>
+                <button class="chip" data-v="above" aria-pressed="false">above <span class="ta" lang="ta">மேலே</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout--idea">
+          <b>in</b> a container &middot; <b>on</b> a surface &middot; <b>at</b> a point.
+          <span lang="ta">உள்ளே &middot; மேற்பரப்பில் &middot; ஒரு புள்ளியில்.</span>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card"><h3>Card</h3><p class="card-note">Raised surface with a shadow.</p></div>
+          <div class="card card--muted"><h3>Muted</h3><p class="card-note">Sunk surface.</p></div>
+          <div class="card"><h3>Third</h3><p class="card-note">
+            <span class="badge badge--accent">Seen</span> <span class="badge">New</span></p></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Word</th><th>Tamil</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>in</td><td lang="ta">உள்ளே</td>
+                  <td>The ball is in the box.<span class="ta" lang="ta">பந்து பெட்டியில் உள்ளது.</span></td></tr>
+              <tr><td>on</td><td lang="ta">மீது</td>
+                  <td>The book is on the table.<span class="ta" lang="ta">புத்தகம் மேசையின் மீது உள்ளது.</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn--primary">Primary</button>
+          <button class="btn">Default</button>
+          <button class="btn btn--ghost">Ghost</button>
+          <button class="btn btn--danger">Danger</button>
+        </div>
+
+        <div class="state state--cannot-draw">
+          <div class="state-icon" aria-hidden="true">✎</div>
+          <h3>We cannot draw this one yet</h3>
+          <p>Not in the drawing library: <b>rocket</b>.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script src="../assets/js/scene.js"></script>
+<script src="../assets/js/icons-extra.js"></script>
+<script src="../assets/js/theme.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var KEYS = ['bg','surface','surface-sunk','line','ink','soft','muted','accent','accent-soft'];
+  var state = Object.assign({}, GV_Theme.PRESETS[0].vars);
+
+  /* ---- presets ---- */
+  document.getElementById('presets').innerHTML = GV_Theme.PRESETS.map(function (p, i) {
+    return '<button class="preset" data-i="' + i + '" aria-pressed="' + (i === 0) + '">' +
+      '<span class="dots">' +
+        '<i style="background:' + p.vars.bg + '"></i>' +
+        '<i style="background:' + p.vars.surface + '"></i>' +
+        '<i style="background:' + p.vars.accent + '"></i>' +
+      '</span>' +
+      '<span><span class="nm">' + p.name + '</span><br>' +
+      '<span class="sub">' + p.note + '</span></span></button>';
+  }).join('');
+
+  /* ---- sliders ---- */
+  document.getElementById('sliders').innerHTML = KEYS.map(function (k) {
+    return '<label class="sl"><span>--' + k + '</span>' +
+      '<input type="color" data-k="' + k + '" value="' + state[k] + '">' +
+      '<code id="hex-' + k + '">' + state[k] + '</code></label>';
+  }).join('');
+
+  function apply() {
+    GV_Theme.apply(state);
+    KEYS.forEach(function (k) {
+      var i = document.querySelector('[data-k="' + k + '"]');
+      if (i && i.value !== state[k]) i.value = state[k];
+      var h = document.getElementById('hex-' + k);
+      if (h) h.textContent = state[k];
+    });
+    report();
+  }
+
+  function report() {
+    var r = GV_Theme.audit(state);
+    document.getElementById('readout').innerHTML =
+      row('cast (0 = neutral)', (r.cast > 0 ? '+' : '') + r.cast, Math.abs(r.cast) <= 2) +
+      row('card lift', r.raised.toFixed(3), r.raised >= 1.08) +
+      row('sunk depth', r.sunk.toFixed(3), r.sunk >= 1.04) +
+      r.text.map(function (t) {
+        return row(t.token, t.ratio.toFixed(2) + ':1', t.ratio >= 4.5);
+      }).join('');
+  }
+  function row(label, val, ok) {
+    return '<div><span>' + label + '</span><span class="' + (ok ? 'ok' : 'bad') + '">' +
+      val + (ok ? ' ✓' : ' ✗') + '</span></div>';
+  }
+
+  document.getElementById('presets').addEventListener('click', function (ev) {
+    var b = ev.target.closest('.preset'); if (!b) return;
+    state = Object.assign({}, GV_Theme.PRESETS[+b.dataset.i].vars);
+    [].forEach.call(this.children, function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    apply();
+  });
+
+  document.getElementById('sliders').addEventListener('input', function (ev) {
+    var i = ev.target.closest('input[data-k]'); if (!i) return;
+    state[i.dataset.k] = i.value;
+    document.querySelectorAll('.preset').forEach(function (p) { p.setAttribute('aria-pressed', 'false'); });
+    apply();
+  });
+
+  document.getElementById('applyAll').addEventListener('click', function () {
+    GV_Theme.save(state); GV_toast('Theme kept across pages');
+  });
+  document.getElementById('clearAll').addEventListener('click', function () {
+    GV_Theme.clear(); location.reload();
+  });
+  document.getElementById('copyCss').addEventListener('click', function () {
+    navigator.clipboard.writeText(GV_Theme.toCss(state));
+    GV_toast('tokens copied');
+  });
+
+  /* ---- the live scene + sentence ---- */
+  var scene = { det:'the', num:1, adj:'', figure:'ball', prep:'in', ground:'box' };
+  function draw() {
+    document.getElementById('demoScene').innerHTML = GV_Scene.renderPlace(scene);
+    var s = GV_Scene.sentencePlace(scene);
+    function line(parts) {
+      return parts.map(function (p, i) {
+        return '<span class="w' + (p.k ? ' tunable' : '') + '">' + p.t +
+          (i === parts.length - 1 ? '.' : '') + '</span>';
+      }).join(' ');
+    }
+    document.getElementById('demoEn').innerHTML = line(s.en);
+    document.getElementById('demoTa').innerHTML = line(s.ta);
+  }
+  document.querySelector('[data-key="prep"]').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-v]'); if (!b) return;
+    scene.prep = b.dataset.v;
+    scene.ground = GV_Scene.allows(scene.prep, 'box') ? 'box' : 'table';
+    [].forEach.call(this.children, function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    draw();
+  });
+
+  apply(); draw();
+})();
+</script>
+</body>
+</html>

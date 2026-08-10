@@ -1,0 +1,146 @@
+[
+  {
+    "id": "tenses",
+    "order": 1,
+    "title": {
+      "en": "Tenses",
+      "ta": "காலங்கள்"
+    },
+    "summary": {
+      "en": "When it happens.",
+      "ta": "எப்போது நடக்கிறது."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "verbs",
+    "order": 2,
+    "title": {
+      "en": "Verbs",
+      "ta": "வினைச்சொல்"
+    },
+    "summary": {
+      "en": "The action word.",
+      "ta": "செயல் சொல்."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "nouns",
+    "order": 3,
+    "title": {
+      "en": "Nouns & pronouns",
+      "ta": "பெயர்ச்சொல்"
+    },
+    "summary": {
+      "en": "Names, and stand-ins.",
+      "ta": "பெயர்ச்சொற்கள்."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "articles",
+    "order": 4,
+    "title": {
+      "en": "Articles",
+      "ta": "ஒரு / அந்த"
+    },
+    "summary": {
+      "en": "Which one.",
+      "ta": "எந்தப் பொருள்."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "prepositions",
+    "order": 5,
+    "title": {
+      "en": "Prepositions",
+      "ta": "இடைச்சொல்"
+    },
+    "summary": {
+      "en": "Where, when, which way.",
+      "ta": "எங்கே, எப்போது."
+    },
+    "lessonIds": [
+      "prep-place-in",
+      "prep-place-on",
+      "prep-place-at",
+      "prep-place-under",
+      "prep-place-above",
+      "prep-place-below",
+      "prep-place-behind",
+      "prep-place-in-front-of",
+      "prep-place-between",
+      "prep-place-near",
+      "prep-place-beside",
+      "prep-place-here",
+      "prep-place-there"
+    ]
+  },
+  {
+    "id": "wh-words",
+    "order": 6,
+    "title": {
+      "en": "WH words",
+      "ta": "வினாச்சொற்கள்"
+    },
+    "summary": {
+      "en": "Asking questions.",
+      "ta": "கேள்வி கேட்க."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "adjectives",
+    "order": 7,
+    "title": {
+      "en": "Adjectives",
+      "ta": "பெயரடை"
+    },
+    "summary": {
+      "en": "Colour, size, shape.",
+      "ta": "பொருளின் குணம்."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "adverbs",
+    "order": 8,
+    "title": {
+      "en": "Adverbs",
+      "ta": "வினையுரிச்சொல்"
+    },
+    "summary": {
+      "en": "How the action happens.",
+      "ta": "எப்படி நடக்கிறது."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "conjunctions",
+    "order": 9,
+    "title": {
+      "en": "Conjunctions",
+      "ta": "இணைப்புச்சொல்"
+    },
+    "summary": {
+      "en": "Joining two things.",
+      "ta": "இரண்டை இணைப்பது."
+    },
+    "lessonIds": []
+  },
+  {
+    "id": "sentences",
+    "order": 10,
+    "title": {
+      "en": "Sentence formation",
+      "ta": "வாக்கிய அமைப்பு"
+    },
+    "summary": {
+      "en": "Putting it together.",
+      "ta": "வாக்கிய அமைப்பு."
+    },
+    "lessonIds": []
+  }
+]

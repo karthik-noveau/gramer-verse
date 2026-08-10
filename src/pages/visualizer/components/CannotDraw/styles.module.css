@@ -1,0 +1,50 @@
+/* Warm, not red. Nothing has gone wrong: a learner typed a sentence about a
+   rocket and the library has no rocket in it. The `--warn` colour is this
+   app's "cannot draw", which is exactly what this is — `--danger` is for
+   something broken. */
+.card {
+  border: 1px solid var(--warn);
+  background: var(--warn-soft);
+  border-radius: var(--r-lg);
+  padding: var(--s-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font: 600 var(--fs-md) / 1.25 var(--serif);
+  color: var(--warn);
+}
+
+.ta { font-family: var(--tamil); font-size: var(--fs-sm); font-weight: 400; color: var(--soft); }
+
+.line { margin: 0; font-size: var(--fs-sm); color: var(--soft); }
+
+/* The structural gap reads as the more important of the two: an unknown word
+   can be swapped, a missing half of a sentence cannot. */
+.gap { color: var(--ink); font-weight: 600; }
+
+.word { color: var(--ink); }
+
+.tryIt {
+  margin: var(--s-1) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.label { font-size: var(--fs-xs); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+
+.suggestion {
+  font-family: var(--mono, ui-monospace, monospace);
+  font-size: var(--fs-sm);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 2px 8px;
+}

@@ -1,0 +1,33 @@
+/* The icons are files on disk, one per icon, no sprite and no icon font — and
+   they still have to take the colour of the text beside them, in both schemes.
+   So the element is a block of `currentColor` and the SVG is its mask. An
+   <img> could not do that; inlining the markup would mean shipping the artwork
+   inside the JS bundle and injecting raw HTML to use it. */
+.icon {
+  display: inline-block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  vertical-align: -0.125em;
+}
+
+.sm { width: 14px; height: 14px; }
+.md { width: 18px; height: 18px; }
+.lg { width: 24px; height: 24px; }
+
+.menu          { mask-image: url("../../../assets/icons/menu.svg"); }
+.close         { mask-image: url("../../../assets/icons/close.svg"); }
+.chevronLeft   { mask-image: url("../../../assets/icons/chevron-left.svg"); }
+.chevronRight  { mask-image: url("../../../assets/icons/chevron-right.svg"); }
+.check         { mask-image: url("../../../assets/icons/check.svg"); }
+.alert         { mask-image: url("../../../assets/icons/alert.svg"); }
+.search        { mask-image: url("../../../assets/icons/search.svg"); }
+.book          { mask-image: url("../../../assets/icons/book.svg"); }
+.pencil        { mask-image: url("../../../assets/icons/pencil.svg"); }
+.moon          { mask-image: url("../../../assets/icons/moon.svg"); }
+.sun           { mask-image: url("../../../assets/icons/sun.svg"); }
+.grid          { mask-image: url("../../../assets/icons/grid.svg"); }

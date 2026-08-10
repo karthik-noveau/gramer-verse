@@ -1,0 +1,19 @@
+.scrim {
+  position: fixed; inset: 0; z-index: 60;
+  background: var(--scrim);
+}
+
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 70;
+  width: min(420px, 100%);
+  padding: var(--s-5);
+  background: var(--surface);
+  border-left: 1px solid var(--line);
+  box-shadow: var(--shadow-3);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform var(--t-base) var(--ease);
+}
+.drawer[data-open="true"] { transform: none; }
+
+.title { font: 600 var(--fs-lg)/1.2 var(--serif); margin-bottom: var(--s-3); }

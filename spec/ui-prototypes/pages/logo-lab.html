@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Logo lab — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<style>
+  body { padding: var(--s-6) var(--s-5) var(--s-8); max-width: 1000px; margin: 0 auto; }
+  h1 { font: 600 26px/1.1 var(--serif); }
+  h2 { font: 600 var(--fs-lg)/1.2 var(--serif); margin: var(--s-6) 0 var(--s-3); }
+  .sub { color: var(--soft); margin-top: var(--s-2); max-width: 66ch; }
+  .band {
+    display: flex; gap: var(--s-5); align-items: flex-end; flex-wrap: wrap;
+    padding: var(--s-4); border-radius: var(--r-lg);
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  .band + .band { margin-top: var(--s-3); }
+  .band .cell { text-align: center; }
+  .band .cell small { display: block; color: var(--muted); font-size: 11px; margin-top: 6px; }
+  .band--ink   { background: var(--ink); }
+  .band--green { background: var(--th-bg); border-color: var(--th-line); }
+  .band--ink .cell small, .band--green .cell small { color: rgba(255,255,255,.7); }
+  .band .lab { flex: 0 0 100%; font-size: var(--fs-xs); color: var(--muted); }
+  .band--ink .lab, .band--green .lab { color: rgba(255,255,255,.75); }
+
+  .rejects { display: grid; gap: var(--s-3);
+             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  .reject {
+    display: flex; gap: var(--s-3); align-items: flex-start;
+    padding: var(--s-3); border-radius: var(--r-md);
+    background: var(--surface); border: 1px solid var(--line);
+  }
+  .reject .why { font-size: var(--fs-sm); color: var(--soft); }
+  .reject .why b { display: block; color: var(--ink); font-family: var(--serif); }
+  .lockup-demo { display: inline-flex; align-items: center; gap: var(--s-2); }
+  .lockup-demo .brand-word { color: var(--ink); }
+  .ta-inline { display: inline-block; vertical-align: -2px; }
+  .ta-inline svg { display: inline-block; }
+</style>
+</head>
+<body>
+
+<h1>Logo lab</h1>
+<p class="sub">
+  The record of the mark: what it is, why it is that and not something else,
+  and proof it survives 16px and both themes. Not part of the product.
+</p>
+
+<h2>The mark</h2>
+<p class="sub" style="margin-bottom:var(--s-3)">
+  A ball inside a box — the preposition <b>in</b>, which is the idea every
+  other lesson is built on. The gap in the top edge is the ball's own width,
+  so it reads as the way in rather than as a missing line. The frame is ink
+  rather than accent so the mark survives on a green ground; the ball takes
+  the accent, whose one job in this system is to mark the thing that moved.
+</p>
+
+<div class="band" id="sizes"></div>
+<div class="band band--ink" id="onInk"></div>
+<div class="band band--green" id="onGreen"></div>
+
+<h2>The bilingual logo</h2>
+<p class="sub" style="margin-bottom:var(--s-3)">
+  The product is English taught in Tamil, so a logo in one script tells half
+  the story. It is the <b>wordmark</b> that carries both, not the mark: Latin
+  leads because the subject is English, and <span class="ta-inline"></span>
+  sits under it, smaller and muted, because it is the pronunciation rather
+  than a second name — the same transliteration bridge the lessons use.
+  Both wordmarks are outlines, not live text: the prototype ships no Tamil
+  webfont, and a wordmark that can render as an empty box is not a wordmark.
+</p>
+<div class="band" id="locks"></div>
+
+<h2>Why not a bilingual mark</h2>
+<p class="sub" style="margin-bottom:var(--s-3)">
+  Putting both alphabets <em>inside</em> the mark was tried first. Tamil
+  letterforms carry more detail than a circle does, and the mark has to hold
+  at 16px — every version below is legible at 48 and a smudge at 16.
+</p>
+<div class="rejects" id="bilingual"></div>
+
+<h2>What the mark replaced, and why</h2>
+<div class="rejects" id="rejects"></div>
+
+<script src="../assets/js/logo.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var SIZES = [16, 20, 24, 32, 48, 96];
+  function row(host, label, opts) {
+    $(host).innerHTML = '<span class="lab">' + label + '</span>' +
+      SIZES.map(function (s) {
+        var o = { size: s };
+        for (var k in (opts || {})) o[k] = opts[k];
+        return '<div class="cell">' + GV_Logo.mark(o) + '<small>' + s + '</small></div>';
+      }).join('');
+  }
+  row('sizes',   'on --surface — where it actually lives');
+  row('onInk',   'on ink', { frame: 'var(--bg)' });
+  row('onGreen', 'on the table-header green. The frame still reads; the ball is ' +
+                 'that same green, so a mark placed here would pass opts.ball — ' +
+                 'nothing in the app does.',
+                 { frame: '#ffffff' });
+
+  document.querySelector('.ta-inline').innerHTML = GV_Logo.wordTa(13, 'var(--ink)');
+
+  $('locks').innerHTML = '<span class="lab">the logo, as shipped</span>' +
+    [[34, 'front door'], [26, 'app header'], [20, 'small']].map(function (p) {
+      return '<div class="cell"><span class="lockup-demo" style="font:600 ' +
+        Math.round(p[0] * 0.62) + 'px/1 var(--serif)">' +
+        GV_Logo.lockup({ size: p[0] }) + '</span><small>' + p[1] + '</small></div>';
+    }).join('') +
+    '<div class="cell"><span class="lockup-demo" style="font:600 17px/1 var(--serif)">' +
+      GV_Logo.lockup({ size: 28, ta: false }) +
+      '</span><small>ta:false — one line only</small></div>';
+
+  /* The bilingual-mark attempts. Each is legible large and a smudge at 16, which
+     is why the Tamil ended up in the wordmark instead. */
+  var BILINGUAL = [
+    ['அ in the box',      'The Tamil first letter in place of the ball. Closest to ' +
+                          'working — but the ball is the picture of "in", and losing ' +
+                          'it costs the mark its meaning.'],
+    ['A and அ, paired',   'The first letter of each alphabet, side by side. Reads ' +
+                          'beautifully at 96px and as two grey specks at 16.'],
+    ['A and அ in the box','Both alphabets in one container. The most literal answer, ' +
+                          'and the busiest: three forms where the budget is two.'],
+    ['அ inside the ball', 'Keeps every part of the mark and knocks the letter out of ' +
+                          'the ball. At 16px the knockout turns the ball into a ' +
+                          'smudge, losing both the ball and the letter.']
+  ];
+  $('bilingual').innerHTML = BILINGUAL.map(function (r) {
+    return '<div class="reject"><span class="why"><b>' + r[0] + '</b>' + r[1] +
+      '</span></div>';
+  }).join('');
+
+  /* The candidates that lost. Kept because "why not just a solid box?" is a
+     question that will be asked again. */
+  var REJECTS = [
+    { title: 'Solid box, nub on top',
+      why: 'What was here before. The nub plus the knocked-out circle reads as a ' +
+           'camera at every size — nothing about it says "in".',
+      svg: '<rect x="2" y="7" width="28" height="23" rx="6" fill="var(--accent)"/>' +
+           '<rect x="13" y="4" width="6" height="6" rx="2" fill="var(--accent)"/>' +
+           '<circle cx="16" cy="19.5" r="6.5" fill="var(--surface)"/>' },
+    { title: 'Solid box with flaps',
+      why: 'The angled flaps make a pentagon, which reads as a roof. House, not ' +
+           'container.',
+      svg: '<path d="M5 12 V24 A3 3 0 0 0 8 27 H24 A3 3 0 0 0 27 24 V12 Z" fill="var(--accent)"/>' +
+           '<path d="M5 12 L11 6 M27 12 L21 6" stroke="var(--accent)" stroke-width="2.6" ' +
+           'stroke-linecap="round"/>' +
+           '<circle cx="16" cy="19" r="5" fill="var(--surface)"/>' },
+    { title: 'Accent frame, ink ball',
+      why: 'Right shape, wrong way round: a green frame vanishes on a green ' +
+           'ground, and the brand colour ends up on the container rather than on ' +
+           'the thing that moves.',
+      svg: '<path d="' + GV_Logo.PATH + '" fill="none" stroke="var(--accent)" ' +
+           'stroke-width="3" stroke-linecap="round"/>' +
+           '<circle cx="16" cy="19" r="6" fill="var(--ink)"/>' },
+    { title: 'Ball entering',
+      why: 'Shows the action rather than the state. At 16px the ball reads as a ' +
+           'notification dot sitting on top of a box.',
+      svg: '<path d="' + GV_Logo.PATH + '" fill="none" stroke="var(--ink)" ' +
+           'stroke-width="3" stroke-linecap="round"/>' +
+           '<circle cx="16" cy="9" r="6" fill="var(--accent)"/>' }
+  ];
+  $('rejects').innerHTML = REJECTS.map(function (r) {
+    return '<div class="reject">' +
+      '<svg viewBox="0 0 32 32" width="40" height="40" aria-hidden="true" ' +
+        'style="flex:none;overflow:visible">' + r.svg + '</svg>' +
+      '<span class="why"><b>' + r.title + '</b>' + r.why + '</span></div>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

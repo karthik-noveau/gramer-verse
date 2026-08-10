@@ -1,0 +1,60 @@
+/* ============================================================
+   /lessons/:lessonId — the workspace.
+
+   The picture and the sentence in the middle, the prose on a
+   rail beside it. Below 1100px the rail goes under the picture
+   rather than beside it: a stage squeezed into half a phone is a
+   picture nobody can read, and reading the picture is the whole
+   lesson.
+   ============================================================ */
+
+.lesson {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .lesson { grid-template-columns: minmax(0, 1fr); }
+}
+
+.main { min-width: 0; }
+
+.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); }
+.ta { font-family: var(--tamil); color: var(--muted); }
+
+/* The one line of the lesson, set apart from the sentence under the picture —
+   which changes — because this one does not. */
+.idea {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: var(--s-3) 0 var(--s-4);
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+
+.predict { margin-bottom: var(--s-4); }
+.sentence { margin-bottom: var(--s-3); }
+
+/* The stage keeps its own proportions and never shrinks below readable: the
+   picture is the lesson. */
+.stage { margin-bottom: var(--s-4); }
+
+.knobs { margin-bottom: var(--s-2); }
+
+.rail { display: flex; flex-direction: column; gap: var(--s-4); min-width: 0; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-4);
+}
+.cardTitle { font: 600 var(--fs-md) / 1.25 var(--serif); margin-bottom: var(--s-3); }
+.cardRow { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+.source { color: var(--muted); font-size: var(--fs-sm); }

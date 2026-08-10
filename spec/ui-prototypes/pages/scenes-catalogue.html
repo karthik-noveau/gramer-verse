@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Articles &amp; Prepositions — the picture version</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<style>
+  :root {
+    --bg:#f7f5f0; --surface:#fff; --ink:#17150f; --soft:#5c554a; --muted:#8a8175;
+    --line:#e2dcd0; --accent:#2f6f4f; --accent-soft:#e4f0e9; --warn:#c25b28;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --tamil: "Noto Sans Tamil", "Nirmala UI", "Latha", system-ui, sans-serif;
+    --serif: "Iowan Old Style", Palatino, Georgia, serif;
+  }
+  /* Light by default, matching the rest of the prototype. Dark is opt-in only. */
+  :root[data-theme="dark"] {
+    --bg:#14140f; --surface:#1d1d18; --ink:#f0eee7; --soft:#c4bfb4; --muted:#8f887c;
+    --line:#2e2e26; --accent:#7dc4a0; --accent-soft:#1e2f27; --warn:#e08a5c;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 var(--font); }
+  .wrap { max-width:1000px; margin:0 auto; padding:28px 20px 72px; }
+
+  h1 { font:600 26px/1.2 var(--serif); margin:0 0 6px; }
+  .sub { color:var(--soft); margin:0 0 22px; max-width:66ch; }
+
+  .modes { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+  .modes button {
+    font:inherit; font-size:14px; padding:8px 18px; border-radius:99px; cursor:pointer;
+    background:var(--surface); color:var(--soft); border:1px solid var(--line);
+  }
+  .modes button[aria-pressed="true"] { background:var(--ink); border-color:var(--ink); color:var(--bg); font-weight:600; }
+
+  .bigidea {
+    background:var(--accent-soft); border:1px solid var(--line); border-radius:12px;
+    padding:12px 16px; margin-bottom:18px; color:var(--soft); font-size:14px;
+  }
+  .bigidea b { color:var(--ink); }
+
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:16px; }
+  .chips button {
+    font:inherit; font-size:13px; padding:5px 13px; border-radius:99px; cursor:pointer;
+    background:var(--surface); color:var(--soft); border:1px solid var(--line);
+  }
+  .chips button:hover { border-color:var(--muted); color:var(--ink); }
+  .chips button[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+
+  .stage {
+    background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:8px;
+    max-width:780px;
+  }
+  .stage svg { display:block; width:100%; height:auto; }
+
+  .caption { margin:16px 0 0; }
+  .caption .en { font:500 26px/1.4 var(--serif); margin:0; }
+  .caption .en b { color:var(--accent); }
+  .caption .ta { font-family:var(--tamil); color:var(--soft); margin:4px 0 0; font-size:16px; }
+  .caption .gloss { color:var(--muted); font-size:13px; margin:2px 0 0; }
+  .caption .gloss span { font-family:var(--tamil); }
+
+  .note {
+    margin-top:18px; padding:14px 18px; background:var(--surface);
+    border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px;
+    color:var(--soft); font-size:14px;
+  }
+  .note b { color:var(--ink); }
+
+  .foot { margin-top:36px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Articles &amp; prepositions, drawn.</h1>
+  <p class="sub">These two are the parts of grammar a picture explains better than a rule. An article
+    says <em>which one</em>; a preposition says <em>where, when, or in what relation</em>. Pick a word —
+    the picture is the definition.</p>
+
+  <div class="modes" id="modes" role="group" aria-label="Topic"></div>
+
+  <div class="bigidea" id="bigidea"></div>
+
+  <div class="chips" id="chips" role="group" aria-label="Word"></div>
+
+  <div class="stage">
+    <svg id="scene" viewBox="0 0 720 420" role="img" aria-labelledby="sceneDesc"></svg>
+    <span id="sceneDesc" hidden></span>
+  </div>
+
+  <div class="caption">
+    <p class="en" id="capEn"></p>
+    <p class="ta" id="capTa"></p>
+    <p class="gloss" id="capGloss"></p>
+  </div>
+
+  <div class="note" id="note"></div>
+
+  <p class="foot">Source content: the Tamil-medium <em>Spoken English</em> notes — articles, prepositions of
+    place / time / direction / other. Tamil glosses carried over from that document.</p>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var W = 720, H = 420, FLOOR = 336;
+
+  var C = { wood:'#a9723f', wood2:'#8a5b30', leaf:'#3f8f5a', grey:'#9aa0a6',
+            skin:'#d9a06a', shirt:'#3d6fa8', shirt2:'#a8447a', hair:'#3a2a1c',
+            brick:'#c08260', brick2:'#9c6446', roof:'#8d4a3c', road:'#b6b0a4',
+            water:'#6ea8d8', red:'#d2452f', gold:'#e0a92e', paper:'#f4efe6',
+            metal:'#cfd3d6', dark:'#3a3a33' };
+
+  /* ============================================================
+     primitives
+     ============================================================ */
+  function R(x,y,w,h,rad,fill,extra){
+    return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+(rad||0)+'" fill="'+fill+'"'+(extra||'')+'/>';
+  }
+  function CI(cx,cy,rad,fill,extra){
+    return '<circle cx="'+cx+'" cy="'+cy+'" r="'+rad+'" fill="'+fill+'"'+(extra||'')+'/>';
+  }
+  function T(x,y,s,o){
+    o = o || {};
+    return '<text x="'+x+'" y="'+y+'" text-anchor="'+(o.a||'middle')+'" font-family="system-ui, sans-serif"'
+      + ' font-size="'+(o.s||14)+'" font-weight="'+(o.w||600)+'" fill="'+(o.f||'var(--muted)')+'"'
+      + (o.st?' letter-spacing="'+o.st+'"':'') + '>' + s + '</text>';
+  }
+  function L(x1,y1,x2,y2,o){
+    o = o || {};
+    return '<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="'+(o.c||'var(--line)')
+      + '" stroke-width="'+(o.w||2)+'"'+(o.d?' stroke-dasharray="'+o.d+'"':'')+' stroke-linecap="round"/>';
+  }
+  function ARROW(d,o){
+    o = o || {};
+    return '<path d="'+d+'" fill="none" stroke="'+(o.c||'var(--accent)')+'" stroke-width="'+(o.w||4.5)
+      + '" stroke-linecap="round"'+(o.d?' stroke-dasharray="'+o.d+'"':'')
+      + (o.noHead?'':' marker-end="url(#ah)"')+(o.startHead?' marker-start="url(#ah)"':'')+'/>';
+  }
+  function SHADOW(cx,w){
+    return '<ellipse cx="'+cx+'" cy="'+(FLOOR+3)+'" rx="'+(w/2)+'" ry="7" fill="rgba(0,0,0,.13)"/>';
+  }
+  function floor(){
+    return L(30,FLOOR,690,FLOOR,{c:'var(--line)',w:3});
+  }
+  function ring(x,y,w,h,dashed){
+    return '<rect x="'+(x-10)+'" y="'+(y-10)+'" width="'+(w+20)+'" height="'+(h+20)+'" rx="14" fill="none"'
+      + ' stroke="var(--accent)" stroke-width="3.5"'+(dashed?' stroke-dasharray="9 7"':'')+'/>';
+  }
+  var DEFS = '<defs>'
+    + '<marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
+    + '<path d="M0 0 L10 5 L0 10 z" fill="var(--accent)"/></marker>'
+    + '<marker id="ahm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
+    + '<path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/></marker>'
+    + '</defs>';
+
+  /* ============================================================
+     things
+     ============================================================ */
+  var TH = {};
+
+  /* table: 300 x 150, surface plane at +14 */
+  TH.table = function (x,y) {
+    return '<g transform="translate('+x+','+y+')">'
+      + R(0,0,300,16,3,C.wood) + R(18,16,16,134,0,C.wood2) + R(266,16,16,134,0,C.wood2)
+      + R(34,26,232,8,0,C.wood2) + '</g>';
+  };
+  /* box: 190 x 150, inside = [18,34,154,100] */
+  TH.box = function (x,y,openTop) {
+    return '<g transform="translate('+x+','+y+')">'
+      + R(0,22,190,128,4,'#c89a5e')
+      + (openTop ? R(0,0,86,26,4,'#b3873f') + R(104,0,86,26,4,'#b3873f')
+                 : R(0,0,190,26,4,'#b3873f') + R(84,0,22,26,2,'#9a7233'))
+      + '</g>';
+  };
+  TH.ball = function (x,y,s) {
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">'
+      + CI(37,37,35,'#e08a2e')
+      + '<path d="M4 37h66" stroke="rgba(0,0,0,.25)" stroke-width="4" fill="none"/>'
+      + '<path d="M37 2a48 48 0 0 0 0 70" stroke="rgba(0,0,0,.25)" stroke-width="4" fill="none"/></g>';
+  };
+  TH.book = function (x,y,s) {
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">'
+      + R(0,0,88,64,4,'#8e4b6e') + R(6,6,34,52,2,C.paper) + R(48,6,34,52,2,C.paper) + R(42,0,4,64,0,'#6d3854')
+      + '</g>';
+  };
+  TH.cat = function (x,y,s) {
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')"><g transform="translate(110,0) scale(-1,1)">'
+      + '<ellipse cx="58" cy="62" rx="44" ry="27" fill="#6b6259"/>' + CI(22,42,22,'#6b6259')
+      + '<path d="M7 27l2-19 15 12z" fill="#6b6259"/><path d="M37 27l-2-19-15 12z" fill="#6b6259"/>'
+      + '<path d="M100 54c23-6 15-36-2-27" stroke="#6b6259" stroke-width="9" fill="none" stroke-linecap="round"/>'
+      + CI(14,40,3,'#111') + CI(29,40,3,'#111') + '</g></g>';
+  };
+  TH.dog = function (x,y,s,coat) {
+    s = s || 1;
+    var body = coat || '#b4813f', ear = coat ? '#1e1e1c' : '#96682e';
+    return '<g transform="translate('+x+','+y+') scale('+s+')"><g transform="translate(120,0) scale(-1,1)">'
+      + '<ellipse cx="64" cy="66" rx="48" ry="29" fill="'+body+'"/>' + CI(24,44,24,body)
+      + '<ellipse cx="8" cy="30" rx="9" ry="18" fill="'+ear+'" transform="rotate(-20 8 30)"/>'
+      + CI(4,52,6,'#3a2a1c')
+      + '<path d="M108 58c22-10 18-34 2-28" stroke="'+body+'" stroke-width="10" fill="none" stroke-linecap="round"/>'
+      + CI(18,42,3,coat ? '#fff' : '#111') + '</g></g>';
+  };
+  /* person: 96 x 196 */
+  TH.person = function (x,y,s,o) {
+    o = o || {}; s = s || 1;
+    var shirt = o.shirt || C.shirt;
+    var body = CI(46,30,24,C.skin)
+      + '<path d="M22 26a24 24 0 0 1 48 0c-6-10-42-12-48 0z" fill="'+C.hair+'"/>'
+      + CI(56,27,3,'#111')
+      + '<path d="M50 42q8 5 14 0" stroke="#8a4b32" stroke-width="3" fill="none" stroke-linecap="round"/>'
+      + R(28,56,38,68,8,shirt)
+      + '<path d="M30 66L10 108" stroke="'+C.skin+'" stroke-width="12" stroke-linecap="round"/>'
+      + '<path d="M64 66L92 104" stroke="'+C.skin+'" stroke-width="12" stroke-linecap="round"/>'
+      + R(32,124,13,70,5,'#2f3d55') + R(51,124,13,70,5,'#2f3d55');
+    var inner = o.flip ? '<g transform="translate(96,0) scale(-1,1)">'+body+'</g>' : body;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">'+inner+'</g>';
+  };
+  TH.building = function (x,y,w,h,label,o) {
+    o = o || {};
+    var fill = o.fill || C.brick, dw = 46, dh = 62;
+    return '<g transform="translate('+x+','+y+')" opacity="'+(o.op||1)+'">'
+      + '<path d="M-12 34 L'+(w/2)+' -4 L'+(w+12)+' 34 z" fill="'+(o.roof||C.roof)+'"/>'
+      + R(0,34,w,h-34,3,fill)
+      + R(w/2-dw/2,h-dh,dw,dh,3,C.wood2)
+      + R(w*0.16,h-dh-46,34,30,3,'#e9eef2') + R(w-w*0.16-34,h-dh-46,34,30,3,'#e9eef2')
+      + T(w/2,h-dh-8,label,{s:15,w:700,f:'#fff'})
+      + '</g>';
+  };
+  TH.tree = function (x,y,s) {
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">'
+      + R(62,92,26,88,4,C.wood2)
+      + CI(75,62,58,C.leaf) + CI(30,90,34,C.leaf) + CI(120,90,34,C.leaf) + '</g>';
+  };
+  /* car: 230 x 123 */
+  TH.car = function (x,y) {
+    return '<g transform="translate('+x+','+y+')">'
+      + R(40,10,112,46,8,'#4a6d96') + R(50,18,42,28,3,'#cfe0ef') + R(100,18,44,28,3,'#cfe0ef')
+      + R(0,50,230,52,12,'#2f5a86')
+      + CI(56,104,19,'#2b2b28') + CI(56,104,8,C.metal)
+      + CI(176,104,19,'#2b2b28') + CI(176,104,8,C.metal)
+      + '</g>';
+  };
+  /* door: 116 x 190 */
+  TH.door = function (x,y) {
+    return '<g transform="translate('+x+','+y+')">'
+      + R(-14,-10,144,200,4,'#d9d2c4') + R(0,0,116,190,3,C.wood)
+      + R(12,14,92,80,3,C.wood2) + R(12,104,92,72,3,C.wood2)
+      + CI(96,100,6,C.gold) + '</g>';
+  };
+  TH.clock = function (cx,cy,rad) {
+    return '<g>' + CI(cx,cy,rad,'#f1ece2') + CI(cx,cy,rad,'none',' stroke="'+C.dark+'" stroke-width="5"')
+      + L(cx,cy,cx,cy-rad*0.6,{c:C.dark,w:5}) + L(cx,cy,cx+rad*0.45,cy+rad*0.25,{c:C.dark,w:5})
+      + CI(cx,cy,4,C.dark) + '</g>';
+  };
+  TH.pin = function (cx,baseY) {
+    return '<g><path d="M'+cx+' '+baseY+' l-16 -26 a18 18 0 1 1 32 0 z" fill="var(--accent)"/>'
+      + CI(cx,baseY-30,7,'var(--surface)') + '</g>';
+  };
+  TH.gift = function (x,y,s) {
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">'
+      + R(0,26,120,84,5,'#c2506b') + R(0,8,120,22,4,'#a83d57')
+      + R(52,8,16,102,2,C.gold) + '<path d="M60 8c-16-22-40-4-14 8M60 8c16-22 40-4 14 8" fill="'+C.gold+'"/>'
+      + '</g>';
+  };
+  TH.bird = function (x,y,s) {
+    s = s || 1;
+    return '<g transform="translate('+x+','+y+') scale('+s+')">'
+      + '<ellipse cx="52" cy="52" rx="42" ry="30" fill="#5a8fc7"/>' + CI(90,34,20,'#5a8fc7')
+      + '<path d="M30 44q28 -22 52 6 -28 18 -52 -6z" fill="#3f6f9f"/>'
+      + '<path d="M108 32l20 6-20 8z" fill="'+C.gold+'"/>' + CI(96,29,3,'#111')
+      + '<path d="M18 62L0 92" stroke="#3f6f9f" stroke-width="8" stroke-linecap="round" fill="none"/>'
+      + '</g>';
+  };
+  TH.wheel = function (cx,cy,rad) {
+    return '<g fill="none" stroke="'+C.dark+'" stroke-width="7">'
+      + '<circle cx="'+cx+'" cy="'+cy+'" r="'+rad+'"/>'
+      + '<path d="M'+(cx-rad)+' '+cy+'h'+(rad*2)+'M'+cx+' '+cy+'v'+rad+'"/></g>'
+      + CI(cx,cy,6,C.dark);
+  };
+
+  /* ============================================================
+     timeline primitives
+     ============================================================ */
+  var TL = 232, TL0 = 60, TL1 = 660, NOW = 430;
+
+  function tlBase(){
+    return L(TL0,TL,TL1,TL,{c:'var(--line)',w:4})
+      + T(TL0,TL+42,'past',{s:12,f:'var(--muted)',a:'start'})
+      + T(TL1,TL+42,'future',{s:12,f:'var(--muted)',a:'end'})
+      + L(NOW,TL-12,NOW,TL+12,{c:'var(--muted)',w:2})
+      + T(NOW,TL+30,'now',{s:11,w:700,f:'var(--muted)'});
+  }
+  function tlBand(x1,x2,label,o){
+    o = o || {};
+    return R(x1,TL-24,x2-x1,48,8,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"'
+        + (o.dash?' stroke-dasharray="8 7"':''))
+      + (label ? T((x1+x2)/2,TL-38,label,{s:13,w:700,f:'var(--accent)'}) : '');
+  }
+  function tlFlag(x,label,stop){
+    return L(x,TL-64,x,TL+22,{c:'var(--warn)',w:3.5})
+      + (stop ? R(x-4,TL-64,26,20,3,'var(--warn)') : '')
+      + T(x,TL-74,label,{s:14,w:700,f:'var(--warn)'});
+  }
+  function tlDot(x,label){
+    return CI(x,TL,12,'var(--accent)') + T(x,TL+62,label,{s:13,w:600,f:'var(--ink)'});
+  }
+
+  /* ============================================================
+     GROUPS
+     ============================================================ */
+
+  /* ---------- articles ---------- */
+  function threeDogs(mode){
+    /* mode: 'a' -> all solid, middle dashed ring ; 'the' -> others faded, middle solid ring */
+    var xs = [110, 300, 490], s = 1.05, dw = 120*s, dh = 100*s, y = FLOOR - dh;
+    var out = '';
+    for (var i = 0; i < 3; i++) {
+      var faded = (mode === 'the' && i !== 1);
+      out += '<g opacity="'+(faded?0.22:1)+'">' + SHADOW(xs[i]+dw/2, dw) + TH.dog(xs[i],y,s) + '</g>';
+    }
+    out += ring(xs[1], y, dw, dh, mode === 'a');
+    out += T(xs[1]+dw/2, y-34, mode === 'a' ? 'any one of these' : 'that one — we both know which',
+             {s:15,w:700,f:'var(--accent)'});
+    return out;
+  }
+
+  var ARTICLES = {
+    idea: '<b>An article answers one question: which one?</b> &nbsp;<b>a / an</b> — one of many, and you '
+        + 'do not yet know which (dashed = not pinned down). &nbsp;<b>the</b> — that one, and we both know '
+        + 'which (solid = pinned down).',
+    items: [
+      { k:'a', ta:'ஒரு', en:['I saw ','a',' dog.'], ta2:'நான் ஒரு நாய் பார்த்தேன்.',
+        why:'<b>a</b> = one out of many, not yet identified. The dashed outline is the point: the listener '
+           + 'cannot pick which dog you mean, and does not need to. First mention of anything gets <b>a</b>.',
+        draw:function(){ return floor() + threeDogs('a'); } },
+
+      { k:'an', ta:'ஒரு', en:['She eats ','an',' apple.'], ta2:'அவள் ஒரு ஆப்பிள் சாப்பிட்டாள்.',
+        why:'<b>an</b> is the same word as <b>a</b> — it only changes so two vowel sounds do not collide. '
+           + 'Go by <em>sound</em>, not spelling: <b>an</b> hour (silent h), <b>a</b> university (starts "yoo").',
+        draw:function(){
+          var y = 120;
+          var rowA = '<g>' + R(70,y,250,110,14,'var(--surface)',' stroke="var(--line)" stroke-width="2"')
+            + T(120,y+68,'a',{s:44,w:700,f:'var(--ink)'})
+            + TH.book(160,y+26,0.72)
+            + T(258,y+62,'book',{s:18,w:600,f:'var(--soft)'})
+            + T(195,y+98,'consonant sound',{s:12,w:600,f:'var(--muted)'}) + '</g>';
+          var rowB = '<g>' + R(400,y,250,110,14,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"')
+            + T(450,y+68,'an',{s:44,w:700,f:'var(--accent)'})
+            + '<g transform="translate(516,'+(y+26)+') scale(.72)">' + CI(39,52,34,C.red) + R(36,8,7,26,3,C.wood2)
+            + '<ellipse cx="56" cy="18" rx="17" ry="9" fill="'+C.leaf+'" transform="rotate(-18 56 18)"/></g>'
+            + T(600,y+62,'apple',{s:18,w:600,f:'var(--soft)'})
+            + T(525,y+98,'vowel sound',{s:12,w:600,f:'var(--accent)'}) + '</g>';
+          var vowels = T(360,300,'a &#160; e &#160; i &#160; o &#160; u',{s:30,w:700,f:'var(--accent)',st:'2'})
+            + T(360,330,'if the next word starts with one of these sounds &#8594; an',{s:13,w:600,f:'var(--muted)'})
+            + T(360,368,'an hour &#10003; &#160;&#160; a university &#10003; &#160;&#160; sound, not spelling',
+                {s:13,w:600,f:'var(--warn)'});
+          return rowA + rowB + vowels;
+        } },
+
+      { k:'the', ta:'அந்த', en:['The',' sun is bright.'], ta2:'அந்த சூரியன் பிரகாசமாக உள்ளது.',
+        why:'<b>the</b> = we both already know which one. That happens when it was mentioned before, when it '
+           + 'is right in front of us, or when there is only one in the world — <em>the</em> sun, <em>the</em> moon.',
+        draw:function(){ return floor() + threeDogs('the'); } },
+
+      { k:'a → the', ta:'முதல் முறை → a, இரண்டாம் முறை → the',
+        en:['I saw ','a',' dog. ','The',' dog is black.'],
+        ta2:'நான் ஒரு நாய் பார்த்தேன். அந்த நாய் கருப்பாக இருக்கிறது.',
+        why:'This is the whole rule in one strip. <b>First mention introduces &#8594; a.</b> '
+           + '<b>Now we both know it &#8594; the.</b> The dog never changed; only what the listener knows changed.',
+        draw:function(){
+          var midX = 360;
+          var y = FLOOR - 100;
+          var p1 = '<g>' + T(180,54,'1 &#8212; you introduce it',{s:13,w:700,f:'var(--muted)'})
+            + T(180,96,'I saw a dog',{s:26,w:600,f:'var(--ink)'})
+            + SHADOW(180,120) + TH.dog(120,y,1)
+            + ring(120,y,120,100,true)
+            + T(180,y-26,'which dog? unknown',{s:13,w:700,f:'var(--accent)'}) + '</g>';
+          var p2 = '<g>' + T(540,54,'2 &#8212; now we both know it',{s:13,w:700,f:'var(--muted)'})
+            + T(540,96,'The dog is black',{s:26,w:600,f:'var(--ink)'})
+            + SHADOW(540,120) + TH.dog(480,y,1,'#3a3a36')
+            + ring(480,y,120,100,false)
+            + T(540,y-26,'that one',{s:13,w:700,f:'var(--accent)'}) + '</g>';
+          return floor() + L(midX,40,midX,FLOOR+8,{c:'var(--line)',w:2,d:'6 8'})
+            + p1 + p2
+            + ARROW('M300 '+(y+50)+' L420 '+(y+50),{w:4});
+        } }
+    ]
+  };
+
+  /* ---------- prepositions of place ---------- */
+  var PLACE = {
+    idea: '<b>Three pictures carry most of it: in = inside a container &#183; on = touching a surface &#183; '
+        + 'at = a single point.</b> Everything else here is one object placed relative to another — and the '
+        + 'preposition is the only thing deciding where it goes.',
+    items: [
+      { k:'in', ta:'இல்', en:['The ball is ','in',' the box.'], ta2:'பந்து பெட்டியில் உள்ளது.',
+        why:'<b>in</b> = surrounded by something. The box has walls, and the ball is within them. Same idea '
+           + 'for <em>in the room</em>, <em>in the water</em>, <em>in Chennai</em> &#8212; a container, big or small.',
+        draw:function(){
+          var bx = 265, by = FLOOR - 150;
+          return floor() + SHADOW(bx+95,190)
+            + TH.box(bx,by,true)
+            + R(bx+18,by+34,154,100,6,'none',' stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="8 7"')
+            + TH.ball(bx+58,by+47,1)
+            + T(bx+95,by-18,'inside the walls',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'on', ta:'மேல்', en:['The book is ','on',' the table.'], ta2:'புத்தகம் மேசையின் மீது உள்ளது.',
+        why:'<b>on</b> = touching the top of a surface, held up by it. Take the table away and the book falls. '
+           + 'That contact is the whole meaning &#8212; <em>on the wall</em>, <em>on the floor</em> work the same way.',
+        draw:function(){
+          var tx = 210, ty = FLOOR - 150, plane = ty + 14;
+          return floor() + SHADOW(360,300) + TH.table(tx,ty)
+            + TH.book(316,plane-64*1.0,1)
+            + L(tx+40,plane,tx+260,plane,{c:'var(--accent)',w:3})
+            + T(360,FLOOR+42,'the surface holds it up &#8212; take it away and the book falls',
+                {s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'at', ta:'இல்', en:['She is ','at',' school.'], ta2:'அவள் பள்ளியில் இருக்கிறாள்.',
+        why:'<b>at</b> = one point on the map. Not <em>inside</em> (that is <em>in</em>), not <em>on top</em> &#8212; '
+           + 'just <em>that spot</em>. <em>At the door, at the bus stop, at home.</em>',
+        draw:function(){
+          var bx = 190, by = FLOOR - 165;
+          return floor() + TH.building(bx,by,230,165,'SCHOOL')
+            + SHADOW(492,80) + TH.person(462,FLOOR-176,0.9)
+            + TH.pin(494,FLOOR-196)
+            + CI(494,FLOOR,7,'var(--accent)')
+            + T(494,FLOOR-246,'this exact spot',{s:14,w:700,f:'var(--accent)'})
+            + T(360,FLOOR+42,'not inside it, not on it &#8212; just there',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'under', ta:'கீழ்', en:['The cat is ','under',' the table.'], ta2:'பூனை மேசைக்கு கீழே உள்ளது.',
+        why:'<b>under</b> = lower <em>and</em> covered by the thing above. The table is directly over the cat. '
+           + 'If nothing is overhead, you want <em>below</em>, not <em>under</em>.',
+        draw:function(){
+          var tx = 210, ty = FLOOR - 150, plane = ty + 14;
+          return floor() + SHADOW(360,300) + TH.table(tx,ty)
+            + TH.cat(305,FLOOR-92,1)
+            + L(268,plane+10,268,FLOOR-30,{c:'var(--accent)',w:3,d:'8 7'})
+            + T(360,FLOOR+42,'the table is directly over it',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'above', ta:'மேலே', en:['The clock is ','above',' the door.'], ta2:'கடிகாரம் கதவின் மேலே உள்ளது.',
+        why:'<b>above</b> = higher up, with a gap. Nothing is touching. That gap is what separates '
+           + '<em>above</em> from <em>on</em>.',
+        draw:function(){
+          var dx = 302, dy = FLOOR - 190;
+          return floor() + TH.door(dx,dy)
+            + TH.clock(360,86,44)
+            + L(360,132,360,dy-24,{c:'var(--accent)',w:3,d:'8 7'})
+            + T(430,(132+dy-24)/2,'a gap &#8212; not touching',{s:13,w:700,f:'var(--accent)',a:'start'});
+        } },
+
+      { k:'below', ta:'கீழே', en:['The temperature is ','below',' zero.'], ta2:'வெப்பநிலை பூஜ்ஜியத்திற்கு கீழே உள்ளது.',
+        why:'<b>below</b> = lower than a line you are measuring from. Nothing has to be on top of it. '
+           + 'That is why temperature is <em>below</em> zero, never <em>under</em> zero.',
+        draw:function(){
+          var tx = 330, top = 60, bot = 300, zeroY = 150;
+          var out = floor()
+            + R(tx,top,60,bot-top,30,'#e7e2d8',' stroke="'+C.grey+'" stroke-width="3"')
+            + CI(tx+30,bot+22,38,'#e7e2d8',' stroke="'+C.grey+'" stroke-width="3"')
+            + R(tx+22,zeroY+40,16,bot-zeroY-40,8,C.red) + CI(tx+30,bot+22,26,C.red)
+            + L(240,zeroY,470,zeroY,{c:'var(--warn)',w:3.5})
+            + T(230,zeroY+5,'0&#176;',{s:20,w:700,f:'var(--warn)',a:'end'})
+            + T(486,zeroY+5,'the line you measure from',{s:13,w:700,f:'var(--warn)',a:'start'});
+          for (var i = 1; i <= 4; i++) out += L(tx,top+34*i,tx+16,top+34*i,{c:C.grey,w:2});
+          out += ARROW('M500 '+(zeroY+16)+' L500 '+(zeroY+90),{w:4})
+            + T(514,zeroY+64,'below',{s:16,w:700,f:'var(--accent)',a:'start'});
+          return out;
+        } },
+
+      { k:'behind', ta:'பின்னால்', en:['The dog is ','behind',' the car.'], ta2:'நாய் காரின் பின்னால் உள்ளது.',
+        why:'<b>behind</b> = the other object is between the dog and you. You only see the part that peeks out '
+           + '&#8212; that hiding <em>is</em> the meaning.',
+        draw:function(){
+          var cx = 245, cy = FLOOR - 123;
+          return floor()
+            + TH.dog(352,200,0.92)
+            + SHADOW(360,240) + TH.car(cx,cy)
+            + R(352,200,110,92,10,'none',' stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="8 7" opacity=".55"')
+            + T(560,196,'only the head shows',{s:13,w:700,f:'var(--accent)',a:'start'})
+            + ARROW('M556 202 L470 224',{w:3})
+            + T(360,FLOOR+42,'the car is between you and the dog',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'in front of', ta:'முன்னால்', en:['He is standing ','in front of',' the shop.'],
+        ta2:'அவன் கடையின் முன்னால் நிற்கிறான்.',
+        why:'<b>in front of</b> = the mirror image of <em>behind</em>. He is between you and the shop, so he '
+           + 'covers part of it, and he is drawn lower and larger because he is nearer.',
+        draw:function(){
+          var bx = 240, by = FLOOR - 224;
+          return floor() + TH.building(bx,by,240,224,'SHOP')
+            + SHADOW(296,110) + TH.person(250,FLOOR-186,0.95)
+            + T(566,182,'he covers part of it',{s:13,w:700,f:'var(--accent)',a:'start'})
+            + ARROW('M562 190 L356 214',{w:3})
+            + T(360,FLOOR+42,'nearer to you than the shop is',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'between', ta:'இடையில்', en:['The park is ','between',' the school and the hospital.'],
+        ta2:'பூங்கா பள்ளிக்கும் மருத்துவமனைக்கும் இடையில் உள்ளது.',
+        why:'<b>between</b> needs exactly two edges, one on each side. If there were three buildings all around '
+           + 'the park, it would be <em>among</em> them, not <em>between</em>.',
+        draw:function(){
+          var h = 150, y = FLOOR - h;
+          return floor()
+            + TH.building(40,y,170,h,'SCHOOL')
+            + TH.building(510,y,170,h,'HOSPITAL',{fill:'#8fa7b8',roof:'#5d7688'})
+            + SHADOW(360,150) + TH.tree(285,FLOOR-180,1)
+            + ARROW('M215 300 L280 300',{w:4,startHead:true})
+            + ARROW('M440 300 L505 300',{w:4,startHead:true})
+            + T(360,FLOOR+44,'one edge on each side',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'near', ta:'அருகில்', en:['The library is ','near',' the college.'], ta2:'நூலகம் கல்லூரிக்கு அருகில் உள்ளது.',
+        why:'<b>near</b> = a short distance away &#8212; close, but with space between. It says nothing about '
+           + 'which side. <em>Beside</em> does.',
+        draw:function(){
+          var h = 150, y = FLOOR - h;
+          return floor()
+            + TH.building(90,y,190,h,'LIBRARY')
+            + TH.building(430,y,190,h,'COLLEGE',{fill:'#8fa7b8',roof:'#5d7688'})
+            + ARROW('M286 296 L424 296',{w:4,startHead:true,d:'10 8'})
+            + T(355,278,'a short gap',{s:14,w:700,f:'var(--accent)'})
+            + T(355,FLOOR+44,'close &#8212; but not touching, and no side specified',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'beside', ta:'பக்கத்தில் / அருகில்', en:['He is sitting ','beside',' his friend.'],
+        ta2:'அவன் தனது நண்பரின் அருகில் உட்கார்ந்துள்ளான்.',
+        why:'<b>beside</b> = right at the side of, side by side. Closer than <em>near</em>, and it commits to '
+           + 'a side &#8212; left or right, never in front or behind.',
+        draw:function(){
+          var y = FLOOR - 176;
+          return floor()
+            + SHADOW(300,90) + TH.person(258,y,0.9,{shirt:C.shirt})
+            + SHADOW(400,90) + TH.person(358,y,0.9,{shirt:C.shirt2,flip:false})
+            + '<path d="M258 '+(FLOOR+26)+' v14 h188 v-14" fill="none" stroke="var(--accent)" stroke-width="3"/>'
+            + T(352,FLOOR+62,'shoulder to shoulder',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'here', ta:'இங்கு / இங்கே', en:['He is standing ','here','.'], ta2:'அவன் இங்கே நிற்கிறான்.',
+        why:'<b>here</b> = the spot where the speaker is. It moves when the speaker moves &#8212; that is why '
+           + 'the same place can be <em>here</em> for one person and <em>there</em> for another.',
+        draw:function(){ return hereThere('here'); } },
+
+      { k:'there', ta:'அங்கு / அங்கே', en:['He is standing ','there','.'], ta2:'அவன் அங்கே நிற்கிறான்.',
+        why:'<b>there</b> = away from the speaker. Same picture as <em>here</em> &#8212; only the distance from '
+           + 'the person speaking changed.',
+        draw:function(){ return hereThere('there'); } }
+    ]
+  };
+
+  function hereThere(which) {
+    var hereX = 200, thereX = 590, on = which === 'here' ? hereX : thereX;
+    var out = floor()
+      + T(360,52,'the speaker is standing at the left',{s:13,w:600,f:'var(--muted)'})
+      + SHADOW(hereX,90) + TH.person(hereX-48,FLOOR-176,0.9)
+      + CI(hereX,FLOOR,10,which==='here'?'var(--accent)':'var(--line)')
+      + CI(thereX,FLOOR,10,which==='there'?'var(--accent)':'var(--line)')
+      + L(hereX,FLOOR,thereX,FLOOR,{c:'var(--line)',w:3,d:'8 9'})
+      + T(hereX,FLOOR+34,'here',{s:16,w:700,f:which==='here'?'var(--accent)':'var(--muted)'})
+      + T(thereX,FLOOR+34,'there',{s:16,w:700,f:which==='there'?'var(--accent)':'var(--muted)'});
+    if (which === 'there') {
+      out += SHADOW(thereX,80) + TH.person(thereX-40,FLOOR-158,0.8,{shirt:C.shirt2});
+      out += ARROW('M270 268 L546 268',{w:4});
+      out += T(408,252,'away from me',{s:14,w:700,f:'var(--accent)'});
+    } else {
+      out += ring(hereX-52,FLOOR-182,104,182,false);
+      out += T(hereX,FLOOR-206,'where I am',{s:14,w:700,f:'var(--accent)'});
+    }
+    return out;
+  }
+
+  /* ---------- prepositions of direction ---------- */
+  var DIRECTION = {
+    idea: '<b>A direction preposition is an arrow.</b> Three things about that arrow carry the meaning: where '
+        + 'it starts, where it ends, and whether it actually arrives.',
+    items: [
+      { k:'to', ta:'க்கு', en:['He is going ','to',' school.'], ta2:'அவன் பள்ளிக்கு செல்கிறான்.',
+        why:'<b>to</b> = the arrow ends at the destination. Arrival is included in the word &#8212; that is the '
+           + 'only difference from <em>towards</em>.',
+        draw:function(){
+          return floor() + SHADOW(118,90) + TH.person(70,FLOOR-157,0.8)
+            + TH.building(450,FLOOR-160,180,160,'SCHOOL')
+            + ARROW('M186 292 L440 292',{w:5})
+            + T(310,272,'it arrives',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'into', ta:'உள்ளே', en:['The dog ran ','into',' the room.'], ta2:'நாய் அறைக்குள் ஓடியது.',
+        why:'<b>into</b> = <em>to</em> plus <em>in</em>. The arrow crosses a boundary and finishes inside. '
+           + 'Compare: <em>ran to the room</em> stops at the door; <em>ran into the room</em> does not.',
+        draw:function(){
+          var bx = 420, by = FLOOR - 150;
+          return floor() + SHADOW(118,90) + TH.dog(60,FLOOR-100,1)
+            + TH.box(bx,by,true)
+            + R(bx+18,by+34,154,100,6,'none',' stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="8 7"')
+            + ARROW('M190 268 Q330 150 495 '+(by+80),{w:5})
+            + T(300,140,'crosses the edge, ends inside',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'towards', ta:'நோக்கி', en:['Walk ','towards',' the station.'], ta2:'நிலையத்தை நோக்கி நடந்து செல்.',
+        why:'<b>towards</b> = facing that way, moving that way &#8212; but arrival is not claimed. The dashed '
+           + 'tail is the meaning: the journey, not the destination.',
+        draw:function(){
+          return floor() + SHADOW(118,90) + TH.person(70,FLOOR-157,0.8)
+            + TH.building(470,FLOOR-160,180,160,'STATION',{op:0.42})
+            + ARROW('M186 292 L370 292',{w:5,noHead:true})
+            + ARROW('M370 292 L460 292',{w:5,d:'11 9'})
+            + T(300,272,'still going',{s:14,w:700,f:'var(--accent)'})
+            + T(560,FLOOR+40,'not there yet',{s:13,w:700,f:'var(--muted)'});
+        } },
+
+      { k:'along', ta:'ஓரமாக', en:['They walked ','along',' the river.'], ta2:'அவர்கள் ஆற்றின் ஓரமாக நடந்தனர்.',
+        why:'<b>along</b> = following the line of something, staying beside it. The path copies the shape of '
+           + 'the river instead of crossing it.',
+        draw:function(){
+          var river = 'M20 330 Q180 296 360 322 T700 306';
+          return '<path d="'+river+'" stroke="'+C.water+'" stroke-width="46" fill="none" stroke-linecap="round"/>'
+            + '<path d="'+river+'" stroke="#8fc0e4" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>'
+            + SHADOW(118,84) + TH.person(70,FLOOR-206,0.78)
+            + ARROW('M180 250 Q330 216 500 240 T680 228',{w:5})
+            + T(360,190,'it follows the same line',{s:14,w:700,f:'var(--accent)'})
+            + T(360,392,'the river',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'across', ta:'கடந்து', en:['He ran ','across',' the road.'], ta2:'அவன் சாலையை கடந்து ஓடினான்.',
+        why:'<b>across</b> = from one side to the other side. The arrow cuts the road at right angles &#8212; '
+           + '<em>along</em> would run down it instead.',
+        draw:function(){
+          var top = 190, bot = 300;
+          return R(0,top,W,bot-top,0,C.road)
+            + L(0,top,W,top,{c:'#9a9488',w:3}) + L(0,bot,W,bot,{c:'#9a9488',w:3})
+            + L(20,245,700,245,{c:'#f2ede2',w:6,d:'40 30'})
+            + SHADOW(250,80) + TH.person(206,FLOOR-140,0.72)
+            + ARROW('M430 340 L430 152',{w:5})
+            + T(430,138,'one side to the other',{s:14,w:700,f:'var(--accent)'})
+            + T(360,392,'the road',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'over', ta:'மேலாக', en:['The plane flew ','over',' the city.'], ta2:'விமானம் நகரத்தின் மேலே பறந்தது.',
+        why:'<b>over</b> = passing above it, with clear air in between. <em>Above</em> just states a position; '
+           + '<b>over</b> adds the movement across the top.',
+        draw:function(){
+          var sky = '';
+          var hs = [90,140,110,170,120,150], xs = [200,260,320,380,440,500];
+          for (var i = 0; i < hs.length; i++) {
+            sky += R(xs[i],FLOOR-hs[i],52,hs[i],3,i%2?'#8fa7b8':'#7d94a6');
+            for (var j = 0; j < 3; j++)
+              sky += R(xs[i]+9,FLOOR-hs[i]+18+j*30,34,16,2,'#e9eef2',' opacity=".8"');
+          }
+          var plane = '<g transform="translate(348,84) rotate(6)">'
+            + '<path d="M0 14 L64 6 L82 16 L64 26 L0 20 z" fill="'+C.metal+'"/>'
+            + '<path d="M26 16 L14 -18 L30 -18 L46 14 z" fill="#a9b0b5"/>'
+            + '<path d="M26 18 L14 48 L30 48 L46 20 z" fill="#a9b0b5"/></g>';
+          return floor() + sky
+            + ARROW('M40 250 Q360 20 690 250',{w:4,d:'12 10'})
+            + plane
+            + T(360,392,'above it, and moving across &#8212; never touching',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'past', ta:'கடந்து', en:['We drove ','past',' the park.'], ta2:'நாங்கள் பூங்காவைக் கடந்து சென்றோம்.',
+        why:'<b>past</b> = went by it and kept going. The park is only a landmark on the way &#8212; the arrow '
+           + 'does not stop there.',
+        draw:function(){
+          var y = FLOOR - 180;
+          return floor() + SHADOW(360,150) + TH.tree(285,y,1)
+            + R(240,FLOOR-14,240,14,4,'#8dbb85')
+            + TH.car(58,190) + '<g opacity=".22">' + TH.car(430,190) + '</g>'
+            + ARROW('M60 336 L690 336',{w:5,c:'var(--accent)'})
+            + L(360,FLOOR-14,360,FLOOR,{c:'var(--warn)',w:3,d:'6 6'})
+            + T(360,FLOOR+40,'did not stop here',{s:13,w:700,f:'var(--warn)'})
+            + T(624,FLOOR-40,'kept going',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'from', ta:'இருந்து', en:['He came ','from',' the office.'], ta2:'அவன் அலுவலகத்திலிருந்து வந்தான்.',
+        why:'<b>from</b> marks the <em>start</em> of the movement, not the end. Same road as <em>to</em>, arrow '
+           + 'reversed. Pair them: <em>from</em> the office <em>to</em> home.',
+        draw:function(){
+          return floor() + TH.building(450,FLOOR-160,180,160,'OFFICE')
+            + SHADOW(160,90) + TH.person(112,FLOOR-157,0.8,{flip:true})
+            + ARROW('M440 292 L240 292',{w:5})
+            + T(348,272,'this is where it began',{s:14,w:700,f:'var(--accent)'});
+        } }
+    ]
+  };
+
+  /* ---------- prepositions of time ---------- */
+  var TIME = {
+    idea: '<b>Time is a line, and the same three pictures come back: in = a stretch you are inside &#183; '
+        + 'on = one day you put it on &#183; at = a single point.</b> The rest mark a boundary: before it, '
+        + 'after it, up to it, from it.',
+    items: [
+      { k:'at (5 PM)', ta:'மணிக்கு', en:['The train arrives ','at',' 5 PM.'], ta2:'ரயில் மாலை 5 மணிக்கு வருகிறது.',
+        why:'<b>at</b> = a point on the line. Clock times are points, so they take <em>at</em> &#8212; the same '
+           + 'word you use for a point on a map.',
+        draw:function(){
+          return tlBase() + tlDot(400,'the train arrives')
+            + T(400,TL-42,'5 PM',{s:16,w:700,f:'var(--accent)'})
+            + T(360,392,'a point &#8212; no width',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'on (Monday)', ta:'குறிப்பிட்ட நாளில்', en:['The meeting is ','on',' Monday.'],
+        ta2:'கூட்டம் திங்கட்கிழமை நடைபெறும்.',
+        why:'<b>on</b> = one named day, treated as a surface you set the event down on &#8212; exactly like the '
+           + 'book on the table. Days and dates take <em>on</em>.',
+        draw:function(){
+          var x1 = 300, x2 = 440;
+          return tlBase()
+            + R(x1,TL-58,x2-x1,58,8,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"')
+            + T((x1+x2)/2,TL-24,'MONDAY',{s:15,w:700,f:'var(--accent)'})
+            + CI((x1+x2)/2,TL-72,11,'var(--accent)')
+            + T((x1+x2)/2,TL-88,'the meeting',{s:13,w:600,f:'var(--ink)'})
+            + T(360,392,'one day &#8212; a surface to put it on',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'in (2000)', ta:'இல்', en:['I was born ','in',' 2000.'], ta2:'நான் 2000 ஆம் ஆண்டில் பிறந்தேன்.',
+        why:'<b>in</b> = inside a stretch of time, the way the ball is inside the box. Years, months, seasons '
+           + 'and parts of the day are containers: <em>in 2000, in June, in the morning</em>.',
+        draw:function(){
+          var x1 = 200, x2 = 600;
+          return tlBase()
+            + R(x1,TL-52,x2-x1,104,10,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="3"')
+            + T((x1+x2)/2,TL-66,'2000',{s:18,w:700,f:'var(--accent)'})
+            + CI(340,TL,12,'var(--accent)') + T(340,TL+62,'I was born',{s:13,w:600,f:'var(--ink)'})
+            + T(360,392,'a container of time &#8212; somewhere in there',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'before', ta:'முன்பு', en:['Come ','before',' 8 AM.'], ta2:'காலை 8 மணிக்கு முன்னால் வா.',
+        why:'<b>before</b> = anywhere to the left of that boundary. It does not name a time &#8212; it rules out '
+           + 'everything after one.',
+        draw:function(){
+          return tlBase() + tlBand(TL0,500,'come anywhere in here') + tlFlag(500,'8 AM')
+            + tlDot(330,'you come');
+        } },
+
+      { k:'after', ta:'பிறகு', en:['We will meet ','after',' lunch.'], ta2:'மதிய உணவுக்குப் பிறகு நாம் சந்திப்போம்.',
+        why:'<b>after</b> = anywhere to the right of that boundary. Mirror image of <em>before</em>, same '
+           + 'picture flipped.',
+        draw:function(){
+          return tlBase() + tlBand(300,TL1,'meet anywhere in here') + tlFlag(300,'lunch')
+            + tlDot(500,'we meet');
+        } },
+
+      { k:'by', ta:'அதற்குள்', en:['Finish the work ','by',' 6 PM.'], ta2:'வேலையை மாலை 6 மணிக்குள் முடிக்கவும்.',
+        why:'<b>by</b> = a deadline. Any moment up to that flag is fine; past it is not. <em>Before 6</em> is the '
+           + 'window; <b>by 6</b> is the same window with the door shutting.',
+        draw:function(){
+          return tlBase() + tlBand(TL0,560,'any time up to here') + tlFlag(560,'6 PM',true)
+            + tlDot(420,'work finished')
+            + T(626,TL+62,'too late',{s:13,w:700,f:'var(--warn)'});
+        } },
+
+      { k:'since', ta:'முதல்', en:['I have lived here ','since',' 2010.'], ta2:'நான் 2010 முதல் இங்கே வசிக்கிறேன்.',
+        why:'<b>since</b> = a start point, with the situation running from there to now. It always needs the '
+           + 'point where it began &#8212; not how long it lasted.',
+        draw:function(){
+          return tlBase() + tlFlag(200,'2010') + tlBand(200,NOW,'living here, all of this')
+            + T(NOW+70,TL+8,'&#8594; still true',{s:14,w:700,f:'var(--accent)',a:'start'});
+        } },
+
+      { k:'during', ta:'போது', en:['I slept ','during',' the movie.'], ta2:'நான் படத்தின் போது தூங்கினேன்.',
+        why:'<b>during</b> = inside a stretch that is already named. The movie is the block of time; the '
+           + 'sleeping happened somewhere within it.',
+        draw:function(){
+          return tlBase() + tlBand(250,560,'the movie') + tlDot(400,'I slept')
+            + T(360,392,'inside that block, somewhere',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'until / till', ta:'வரை', en:['Wait ','until',' I come.'], ta2:'நான் வரும் வரை காத்திரு.',
+        why:'<b>until</b> = keep going right up to that point, then stop. It is the end flag of a stretch, '
+           + 'which is exactly what <em>since</em> is at the other end.',
+        draw:function(){
+          return tlBase() + tlBand(NOW,600,'wait through here') + tlFlag(600,'I come',true)
+            + T(NOW,TL+62,'you start waiting',{s:13,w:600,f:'var(--ink)'})
+            + T(646,TL+62,'stop',{s:13,w:700,f:'var(--warn)'});
+        } }
+    ]
+  };
+
+  /* ---------- other prepositions ---------- */
+  var OTHER = {
+    idea: '<b>These do not point at a place.</b> Each one marks a role instead: what it is about, who it is '
+        + 'for, who is with you, what role you are in, what it resembles, and how much for each one.',
+    items: [
+      { k:'about', ta:'பற்றி', en:['This book is ','about',' history.'], ta2:'இந்த புத்தகம் வரலாற்றைப் பற்றியது.',
+        why:'<b>about</b> names the subject &#8212; what is <em>inside</em> the thing, in the sense of content '
+           + 'rather than space.',
+        draw:function(){
+          var bubble = R(220,50,280,110,20,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"')
+            + CI(330,178,14,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"')
+            + CI(306,202,8,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"')
+            + '<g transform="translate(250,74)">' + R(0,52,88,10,2,'#b08a52') + R(10,10,10,42,2,'#c9a56c')
+            + R(38,10,10,42,2,'#c9a56c') + R(66,10,10,42,2,'#c9a56c') + R(-4,0,96,10,2,'#b08a52') + '</g>'
+            + T(430,116,'HISTORY',{s:17,w:700,f:'var(--accent)'});
+          return floor() + bubble + SHADOW(360,190) + TH.book(316,FLOOR-141,2.2)
+            + T(360,392,'what is inside it &#8212; not where it is',{s:13,w:600,f:'var(--muted)'});
+        } },
+
+      { k:'for', ta:'க்கு / காக', en:['The gift is ','for',' you.'], ta2:'இந்த பரிசு உங்களுக்காக.',
+        why:'<b>for</b> marks who benefits &#8212; the receiver. The gift may be in my hands, but it is pointed '
+           + 'at you.',
+        draw:function(){
+          return floor() + SHADOW(230,130) + TH.gift(170,FLOOR-116,0.98)
+            + SHADOW(520,90) + TH.person(472,FLOOR-176,0.9,{shirt:C.shirt2})
+            + ARROW('M310 258 L448 258',{w:5})
+            + T(380,238,'the one it is for',{s:14,w:700,f:'var(--accent)'})
+            + T(230,FLOOR+40,'the thing',{s:13,w:600,f:'var(--muted)'})
+            + T(520,FLOOR+40,'the receiver',{s:13,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'with', ta:'உடன்', en:['I will go ','with',' my friend.'], ta2:'நான் என் நண்பருடன் போவேன்.',
+        why:'<b>with</b> = together, in company. It also covers the tool you use &#8212; <em>cut it with a '
+           + 'knife</em> &#8212; because that is the same idea: it goes along with the action.',
+        draw:function(){
+          var y = FLOOR - 176;
+          return floor()
+            + SHADOW(300,90) + TH.person(258,y,0.9)
+            + SHADOW(408,90) + TH.person(366,y,0.9,{shirt:C.shirt2})
+            + '<path d="M254 '+(FLOOR+26)+' v16 h200 v-16" fill="none" stroke="var(--accent)" stroke-width="3"/>'
+            + T(354,FLOOR+66,'both of us, one journey',{s:14,w:700,f:'var(--accent)'})
+            + ARROW('M480 250 L648 250',{w:5}) + T(564,232,'going',{s:13,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'as', ta:'ஆக', en:['He works ','as',' a driver.'], ta2:'அவன் ஒரு டிரைவராக வேலை செய்கிறான்.',
+        why:'<b>as</b> = in that role, actually. He <em>is</em> the driver. Swap it to <em>like</em> a driver and '
+           + 'he only resembles one &#8212; that is the whole difference.',
+        draw:function(){
+          var px = 250, py = FLOOR - 196;
+          return floor() + SHADOW(px+48,96) + TH.person(px,py,1)
+            + R(px-24,py-58,142,38,10,'var(--accent)') + T(px+47,py-32,'DRIVER',{s:16,w:700,f:'#fff'})
+            + TH.wheel(430,py+104,46)
+            + L(px+92,py+104,384,py+104,{c:C.skin,w:12})
+            + T(430,FLOOR+20,'this is the role he is really in',{s:14,w:700,f:'var(--accent)'});
+        } },
+
+      { k:'like', ta:'போன்ற', en:['She sings ','like',' a bird.'], ta2:'அவள் பறவையைப் போன்று பாடுகிறாள்.',
+        why:'<b>like</b> = similar to, not the same as. She is not a bird. Keep it apart from <em>as</em>, which '
+           + 'claims the thing is actually that.',
+        draw:function(){
+          return floor() + SHADOW(200,90) + TH.person(152,FLOOR-176,0.9,{shirt:C.shirt2})
+            + '<g transform="translate(224,150)">'
+            + '<path d="M0 0 q10 -14 20 0 t20 0" stroke="var(--accent)" stroke-width="4" fill="none"/>'
+            + '<path d="M6 20 q10 -14 20 0 t20 0" stroke="var(--accent)" stroke-width="4" fill="none" opacity=".6"/></g>'
+            + T(360,232,'&#8776;',{s:60,w:400,f:'var(--accent)'})
+            + T(360,286,'similar &#8212; not the same',{s:14,w:700,f:'var(--accent)'})
+            + SHADOW(520,110) + TH.bird(452,FLOOR-104,1)
+            + L(268,206,332,206,{c:'var(--line)',w:3,d:'8 8'})
+            + L(392,206,452,206,{c:'var(--line)',w:3,d:'8 8'});
+        } },
+
+      { k:'per', ta:'ஒன்றுக்கு', en:['The price is $10 ','per',' kg.'], ta2:'ஒரு கிலோவுக்கு விலை $10.',
+        why:'<b>per</b> = for each one. It states a rate, so the pair repeats: one more kilo, ten more dollars. '
+           + 'Same shape as <em>per hour, per person, per day</em>.',
+        draw:function(){
+          var out = floor() + T(360,60,'one unit &#8594; one price, every time',{s:14,w:700,f:'var(--muted)'});
+          for (var i = 0; i < 3; i++) {
+            var y = 96 + i * 82;
+            out += R(150,y,110,62,8,'#c89a5e') + T(205,y+40,(i+1)+' kg',{s:19,w:700,f:'#4a3418'})
+              + T(300,y+42,'=',{s:26,w:700,f:'var(--muted)'})
+              + R(346,y,150,62,8,'var(--accent-soft)',' stroke="var(--accent)" stroke-width="2.5"')
+              + T(421,y+40,'$'+(10*(i+1)),{s:22,w:700,f:'var(--accent)'});
+          }
+          out += T(578,178,'each extra kg',{s:13,w:700,f:'var(--accent)',a:'start'})
+            + T(578,200,'adds $10',{s:13,w:700,f:'var(--accent)',a:'start'})
+            + ARROW('M540 122 L540 300',{w:4,d:'10 8'});
+          return out;
+        } }
+    ]
+  };
+
+  var GROUPS = [
+    { id:'articles',  label:'Articles',        data:ARTICLES },
+    { id:'place',     label:'Where (place)',   data:PLACE },
+    { id:'direction', label:'Which way',       data:DIRECTION },
+    { id:'time',      label:'When (time)',     data:TIME },
+    { id:'other',     label:'Other roles',     data:OTHER }
+  ];
+
+  var STATE = { group:'articles', item:0 };
+
+  function group(){ for (var i=0;i<GROUPS.length;i++) if (GROUPS[i].id===STATE.group) return GROUPS[i]; }
+
+  /* ---- rendering --------------------------------------------- */
+  function sentenceHtml(parts){
+    return parts.map(function (p, i) { return i % 2 === 1 ? '<b>'+p+'</b>' : p; }).join('');
+  }
+  function plain(parts){ return parts.join(''); }
+
+  function render(){
+    var g = group(), it = g.data.items[STATE.item];
+
+    document.getElementById('scene').innerHTML = DEFS + it.draw();
+    document.getElementById('sceneDesc').textContent = plain(it.en);
+
+    document.getElementById('bigidea').innerHTML = g.data.idea;
+    document.getElementById('capEn').innerHTML = sentenceHtml(it.en);
+    document.getElementById('capTa').textContent = it.ta2;
+    document.getElementById('capGloss').innerHTML = '<b>' + it.k + '</b> &#8226; <span>' + it.ta + '</span>';
+    document.getElementById('note').innerHTML = it.why;
+  }
+
+  function buildModes(){
+    document.getElementById('modes').innerHTML = GROUPS.map(function (g) {
+      return '<button type="button" data-g="'+g.id+'" aria-pressed="'+(g.id===STATE.group)+'">'+g.label+'</button>';
+    }).join('');
+  }
+  function buildChips(){
+    document.getElementById('chips').innerHTML = group().data.items.map(function (it, i) {
+      return '<button type="button" data-i="'+i+'" aria-pressed="'+(i===STATE.item)+'">'+it.k+'</button>';
+    }).join('');
+  }
+
+  document.getElementById('modes').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-g]'); if (!b) return;
+    STATE.group = b.dataset.g; STATE.item = 0;
+    buildModes(); buildChips(); render();
+  });
+  document.getElementById('chips').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-i]'); if (!b) return;
+    STATE.item = Number(b.dataset.i);
+    buildChips(); render();
+  });
+
+  buildModes(); buildChips(); render();
+})();
+</script>
+</body>
+</html>

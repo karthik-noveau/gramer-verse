@@ -1,0 +1,62 @@
+/* The stage is a figure, not a canvas: it has a caption, even when the caption
+   is only read out. */
+.stage {
+  margin: 0;
+  width: 100%;
+}
+
+/* Scales with the column it is in and keeps its own proportions. A fixed
+   height would letterbox the picture on a phone, which is where most of this
+   product is read. */
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-lg);
+  background: var(--fm-bg);
+}
+
+/* ---- the picture, mid-change -------------------------------
+   The transition is on `transform`, which for an SVG element is
+   a CSS property and is composited: animating the x and y
+   attributes instead would lay the scene out again every frame.
+
+   Nothing here moves anything. The renderer has already put the
+   node where it belongs; these only say how it is allowed to get
+   there.
+   ------------------------------------------------------------ */
+
+/* The same ball in a new place. */
+.moving {
+  transition: transform 420ms cubic-bezier(.32, .72, .3, 1), opacity 420ms ease;
+}
+
+/* Arriving. Faded in and nothing else: a CSS transform here would replace the
+   group's own translate and the prop would land at the origin. */
+.entering {
+  animation: enter 420ms ease-out;
+}
+
+/* On its way out, and out of the way: it is drawn under the new picture and
+   must not take a click meant for what has arrived. */
+.leaving {
+  animation: leave 420ms ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes enter {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes leave {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Reduced motion means no motion, not fast motion — the picture is simply the
+   new picture. The hook already stops handing these classes out; this is the
+   belt to its braces, and covers a class that outlives its own timer. */
+@media (prefers-reduced-motion: reduce) {
+  .moving, .entering, .leaving { transition: none; animation: none; }
+}

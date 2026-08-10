@@ -1,0 +1,21 @@
+/* The block is repeated in ErrorState rather than shared across folders: a
+   component that reaches into a sibling's stylesheet cannot be moved or deleted
+   on its own, and this is fifteen lines. */
+.state {
+  display: grid; justify-items: center; gap: var(--s-3);
+  padding: var(--s-7) var(--s-4);
+  text-align: center;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+
+.icon {
+  width: 52px; height: 52px; border-radius: var(--r-lg);
+  display: grid; place-items: center;
+  background: var(--surface-sunk); color: var(--muted);
+  font-size: var(--fs-lg);
+}
+
+.title { font: 600 var(--fs-md)/1.3 var(--serif); }
+.body { color: var(--soft); font-size: var(--fs-sm); max-width: 46ch; }

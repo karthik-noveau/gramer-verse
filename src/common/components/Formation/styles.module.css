@@ -1,0 +1,24 @@
+/* ============================================================
+   Formation — the word-order diagram.
+
+   No heading. "The word order is different" is what the drawing
+   shows; naming it first made the card explain its own picture.
+   ============================================================ */
+
+.formation { display: flex; flex-direction: column; gap: var(--s-2); }
+
+/* One line, Tamil only, above the diagram it describes. It is the one thing
+   here written for a reader who has no English yet. */
+.note {
+  margin: 0;
+  font-family: var(--tamil);
+  font-size: var(--fs-sm);
+  color: var(--soft);
+}
+
+/* The diagram scrolls, not the card: on a phone the drawing is wider than the
+   screen and the note above it is not, so scrolling the card would drag the
+   sentence sideways along with the picture that explains it. */
+.scroll { overflow-x: auto; }
+
+.svg { display: block; width: 100%; min-width: 520px; height: auto; }

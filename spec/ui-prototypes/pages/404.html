@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Not found — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="404">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+    <div class="state" style="margin-top:var(--s-6)">
+      <div class="state-icon" aria-hidden="true">?</div>
+      <h3 style="font-size:var(--fs-xl)">This page is not here</h3>
+      <p>
+        The address did not match any topic or lesson. It has been left in the address bar
+        rather than redirected, so you can see what was asked for.
+      </p>
+      <p lang="ta">இந்தப் பக்கம் கிடைக்கவில்லை.</p>
+      <p><code id="badPath">/lessons/does-not-exist</code></p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="topics.html">All topics</a>
+        <a class="btn" href="../index.html">Home</a>
+        <a class="btn" href="visualizer.html">Visualizer</a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script>
+  document.getElementById('badPath').textContent = location.hash
+    ? location.hash.slice(1)
+    : '/lessons/does-not-exist';
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+/* The prose beside the picture. A card on the rail, so it reads as an aside to
+   the lesson rather than as part of the sentence under the stage. */
+.why {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-4);
+}
+
+.title { font: 600 var(--fs-md) / 1.25 var(--serif); margin-bottom: var(--s-2); }
+
+.body { color: var(--soft); font-size: var(--fs-sm); }
+
+.ta {
+  margin-top: var(--s-1);
+  font-family: var(--tamil);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}

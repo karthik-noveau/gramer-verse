@@ -1,0 +1,258 @@
+[
+  {
+    "id": "table",
+    "word": {
+      "en": {
+        "singular": "table",
+        "plural": "tables"
+      },
+      "ta": {
+        "nominative": "மேசை",
+        "accusative": "மேசையை",
+        "dative": "மேசைக்கு",
+        "locative": "மேசையில்",
+        "ablative": "மேசையிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "box",
+    "word": {
+      "en": {
+        "singular": "box",
+        "plural": "boxes"
+      },
+      "ta": {
+        "nominative": "பெட்டி",
+        "accusative": "பெட்டியை",
+        "dative": "பெட்டிக்கு",
+        "locative": "பெட்டியில்",
+        "ablative": "பெட்டியிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "chair",
+    "word": {
+      "en": {
+        "singular": "chair",
+        "plural": "chairs"
+      },
+      "ta": {
+        "nominative": "நாற்காலி",
+        "accusative": "நாற்காலியை",
+        "dative": "நாற்காலிக்கு",
+        "locative": "நாற்காலியில்",
+        "ablative": "நாற்காலியிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "door",
+    "word": {
+      "en": {
+        "singular": "door",
+        "plural": "doors"
+      },
+      "ta": {
+        "nominative": "கதவு",
+        "accusative": "கதவை",
+        "dative": "கதவுக்கு",
+        "locative": "கதவில்",
+        "ablative": "கதவிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "car",
+    "word": {
+      "en": {
+        "singular": "car",
+        "plural": "cars"
+      },
+      "ta": {
+        "nominative": "கார்",
+        "accusative": "காரை",
+        "dative": "காருக்கு",
+        "locative": "காரில்",
+        "ablative": "காரிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "shop",
+    "word": {
+      "en": {
+        "singular": "shop",
+        "plural": "shops"
+      },
+      "ta": {
+        "nominative": "கடை",
+        "accusative": "கடையை",
+        "dative": "கடைக்கு",
+        "locative": "கடையில்",
+        "ablative": "கடையிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "tree",
+    "word": {
+      "en": {
+        "singular": "tree",
+        "plural": "trees"
+      },
+      "ta": {
+        "nominative": "மரம்",
+        "accusative": "மரத்தை",
+        "dative": "மரத்திற்கு",
+        "locative": "மரத்தில்",
+        "ablative": "மரத்திலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "ball",
+    "word": {
+      "en": {
+        "singular": "ball",
+        "plural": "balls"
+      },
+      "ta": {
+        "nominative": "பந்து",
+        "accusative": "பந்தை",
+        "dative": "பந்துக்கு",
+        "locative": "பந்தில்",
+        "ablative": "பந்திலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "book",
+    "word": {
+      "en": {
+        "singular": "book",
+        "plural": "books"
+      },
+      "ta": {
+        "nominative": "புத்தகம்",
+        "accusative": "புத்தகத்தை",
+        "dative": "புத்தகத்திற்கு",
+        "locative": "புத்தகத்தில்",
+        "ablative": "புத்தகத்திலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "cup",
+    "word": {
+      "en": {
+        "singular": "cup",
+        "plural": "cups"
+      },
+      "ta": {
+        "nominative": "கோப்பை",
+        "accusative": "கோப்பையை",
+        "dative": "கோப்பைக்கு",
+        "locative": "கோப்பையில்",
+        "ablative": "கோப்பையிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "apple",
+    "word": {
+      "en": {
+        "singular": "apple",
+        "plural": "apples"
+      },
+      "ta": {
+        "nominative": "ஆப்பிள்",
+        "accusative": "ஆப்பிளை",
+        "dative": "ஆப்பிளுக்கு",
+        "locative": "ஆப்பிளில்",
+        "ablative": "ஆப்பிளிலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "clock",
+    "word": {
+      "en": {
+        "singular": "clock",
+        "plural": "clocks"
+      },
+      "ta": {
+        "nominative": "கடிகாரம்",
+        "accusative": "கடிகாரத்தை",
+        "dative": "கடிகாரத்திற்கு",
+        "locative": "கடிகாரத்தில்",
+        "ablative": "கடிகாரத்திலிருந்து"
+      }
+    }
+  },
+  {
+    "id": "cat",
+    "word": {
+      "en": {
+        "singular": "cat",
+        "plural": "cats"
+      },
+      "ta": {
+        "nominative": "பூனை",
+        "accusative": "பூனையை",
+        "dative": "பூனைக்கு",
+        "locative": "பூனையிடம்",
+        "ablative": "பூனையிடமிருந்து"
+      }
+    }
+  },
+  {
+    "id": "dog",
+    "word": {
+      "en": {
+        "singular": "dog",
+        "plural": "dogs"
+      },
+      "ta": {
+        "nominative": "நாய்",
+        "accusative": "நாயை",
+        "dative": "நாய்க்கு",
+        "locative": "நாயிடம்",
+        "ablative": "நாயிடமிருந்து"
+      }
+    }
+  },
+  {
+    "id": "man",
+    "word": {
+      "en": {
+        "singular": "man",
+        "plural": "men"
+      },
+      "ta": {
+        "nominative": "மனிதன்",
+        "accusative": "மனிதனை",
+        "dative": "மனிதனுக்கு",
+        "locative": "மனிதனிடம்",
+        "ablative": "மனிதனிடமிருந்து"
+      }
+    }
+  },
+  {
+    "id": "woman",
+    "word": {
+      "en": {
+        "singular": "woman",
+        "plural": "women"
+      },
+      "ta": {
+        "nominative": "பெண்",
+        "accusative": "பெண்ணை",
+        "dative": "பெண்ணுக்கு",
+        "locative": "பெண்ணிடம்",
+        "ablative": "பெண்ணிடமிருந்து"
+      }
+    }
+  }
+]

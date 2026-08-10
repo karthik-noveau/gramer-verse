@@ -1,0 +1,2908 @@
+{
+  "topics": [
+    {
+      "id": "tenses",
+      "groups": [
+        {
+          "en": "Present Tense",
+          "ta": "நிகழ்காலம்",
+          "lessons": [
+            {
+              "en": "Simple present",
+              "ta": "எளிய நிகழ்காலம்",
+              "ex": "I write.",
+              "exTa": "நான் எழுதுகிறேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Present continuous",
+              "ta": "தொடர்ந்து நிகழ்காலம்",
+              "ex": "I am writing.",
+              "exTa": "நான் எழுதிக்கொண்டிருக்கிறேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Present perfect",
+              "ta": "சரியான நிகழ்காலம்",
+              "ex": "I have written.",
+              "exTa": "நான் எழுதிவிட்டேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Present perfect continuous",
+              "ta": "சரியான தொடர்ச்சியான நிகழ்காலம்",
+              "ex": "I have been writing for an hour.",
+              "exTa": "நான் ஒரு மணி நேரமாக எழுதி வருகிறேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            }
+          ]
+        },
+        {
+          "en": "Past Tense",
+          "ta": "கடந்த காலம்",
+          "lessons": [
+            {
+              "en": "Simple past",
+              "ta": "எளிய கடந்த காலம்",
+              "ex": "I wrote.",
+              "exTa": "நான் எழுதினேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Past continuous",
+              "ta": "கடந்த தொடர்ச்சியான காலம்",
+              "ex": "I was writing.",
+              "exTa": "நான் எழுதிக்கொண்டிருந்தேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Past perfect",
+              "ta": "முற்பட்ட கடந்த காலம்",
+              "ex": "I had written.",
+              "exTa": "நான் எழுதி முடித்திருந்தேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Past perfect continuous",
+              "ta": "முற்பட்ட தொடர்ச்சியான கடந்த காலம்",
+              "ex": "I had been writing for an hour.",
+              "exTa": "நான் ஒரு மணி நேரமாக எழுதி வந்தேன்.",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Future Tense",
+          "ta": "எதிர்காலம்",
+          "lessons": [
+            {
+              "en": "Simple future",
+              "ta": "எளிய எதிர்காலம்",
+              "ex": "I will write.",
+              "exTa": "நான் எழுதுவேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Future continuous",
+              "ta": "எதிர்கால தொடர்ச்சி",
+              "ex": "I will be writing.",
+              "exTa": "நான் எழுதிக்கொண்டிருப்பேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Future perfect",
+              "ta": "எதிர்கால பூர்த்தி",
+              "ex": "I will have written.",
+              "exTa": "நான் எழுதி முடித்திருப்பேன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "Future perfect continuous",
+              "ta": "எதிர்கால பூர்த்தி தொடர்ச்சி",
+              "ex": "I will have been writing for an hour.",
+              "exTa": "நான் ஒரு மணி நேரமாக எழுதி வந்திருப்பேன்.",
+              "authored": [
+                "exTa"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "verbs",
+      "groups": [
+        {
+          "en": "Verb forms",
+          "ta": "வினை வடிவங்கள்",
+          "lessons": [
+            {
+              "en": "Be form",
+              "ta": "இரு",
+              "ex": "am, is, are · was, were · will be",
+              "exTa": "இருக்கிறேன் · இருந்தது · இருக்கும்",
+              "authored": []
+            },
+            {
+              "en": "Have form",
+              "ta": "உள்ளது",
+              "ex": "have, has · had",
+              "exTa": "உள்ளது · இருந்தது",
+              "authored": [
+                "ex"
+              ]
+            }
+          ]
+        },
+        {
+          "en": "Auxiliary verbs",
+          "ta": "உதவி வினைச்சொல்",
+          "lessons": [
+            {
+              "en": "Simple",
+              "ta": "",
+              "ex": "am,is,are / Was,Were / Will be,shall be",
+              "exTa": "",
+              "authored": []
+            },
+            {
+              "en": "Continuous",
+              "ta": "",
+              "ex": "am being,is being,are being / Was being,were being / Will be being,shall be being",
+              "exTa": "",
+              "authored": []
+            },
+            {
+              "en": "Perfect",
+              "ta": "",
+              "ex": "Has been,have been / Had been / Will have been,shall have been",
+              "exTa": "",
+              "authored": []
+            },
+            {
+              "en": "Perfect continuous",
+              "ta": "",
+              "ex": "Has been being,have been being / Had been being / Will have been being,shall have been being",
+              "exTa": "",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Modal verbs",
+          "ta": "சிறப்பு உதவி வினை",
+          "lessons": [
+            {
+              "en": "can",
+              "ta": "செய்ய முடியும்",
+              "ex": "I can write.",
+              "exTa": "நான் எழுத முடியும்.",
+              "authored": []
+            },
+            {
+              "en": "could",
+              "ta": "முடிந்த செயல்",
+              "ex": "I could go.",
+              "exTa": "நான் போக முடியும்.",
+              "authored": []
+            },
+            {
+              "en": "will",
+              "ta": "எதிர்காலம்",
+              "ex": "I will write",
+              "exTa": "நான் எழுதப் போகிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "would",
+              "ta": "கற்பனையான செயல்",
+              "ex": "I would like tea.",
+              "exTa": "நான் தேனீர் விரும்புகிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "may",
+              "ta": "செயல் நிகழலாம்",
+              "ex": "I may come",
+              "exTa": "நான் வர வாய்ப்பு இருக்கிறது",
+              "authored": []
+            },
+            {
+              "en": "might",
+              "ta": "செயல் நிகழலாம்",
+              "ex": "It might rain today.",
+              "exTa": "இன்று மழை பெய்யலாம்",
+              "authored": []
+            },
+            {
+              "en": "must",
+              "ta": "கட்டாயம் செய்ய வேண்டும்",
+              "ex": "You must come.",
+              "exTa": "நீ வர வேண்டும்.",
+              "authored": []
+            },
+            {
+              "en": "shall",
+              "ta": "செய்யப்போகிறேன்",
+              "ex": "I shall help you",
+              "exTa": "நான் உங்களுக்கு உதவப்போகிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "should",
+              "ta": "கட்டாயம் செய்ய வேண்டும்",
+              "ex": "You should study.",
+              "exTa": "நீ படிக்க வேண்டும்.",
+              "authored": []
+            },
+            {
+              "en": "ought to",
+              "ta": "செய்யவேண்டும்",
+              "ex": "You ought to help.",
+              "exTa": "நீ உதவ வேண்டும்.",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nouns",
+      "groups": [
+        {
+          "en": "Nouns",
+          "ta": "பெயர்ச்சொல்",
+          "lessons": [
+            {
+              "en": "Ravi is a student",
+              "ta": "",
+              "ex": "Ravi is a student",
+              "exTa": "ரவி ஒரு மாணவர்",
+              "authored": []
+            },
+            {
+              "en": "Chennai is big",
+              "ta": "",
+              "ex": "Chennai is big",
+              "exTa": "சென்னை பெரியது",
+              "authored": []
+            },
+            {
+              "en": "This is a pen",
+              "ta": "",
+              "ex": "This is a pen",
+              "exTa": "இது ஒரு பேனா",
+              "authored": []
+            },
+            {
+              "en": "The dog is barking.",
+              "ta": "",
+              "ex": "The dog is barking.",
+              "exTa": "நாய் குரைக்கிறது",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Pronouns",
+          "ta": "பிரதிப்பெயர்",
+          "lessons": [
+            {
+              "en": "He is a student.",
+              "ta": "",
+              "ex": "He is a student.",
+              "exTa": "அவன் ஒரு மாணவன்",
+              "authored": []
+            },
+            {
+              "en": "It is big",
+              "ta": "",
+              "ex": "It is big",
+              "exTa": "அது பெரியது",
+              "authored": []
+            },
+            {
+              "en": "This is it",
+              "ta": "",
+              "ex": "This is it",
+              "exTa": "இதுதான்",
+              "authored": []
+            },
+            {
+              "en": "It is barking",
+              "ta": "",
+              "ex": "It is barking",
+              "exTa": "அதுகுரைக்கிறது",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Personal pronouns",
+          "ta": "ஆள்பெயர்",
+          "lessons": [
+            {
+              "en": "I / we",
+              "ta": "நான் / நாங்கள்",
+              "ex": "I am a student.",
+              "exTa": "நான் ஒரு மாணவன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "you",
+              "ta": "நீ / நீங்கள்",
+              "ex": "You are a student.",
+              "exTa": "நீ ஒரு மாணவன்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            },
+            {
+              "en": "he / she / it",
+              "ta": "அவன் / அவள் / அது",
+              "ex": "He is a student.",
+              "exTa": "அவன் ஒரு மாணவன்.",
+              "authored": [
+                "exTa"
+              ]
+            },
+            {
+              "en": "they",
+              "ta": "அவர்கள்",
+              "ex": "They are students.",
+              "exTa": "அவர்கள் மாணவர்கள்.",
+              "authored": [
+                "ex",
+                "exTa"
+              ]
+            }
+          ]
+        },
+        {
+          "en": "This & that",
+          "ta": "இது / அது",
+          "lessons": [
+            {
+              "en": "This",
+              "ta": "இது / இந்த",
+              "ex": "This is my pen",
+              "exTa": "இது என் பேனா.",
+              "authored": []
+            },
+            {
+              "en": "That",
+              "ta": "அது / அந்த",
+              "ex": "That is your bag.",
+              "exTa": "அது உன் பை.",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "articles",
+      "groups": [
+        {
+          "en": "Articles",
+          "ta": "ஒரு / அந்த",
+          "lessons": [
+            {
+              "en": "a",
+              "ta": "ஒரு",
+              "ex": "I have a pen.",
+              "exTa": "எனக்கு ஒரு பேனா             இருக்கிறது.",
+              "authored": []
+            },
+            {
+              "en": "an",
+              "ta": "ஒரு",
+              "ex": "She eats an apple.",
+              "exTa": "அவள் ஒரு ஆப்பிள் சாப்பிட்டாள்.",
+              "authored": []
+            },
+            {
+              "en": "the",
+              "ta": "அந்த",
+              "ex": "The sun is bright.",
+              "exTa": "அந்த சூரியன் பிரகாசமாக உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "a → the",
+              "ta": "முதல் முறை → a",
+              "ex": "I saw a dog. The dog is black.",
+              "exTa": "நான் ஒரு நாய் பார்த்தேன். அந்த நாய் கருப்பு.",
+              "authored": [
+                "en",
+                "ta",
+                "ex",
+                "exTa"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prepositions",
+      "groups": [
+        {
+          "en": "Place",
+          "ta": "இடம்",
+          "lessons": [
+            {
+              "en": "in",
+              "ta": "இல்",
+              "ex": "The ball is in the box",
+              "exTa": "பந்து பெட்டியில் உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "at",
+              "ta": "இல்",
+              "ex": "She is at school",
+              "exTa": "அவள் பள்ளியில் இருக்கிறாள்.",
+              "authored": []
+            },
+            {
+              "en": "on",
+              "ta": "மேல்",
+              "ex": "The book is on the table",
+              "exTa": "புத்தகம் மேசையின் மீது உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "under",
+              "ta": "கீழ்",
+              "ex": "The cat is under the table",
+              "exTa": "பூனை மேசைய கீழே உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "above",
+              "ta": "மேலே",
+              "ex": "The clock is above the door",
+              "exTa": "கடிகாரம் கதவின் மேலே உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "below",
+              "ta": "கீழே",
+              "ex": "The temperature is below zero",
+              "exTa": "வெப்பநிலை பூஜ்ஜியத்திற்கு கீழே உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "behind",
+              "ta": "பின்னால்",
+              "ex": "The dog is behind the car",
+              "exTa": "நாய் காரின் பின்புறம் உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "In front of",
+              "ta": "முன்னால்",
+              "ex": "He is standing in front of",
+              "exTa": "அவன் கடையின் முன்னால் நிற்கிறான்.",
+              "authored": []
+            },
+            {
+              "en": "between",
+              "ta": "இடையில்",
+              "ex": "The park is between the school and the hospital",
+              "exTa": "பூங்கா பள்ளி மற்றும் மருத்துவமனைக்கு நடுவில் உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "near",
+              "ta": "அருகில்",
+              "ex": "The library is near the college",
+              "exTa": "நூலகம் கல்லூரிக்கு அருகில் உள்ளது.",
+              "authored": []
+            },
+            {
+              "en": "beside",
+              "ta": "பக்கத்தில் / அருகில்",
+              "ex": "He is sitting beside his friend",
+              "exTa": "அவன் தனது நண்பரின் அருகில் உட்கார்ந்துள்ளான்.",
+              "authored": []
+            },
+            {
+              "en": "There",
+              "ta": "அங்கு / அங்கே",
+              "ex": "He is standing there",
+              "exTa": "அவன் அங்கே நிற்கிறான்.",
+              "authored": []
+            },
+            {
+              "en": "Here",
+              "ta": "இங்கு / இங்கே",
+              "ex": "He is standing here",
+              "exTa": "அவன் இங்கே நிற்கிறான்",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Direction",
+          "ta": "திசை",
+          "lessons": [
+            {
+              "en": "to",
+              "ta": "க்கு",
+              "ex": "He is going to school",
+              "exTa": "அவன் பள்ளிக்கு செல்கிறான்.",
+              "authored": []
+            },
+            {
+              "en": "into",
+              "ta": "உள்ளே",
+              "ex": "The dog ran into the room",
+              "exTa": "நாய் அறைக்குள் ஓடியது.",
+              "authored": []
+            },
+            {
+              "en": "towards",
+              "ta": "நோக்கி",
+              "ex": "Walk towards the station",
+              "exTa": "நிலையத்தைக் நோக்கி நடந்தேறு",
+              "authored": []
+            },
+            {
+              "en": "along",
+              "ta": "ஓரமாக",
+              "ex": "They walked along the river",
+              "exTa": "அவர்கள் ஆற்றின் ஓரமாக நடந்தனர்.",
+              "authored": []
+            },
+            {
+              "en": "across",
+              "ta": "கடந்து",
+              "ex": "He ran across the road",
+              "exTa": "அவன் சாலையை கடந்து",
+              "authored": []
+            },
+            {
+              "en": "over",
+              "ta": "மேலாக",
+              "ex": "The plane flew over the city",
+              "exTa": "விமானம் நகரத்தின் மேலே",
+              "authored": []
+            },
+            {
+              "en": "past",
+              "ta": "கடந்து",
+              "ex": "We drove past the park",
+              "exTa": "நாங்கள் பூங்காவை தாண்டி ஓட்டிச் சென்றோம்.",
+              "authored": []
+            },
+            {
+              "en": "from",
+              "ta": "இருந்து",
+              "ex": "He came from the office",
+              "exTa": "அவன் அலுவலகத்திலிருந்து",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Time",
+          "ta": "காலம்",
+          "lessons": [
+            {
+              "en": "in",
+              "ta": "இல்",
+              "ex": "I was born in 2000",
+              "exTa": "நான் 2000 ஆம் ஆண்டில் பிறந்தேன்.",
+              "authored": []
+            },
+            {
+              "en": "at",
+              "ta": "க்இ",
+              "ex": "The train arrives at 5 PM",
+              "exTa": "ரயில் மாலை 5 மணிக்கு வருகிறது..",
+              "authored": []
+            },
+            {
+              "en": "on",
+              "ta": "குறிப்பிட்ட நாளில்",
+              "ex": "The meeting is on Monday",
+              "exTa": "கூட்டம் திங்கட்கிழமை நடைபெறும்.",
+              "authored": []
+            },
+            {
+              "en": "before",
+              "ta": "முன்பு",
+              "ex": "Come before 8 AM",
+              "exTa": "காலை 8 மணிக்கு முன்னால் வா.",
+              "authored": []
+            },
+            {
+              "en": "after",
+              "ta": "பிறகு",
+              "ex": "We’ll meet after lunch",
+              "exTa": "மதிய உணவுக்குப் பிறகு",
+              "authored": []
+            },
+            {
+              "en": "by",
+              "ta": "அதற்குள்",
+              "ex": "Finish the work by 6 PM",
+              "exTa": "வேலையை மாலை 6 மணிக்குள் முடிக்கவும்.",
+              "authored": []
+            },
+            {
+              "en": "since",
+              "ta": "முதல்",
+              "ex": "I’ve lived here since 2010",
+              "exTa": "நான் 2010 முதல் இங்கே வசிக்கிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "during",
+              "ta": "போது",
+              "ex": "I slept during the movie",
+              "exTa": "நான் படத்தின் போது தூங்கினேன்.",
+              "authored": []
+            },
+            {
+              "en": "until / till",
+              "ta": "வரை",
+              "ex": "Wait until I come",
+              "exTa": "நான் வரும் வரை காத்திரு.",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Other roles",
+          "ta": "மற்றவை",
+          "lessons": [
+            {
+              "en": "about",
+              "ta": "பற்றி",
+              "ex": "This book is about history",
+              "exTa": "இந்த புத்தகம் வரலாற்றைப் பற்றி.",
+              "authored": []
+            },
+            {
+              "en": "for",
+              "ta": "க்கு,",
+              "ex": "The gift is for you",
+              "exTa": "இந்த பரிசு உங்களுக்காக.",
+              "authored": []
+            },
+            {
+              "en": "with",
+              "ta": "உடன்",
+              "ex": "I will go with my friend",
+              "exTa": "நான் என் நண்பருடன்",
+              "authored": []
+            },
+            {
+              "en": "as",
+              "ta": "போல",
+              "ex": "He works as a driver",
+              "exTa": "அவன் ஒரு டிரைவராக வேலை செய்கிறான்.",
+              "authored": []
+            },
+            {
+              "en": "like",
+              "ta": "போன்ற",
+              "ex": "She sings like a bird",
+              "exTa": "அவள் பறவையைப் போன்று",
+              "authored": []
+            },
+            {
+              "en": "per",
+              "ta": "ஒன்றுக்கு",
+              "ex": "The price is $10 per kg",
+              "exTa": "1 கிலோக்கு விலை $10.",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wh-words",
+      "groups": [
+        {
+          "en": "WH words",
+          "ta": "வினாச்சொற்கள்",
+          "lessons": [
+            {
+              "en": "What",
+              "ta": "என்ன",
+              "ex": "What is your name?",
+              "exTa": "உங்கள் பெயர் என்ன?",
+              "authored": []
+            },
+            {
+              "en": "When",
+              "ta": "எப்போது",
+              "ex": "When is your birthday?",
+              "exTa": "உங்கள் பிறந்த நாள் எப்போது?",
+              "authored": []
+            },
+            {
+              "en": "Where",
+              "ta": "எங்கு",
+              "ex": "Where is the bus stop?",
+              "exTa": "பேருந்து நிறுத்தம் எங்கே?",
+              "authored": []
+            },
+            {
+              "en": "Why",
+              "ta": "ஏன்",
+              "ex": "Why are you sad?",
+              "exTa": "நீங்கள் ஏன் சோகமாக இருக்கிறீர்கள்?",
+              "authored": []
+            },
+            {
+              "en": "Who",
+              "ta": "யார்",
+              "ex": "Who is calling?",
+              "exTa": "யார் அழைக்கிறார்?",
+              "authored": []
+            },
+            {
+              "en": "Whose",
+              "ta": "யாருடைய",
+              "ex": "Whose book is this?",
+              "exTa": "இது யாருடைய புத்தகம்?",
+              "authored": []
+            },
+            {
+              "en": "Which",
+              "ta": "எது",
+              "ex": "Which color do you like?",
+              "exTa": "எந்த நிறத்தை நீங்கள் விரும்புகிறீர்கள்?",
+              "authored": []
+            },
+            {
+              "en": "How",
+              "ta": "எப்படி",
+              "ex": "How do you come to school?",
+              "exTa": "நீங்கள் எப்படி பள்ளிக்கு வருகிறீர்கள்?",
+              "authored": []
+            },
+            {
+              "en": "How much",
+              "ta": "எவ்வளவு (விலை)",
+              "ex": "How much is this pen?",
+              "exTa": "இந்த பேனா எவ்வளவு?",
+              "authored": []
+            },
+            {
+              "en": "How many",
+              "ta": "எத்தனை (எண்ணிக்கை)",
+              "ex": "How many apples are there?",
+              "exTa": "அங்கே எத்தனை ஆப்பிள்கள் உள்ளன?",
+              "authored": []
+            },
+            {
+              "en": "How long",
+              "ta": "எவ்வளவு காலம்",
+              "ex": "How long will it take?",
+              "exTa": "எவ்வளவு நேரம் ஆகும்?",
+              "authored": []
+            },
+            {
+              "en": "How far",
+              "ta": "எவ்வளவு தூரம்",
+              "ex": "How far is the station?",
+              "exTa": "நிலையம் எவ்வளவு தூரம்?",
+              "authored": []
+            },
+            {
+              "en": "How old",
+              "ta": "வயது என்ன",
+              "ex": "How old are you?",
+              "exTa": "உங்கள் வயது என்ன?",
+              "authored": []
+            },
+            {
+              "en": "How often",
+              "ta": "எவ்வளவு முறை",
+              "ex": "How often do you exercise?",
+              "exTa": "நீங்கள் எவ்வளவு முறை உடற்பயிற்சி செய்கிறீர்கள்?",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adjectives",
+      "groups": [
+        {
+          "en": "Adjectives",
+          "ta": "பெயரடை",
+          "lessons": [
+            {
+              "en": "big",
+              "ta": "பெரிய",
+              "ex": "This is a big house.",
+              "exTa": "இது ஒரு பெரிய வீடு",
+              "authored": []
+            },
+            {
+              "en": "small",
+              "ta": "சிறிய",
+              "ex": "It is a small cat.",
+              "exTa": "அது ஒரு சிறிய பூனை",
+              "authored": []
+            },
+            {
+              "en": "tall",
+              "ta": "உயரமான",
+              "ex": "He is tall.",
+              "exTa": "அவன் உயரமானவன்.",
+              "authored": []
+            },
+            {
+              "en": "short",
+              "ta": "குறுகிய",
+              "ex": "She is short.",
+              "exTa": "அவள் குறுகியவள்.",
+              "authored": []
+            },
+            {
+              "en": "happy",
+              "ta": "மகிழ்ச்சியான",
+              "ex": "I am happy.",
+              "exTa": "நான் மகிழ்ச்சியாக இருக்கிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "sad",
+              "ta": "சோகமான",
+              "ex": "He looks sad.",
+              "exTa": "அவன் சோகமாக தெரிகிறான்",
+              "authored": []
+            },
+            {
+              "en": "beautiful",
+              "ta": "அழகான",
+              "ex": "She is beautiful",
+              "exTa": "அவள் அழகானவள்.",
+              "authored": []
+            },
+            {
+              "en": "good",
+              "ta": "நல்லது",
+              "ex": "He is a good boy.",
+              "exTa": "அவன் ஒரு நல்ல பையன்.",
+              "authored": []
+            },
+            {
+              "en": "bad",
+              "ta": "மோசமான",
+              "ex": "That is a bad idea.",
+              "exTa": "அது ஒரு மோசமான யோசனை",
+              "authored": []
+            },
+            {
+              "en": "strong",
+              "ta": "வலிமையான",
+              "ex": "He is strong.",
+              "exTa": "அவன் வலிமையானவன்.",
+              "authored": []
+            },
+            {
+              "en": "weak",
+              "ta": "பலவீனமான",
+              "ex": "She is weak.",
+              "exTa": "அவள் பலவீனமானவள்.",
+              "authored": []
+            },
+            {
+              "en": "fast",
+              "ta": "வேகமான",
+              "ex": "It is a fast car.",
+              "exTa": "அது ஒரு வேகமான கார்.",
+              "authored": []
+            },
+            {
+              "en": "slow",
+              "ta": "மெதுவான",
+              "ex": "It is a slow turtle.",
+              "exTa": "அது ஒரு மெதுவான ஆமை.",
+              "authored": []
+            },
+            {
+              "en": "clever",
+              "ta": "புத்திசாலி",
+              "ex": "He is clever.",
+              "exTa": "அவன் புத்திசாலி.",
+              "authored": []
+            },
+            {
+              "en": "kind",
+              "ta": "தயாளமான",
+              "ex": "She is kind.",
+              "exTa": "அவள் தயாளமானவள்.",
+              "authored": []
+            },
+            {
+              "en": "brave",
+              "ta": "தைரியமான",
+              "ex": "He is brave.",
+              "exTa": "அவன் தைரியமானவன்.",
+              "authored": []
+            },
+            {
+              "en": "honest",
+              "ta": "நேர்மையான",
+              "ex": "She is honest.",
+              "exTa": "அவள் நேர்மையானவள்",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adverbs",
+      "groups": [
+        {
+          "en": "Adverbs",
+          "ta": "வினையுரிச்சொல்",
+          "lessons": [
+            {
+              "en": "quickly",
+              "ta": "விரைவாக",
+              "ex": "He runs quickly.",
+              "exTa": "அவன் விரைவாக ஓடுகிறான்.",
+              "authored": []
+            },
+            {
+              "en": "slowly",
+              "ta": "மெதுவாக",
+              "ex": "She speaks slowly.",
+              "exTa": "அவள் மெதுவாக பேசுகிறாள்",
+              "authored": []
+            },
+            {
+              "en": "loudly",
+              "ta": "சத்தமாக",
+              "ex": "He sings loudly.",
+              "exTa": "அவன் சத்தமாக பாடுகிறான்.",
+              "authored": []
+            },
+            {
+              "en": "softly",
+              "ta": "மென்மையாக",
+              "ex": "She speaks softly.",
+              "exTa": "அவள் மென்மையாக பேசுகிறாள்.",
+              "authored": []
+            },
+            {
+              "en": "always",
+              "ta": "எப்போதும்",
+              "ex": "I always help you.",
+              "exTa": "நான் எப்போதும் உனக்கு உதவுகிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "never",
+              "ta": "ஒருபோதும் இல்லை",
+              "ex": "I never lie.",
+              "exTa": "நான் ஒருபோதும் பொய் பேசுவதில்லை.",
+              "authored": []
+            },
+            {
+              "en": "often",
+              "ta": "அடிக்கடி",
+              "ex": "We often go there.",
+              "exTa": "நாங்கள் அடிக்கடி அங்கே செல்கிறோம்.",
+              "authored": []
+            },
+            {
+              "en": "sometimes",
+              "ta": "சில சமயம்",
+              "ex": "I sometimes sing.",
+              "exTa": "நான் சில சமயம் பாடுகிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "usually",
+              "ta": "வழக்கமாக",
+              "ex": "He usually eats early.",
+              "exTa": "அவன் வழக்கமாக விரைவாக சாப்பிடுகிறான்",
+              "authored": []
+            },
+            {
+              "en": "yesterday",
+              "ta": "நேற்று",
+              "ex": "I met him yesterday.",
+              "exTa": "நான் அவனை நேற்று சந்தித்தேன்.",
+              "authored": []
+            },
+            {
+              "en": "today",
+              "ta": "இன்று",
+              "ex": "I will go today.",
+              "exTa": "நான் இன்று செல்லப் போகிறேன்.",
+              "authored": []
+            },
+            {
+              "en": "tomorrow",
+              "ta": "நாளை",
+              "ex": "We will play tomorrow.",
+              "exTa": "நாங்கள் நாளை விளையாடுவோம்",
+              "authored": []
+            },
+            {
+              "en": "well",
+              "ta": "நன்றாக",
+              "ex": "He speaks well.",
+              "exTa": "அவன் நன்றாக பேசுகிறான்.",
+              "authored": []
+            },
+            {
+              "en": "badly",
+              "ta": "மோசமாக",
+              "ex": "She sings badly.",
+              "exTa": "அவள் மோசமாக பாடுகிறாள்.",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conjunctions",
+      "groups": [
+        {
+          "en": "Conjunctions",
+          "ta": "இணைப்புச்சொல்",
+          "lessons": [
+            {
+              "en": "and",
+              "ta": "மற்றும்",
+              "ex": "I like tea and coffee.",
+              "exTa": "எனக்கு தேனீர் மற்றும் காபி பிடிக்கும்.",
+              "authored": []
+            },
+            {
+              "en": "but",
+              "ta": "ஆனால்",
+              "ex": "She is small but strong.",
+              "exTa": "அவள் சிறியவள் ஆனால் வலிமையானவள்.",
+              "authored": []
+            },
+            {
+              "en": "or",
+              "ta": "அல்லது",
+              "ex": "Do you want tea or coffee?",
+              "exTa": "உங்களுக்கு தேனீர் அல்லது காபி வேண்டுமா?",
+              "authored": []
+            },
+            {
+              "en": "because",
+              "ta": "ஏனெனில்",
+              "ex": "I came because of you",
+              "exTa": "நான் வந்தேன் ஏனெனில் நீ தான் அழைத்தாய்.",
+              "authored": []
+            },
+            {
+              "en": "so",
+              "ta": "ஆகவே",
+              "ex": "I was tired, so I slept",
+              "exTa": "நான் களைத்துவிட்டேன், ஆகவே நான் தூங்கினேன்.",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sentences",
+      "groups": [
+        {
+          "en": "Positive",
+          "ta": "உடன்பாடு",
+          "lessons": [
+            {
+              "en": "Present tense",
+              "ta": "",
+              "ex": "I play cricket",
+              "exTa": "நான் cricket விளையாடுறேன்",
+              "authored": []
+            },
+            {
+              "en": "Present continuous",
+              "ta": "",
+              "ex": "I am playing cricket",
+              "exTa": "நான் cricket விளையாடிக்கிட்டிருக்கேன்",
+              "authored": []
+            },
+            {
+              "en": "Past tense",
+              "ta": "",
+              "ex": "I played cricket",
+              "exTa": "நான் cricket விளையாடினேன்",
+              "authored": []
+            },
+            {
+              "en": "Future tense",
+              "ta": "",
+              "ex": "I will play cricket",
+              "exTa": "நான் cricket விளையாட போறேன்",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Negative",
+          "ta": "எதிர்மறை",
+          "lessons": [
+            {
+              "en": "Present tense",
+              "ta": "",
+              "ex": "I do not play cricket",
+              "exTa": "நான் cricket விளையாட மாட்டேன்",
+              "authored": []
+            },
+            {
+              "en": "Present continuous",
+              "ta": "",
+              "ex": "I am not playing cricket",
+              "exTa": "நான் cricket விளையாடல",
+              "authored": []
+            },
+            {
+              "en": "Past tense",
+              "ta": "",
+              "ex": "I did not play cricket",
+              "exTa": "நான் cricket விளையாடல",
+              "authored": []
+            },
+            {
+              "en": "Future tense",
+              "ta": "",
+              "ex": "I will not play cricket",
+              "exTa": "நான் cricket விளையாட மாட்டேன்",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Question",
+          "ta": "வினா",
+          "lessons": [
+            {
+              "en": "Present tense",
+              "ta": "",
+              "ex": "Where do you play cricket ?",
+              "exTa": "நீ எங்கே cricket விளையாடுறா ?",
+              "authored": []
+            },
+            {
+              "en": "Present continuous",
+              "ta": "",
+              "ex": "Where are you playing cricket ?",
+              "exTa": "நீ எங்கே cricket விளையாடிக்கிட்டிருக்கா?",
+              "authored": []
+            },
+            {
+              "en": "Past tense",
+              "ta": "",
+              "ex": "Where did you play cricket ?",
+              "exTa": "நீ எங்கே cricket விளையாடினா ?",
+              "authored": []
+            },
+            {
+              "en": "Future tense",
+              "ta": "",
+              "ex": "Where will you play cricket ?",
+              "exTa": "நீ எங்கே cricket விளையாட போறா ?",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Yes / No question",
+          "ta": "ஆம் / இல்லை",
+          "lessons": [
+            {
+              "en": "Present tense",
+              "ta": "",
+              "ex": "Do you play cricket ?",
+              "exTa": "நீ எங்கே cricket விளையாடுறா ?",
+              "authored": []
+            },
+            {
+              "en": "Present continuous",
+              "ta": "",
+              "ex": "Are you playing cricket ?",
+              "exTa": "நீ cricket விளையாடிக்கிட்டிருக்கியா ?",
+              "authored": []
+            },
+            {
+              "en": "Past tense",
+              "ta": "",
+              "ex": "Did you play cricket ?",
+              "exTa": "நீ cricket விளையாடினியா ?",
+              "authored": []
+            },
+            {
+              "en": "Future tense",
+              "ta": "",
+              "ex": "Will you play cricket ?",
+              "exTa": "நீ cricket விளையாட போறியா ?",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Imperative",
+          "ta": "கட்டளை",
+          "lessons": [
+            {
+              "en": "Order",
+              "ta": "",
+              "ex": "Close the door",
+              "exTa": "கதவு மூடு",
+              "authored": []
+            },
+            {
+              "en": "Request Example",
+              "ta": "",
+              "ex": "Please open the window",
+              "exTa": "தயவு செய்து ஜன்னல் திற",
+              "authored": []
+            }
+          ]
+        },
+        {
+          "en": "Exclamatory",
+          "ta": "வியப்பு",
+          "lessons": [
+            {
+              "en": "Exclamatory",
+              "ta": "",
+              "ex": "What a beautiful place!",
+              "exTa": "என்ன ஒரு அழகான இடம்!",
+              "authored": []
+            },
+            {
+              "en": "Exclamatory",
+              "ta": "",
+              "ex": "Wow! It's amazing",
+              "exTa": "வாவ்! இது அருமை!",
+              "authored": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "id": "tense-forms",
+      "topic": "tenses",
+      "en": "Tense forms",
+      "ta": "கால வடிவங்கள்",
+      "cols": [
+        "Tense",
+        "Auxiliary verb",
+        "Usage example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "PRESENT TENSE",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Simple present",
+          "am, is, are",
+          "I am a writer\nHe is a writer\nThey are writers",
+          "நான் ஒரு எழுத்தாளன்.\nஅவன் ஒரு எழுத்தாளர்.\nஅவர்கள் எழுத்தாளர்கள்."
+        ],
+        [
+          "Present continuous",
+          "am being, is being, are being",
+          "I am writing now..\nI am being careful in writing\nHe is being careful in writing",
+          "நான் இப்போது எழுதுகிறேன்.\nஅவன் எழுதுவதில் கவனமாக இருக்கிறான்.\nஅவர்கள் எழுதுவதில் கவனமாக இருக்கிறார்கள்."
+        ],
+        [
+          "Present perfect",
+          "has been, have been",
+          "He has been  writing for an hour\nThey have been writing",
+          "அவன் ஒரு மணி நேரமாக எழுதிவருகிறான்.\nஅவர்கள் எழுதிக்கொண்டிருக்கிறார்கள்."
+        ],
+        [
+          "Present perfect continuous",
+          "Has been being, have been being",
+          "He has been being careful in writing.\nThey have been being careful in writing",
+          "அவன் எழுதும் பொழுது கவனமாக இருந்து வந்தான்.\nஅவர்கள் எழுதுவதில் கவனமாக இருந்து கொண்டிருக்கிறார்கள்."
+        ],
+        [
+          "PAST TENSE",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Simple past",
+          "was, were",
+          "I was a writer.\nThey were writers.",
+          "நான் ஒரு எழுத்தாளன் இருந்தேன்\n.\nஅவர்கள் எழுத்தாளர்கள் இருந்தனர்."
+        ],
+        [
+          "Past continuous",
+          "was being, were being",
+          "I was writing yesterday.\nThey were being careful in writing.",
+          "நேற்று எழுதிக் கொண்டிருந்தேன்.\nஅவர்கள் எழுதுவதில் கவனமாக இருந்தனர்."
+        ],
+        [
+          "Past perfect",
+          "Had been",
+          "I had been writing  for an hour..",
+          "நான் ஒரு மணி நேரமாக எழுதி வந்தேன்."
+        ],
+        [
+          "Past perfect continuous",
+          "Had been being",
+          "He had been being careful in writing.",
+          "அவன் எழுதும் போது கவனமாக இருந்து வந்தான்."
+        ],
+        [
+          "FUTURE TENSE",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Simple future",
+          "will be, shall be",
+          "I will be a writer.\nWe shall be writers.",
+          "நான் ஒரு எழுத்தாளன் ஆக இருப்பேன்.\nநாங்கள் எழுத்தாளர்கள் ஆக இருப்போம்."
+        ],
+        [
+          "Future continuous",
+          "will be being, shall be being",
+          "I will be being careful while writing\nWe shall be being careful in writing.",
+          "நான் எழுதும் போது கவனமாக இருந்து கொண்டிருப்பேன்.\nநாங்கள் எழுதுவதில் கவனமாக இருக்க இருப்போம்."
+        ],
+        [
+          "Future perfect",
+          "will have been,shall have been",
+          "I will have been writing for an hour.\nWe shall have been writing.",
+          "நான் ஒரு மணி நேரமாக எழுதி முடித்திருப்பேன்.\nநாங்கள் எழுதிக் கொண்டிருப்போம்."
+        ],
+        [
+          "Future perfect continuous",
+          "will have been being, shall have been being",
+          "I will have been being careful in writing.\nWe shall have been being careful in writing.",
+          "நான் எழுதும் போது கவனமாக இருந்து வந்திருப்பேன்.\nநாங்கள் எழுதுவதில் கவனமாக இருந்து கொண்டிருப்போம்."
+        ]
+      ]
+    },
+    {
+      "id": "auxiliary",
+      "topic": "verbs",
+      "en": "Auxiliary verb forms",
+      "ta": "உதவி வினை",
+      "cols": [
+        "Auxiliary verb forms",
+        "Present",
+        "Past",
+        "Future"
+      ],
+      "rows": [
+        [
+          "",
+          "am,is,are",
+          "Was,Were",
+          "Will be,shall be"
+        ],
+        [
+          "Continuous",
+          "am being,is being,are being",
+          "Was being,were being",
+          "Will be being,shall be being"
+        ],
+        [
+          "Perfect",
+          "Has been,have been",
+          "Had been",
+          "Will have been,shall have been"
+        ],
+        [
+          "Perfect continuous",
+          "Has been being,have been being",
+          "Had been being",
+          "Will have been being,shall have been being"
+        ]
+      ]
+    },
+    {
+      "id": "modals",
+      "topic": "verbs",
+      "en": "Modal verbs",
+      "ta": "சிறப்பு உதவி வினை",
+      "cols": [
+        "Modal Verb",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "can",
+          "செய்ய முடியும்",
+          "I can write.",
+          "நான் எழுத முடியும்."
+        ],
+        [
+          "could",
+          "முடிந்த செயல்",
+          "I could go.",
+          "நான் போக முடியும்."
+        ],
+        [
+          "will",
+          "எதிர்காலம்",
+          "I will write",
+          "நான் எழுதப் போகிறேன்."
+        ],
+        [
+          "would",
+          "கற்பனையான செயல்\n( Imaginary action )",
+          "I would like tea.",
+          "நான் தேனீர் விரும்புகிறேன்."
+        ],
+        [
+          "may",
+          "செயல் நிகழலாம்\n( செயல் நிகழ்வதற்கான சாத்தியங்கள் அதிகம் )",
+          "I may come",
+          "நான் வர வாய்ப்பு இருக்கிறது"
+        ],
+        [
+          "might",
+          "செயல் நிகழலாம்\n( செயல் நிகழ்வதற்கான சாத்தியங்கள் குறைவு )",
+          "It might rain today.",
+          "இன்று மழை பெய்யலாம்"
+        ],
+        [
+          "must",
+          "கட்டாயம் செய்ய வேண்டும்",
+          "You must come.",
+          "நீ வர வேண்டும்."
+        ],
+        [
+          "shall",
+          "செய்யப்போகிறேன்\n( மரியாதையான )",
+          "I shall help you",
+          "நான் உங்களுக்கு உதவப்போகிறேன்."
+        ],
+        [
+          "should",
+          "கட்டாயம் செய்ய வேண்டும்\n( மரியாதையான )",
+          "You should study.",
+          "நீ படிக்க வேண்டும்."
+        ],
+        [
+          "ought to",
+          "செய்யவேண்டும்\n( ஒழுக்கத்தை குறிக்கக்கூடிய செயல்",
+          "You ought to help.",
+          "நீ உதவ வேண்டும்."
+        ]
+      ]
+    },
+    {
+      "id": "main-verbs",
+      "topic": "verbs",
+      "en": "Main verbs",
+      "ta": "முதன்மை வினை",
+      "cols": [
+        "Root Verb",
+        "Present",
+        "Past",
+        "Future",
+        "Present Participle"
+      ],
+      "rows": [
+        [
+          "do\nசெய்",
+          "do/does\nசெய்கிறேன்",
+          "did\nசெய்தேன்",
+          "will do / shall do\nசெய்வேன்",
+          "doing\nசெய்து கொண்டு"
+        ],
+        [
+          "read\nபடி",
+          "read(s)\nபடிக்கிறேன்",
+          "read\nபடித்தேன்",
+          "will read / shall read\nபடிப்பேன்",
+          "reading\nபடித்து கொண்டு"
+        ],
+        [
+          "see\nபார்",
+          "see(s)\nபார்க்கிறேன்",
+          "saw\nபார்த்தேன்",
+          "will see / shall see\nபார்ப்பேன்",
+          "seeing\nபார்த்துக் கொண்டு"
+        ],
+        [
+          "ask\nகேள்",
+          "ask(s)\nகேட்கிறேன்",
+          "asked\nகேட்டேன்",
+          "will ask / shall ask\nகேட்பேன்",
+          "asking\nகேட்டுக் கொண்டு"
+        ],
+        [
+          "sleep\nதூங்கு",
+          "sleep(s)\nதூங்குகிறேன்",
+          "slept\nதூங்கினேன்",
+          "will sleep / shall sleep\nதூங்குவேன்",
+          "sleeping\nதூங்கிக் கொண்டு"
+        ],
+        [
+          "say\nசொல்",
+          "say(s)\nசொல்கிறேன்",
+          "said\nசொன்னேன்",
+          "will say / shall say\nசொல்வேன்",
+          "saying\nசொல்லிக் கொண்டு"
+        ],
+        [
+          "tell\nசொல்",
+          "tell(s)\nசொல்கிறேன்",
+          "told\nசொன்னேன்",
+          "will tell / shall tell\nசொல்வேன்",
+          "telling\nசொல்லிக் கொண்டு"
+        ],
+        [
+          "listen\nகேள்",
+          "listen(s)\nகேட்கிறேன்",
+          "listened\nகேட்டேன்",
+          "will listen / shall listen\nகேட்பேன்",
+          "listening\nகேட்டுக் கொண்டு"
+        ],
+        [
+          "open\nதிற",
+          "open(s)\nதிறக்கிறேன்",
+          "opened\nதிறந்தேன்",
+          "will open / shall open\nதிறப்பேன்",
+          "opening\nதிறந்து கொண்டு"
+        ],
+        [
+          "close\nமூடு",
+          "close(s)\nமூடுகிறேன்",
+          "closed\nமூடினேன்",
+          "will close / shall close\nமூடுவேன்",
+          "closing\nமூடிக் கொண்டு"
+        ],
+        [
+          "pull\nஇழு",
+          "pull(s)\nஇழுக்கிறேன்",
+          "pulled\nஇழுத்தேன்",
+          "will pull / shall pull\nஇழுப்பேன்",
+          "pulling\nஇழுத்துக் கொண்டு"
+        ],
+        [
+          "bath\nகுளி",
+          "bath(s)\nகுளிக்கிறேன்",
+          "bathed\nகுளித்தேன்",
+          "will bath / shall bath\nகுளிப்பேன்",
+          "bathing\nகுளித்துக் கொண்டு"
+        ],
+        [
+          "cry\nஅழு",
+          "cry(s)\nஅழுகிறேன்",
+          "cried\nஅழுதேன்",
+          "will cry / shall cry\nஅழுவேன்",
+          "crying\nஅழத்துக் கொண்டு"
+        ],
+        [
+          "get\nபெறு",
+          "get(s)\nபெறுகிறேன்",
+          "got\nபெற்றேன்",
+          "will get / shall get\nபெறுவேன்",
+          "getting\nபெற்று கொண்டு"
+        ],
+        [
+          "wash\nகழுவு",
+          "wash(s)\nகழுவுகிறேன்",
+          "washed\nகழுவினேன்",
+          "will wash / shall wash\nகழுவுவேன்",
+          "washing\nகழுவிக் கொண்டு"
+        ],
+        [
+          "scold\nதிட்டு",
+          "scold(s)\nதிட்டுகிறேன்",
+          "scolded\nதிட்டினேன்",
+          "will scold / shall scold\nதிட்டுவேன்",
+          "scolding\nதிட்டிக் கொண்டு"
+        ],
+        [
+          "fight\nபோராடு",
+          "fight(s)\nபோராடுகிறேன்",
+          "fought\nபோராடினேன்",
+          "will fight / shall fight\nபோராடுவேன்",
+          "fighting\nபோராடிக் கொண்டு"
+        ],
+        [
+          "take\nஎடு",
+          "take(s)\nஎடுக்கிறேன்",
+          "took\nஎடுத்தேன்",
+          "will take / shall take\nஎடுப்பேன்",
+          "taking\nஎடுத்துக் கொண்டு"
+        ],
+        [
+          "like\nவிரும்பு",
+          "like(s)\nவிரும்புகிறேன்",
+          "liked\nவிரும்பினேன்",
+          "will like / shall like\nவிரும்புவேன்",
+          "liking\nவிரும்பிக் கொண்டு"
+        ],
+        [
+          "join\nசேர்ந்து",
+          "join(s)\nசேர்கிறேன்",
+          "joined\nசேர்ந்தேன்",
+          "will join / shall join\nசேர்வேன்",
+          "joining\nசேர்ந்துக் கொண்டு"
+        ],
+        [
+          "give\nகொடு",
+          "give(s)\nகொடுக்கிறேன்",
+          "gave\nகொடுத்தேன்",
+          "will give / shall give\nகொடுப்பேன்",
+          "giving\nகொடுத்துக் கொண்டு"
+        ],
+        [
+          "eat\nசாப்பிடு",
+          "eat(s)\nசாப்பிடுகிறேன்",
+          "ate\nசாப்பிட்டேன்",
+          "will eat / shall eat\nசாப்பிடுவேன்",
+          "eating\nசாப்பிட்டுக் கொண்டு"
+        ],
+        [
+          "stop\nநிறுத்து",
+          "stop(s)\nநிறுத்துகிறேன்",
+          "stopped\nநிறுத்தினேன்",
+          "will stop / shall stop\nநிறுத்துவேன்",
+          "stopping\nநிறுத்திக் கொண்டு"
+        ],
+        [
+          "send\nஅனுப்பு",
+          "send(s)\nஅனுப்புகிறேன்",
+          "sent\nஅனுப்பினேன்",
+          "will send / shall send\nஅனுப்புவேன்",
+          "sending\nஅனுப்பிக் கொண்டு"
+        ],
+        [
+          "laugh\nசிரி",
+          "laugh(s)\nசிரிக்கிறேன்",
+          "laughed\nசிரித்தேன்",
+          "will laugh / shall laugh\nசிரிப்பேன்",
+          "laughing\nசிரித்துக் கொண்டு"
+        ],
+        [
+          "bug\nதொந்தரவு செய்",
+          "bug(s)\nதொந்தரவு செய்கிறேன்",
+          "bugged\nதொந்தரவு செய்தேன்",
+          "will bug / shall bug\nதொந்தரவு செய்வேன்",
+          "bugging\nதொந்தரவு செய்து கொண்டு"
+        ],
+        [
+          "clean\nசுத்தம் செய்",
+          "clean(s)\nசுத்தம் செய்கிறேன்",
+          "cleaned\nசுத்தம் செய்தேன்",
+          "will clean / shall clean\nசுத்தம் செய்வேன்",
+          "cleaning\nசுத்தம் செய்து கொண்டு"
+        ],
+        [
+          "bring\nகொண்டு வா",
+          "bring(s)\nகொண்டு வருகிறேன்",
+          "brought\nகொண்டு வந்தேன்",
+          "will bring / shall bring\nகொண்டு வருவேன்",
+          "bringing\nகொண்டு வந்து கொண்டு"
+        ],
+        [
+          "go\nபோ",
+          "go(es)\nபோகிறேன்",
+          "went\nசென்றேன்",
+          "will go / shall go\nபோவேன்",
+          "going\nபோய் கொண்டு"
+        ],
+        [
+          "leave\nவிடு",
+          "leave(s)\nவிடுகிறேன்",
+          "left\nவிட்டேன்",
+          "will leave / shall leave\nவிடுவேன்",
+          "leaving\nவிட்டுக் கொண்டு"
+        ],
+        [
+          "drink\nகுடி",
+          "drink(s)\nகுடிக்கிறேன்",
+          "drank\nகுடித்தேன்",
+          "will drink / shall drink\nகுடிப்பேன்",
+          "drinking\nகுடித்துக் கொண்டு"
+        ],
+        [
+          "warn\nஎச்சரிக்கை செய்",
+          "warn(s)\nஎச்சரிக்கை செய்கிறேன்",
+          "warned\nஎச்சரிக்கை செய்தேன்",
+          "will warn / shall warn\nஎச்சரிக்கை செய்வேன்",
+          "warning\nஎச்சரிக்கை செய்து கொண்டு"
+        ],
+        [
+          "like\nவிரும்பு",
+          "like(s)\nவிரும்புகிறேன்",
+          "liked\nவிரும்பினேன்",
+          "will like / shall like\nவிரும்புவேன்",
+          "liking\nவிரும்பிக் கொண்டு"
+        ],
+        [
+          "write\nஎழுது",
+          "write(s)\nஎழுதுகிறேன்",
+          "wrote\nஎழுதியேன்",
+          "will write / shall write\nஎழுதுவேன்",
+          "writing\nஎழுதி கொண்டு"
+        ],
+        [
+          "find\nகண்டுபிடி",
+          "find(s)\nகண்டுபிடிக்கிறேன்",
+          "found\nகண்டுபிடித்தேன்",
+          "will find / shall find\nகண்டுபிடிப்பேன்",
+          "finding\nகண்டுபிடித்து கொண்டு"
+        ],
+        [
+          "roll\nஉருட்டு",
+          "roll(s)\nஉருட்டுகிறேன்",
+          "rolled\nஉருட்டினேன்",
+          "will roll / shall roll\nஉருட்டுவேன்",
+          "rolling\nஉருட்டிக் கொண்டு"
+        ],
+        [
+          "play\nவிளையாடு",
+          "play(s)\nவிளையாடுகிறேன்",
+          "played\nவிளையாடினேன்",
+          "will play / shall play\nவிளையாடுவேன்",
+          "playing\nவிளையாடிக் கொண்டு"
+        ],
+        [
+          "touch\nதொடு",
+          "touch(es)\nதொடுகிறேன்",
+          "touched\nதொடைத்தேன்",
+          "will touch / shall touch\nதொடுவேன்",
+          "touching\nதொடத் கொண்டு"
+        ],
+        [
+          "earn\nசம்பாதி",
+          "earn(s)\nசம்பாதிக்கிறேன்",
+          "earned\nசம்பாதித்தேன்",
+          "will earn / shall earn\nசம்பாதிப்பேன்",
+          "earning\nசம்பாதித்து கொண்டு"
+        ],
+        [
+          "remember\nநினை",
+          "remember(s)\nநினைக்கிறேன்",
+          "remembered\nநினைத்தேன்",
+          "will remember / shall remember\nநினைப்பேன்",
+          "remembering\nநினைத்து கொண்டு"
+        ],
+        [
+          "wait\nகாத்திரு",
+          "wait(s)\nகாத்திருக்கிறேன்",
+          "waited\nகாத்திருந்தேன்",
+          "will wait / shall wait\nகாத்திருப்பேன்",
+          "waiting\nகாத்திருந்து கொண்டு"
+        ],
+        [
+          "sit\nஉட்கார்",
+          "sit(s)\nஉட்கார்கிறேன்",
+          "sat\nஉட்கார்ந்தேன்",
+          "will sit / shall sit\nஉட்கார்வேன்",
+          "sitting\nஉட்கார்ந்து கொண்டு"
+        ],
+        [
+          "show\nகாட்டு",
+          "show(s)\nகாட்டுகிறேன்",
+          "showed\nகாட்டினேன்",
+          "will show / shall show\nகாட்டுவேன்",
+          "showing\nகாட்டிக் கொண்டு"
+        ],
+        [
+          "permission\nஅனுமதி கொடு",
+          "give permission\nஅனுமதி கொடுக்கிறேன்",
+          "gave permission\nஅனுமதி கொடுத்தேன்",
+          "will give permission\nஅனுமதி கொடுப்பேன்",
+          "giving permission\nஅனுமதி கொடுத்து கொண்டு"
+        ],
+        [
+          "work\nவேலை செய்",
+          "work(s)\nவேலை செய்கிறேன்",
+          "worked\nவேலை செய்தேன்",
+          "will work / shall work\nவேலை செய்வேன்",
+          "working\nவேலை செய்து கொண்டு"
+        ],
+        [
+          "answer\nபதில் சொல்",
+          "answer(s)\nபதில் சொல்கிறேன்",
+          "answered\nபதில் சொன்னேன்",
+          "will answer / shall answer\nபதில் சொல்வேன்",
+          "answering\nபதில் சொல்லிக் கொண்டு"
+        ],
+        [
+          "force\nவலியுறுத்து",
+          "force(s)\nவலியுறுத்துகிறேன்",
+          "forced\nவலியுறுத்தினேன்",
+          "will force / shall force\nவலியுறுத்துவேன்",
+          "forcing\nவலியுறுத்திக் கொண்டு"
+        ]
+      ]
+    },
+    {
+      "id": "pronouns",
+      "topic": "nouns",
+      "en": "Personal pronouns",
+      "ta": "ஆள்பெயர்",
+      "cols": [
+        "Persons",
+        "Numbers",
+        "Subject",
+        "Object-ஐ/குடம்",
+        "Adjective+noun",
+        "Possessive",
+        "Reflexive and empathic"
+      ],
+      "rows": [
+        [
+          "First Person",
+          "singular",
+          "I\nநான்",
+          "Me\nஎன்னை\nஎனக்கு",
+          "My\nஎன்னுடைய",
+          "Mine\nஎன்னுடையது",
+          "Myself\nதானே"
+        ],
+        [
+          "First Person",
+          "Plural",
+          "We\nநாம்\nநாங்கள்",
+          "Us\nஎங்களை\nஎங்களுக்கு",
+          "Our\nநம்முடைய\nஎங்களுடைய",
+          "Ours\nநம்முடையது\nஎங்களுடைது",
+          "Ourselves\nதாங்களே"
+        ],
+        [
+          "Second Person",
+          "singular",
+          "You\nநீ / நீங்கள்",
+          "You\nஉன்னை\nஉனக்கு",
+          "Your\nஉன்னுடைய\nஉங்களுடைய",
+          "Yours\nஉன்னுடையது\nஉங்களுடையது",
+          "Yourself\nதானே"
+        ],
+        [
+          "Second Person",
+          "plural",
+          "You\nநீங்கள்",
+          "You\nஉங்களை\nஉங்களுக்கு\nஉங்களிடம்",
+          "Your\nஉங்களுடைய",
+          "Your\nஉங்களுடையது",
+          "Yourselves\nதாங்களே"
+        ],
+        [
+          "Third Person",
+          "singular",
+          "He\nஅவன்\nஅவர்",
+          "Him\nஅவனை\nஅவனிடம்\nஅவனுக்கு",
+          "His\nஅவனுடைய\nஅவருடைய",
+          "His\nஅவனுடையது\nஅவருடையது",
+          "Himself\nதானே"
+        ],
+        [
+          "Third Person",
+          "singular",
+          "She\nஅவள்\nஅவங்க",
+          "Her\nஅவளை\nஅவளுக்கு\nஅவளிடம்",
+          "Her\nஅவளுடைய",
+          "Her\nஅவளுடையது",
+          "Herself\nதானே"
+        ],
+        [
+          "Third Person",
+          "singular",
+          "It\nஅது",
+          "It\nஅதை\nஅதற்கு\nஅதனிடம்",
+          "Its\nஅதனுடைய",
+          "Its\nஅதனுடையது",
+          "Itself\nதானே"
+        ],
+        [
+          "Third Person",
+          "plural",
+          "They\nஅவர்கள்\nஅவைகள்",
+          "Them\nஅவர்களை\nஅவர்களுக்கு\nஅவர்களிடம்",
+          "Their\nஅவர்களுடைய\nஅவைகளுடைய",
+          "Theirs\nஅவர்களுடையது\nஅவைகளுடைது",
+          "Themselves\nதாங்களே"
+        ]
+      ]
+    },
+    {
+      "id": "articles",
+      "topic": "articles",
+      "en": "Articles",
+      "ta": "ஒரு / அந்த",
+      "cols": [
+        "Article",
+        "Meaning in Tamil",
+        "Usage",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "a",
+          "ஒரு",
+          "Singular",
+          "I have a pen.",
+          "எனக்கு ஒரு பேனா             இருக்கிறது."
+        ],
+        [
+          "an",
+          "ஒரு",
+          "Singular,\nIf noun starts with vowels (அ, ஆ, இ, ஈ, உ)",
+          "She eats an apple.",
+          "அவள் ஒரு ஆப்பிள் சாப்பிட்டாள்."
+        ],
+        [
+          "the",
+          "அந்த",
+          "Specific nouns\n(அந்த குறிப்பிட்ட பொருள்)",
+          "The sun is bright.",
+          "அந்த சூரியன் பிரகாசமாக உள்ளது."
+        ]
+      ]
+    },
+    {
+      "id": "prep-common",
+      "topic": "prepositions",
+      "en": "Common prepositions",
+      "ta": "இடமும் காலமும்",
+      "cols": [
+        "Preposition",
+        "",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "in",
+          "Place",
+          "இல்",
+          "The ball is in the box",
+          "பந்து பெட்டியில் உள்ளது."
+        ],
+        [
+          "Time",
+          "இல்",
+          "I was born in 2000",
+          "நான் 2000 ஆம் ஆண்டில் பிறந்தேன்."
+        ],
+        [
+          "at",
+          "Place",
+          "இல்",
+          "She is at school",
+          "அவள் பள்ளியில் இருக்கிறாள்."
+        ],
+        [
+          "Time",
+          "க்இ",
+          "The train arrives at 5 PM",
+          "ரயில் மாலை 5 மணிக்கு வருகிறது.."
+        ],
+        [
+          "on",
+          "Place",
+          "மேல்",
+          "The book is on the table",
+          "புத்தகம் மேசையின் மீது உள்ளது."
+        ],
+        [
+          "Time",
+          "குறிப்பிட்ட நாளில்",
+          "The meeting is on Monday",
+          "கூட்டம் திங்கட்கிழமை நடைபெறும்."
+        ]
+      ]
+    },
+    {
+      "id": "prep-place",
+      "topic": "prepositions",
+      "en": "Prepositions of place",
+      "ta": "இட இடைச்சொல்",
+      "cols": [
+        "Preposition",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "under",
+          "கீழ்",
+          "The cat is under the table",
+          "பூனை மேசைய கீழே உள்ளது."
+        ],
+        [
+          "above",
+          "மேலே",
+          "The clock is above the door",
+          "கடிகாரம் கதவின் மேலே உள்ளது."
+        ],
+        [
+          "below",
+          "கீழே",
+          "The temperature is below zero",
+          "வெப்பநிலை பூஜ்ஜியத்திற்கு கீழே உள்ளது."
+        ],
+        [
+          "behind",
+          "பின்னால்",
+          "The dog is behind the car",
+          "நாய் காரின் பின்புறம் உள்ளது."
+        ],
+        [
+          "In front of",
+          "முன்னால்",
+          "He is standing in front of\nthe shop",
+          "அவன் கடையின் முன்னால் நிற்கிறான்."
+        ],
+        [
+          "between",
+          "இடையில்",
+          "The park is between the school and the hospital",
+          "பூங்கா பள்ளி மற்றும் மருத்துவமனைக்கு நடுவில் உள்ளது."
+        ],
+        [
+          "near",
+          "அருகில்",
+          "The library is near the college",
+          "நூலகம் கல்லூரிக்கு அருகில் உள்ளது."
+        ],
+        [
+          "beside",
+          "பக்கத்தில் / அருகில்",
+          "He is sitting beside his friend",
+          "அவன் தனது நண்பரின் அருகில் உட்கார்ந்துள்ளான்."
+        ],
+        [
+          "There",
+          "அங்கு / அங்கே",
+          "He is standing there",
+          "அவன் அங்கே நிற்கிறான்."
+        ],
+        [
+          "Here",
+          "இங்கு / இங்கே",
+          "He is standing here",
+          "அவன் இங்கே நிற்கிறான்"
+        ]
+      ]
+    },
+    {
+      "id": "prep-time",
+      "topic": "prepositions",
+      "en": "Prepositions of time",
+      "ta": "கால இடைச்சொல்",
+      "cols": [
+        "Preposition",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "before",
+          "முன்பு",
+          "Come before 8 AM",
+          "காலை 8 மணிக்கு முன்னால் வா."
+        ],
+        [
+          "after",
+          "பிறகு",
+          "We’ll meet after lunch",
+          "மதிய உணவுக்குப் பிறகு\nநாம் சந்திப்போம்."
+        ],
+        [
+          "by",
+          "அதற்குள்",
+          "Finish the work by 6 PM",
+          "வேலையை மாலை 6 மணிக்குள் முடிக்கவும்."
+        ],
+        [
+          "since",
+          "முதல்",
+          "I’ve lived here since 2010",
+          "நான் 2010 முதல் இங்கே வசிக்கிறேன்."
+        ],
+        [
+          "during",
+          "போது",
+          "I slept during the movie",
+          "நான் படத்தின் போது தூங்கினேன்."
+        ],
+        [
+          "until / till",
+          "வரை",
+          "Wait until I come",
+          "நான் வரும் வரை காத்திரு."
+        ]
+      ]
+    },
+    {
+      "id": "prep-dir",
+      "topic": "prepositions",
+      "en": "Prepositions of direction",
+      "ta": "திசை இடைச்சொல்",
+      "cols": [
+        "Perposition",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "to",
+          "க்கு",
+          "He is going to school",
+          "அவன் பள்ளிக்கு செல்கிறான்."
+        ],
+        [
+          "into",
+          "உள்ளே",
+          "The dog ran into the room",
+          "நாய் அறைக்குள் ஓடியது."
+        ],
+        [
+          "towards",
+          "நோக்கி",
+          "Walk towards the station",
+          "நிலையத்தைக் நோக்கி நடந்தேறு"
+        ],
+        [
+          "along",
+          "ஓரமாக",
+          "They walked along the river",
+          "அவர்கள் ஆற்றின் ஓரமாக நடந்தனர்."
+        ],
+        [
+          "across",
+          "கடந்து",
+          "He ran across the road",
+          "அவன் சாலையை கடந்து\nஓடினான்."
+        ],
+        [
+          "over",
+          "மேலாக",
+          "The plane flew over the city",
+          "விமானம் நகரத்தின் மேலே\nபறந்தது."
+        ],
+        [
+          "past",
+          "கடந்து",
+          "We drove past the park",
+          "நாங்கள் பூங்காவை தாண்டி ஓட்டிச் சென்றோம்."
+        ],
+        [
+          "from",
+          "இருந்து",
+          "He came from the office",
+          "அவன் அலுவலகத்திலிருந்து\nவந்தான்."
+        ]
+      ]
+    },
+    {
+      "id": "prep-other",
+      "topic": "prepositions",
+      "en": "Other prepositions",
+      "ta": "மற்ற இடைச்சொல்",
+      "cols": [
+        "Preposition",
+        "Tamil meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "about",
+          "பற்றி",
+          "This book is about history",
+          "இந்த புத்தகம் வரலாற்றைப் பற்றி."
+        ],
+        [
+          "for",
+          "க்கு,",
+          "The gift is for you",
+          "இந்த பரிசு உங்களுக்காக."
+        ],
+        [
+          "with",
+          "உடன்",
+          "I will go with my friend",
+          "நான் என் நண்பருடன்\nபோவேன்."
+        ],
+        [
+          "as",
+          "போல",
+          "He works as a driver",
+          "அவன் ஒரு டிரைவராக வேலை செய்கிறான்."
+        ],
+        [
+          "like",
+          "போன்ற",
+          "She sings like a bird",
+          "அவள் பறவையைப் போன்று\nபாடுகிறாள்."
+        ],
+        [
+          "per",
+          "ஒன்றுக்கு",
+          "The price is $10 per kg",
+          "1 கிலோக்கு விலை $10."
+        ]
+      ]
+    },
+    {
+      "id": "wh-words",
+      "topic": "wh-words",
+      "en": "WH question words",
+      "ta": "வினாச்சொற்கள்",
+      "cols": [
+        "English Question Word",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "What",
+          "என்ன",
+          "What is your name?",
+          "உங்கள் பெயர் என்ன?"
+        ],
+        [
+          "When",
+          "எப்போது",
+          "When is your birthday?",
+          "உங்கள் பிறந்த நாள் எப்போது?"
+        ],
+        [
+          "Where",
+          "எங்கு",
+          "Where is the bus stop?",
+          "பேருந்து நிறுத்தம் எங்கே?"
+        ],
+        [
+          "Why",
+          "ஏன்",
+          "Why are you sad?",
+          "நீங்கள் ஏன் சோகமாக இருக்கிறீர்கள்?"
+        ],
+        [
+          "Who",
+          "யார்",
+          "Who is calling?",
+          "யார் அழைக்கிறார்?"
+        ],
+        [
+          "Whose",
+          "யாருடைய",
+          "Whose book is this?",
+          "இது யாருடைய புத்தகம்?"
+        ],
+        [
+          "Which",
+          "எது",
+          "Which color do you like?",
+          "எந்த நிறத்தை நீங்கள் விரும்புகிறீர்கள்?"
+        ],
+        [
+          "How",
+          "எப்படி",
+          "How do you come to school?",
+          "நீங்கள் எப்படி பள்ளிக்கு வருகிறீர்கள்?"
+        ],
+        [
+          "How much",
+          "எவ்வளவு (விலை)",
+          "How much is this pen?",
+          "இந்த பேனா எவ்வளவு?"
+        ],
+        [
+          "How many",
+          "எத்தனை (எண்ணிக்கை)",
+          "How many apples are there?",
+          "அங்கே எத்தனை ஆப்பிள்கள் உள்ளன?"
+        ],
+        [
+          "How long",
+          "எவ்வளவு காலம்",
+          "How long will it take?",
+          "எவ்வளவு நேரம் ஆகும்?"
+        ],
+        [
+          "How far",
+          "எவ்வளவு தூரம்",
+          "How far is the station?",
+          "நிலையம் எவ்வளவு தூரம்?"
+        ],
+        [
+          "How old",
+          "வயது என்ன",
+          "How old are you?",
+          "உங்கள் வயது என்ன?"
+        ],
+        [
+          "How often",
+          "எவ்வளவு முறை",
+          "How often do you exercise?",
+          "நீங்கள் எவ்வளவு முறை உடற்பயிற்சி செய்கிறீர்கள்?"
+        ]
+      ]
+    },
+    {
+      "id": "adjectives",
+      "topic": "adjectives",
+      "en": "Adjectives",
+      "ta": "பெயரடை",
+      "cols": [
+        "Adjective",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "big",
+          "பெரிய",
+          "This is a big house.",
+          "இது ஒரு பெரிய வீடு"
+        ],
+        [
+          "small",
+          "சிறிய",
+          "It is a small cat.",
+          "அது ஒரு சிறிய பூனை"
+        ],
+        [
+          "tall",
+          "உயரமான",
+          "He is tall.",
+          "அவன் உயரமானவன்."
+        ],
+        [
+          "short",
+          "குறுகிய",
+          "She is short.",
+          "அவள் குறுகியவள்."
+        ],
+        [
+          "happy",
+          "மகிழ்ச்சியான",
+          "I am happy.",
+          "நான் மகிழ்ச்சியாக இருக்கிறேன்."
+        ],
+        [
+          "sad",
+          "சோகமான",
+          "He looks sad.",
+          "அவன் சோகமாக தெரிகிறான்"
+        ],
+        [
+          "beautiful",
+          "அழகான",
+          "She is beautiful",
+          "அவள் அழகானவள்."
+        ],
+        [
+          "good",
+          "நல்லது",
+          "He is a good boy.",
+          "அவன் ஒரு நல்ல பையன்."
+        ],
+        [
+          "bad",
+          "மோசமான",
+          "That is a bad idea.",
+          "அது ஒரு மோசமான யோசனை"
+        ],
+        [
+          "strong",
+          "வலிமையான",
+          "He is strong.",
+          "அவன் வலிமையானவன்."
+        ],
+        [
+          "weak",
+          "பலவீனமான",
+          "She is weak.",
+          "அவள் பலவீனமானவள்."
+        ],
+        [
+          "fast",
+          "வேகமான",
+          "It is a fast car.",
+          "அது ஒரு வேகமான கார்."
+        ],
+        [
+          "slow",
+          "மெதுவான",
+          "It is a slow turtle.",
+          "அது ஒரு மெதுவான ஆமை."
+        ],
+        [
+          "clever",
+          "புத்திசாலி",
+          "He is clever.",
+          "அவன் புத்திசாலி."
+        ],
+        [
+          "kind",
+          "தயாளமான",
+          "She is kind.",
+          "அவள் தயாளமானவள்."
+        ],
+        [
+          "brave",
+          "தைரியமான",
+          "He is brave.",
+          "அவன் தைரியமானவன்."
+        ],
+        [
+          "honest",
+          "நேர்மையான",
+          "She is honest.",
+          "அவள் நேர்மையானவள்"
+        ]
+      ]
+    },
+    {
+      "id": "adverbs",
+      "topic": "adverbs",
+      "en": "Adverbs",
+      "ta": "வினையுரிச்சொல்",
+      "cols": [
+        "Adverb",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "quickly",
+          "விரைவாக",
+          "He runs quickly.",
+          "அவன் விரைவாக ஓடுகிறான்."
+        ],
+        [
+          "slowly",
+          "மெதுவாக",
+          "She speaks slowly.",
+          "அவள் மெதுவாக பேசுகிறாள்"
+        ],
+        [
+          "loudly",
+          "சத்தமாக",
+          "He sings loudly.",
+          "அவன் சத்தமாக பாடுகிறான்."
+        ],
+        [
+          "softly",
+          "மென்மையாக",
+          "She speaks softly.",
+          "அவள் மென்மையாக பேசுகிறாள்."
+        ],
+        [
+          "always",
+          "எப்போதும்",
+          "I always help you.",
+          "நான் எப்போதும் உனக்கு உதவுகிறேன்."
+        ],
+        [
+          "never",
+          "ஒருபோதும் இல்லை",
+          "I never lie.",
+          "நான் ஒருபோதும் பொய் பேசுவதில்லை."
+        ],
+        [
+          "often",
+          "அடிக்கடி",
+          "We often go there.",
+          "நாங்கள் அடிக்கடி அங்கே செல்கிறோம்."
+        ],
+        [
+          "sometimes",
+          "சில சமயம்",
+          "I sometimes sing.",
+          "நான் சில சமயம் பாடுகிறேன்."
+        ],
+        [
+          "usually",
+          "வழக்கமாக",
+          "He usually eats early.",
+          "அவன் வழக்கமாக விரைவாக சாப்பிடுகிறான்"
+        ],
+        [
+          "yesterday",
+          "நேற்று",
+          "I met him yesterday.",
+          "நான் அவனை நேற்று சந்தித்தேன்."
+        ],
+        [
+          "today",
+          "இன்று",
+          "I will go today.",
+          "நான் இன்று செல்லப் போகிறேன்."
+        ],
+        [
+          "tomorrow",
+          "நாளை",
+          "We will play tomorrow.",
+          "நாங்கள் நாளை விளையாடுவோம்"
+        ],
+        [
+          "well",
+          "நன்றாக",
+          "He speaks well.",
+          "அவன் நன்றாக பேசுகிறான்."
+        ],
+        [
+          "badly",
+          "மோசமாக",
+          "She sings badly.",
+          "அவள் மோசமாக பாடுகிறாள்."
+        ]
+      ]
+    },
+    {
+      "id": "conjunctions",
+      "topic": "conjunctions",
+      "en": "Conjunctions",
+      "ta": "இணைப்புச்சொல்",
+      "cols": [
+        "Conjunction",
+        "Tamil Meaning",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "and",
+          "மற்றும்",
+          "I like tea and coffee.",
+          "எனக்கு தேனீர் மற்றும் காபி பிடிக்கும்."
+        ],
+        [
+          "but",
+          "ஆனால்",
+          "She is small but strong.",
+          "அவள் சிறியவள் ஆனால் வலிமையானவள்."
+        ],
+        [
+          "or",
+          "அல்லது",
+          "Do you want tea or coffee?",
+          "உங்களுக்கு தேனீர் அல்லது காபி வேண்டுமா?"
+        ],
+        [
+          "because",
+          "ஏனெனில்",
+          "I came because of you",
+          "நான் வந்தேன் ஏனெனில் நீ தான் அழைத்தாய்."
+        ],
+        [
+          "so",
+          "ஆகவே",
+          "I was tired, so I slept",
+          "நான் களைத்துவிட்டேன், ஆகவே நான் தூங்கினேன்."
+        ]
+      ]
+    },
+    {
+      "id": "sentence-types",
+      "topic": "sentences",
+      "en": "Sentence formation",
+      "ta": "வாக்கிய அமைப்பு",
+      "cols": [
+        "Tense",
+        "Pattern",
+        "English Example",
+        "Tamil Example"
+      ],
+      "rows": [
+        [
+          "Positive",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Present tense",
+          "Subject + Main Verb + Object",
+          "I play cricket",
+          "நான் cricket விளையாடுறேன்"
+        ],
+        [
+          "Present continuous",
+          "Subject + Helping Verb + Main Verb + ing + Object",
+          "I am playing cricket",
+          "நான் cricket விளையாடிக்கிட்டிருக்கேன்"
+        ],
+        [
+          "Past tense",
+          "Subject + Past Verb + Object",
+          "I played cricket",
+          "நான் cricket விளையாடினேன்"
+        ],
+        [
+          "Future tense",
+          "Subject + will + Main Verb + Object",
+          "I will play cricket",
+          "நான் cricket விளையாட போறேன்"
+        ],
+        [
+          "Negative",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Present tense",
+          "Subject + do/does not + Main Verb + Object",
+          "I do not play cricket",
+          "நான் cricket விளையாட மாட்டேன்"
+        ],
+        [
+          "Present continuous",
+          "Subject + am/is/are not + Verb + ing + Object",
+          "I am not playing cricket",
+          "நான் cricket விளையாடல"
+        ],
+        [
+          "Past tense",
+          "Subject + did not + Main Verb + Object",
+          "I did not play cricket",
+          "நான் cricket விளையாடல"
+        ],
+        [
+          "Future tense",
+          "Subject + will not + Main Verb + Object",
+          "I will not play cricket",
+          "நான் cricket விளையாட மாட்டேன்"
+        ],
+        [
+          "Question",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Present tense",
+          "WH + do/does + Subject + Main Verb + Object ?",
+          "Where do you play cricket ?",
+          "நீ எங்கே cricket விளையாடுறா ?"
+        ],
+        [
+          "Present continuous",
+          "WH + am/is/are + Subject + Verb + ing + Object ?",
+          "Where are you playing cricket ?",
+          "நீ எங்கே cricket விளையாடிக்கிட்டிருக்கா?"
+        ],
+        [
+          "Past tense",
+          "WH + did + Subject + Main Verb + Object ?",
+          "Where did you play cricket ?",
+          "நீ எங்கே cricket விளையாடினா ?"
+        ],
+        [
+          "Future tense",
+          "WH + will + Subject + Main Verb + Object ?",
+          "Where will you play cricket ?",
+          "நீ எங்கே cricket விளையாட போறா ?"
+        ],
+        [
+          "Yes / No question",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Present tense",
+          "Do/Does + Subject + Main Verb + Object ?",
+          "Do you play cricket ?",
+          "நீ எங்கே cricket விளையாடுறா ?"
+        ],
+        [
+          "Present continuous",
+          "Am/Is/Are + Subject + Verb + ing + Object ?",
+          "Are you playing cricket ?",
+          "நீ cricket விளையாடிக்கிட்டிருக்கியா ?"
+        ],
+        [
+          "Past tense",
+          "Did + Subject + Main Verb + Object ?",
+          "Did you play cricket ?",
+          "நீ cricket விளையாடினியா ?"
+        ],
+        [
+          "Future tense",
+          "Will + Subject + Main Verb + Object ?",
+          "Will you play cricket ?",
+          "நீ cricket விளையாட போறியா ?"
+        ],
+        [
+          "Imperative",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Order",
+          "",
+          "Close the door",
+          "கதவு மூடு"
+        ],
+        [
+          "Request Example",
+          "",
+          "Please open the window",
+          "தயவு செய்து ஜன்னல் திற"
+        ],
+        [
+          "Exclamatory",
+          "",
+          "",
+          ""
+        ],
+        [
+          "Exclamatory",
+          "",
+          "What a beautiful place!",
+          "என்ன ஒரு அழகான இடம்!"
+        ],
+        [
+          "Exclamatory",
+          "",
+          "Wow! It's amazing",
+          "வாவ்! இது அருமை!"
+        ]
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "where": "Tense forms",
+      "was": "\"He has been writing for an hour\" is labelled present perfect.",
+      "now": "That is present perfect continuous. Present perfect is has/have + past participle — \"he has written\". The row is left as the notes wrote it and flagged here; rewriting it would mean inventing an English and a Tamil sentence the notes do not contain."
+    },
+    {
+      "where": "Auxiliary verb forms",
+      "was": "\"has been being\", \"had been being\", \"will have been being\".",
+      "now": "Not real English usage. Kept, because it is what the notes say and removing a row would hide the error rather than name it — the perfect continuous is has/have been + -ing."
+    },
+    {
+      "where": "Modal verbs",
+      "was": "may = fewer possibilities, might = more possibilities.",
+      "now": "Reversed. \"may\" is the more likely of the two; \"might\" is the more tentative."
+    },
+    {
+      "where": "Prepositions of place",
+      "was": "below example glossed \"வெப்பநிலை சுழற்சி புள்ளியின் கீழே\".",
+      "now": "Corrected to \"வெப்பநிலை பூஜ்ஜியத்திற்கு கீழே\" — zero, not \"cycle point\"."
+    },
+    {
+      "where": "Main verbs",
+      "was": "cried → அழைத்தேன்.",
+      "now": "அழைத்தேன் means \"called\". Corrected to அழுதேன்."
+    },
+    {
+      "where": "Conjunctions",
+      "was": "the third column is headed \"Conjunction\", the same as the first.",
+      "now": "It holds the English example sentence. Headed \"English Example\"."
+    },
+    {
+      "where": "Adjectives",
+      "was": "\"English Example\" heads both the third and fourth columns.",
+      "now": "The fourth is the Tamil rendering. Headed \"Tamil Example\"."
+    },
+    {
+      "where": "Tense forms",
+      "was": "three column headings above rows of four cells.",
+      "now": "The fourth column is the Tamil example. Heading supplied."
+    },
+    {
+      "where": "Personal pronouns",
+      "was": "columns headed \"Subjust\" and \"Possesive\".",
+      "now": "Spelled Subject and Possessive."
+    },
+    {
+      "where": "Prepositions of direction",
+      "was": "\"He run across the road\" and \"His came from the office\".",
+      "now": "\"He ran across the road\" and \"He came from the office\"."
+    },
+    {
+      "where": "Articles",
+      "was": "\"She eat an apple.\"",
+      "now": "\"She eats an apple.\" — third person singular takes -s."
+    },
+    {
+      "where": "Personal pronouns",
+      "was": "rows drop the repeated Persons and Numbers labels, and \"Third Person / singular\" is typed on She — three rows into its own group.",
+      "now": "Every row carries its own Persons and Numbers. He, She and It are all Third Person singular."
+    },
+    {
+      "where": "Personal pronouns",
+      "was": "reflexives written as two words — \"Him self\", \"Them selves-\" — and \"My\" for the first person.",
+      "now": "Myself, Ourselves, Yourself, Yourselves, Himself, Herself, Itself, Themselves."
+    },
+    {
+      "where": "Personal pronouns",
+      "was": "\"Then அவர்களுடைய\" in the adjective column.",
+      "now": "\"Their\" — a possessive adjective, not \"then\"."
+    },
+    {
+      "where": "Sentence formation",
+      "was": "each Example cell runs the pattern, the English sentence and the Tamil together with no separator — \"Subject + Main Verb + ObjectI play cricketநான் cricket விளையாடுறேன்\".",
+      "now": "Split into three columns. The port had kept only the pattern and the English, dropping every Tamil sentence in the topic."
+    },
+    {
+      "where": "Sentence formation",
+      "was": "the Yes / No present-tense row is glossed \"நீ எங்கே cricket விளையாடுறா ?\" — a where-question.",
+      "now": "That Tamil belongs to the WH row above it. Left as written and flagged; correcting it would mean writing a Tamil sentence the notes do not contain."
+    },
+    {
+      "where": "Exclamatory sentences",
+      "was": "the second row, \"Wow! It's amazing / வாவ்! இது அருமை!\", was missing from the port.",
+      "now": "Restored. The topic has 20 rows, not 19."
+    }
+  ]
+}

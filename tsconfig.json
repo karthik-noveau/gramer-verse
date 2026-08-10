@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    /* `vite/client` is what declares `*.css` as a module, so a side-effect
+       import of the theme typechecks; `node` is for the two theme tests, which
+       read the CSS off disk and recompute it rather than trusting a comment. */
+    "types": ["jest", "node", "vite/client"],
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+
+    /* Absolute imports from src/. `baseUrl` is what engine 01 names, but
+       TypeScript 6 deprecates it and stops honouring it in 7; a bare `paths`
+       entry resolved from this file is the supported spelling of the same
+       thing. Mirrored by the alias in vite.config.ts and by
+       `moduleDirectories` in jest.config.cjs. */
+    "paths": { "*": ["./src/*"] }
+  },
+  "include": ["src"]
+}

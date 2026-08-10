@@ -1,0 +1,85 @@
+/* ============================================================
+   /reference — the source tables, browsable.
+
+   A list of them down the left that marks where the reader is,
+   and the tables themselves on the right. Below 900px the list
+   goes away entirely rather than becoming a stack of links above
+   the content it is supposed to be beside.
+   ============================================================ */
+
+.head { margin-bottom: var(--s-5); }
+.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); }
+.sub { margin-top: var(--s-2); color: var(--soft); }
+.ta { font-family: var(--tamil); color: var(--muted); }
+
+.layout {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: 200px minmax(0, 1fr);
+  align-items: start;
+}
+
+.nav { position: sticky; top: 76px; font-size: var(--fs-sm); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.nav a {
+  display: block;
+  padding: 4px var(--s-2);
+  border-radius: var(--r-sm);
+  border-left: 2px solid transparent;
+  color: var(--soft);
+  text-decoration: none;
+}
+.nav a:hover { color: var(--ink); background: var(--surface-sunk); }
+
+/* Where the reader is. Marked with the accent and a rule, not with a
+   background: the list is thin and a filled row in it reads as a button. */
+.here { color: var(--accent); font-weight: 600; border-left-color: var(--accent); }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .nav { display: none; }
+}
+
+.tables { min-width: 0; }
+
+/* ---- the corrections --------------------------------------- */
+/* At the foot, after every table, because they are about the tables above
+   them. Never applied to a row: the notes stay as they were written. */
+
+.corrections {
+  margin-top: var(--s-7);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 84px;
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font: 600 var(--fs-lg) / 1.2 var(--serif);
+}
+
+.list { margin: var(--s-4) 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--s-4); }
+
+.correction {
+  padding: var(--s-3) var(--s-4);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--warn);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  background: var(--surface);
+}
+
+.where { font-weight: 700; font-size: var(--fs-sm); }
+.was, .now { margin: var(--s-1) 0 0; font-size: var(--fs-sm); color: var(--soft); }
+.now { color: var(--ink); }
+
+.label {
+  display: inline-block;
+  min-width: 8.5em;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}

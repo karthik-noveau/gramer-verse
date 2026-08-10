@@ -1,0 +1,1846 @@
+[
+  {
+    "id": "prep-place-in",
+    "topicId": "prepositions",
+    "order": 1,
+    "title": {
+      "en": "in",
+      "ta": "உள்ளே"
+    },
+    "idea": {
+      "en": "Inside something that holds it.",
+      "ta": "ஒன்றின் உள்ளே இருப்பது."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "ball",
+      "ground": "box",
+      "ground2": null,
+      "relation": "in",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "relation",
+        "label": {
+          "en": "The word",
+          "ta": "சொல்"
+        },
+        "options": [
+          {
+            "value": "in",
+            "label": {
+              "en": "in",
+              "ta": "உள்ளே"
+            }
+          },
+          {
+            "value": "on",
+            "label": {
+              "en": "on",
+              "ta": "மேல்"
+            }
+          }
+        ]
+      },
+      {
+        "key": "ground",
+        "label": {
+          "en": "The place",
+          "ta": "இடம்"
+        },
+        "options": [
+          {
+            "value": "box",
+            "label": {
+              "en": "box",
+              "ta": "பெட்டி"
+            }
+          },
+          {
+            "value": "table",
+            "label": {
+              "en": "table",
+              "ta": "மேசை"
+            }
+          },
+          {
+            "value": "chair",
+            "label": {
+              "en": "chair",
+              "ta": "நாற்காலி"
+            }
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": {
+      "question": {
+        "en": "Where does the ball sit?",
+        "ta": "பந்து எங்கே இருக்கும்?"
+      },
+      "options": [
+        {
+          "value": "in",
+          "label": {
+            "en": "inside the box",
+            "ta": "பெட்டிக்கு உள்ளே"
+          }
+        },
+        {
+          "value": "on",
+          "label": {
+            "en": "on top of the box",
+            "ta": "பெட்டியின் மேல்"
+          }
+        }
+      ],
+      "answer": "in",
+      "explain": {
+        "en": "in means the sides are around it. On top is on — the box holds it from below, not from every side.",
+        "ta": "in என்றால் பக்கங்கள் சுற்றி உள்ளன. மேல் இருந்தால் அது on — பெட்டி கீழிருந்து மட்டும் தாங்குகிறது."
+      },
+      "knob": "relation"
+    },
+    "why": {
+      "en": "The box has sides and a bottom, so the ball is held. English needs two words — in the box — and Tamil needs one: பெட்டியில்.",
+      "ta": "பெட்டிக்குப் பக்கங்களும் அடிப்பகுதியும் உள்ளன, எனவே பந்து அதற்குள் இருக்கிறது. ஆங்கிலத்தில் in the box என இரண்டு சொல்; தமிழில் பெட்டியில் என ஒரே சொல்."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "locative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-on",
+    "topicId": "prepositions",
+    "order": 2,
+    "title": {
+      "en": "on",
+      "ta": "மேல்"
+    },
+    "idea": {
+      "en": "Touching the top of something.",
+      "ta": "ஒன்றின் மேற்பரப்பைத் தொட்டு இருப்பது."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "book",
+      "ground": "table",
+      "ground2": null,
+      "relation": "on",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "ground",
+        "label": {
+          "en": "The place",
+          "ta": "இடம்"
+        },
+        "options": [
+          {
+            "value": "box",
+            "label": {
+              "en": "box",
+              "ta": "பெட்டி"
+            }
+          },
+          {
+            "value": "table",
+            "label": {
+              "en": "table",
+              "ta": "மேசை"
+            }
+          },
+          {
+            "value": "chair",
+            "label": {
+              "en": "chair",
+              "ta": "நாற்காலி"
+            }
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "The table has a surface, so the book rests on it and nothing holds it in. in and on differ by whether there are sides.",
+      "ta": "மேசைக்கு ஒரு மேற்பரப்பு உள்ளது, அதனால் புத்தகம் அதன் மேல் இருக்கிறது. பக்கங்கள் உள்ளதா இல்லையா என்பதே in-க்கும் on-க்கும் உள்ள வேறுபாடு."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "locative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-at",
+    "topicId": "prepositions",
+    "order": 3,
+    "title": {
+      "en": "at",
+      "ta": "இல்"
+    },
+    "idea": {
+      "en": "A single point, not an inside and not a surface.",
+      "ta": "ஒரு புள்ளி — உள்ளும் அல்ல, மேலும் அல்ல."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "woman",
+      "ground": "shop",
+      "ground2": null,
+      "relation": "at",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "at names the place as one point on a map. She is at the shop says where, not whether she is inside it.",
+      "ta": "at என்பது இடத்தை ஒரு புள்ளியாகச் சொல்கிறது. அவள் கடையில் இருக்கிறாள் என்பது எங்கே என்பதைச் சொல்கிறது, உள்ளே இருக்கிறாளா என்பதை அல்ல."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "locative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-under",
+    "topicId": "prepositions",
+    "order": 4,
+    "title": {
+      "en": "under",
+      "ta": "கீழ்"
+    },
+    "idea": {
+      "en": "Lower than something, with that thing over it.",
+      "ta": "ஒன்றின் கீழே, அது மேலே இருக்க."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "cat",
+      "ground": "table",
+      "ground2": null,
+      "relation": "under",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "relation",
+        "label": {
+          "en": "The word",
+          "ta": "சொல்"
+        },
+        "options": [
+          {
+            "value": "under",
+            "label": {
+              "en": "under",
+              "ta": "கீழ்"
+            }
+          },
+          {
+            "value": "above",
+            "label": {
+              "en": "above",
+              "ta": "மேலே"
+            }
+          }
+        ]
+      },
+      {
+        "key": "ground",
+        "label": {
+          "en": "The place",
+          "ta": "இடம்"
+        },
+        "options": [
+          {
+            "value": "table",
+            "label": {
+              "en": "table",
+              "ta": "மேசை"
+            }
+          },
+          {
+            "value": "chair",
+            "label": {
+              "en": "chair",
+              "ta": "நாற்காலி"
+            }
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": {
+      "question": {
+        "en": "Which way does the cat move?",
+        "ta": "பூனை எந்தப் பக்கம் நகரும்?"
+      },
+      "options": [
+        {
+          "value": "under",
+          "label": {
+            "en": "down, beneath the table",
+            "ta": "கீழே, மேசைக்கு அடியில்"
+          }
+        },
+        {
+          "value": "above",
+          "label": {
+            "en": "up, over the table",
+            "ta": "மேலே, மேசைக்கு மேல்"
+          }
+        }
+      ],
+      "answer": "under",
+      "explain": {
+        "en": "under is beneath, with the table over it. Above is the other way round, and the table is drawn under the cat.",
+        "ta": "under என்றால் அடியில் — மேசை மேலே இருக்கும். above என்றால் நேர் எதிர்; மேசை பூனைக்கு கீழே வரும்."
+      },
+      "knob": "relation"
+    },
+    "why": {
+      "en": "A table stands on legs, so there is room beneath it. A box sits flat and has no under — the picture would contradict the sentence.",
+      "ta": "மேசை கால்களில் நிற்கிறது, அதனால் அதற்குக் கீழே இடம் உள்ளது. பெட்டி தரையில் படுத்திருக்கிறது, அதற்குக் கீழே இடம் இல்லை."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-above",
+    "topicId": "prepositions",
+    "order": 5,
+    "title": {
+      "en": "above",
+      "ta": "மேலே"
+    },
+    "idea": {
+      "en": "Higher than something, without touching it.",
+      "ta": "ஒன்றைத் தொடாமல், அதற்கு மேலே."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "clock",
+      "ground": "door",
+      "ground2": null,
+      "relation": "above",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "above and on both put one thing higher. on touches; above does not — the clock hangs clear of the door.",
+      "ta": "above-உம் on-உம் ஒன்றை உயரத்தில் வைக்கின்றன. on தொடுகிறது; above தொடுவதில்லை — கடிகாரம் கதவைத் தொடாமல் தொங்குகிறது."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-below",
+    "topicId": "prepositions",
+    "order": 6,
+    "title": {
+      "en": "below",
+      "ta": "கீழே"
+    },
+    "idea": {
+      "en": "Lower than something, measured against it.",
+      "ta": "ஒன்றை ஒப்பிட்டு, அதற்குக் கீழே."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "ball",
+      "ground": "table",
+      "ground2": null,
+      "relation": "below",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "below is only lower than. It says nothing about being covered, which is what under adds.",
+      "ta": "below என்பது கீழே இருப்பதை மட்டுமே சொல்கிறது. மூடப்பட்டிருப்பதைச் சொல்வதில்லை — அதைத்தான் under சேர்க்கிறது."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-behind",
+    "topicId": "prepositions",
+    "order": 7,
+    "title": {
+      "en": "behind",
+      "ta": "பின்னால்"
+    },
+    "idea": {
+      "en": "Further away, with something in front of it.",
+      "ta": "முன்னால் ஒன்று இருக்க, பின்னால் இருப்பது."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "dog",
+      "ground": "car",
+      "ground2": null,
+      "relation": "behind",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "ground",
+        "label": {
+          "en": "The place",
+          "ta": "இடம்"
+        },
+        "options": [
+          {
+            "value": "car",
+            "label": {
+              "en": "car",
+              "ta": "கார்"
+            }
+          },
+          {
+            "value": "tree",
+            "label": {
+              "en": "tree",
+              "ta": "மரம்"
+            }
+          },
+          {
+            "value": "shop",
+            "label": {
+              "en": "shop",
+              "ta": "கடை"
+            }
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "Depth is drawn, not written: the dog is smaller and higher on the floor because it is further from you.",
+      "ta": "ஆழம் எழுதப்படுவதில்லை, வரையப்படுகிறது: நாய் உங்களிடமிருந்து தொலைவில் இருப்பதால் சிறியதாகவும் தரையில் உயரமாகவும் தெரிகிறது."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-in-front-of",
+    "topicId": "prepositions",
+    "order": 8,
+    "title": {
+      "en": "in front of",
+      "ta": "முன்னால்"
+    },
+    "idea": {
+      "en": "Nearer to you, with something behind it.",
+      "ta": "பின்னால் ஒன்று இருக்க, உங்களுக்கு அருகில்."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "man",
+      "ground": "shop",
+      "ground2": null,
+      "relation": "in front of",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "ground",
+        "label": {
+          "en": "The place",
+          "ta": "இடம்"
+        },
+        "options": [
+          {
+            "value": "shop",
+            "label": {
+              "en": "shop",
+              "ta": "கடை"
+            }
+          },
+          {
+            "value": "car",
+            "label": {
+              "en": "car",
+              "ta": "கார்"
+            }
+          },
+          {
+            "value": "tree",
+            "label": {
+              "en": "tree",
+              "ta": "மரம்"
+            }
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "The mirror of behind. Nearer means lower on the floor and larger, so the two lessons are one picture read twice.",
+      "ta": "behind-இன் எதிர்ப்படம். அருகில் என்றால் தரையில் கீழேயும் பெரிதாகவும் — இரண்டு பாடங்களும் ஒரே படம், இரு முறை படிக்கப்படுகிறது."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-between",
+    "topicId": "prepositions",
+    "order": 9,
+    "title": {
+      "en": "between",
+      "ta": "இடையில்"
+    },
+    "idea": {
+      "en": "In the space two things leave.",
+      "ta": "இரண்டு பொருள்கள் விடும் இடைவெளியில்."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "ball",
+      "ground": "box",
+      "ground2": "chair",
+      "relation": "between",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": {
+      "question": {
+        "en": "The ball is between the box and the chair. How many things are drawn?",
+        "ta": "பந்து பெட்டிக்கும் நாற்காலிக்கும் நடுவில் உள்ளது. எத்தனை பொருள்கள் வரையப்படும்?"
+      },
+      "options": [
+        {
+          "value": "three",
+          "label": {
+            "en": "Three",
+            "ta": "மூன்று"
+          }
+        },
+        {
+          "value": "two",
+          "label": {
+            "en": "Two",
+            "ta": "இரண்டு"
+          }
+        }
+      ],
+      "answer": "three",
+      "explain": {
+        "en": "The ball and both things it sits between — between is the only place relation that needs two.",
+        "ta": "பந்து, மற்றும் அது எவற்றுக்கு நடுவில் உள்ளதோ அந்த இரண்டும். இரண்டு தேவைப்படும் ஒரே இட உறவு between மட்டுமே."
+      },
+      "knob": null
+    },
+    "why": {
+      "en": "between needs two grounds, which is why this is the only place scene with a second one. One thing has no between.",
+      "ta": "between-க்கு இரண்டு இடங்கள் தேவை; அதனால்தான் இந்தக் காட்சியில் மட்டும் இரண்டாவது இடம் உள்ளது. ஒரே பொருளுக்கு இடையில் என்பது இல்லை."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        },
+        {
+          "slot": "text",
+          "text": "and"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground2"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-near",
+    "topicId": "prepositions",
+    "order": 10,
+    "title": {
+      "en": "near",
+      "ta": "அருகில்"
+    },
+    "idea": {
+      "en": "Close to something, without touching it.",
+      "ta": "ஒன்றைத் தொடாமல், அதற்கு அருகில்."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "cat",
+      "ground": "tree",
+      "ground2": null,
+      "relation": "near",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "ground",
+        "label": {
+          "en": "The place",
+          "ta": "இடம்"
+        },
+        "options": [
+          {
+            "value": "tree",
+            "label": {
+              "en": "tree",
+              "ta": "மரம்"
+            }
+          },
+          {
+            "value": "shop",
+            "label": {
+              "en": "shop",
+              "ta": "கடை"
+            }
+          },
+          {
+            "value": "car",
+            "label": {
+              "en": "car",
+              "ta": "கார்"
+            }
+          }
+        ]
+      },
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "near is a distance, so the distance is what is drawn — the gap is measured on the picture rather than named in a word.",
+      "ta": "near என்பது ஒரு தூரம்; அதனால் தூரமே வரையப்படுகிறது — இடைவெளி சொல்லால் அல்ல, படத்தில் அளவாகக் காட்டப்படுகிறது."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-beside",
+    "topicId": "prepositions",
+    "order": 11,
+    "title": {
+      "en": "beside",
+      "ta": "பக்கத்தில்"
+    },
+    "idea": {
+      "en": "Right next to something, side by side.",
+      "ta": "ஒன்றின் பக்கத்தில், அருகருகே."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "chair",
+      "ground": "table",
+      "ground2": null,
+      "relation": "beside",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "beside is near with the gap closed. Same picture, one measurement apart — which is why they are taught together.",
+      "ta": "இடைவெளி மூடப்பட்ட near தான் beside. ஒரே படம், ஒரே அளவு வேறுபாடு — அதனால்தான் இரண்டும் சேர்ந்து கற்பிக்கப்படுகின்றன."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        },
+        {
+          "slot": "text",
+          "text": "the"
+        },
+        {
+          "slot": "ground"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "ground",
+          "case": "dative"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-here",
+    "topicId": "prepositions",
+    "order": 12,
+    "title": {
+      "en": "here",
+      "ta": "இங்கே"
+    },
+    "idea": {
+      "en": "The place where the speaker is.",
+      "ta": "பேசுபவர் இருக்கும் இடம்."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "man",
+      "ground": null,
+      "ground2": null,
+      "relation": "here",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "here has no second thing to be near. It points at where you are standing, so the scene draws no ground at all.",
+      "ta": "here-க்கு அருகில் இருக்க வேறு பொருள் இல்லை. நீங்கள் நிற்கும் இடத்தையே அது சுட்டுகிறது; அதனால் காட்சியில் இடம் எதுவும் வரையப்படுவதில்லை."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "text",
+          "text": "இங்கே"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  },
+  {
+    "id": "prep-place-there",
+    "topicId": "prepositions",
+    "order": 13,
+    "title": {
+      "en": "there",
+      "ta": "அங்கே"
+    },
+    "idea": {
+      "en": "A place away from the speaker.",
+      "ta": "பேசுபவரிடமிருந்து தொலைவில் உள்ள இடம்."
+    },
+    "scene": {
+      "kind": "place",
+      "figure": "man",
+      "ground": null,
+      "ground2": null,
+      "relation": "there",
+      "determiner": "the",
+      "count": 1,
+      "adjective": null
+    },
+    "knobs": [
+      {
+        "key": "count",
+        "label": {
+          "en": "How many",
+          "ta": "எத்தனை"
+        },
+        "options": [
+          {
+            "value": "1",
+            "label": {
+              "en": "one",
+              "ta": "ஒன்று"
+            }
+          },
+          {
+            "value": "2",
+            "label": {
+              "en": "two",
+              "ta": "இரண்டு"
+            }
+          },
+          {
+            "value": "3",
+            "label": {
+              "en": "three",
+              "ta": "மூன்று"
+            }
+          }
+        ]
+      },
+      {
+        "key": "determiner",
+        "label": {
+          "en": "Which one",
+          "ta": "எது"
+        },
+        "options": [
+          {
+            "value": "a",
+            "label": {
+              "en": "a — any one",
+              "ta": "ஒரு — ஏதேனும் ஒன்று"
+            }
+          },
+          {
+            "value": "the",
+            "label": {
+              "en": "the — that one",
+              "ta": "அந்த — அதுவே"
+            }
+          }
+        ]
+      }
+    ],
+    "predict": null,
+    "why": {
+      "en": "there is here at a distance. The pair works the way this and that do, and neither needs a ground.",
+      "ta": "தொலைவில் உள்ள here தான் there. this-உம் that-உம் போலவே இந்த இணை வேலை செய்கிறது; இரண்டுக்கும் இடம் தேவையில்லை."
+    },
+    "sentence": {
+      "en": [
+        {
+          "slot": "det"
+        },
+        {
+          "slot": "figure"
+        },
+        {
+          "slot": "be"
+        },
+        {
+          "slot": "relation"
+        }
+      ],
+      "ta": [
+        {
+          "slot": "figure",
+          "case": "nominative"
+        },
+        {
+          "slot": "text",
+          "text": "அங்கே"
+        },
+        {
+          "slot": "be"
+        }
+      ]
+    }
+  }
+]

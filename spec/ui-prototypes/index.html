@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Grammer-Verse — English grammar, drawn</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="English grammar as pictures, in English and Tamil.">
+<link rel="icon" href="assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body data-page="home">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="home">
+
+  <header class="brandbar" id="brandbar">
+    <div class="bar-inner">
+      <a class="lockup" href="index.html" id="lockup" aria-label="Grammer-Verse home"></a>
+      <span class="spacer"></span>
+      <button class="btn btn--icon btn--ghost" id="themeBtn" aria-label="Switch theme">◐</button>
+      <a class="btn btn--primary" href="pages/topics.html">Open the app</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="home-hero">
+      <div>
+        <p class="eyebrow">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="heroCount">Ten topics</span> · English &amp; <span lang="ta">தமிழ்</span>
+        </p>
+        <h1>English grammar,<br><em>drawn</em>.</h1>
+        <p class="tagline">
+          Change a word, the picture changes.
+          <span lang="ta">ஒரு சொல்லை மாற்றுங்கள், படம் மாறும்.</span>
+        </p>
+        <!-- One way in. Two calls to action asked a visitor who has never seen
+             the product to choose between a lesson and practice; /topics is
+             where that choice belongs, with the ten of them in front of them.
+             Same destination as "Open the app" in the bar — the front door
+             has one door. -->
+        <div class="cta">
+          <a class="btn btn--primary btn--lg" href="pages/topics.html">Start</a>
+        </div>
+        <p class="meta">Free · works offline · nothing to sign up for</p>
+      </div>
+
+      <!-- The pitch, working. Tap a word and the picture moves — the claim on
+           the left is demonstrated on the right rather than asserted. -->
+      <div class="demo">
+        <div class="demo-head">
+          <span class="live">Live</span>
+          <span class="spacer"></span>
+          <span>Prepositions · lesson 1</span>
+        </div>
+        <div class="demo-stage">
+          <!-- The crop has to hold every position the demo cycles through, so
+               the tallest one sets the frame height. "above" put the ball at
+               y=76 and left the top 40% of the card empty on every other
+               word. Dropping it lets the frame close up around the rest,
+               which all sit between y=112 and y=336. -->
+          <svg id="demoScene" viewBox="196 100 384 252" role="img"
+               aria-label="A ball shown in different positions relative to a box."></svg>
+        </div>
+        <div class="demo-say">
+          <p class="en" id="demoEn"></p>
+          <p class="ta" id="demoTa" lang="ta"></p>
+        </div>
+        <div class="demo-knobs" id="demoKnobs" role="group" aria-label="Preposition"></div>
+      </div>
+    </section>
+
+    <!-- ---- what a lesson does, in three lines ---------------- -->
+    <!-- Three sentences, no worked example. The hero above already shows
+         the product working; repeating it here in miniature was the page
+         explaining what the visitor had just watched. -->
+    <section class="band band--sheet">
+      <div class="band-inner">
+        <ol class="steps-3">
+          <li class="step">
+            <span class="n">1</span>
+            <h3>Predict <span lang="ta">யூகியுங்கள்</span></h3>
+            <p>A situation, four words, no hint. Being wrong here is the point.</p>
+          </li>
+          <li class="step">
+            <span class="n">2</span>
+            <h3>Reveal <span lang="ta">சரியான பதில்</span></h3>
+            <p>What you said, beside what is true, and one line saying why.</p>
+          </li>
+          <li class="step">
+            <span class="n">3</span>
+            <h3>Turn the knobs <span lang="ta">சொல்லை மாற்றுங்கள்</span></h3>
+            <p>Every word is a control. Change one, the drawing changes with it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- No topic list here. The count is in the eyebrow, the names are one
+         click away behind Start, and /topics says the same thing properly. -->
+
+  </main>
+
+  <footer class="home-footer">
+    <div class="inner">
+      <span class="foot-lockup"><span data-mark="18"></span>Grammer-Verse</span>
+      <span class="spacer"></span>
+      <nav aria-label="Footer">
+        <a href="pages/topics.html">Topics</a>
+        <a href="pages/visualizer.html">Visualizer</a>
+        <a href="pages/reference.html">Reference</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+<script src="assets/js/logo.js"></script>
+<script src="assets/js/theme.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/scene.js"></script>
+<script src="assets/js/icons-extra.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---- the mark ----
+     From assets/js/logo.js, which is the one definition for the whole app.
+     It used to be declared here as well as in shell.js and in the .svg file;
+     three copies of a logo is three logos waiting to disagree. */
+  [].forEach.call(document.querySelectorAll('[data-mark]'), function (el) {
+    el.innerHTML = GV_Logo.mark({ size: el.dataset.mark ? +el.dataset.mark : 28 });
+  });
+  /* The front door gets the full bilingual lockup; the footer, which is one
+     line of small print, gets the mark and the name only. */
+  $('lockup').innerHTML = GV_Logo.lockup({ size: 30, taSize: 10 });
+
+  /* ---- the demo ---- */
+  /* "above" is deliberately absent: it needs so much headroom that the frame
+     would sit mostly empty for every other word. It is in the lesson, where
+     the stage is full height. */
+  var WORDS = ['in', 'on', 'under', 'behind', 'beside'];
+  var state = { det: 'the', num: 1, adj: '', figure: 'ball', prep: 'in', ground: 'box' };
+  var touched = false;
+
+  $('demoKnobs').innerHTML = '<span class="k-hint">Tap a word</span>' +
+    WORDS.map(function (w) {
+      return '<button type="button" data-v="' + w + '" aria-pressed="' + (w === state.prep) + '">' +
+        GV_Scene.icon('prep', w, { size: 20, label: w }) + w + '</button>';
+    }).join('');
+
+  function draw() {
+    /* a box has nothing beneath it — swap the ground rather than lie */
+    state.ground = GV_Scene.allows(state.prep, 'box') ? 'box' : 'table';
+    $('demoScene').innerHTML = GV_Scene.renderPlace(state);
+
+    var s = GV_Scene.sentencePlace(state);
+    $('demoEn').innerHTML = s.en.map(function (p, i) {
+      var t = p.t + (i === s.en.length - 1 ? '.' : '');
+      return p.k === 'prep' ? '<b>' + t + '</b>' : t;
+    }).join(' ');
+    $('demoTa').textContent = s.ta.map(function (p) { return p.t; }).join(' ') + '.';
+
+    [].forEach.call($('demoKnobs').querySelectorAll('button'), function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.v === state.prep));
+    });
+    $('demoScene').setAttribute('aria-label',
+      'A ball ' + state.prep + ' the ' + state.ground + '.');
+  }
+
+  $('demoKnobs').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button[data-v]'); if (!b) return;
+    touched = true;
+    state.prep = b.dataset.v;
+    draw();
+  });
+
+  draw();
+
+  /* Cycle gently until the visitor takes over, so the page demonstrates itself
+     without needing a click. Stops on first interaction, and never starts if
+     the visitor asked for reduced motion. */
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var i = 0;
+    var timer = setInterval(function () {
+      if (touched) { clearInterval(timer); return; }
+      i = (i + 1) % WORDS.length;
+      state.prep = WORDS[i];
+      draw();
+    }, 2200);
+  }
+
+  /* ---- the count ----
+     Read from the curriculum rather than typed into the markup, so the one
+     number this page quotes cannot drift from the real topic list. */
+  $('heroCount').textContent = GV_CONTENT.topics.length + ' topics · ' +
+    GV_CONTENT.totalLessons + ' lessons';
+
+  /* ---- theme ---- */
+  $('themeBtn').addEventListener('click', function () {
+    var root = document.documentElement;
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  });
+
+  var bar = $('brandbar');
+  addEventListener('scroll', function () {
+    bar.dataset.stuck = String(scrollY > 8);
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

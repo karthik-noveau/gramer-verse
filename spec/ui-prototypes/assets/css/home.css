@@ -1,0 +1,215 @@
+/* ============================================================
+   home.css — the home screen only.
+
+   No app shell: no sidebar, no topic nav, no breadcrumbs. It is
+   the front door, so it carries the brand and one clear way in.
+
+   The hero demo is the pitch and it is the real engine, not a
+   screenshot. Everything under it is deliberately thin: three
+   lines on what a lesson does, and the topic names. Anything
+   that needed a second demonstration, a summary per topic or a
+   panel of brand documentation belongs on the pages that exist
+   for it — /topics, /reference, theme-lab, components.
+   ============================================================ */
+
+.home {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  background: var(--bg);
+
+  /* Narrower than --content-max (1180px). The app fills the width because
+     it has a sidebar eating 216px of it; this page has none, and a hero
+     line running the full 1180 is too long to read in one sweep. */
+  --home-max: 1120px;
+}
+
+/* Anchored sections must clear the sticky bar, or the heading lands
+   underneath it. */
+.home [id] { scroll-margin-top: 72px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* ---- brand bar --------------------------------------------- */
+.brandbar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t-base) var(--ease);
+}
+.brandbar[data-stuck="true"] { border-bottom-color: var(--line); }
+.brandbar .bar-inner {
+  max-width: var(--home-max); margin: 0 auto;
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-5);
+}
+.brandbar .spacer { flex: 1; }
+
+.lockup { display: inline-flex; align-items: center; gap: var(--s-2); text-decoration: none; }
+.lockup .brand-word { font-size: var(--fs-lg); }
+.foot-lockup { display: inline-flex; align-items: center; gap: 7px; }
+
+/* On a phone the bar had the wordmark broken over two lines and "Open the
+   app" over two more — the two things the front door has to say, both said
+   badly. The name drops a size and the button keeps its label on one line;
+   between them they fit a 360px bar with room left. */
+@media (max-width: 560px) {
+  .brandbar .bar-inner { gap: var(--s-2); padding: var(--s-3) var(--s-4); }
+  .lockup .brand-word { font-size: var(--fs-md); }
+  .brandbar .btn { white-space: nowrap; padding: var(--s-2) var(--s-3); }
+}
+
+/* ---- hero --------------------------------------------------- */
+/* Top-aligned, not centred: the headline is the first thing read, so it
+   should start where the demo starts rather than float in the middle. */
+.home-hero {
+  position: relative; isolation: isolate;
+  display: grid; gap: var(--s-7); align-items: start;
+  /* 30rem, not 26: "English grammar," has to survive on one line at the
+     headline's largest size, or the break lands mid-phrase. */
+  grid-template-columns: minmax(300px, 30rem) minmax(0, 1fr);
+  max-width: var(--home-max); width: 100%;
+  margin: 0 auto; padding: var(--s-8) var(--s-5) var(--s-8);
+}
+/* A soft wash behind the demo card so it reads as lit rather than pasted
+   on. --accent-soft is defined in both schemes, so this needs no dark
+   variant of its own. */
+.home-hero::before {
+  content: ""; position: absolute; z-index: -1;
+  right: -6%; top: -12%; width: 70%; aspect-ratio: 1;
+  background: radial-gradient(closest-side, var(--accent-soft), transparent 70%);
+  pointer-events: none;
+}
+@media (max-width: 940px) {
+  .home-hero { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); padding: var(--s-5) var(--s-4) var(--s-7); }
+  .home-hero::before { display: none; }
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: 4px var(--s-3) 4px var(--s-2);
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  background: var(--surface); box-shadow: var(--shadow-1);
+  font-size: var(--fs-xs); color: var(--soft);
+}
+.eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; }
+
+/* Large enough to hold its own against the demo card beside it. */
+.home-hero h1 {
+  font: 600 clamp(36px, 4.2vw, 50px)/1.04 var(--serif);
+  letter-spacing: -.03em; margin-top: var(--s-4);
+}
+.home-hero h1 em { font-style: italic; color: var(--accent); }
+
+.home-hero .tagline { color: var(--soft); margin-top: var(--s-4); max-width: 32ch;
+  font-size: var(--fs-md); }
+.home-hero .tagline [lang="ta"] { display: block; color: var(--muted); font-size: var(--fs-sm); }
+.home-hero .cta { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-5); }
+/* The Tamil rides inside the button rather than under it — the label is one
+   word in each language, not an English button with a translation beneath. */
+.home-hero .cta [lang="ta"] { font-weight: 500; opacity: .85; }
+.home-hero .meta { margin-top: var(--s-4); color: var(--muted); font-size: var(--fs-xs); }
+
+/* ---- the demo: the pitch, working -------------------------- */
+.demo {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-lg); box-shadow: var(--shadow-2);
+  overflow: hidden;
+}
+.demo-head {
+  display: flex; align-items: center; gap: var(--s-2);
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-xs); color: var(--muted);
+}
+.demo-head .spacer { flex: 1; }
+.demo-head .live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--accent);
+}
+.demo-head .live::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: gv-pulse 2.2s var(--ease) infinite;
+}
+@keyframes gv-pulse { 0%, 100% { opacity: 1 } 50% { opacity: .25 } }
+@media (prefers-reduced-motion: reduce) { .demo-head .live::before { animation: none; } }
+
+/* The picture sits on the sunk plane so the card reads as frame + stage
+   rather than one flat white panel. */
+.demo-stage { padding: var(--s-3); background: var(--surface-sunk); }
+.demo-stage svg { display: block; width: 100%; height: auto; }
+
+.demo-say {
+  padding: var(--s-3) var(--s-4);
+  border-block: 1px solid var(--line);
+}
+.demo-say .en { font: 500 var(--fs-md)/1.35 var(--serif); }
+.demo-say .en b { color: var(--accent); font-weight: 600; }
+.demo-say .ta { font-family: var(--tamil); color: var(--soft); font-size: var(--fs-sm); }
+
+.demo-knobs {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface);
+}
+.demo-knobs .k-hint {
+  width: 100%; font-size: var(--fs-xs); color: var(--muted); margin-bottom: 2px;
+}
+.demo-knobs button {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px 4px 6px; border-radius: var(--r-pill); cursor: pointer;
+  border: 1px solid var(--line); background: var(--surface); color: var(--soft);
+  font-size: var(--fs-sm);
+}
+.demo-knobs button:hover { border-color: var(--line-strong); color: var(--ink); }
+.demo-knobs button[aria-pressed="true"] {
+  background: var(--accent); border-color: var(--accent);
+  color: var(--accent-ink); font-weight: 600;
+}
+/* The icon has to become --accent-ink, and it is flat artwork rather than a
+   currentColor glyph, so it is knocked to one tone. White in light, where
+   the accent is dark green; black in dark, where the accent is pale — the
+   invert on both schemes left a white icon on a pale green chip. */
+.demo-knobs button[aria-pressed="true"] svg { filter: brightness(0) invert(1); }
+:root[data-theme="dark"] .demo-knobs button[aria-pressed="true"] svg { filter: brightness(0); }
+.demo-knobs button svg { display: block; }
+
+/* ---- the band ----------------------------------------------- */
+/* One of them now, on the card ground, so the three lines under the hero
+   read as a footnote to it rather than a second section. No heading: with
+   a single band there is nothing to tell it apart from. */
+.band { border-top: 1px solid var(--line); }
+.band--sheet { background: var(--surface); }
+.band-inner { max-width: var(--home-max); margin: 0 auto; padding: var(--s-7) var(--s-5); }
+@media (max-width: 720px) { .band-inner { padding: var(--s-6) var(--s-4); } }
+
+/* ---- what a lesson does ------------------------------------- */
+/* One line each. There were worked examples here — chips, a compare, a
+   knob row — but the hero is already the product running, and a second
+   demonstration under it only pushed the topics further down the page. */
+.steps-3 { display: grid; gap: var(--s-5); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 820px) { .steps-3 { grid-template-columns: minmax(0, 1fr); gap: var(--s-4); } }
+
+.step { display: flex; flex-direction: column; gap: var(--s-1); }
+.step .n {
+  width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--bg);
+  font-size: var(--fs-xs); font-weight: 700;
+}
+.step h3 { font: 600 var(--fs-md)/1.25 var(--serif); margin-top: var(--s-2); }
+.step h3 [lang="ta"] { font-size: var(--fs-sm); font-weight: 400; color: var(--muted); }
+.step p { color: var(--soft); font-size: var(--fs-sm); }
+
+/* No topic strip. It was ten names and counts, then ten cards before that —
+   both were /topics rendered smaller on the page whose only job is to send
+   you to /topics. The eyebrow carries the count; Start carries the rest. */
+
+/* ---- footer ------------------------------------------------- */
+.home-footer { margin-top: auto; border-top: 1px solid var(--line); padding: var(--s-4) var(--s-5); }
+.home-footer .inner {
+  max-width: var(--home-max); margin: 0 auto;
+  display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center;
+  color: var(--muted); font-size: var(--fs-sm);
+}
+.home-footer .spacer { flex: 1; }
+.home-footer nav { display: flex; flex-wrap: wrap; gap: var(--s-4); }

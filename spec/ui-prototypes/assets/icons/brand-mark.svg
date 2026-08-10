@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"
+     role="img" aria-label="Grammer-Verse">
+  <!--
+    The mark is the first thing the product teaches: a ball inside a box.
+    That is the preposition "in", and every other lesson is built on it.
+
+    Two shapes, and each earns its place:
+
+      the container is a stroke with a gap in the top edge. The gap is the
+      ball's own width, so it reads as the way in rather than as a missing
+      line — and it is what stops the silhouette reading as a camera, which
+      is exactly what the previous mark did at every size;
+
+      the ball is solid accent, because the accent has one job in this design
+      system — mark the thing that moved — and the ball is the thing that
+      moves.
+
+    The frame is ink, not accent. The mark has to survive on the green table
+    header, and a green frame disappears there.
+
+    This file is the record, and the favicon. Where the mark must follow the
+    theme it is inlined instead, from assets/js/logo.js: an external file
+    cannot read the page's custom properties.
+  -->
+  <style>
+    .frame { stroke: #17160f; }
+    .ball  { fill:   #2f6f4f; }
+    /* A favicon has no page to inherit from, so it reads the OS setting
+       directly. The inlined copy uses the app's own theme toggle instead. */
+    @media (prefers-color-scheme: dark) {
+      .frame { stroke: #f2f1ec; }
+      .ball  { fill:   #7dc4a0; }
+    }
+  </style>
+  <path class="frame"
+        d="M11 4 H7.5 A3.5 3.5 0 0 0 4 7.5 V24.5 A3.5 3.5 0 0 0 7.5 28 H24.5
+           A3.5 3.5 0 0 0 28 24.5 V7.5 A3.5 3.5 0 0 0 24.5 4 H21"
+        fill="none" stroke-width="3" stroke-linecap="round"/>
+  <circle class="ball" cx="16" cy="19" r="6"/>
+</svg>

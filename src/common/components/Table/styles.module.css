@@ -1,0 +1,69 @@
+/* Wide content scrolls inside this box. The page body never scrolls sideways —
+   one very long Tamil cell must not drag the whole document with it. */
+.wrap {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+}
+
+.table { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+
+.table th,
+.table td {
+  text-align: left;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.table thead th {
+  font-size: var(--fs-sm); font-weight: 700; letter-spacing: .01em;
+  color: var(--th-ink); background: var(--th-bg);
+  position: sticky; top: 0;
+  border-bottom: 1px solid var(--th-line);
+}
+.table thead th:first-child { border-right: 1px solid var(--th-line); }
+.table tbody tr:last-child td { border-bottom: 0; }
+
+/* The first column names the row; a rule down its right edge separates the
+   label from what is said about it. It goes on a class rather than
+   :first-child, because a row whose label is merged into the one above renders
+   no first cell at all — :first-child there is the SECOND column, and the rule
+   would land in the middle of the table. */
+.group { border-right: 1px solid var(--line); }
+
+/* A row does not react to the pointer. Nothing happens when you click one, so
+   lighting it up would promise something the row cannot do. */
+.ta { display: block; color: var(--soft); }
+
+.sortable { cursor: pointer; user-select: none; }
+.table th[aria-sort="ascending"] .arrow::after  { content: " ▲"; opacity: .8; }
+.table th[aria-sort="descending"] .arrow::after { content: " ▼"; opacity: .8; }
+.table thead th:focus-visible { outline: 2px solid var(--th-ink); outline-offset: -3px; }
+
+.sortButton {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 0; background: transparent; padding: 0; margin: 0;
+  color: inherit; font: inherit; cursor: pointer;
+}
+
+.caption {
+  caption-side: top;
+  text-align: left;
+  padding: var(--s-3) var(--s-4);
+  color: var(--soft);
+  font-size: var(--fs-sm);
+}
+
+/* On a phone the wrapper scrolls rather than the table crushing its columns —
+   "am being / is being / are being" down one word per line is not a table any
+   more. The floor is on the cell, not the table, so the width that triggers
+   the scroll follows the column count. */
+@media (max-width: 760px) {
+  .table th,
+  .table td { min-width: 136px; }
+}

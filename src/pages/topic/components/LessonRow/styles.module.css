@@ -1,0 +1,43 @@
+/* One line of a topic's outline. A row rather than a card: a topic has forty
+   of these and forty cards is a page nobody reads to the end of. */
+.row { list-style: none; }
+
+.inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-2);
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Only the rows that go somewhere respond to the pointer. A hover state on a
+   row that cannot be clicked is a promise the page does not keep. */
+.link:hover { background: var(--surface-sunk); }
+
+.n {
+  min-width: 22px;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  padding-top: 2px;
+}
+
+.text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.title { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2); font-weight: 600; }
+.example { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2); color: var(--soft); font-size: var(--fs-sm); }
+
+.ta { font-family: var(--tamil); color: var(--muted); font-weight: 400; }
+
+/* Says which rows this app can draw. Not a lock and not a warning: the notes
+   are the curriculum, and the app is behind them. */
+.tag {
+  white-space: nowrap;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  padding-top: 2px;
+}
+.drawn { color: var(--accent); font-weight: 600; }

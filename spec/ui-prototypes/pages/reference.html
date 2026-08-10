@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reference — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="reference">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb" data-crumbs="Reference|"></nav>
+
+    <div class="page-head">
+      <h1>Reference</h1>
+      <p class="sub">The source tables, for looking things up.
+        <span lang="ta">மூல அட்டவணைகள்.</span></p>
+    </div>
+
+    <div class="ref-layout">
+      <nav class="ref-nav" aria-label="Reference tables" id="refNav"></nav>
+
+      <div id="refBody"></div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/scene.js"></script>
+<script src="../assets/js/icons-extra.js"></script>
+<script src="../assets/js/art.js"></script>
+<script src="../assets/js/formation.js"></script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script>
+(function () {
+  var T = GV_CONTENT.tables;
+
+  var PROTO = [
+    { href:'components.html',       title:'Components &amp; states',
+      note:'Every reusable component and every state, on one page.' },
+    { href:'scenes-catalogue.html', title:'Scene catalogue',
+      note:'40 drawn articles and prepositions — what the engine can render.' },
+    { href:'scene-demo.html',       title:'Scene demo',
+      note:'The original concept: change a word, the picture changes.' },
+    { href:'theme-lab.html',        title:'Theme lab',
+      note:'Try a palette on the real UI, with contrast checked live.' },
+    { href:'logo-lab.html',         title:'Logo lab',
+      note:'The mark at every size and on every ground, and the four it beat.' },
+    { href:'404.html',              title:'404',
+      note:'The not-found screen.' }
+  ];
+
+  document.getElementById('refNav').innerHTML = T.map(function (t, i) {
+    return '<a href="#' + t.id + '"' + (i === 0 ? ' aria-current="true"' : '') + '>' + t.en + '</a>';
+  }).join('') +
+    '<a href="#corrections">Corrections</a>' +
+    '<a href="#prototype">Prototype pages</a>';
+
+  document.getElementById('refBody').innerHTML =
+    T.map(function (t) { return GV_Table.section(t); }).join('') +
+    '<section id="corrections">' +
+      '<div class="section-head"><h2>Corrections to the source</h2></div>' +
+      '<p style="color:var(--soft);font-size:var(--fs-sm);margin-bottom:var(--s-3)">' +
+        'Where the notes are wrong, the app teaches the correct form and says so here.</p>' +
+      GV_CONTENT.corrections.map(function (c) {
+        return '<div class="callout callout--warn" style="margin-bottom:var(--s-2)">' +
+          '<b>' + c.where + '</b><br>' +
+          '<span style="color:var(--muted)">Source:</span> ' + c.was + '<br>' +
+          '<span style="color:var(--muted)">Here:</span> ' + c.now + '</div>';
+      }).join('') +
+    '</section>' +
+
+    /* These are prototype-only pages, not product screens. They used to sit
+       in the sidebar beside Topics and Practice, where they read as real app
+       tabs. Grouped here so the sidebar contains only the actual product. */
+    '<section id="prototype">' +
+      '<div class="section-head"><h2>Prototype pages</h2></div>' +
+      '<p style="color:var(--soft);font-size:var(--fs-sm);margin-bottom:var(--s-3)">' +
+        'For reviewing the build. Not part of the product — no learner sees these.</p>' +
+      '<div class="grid grid--3">' +
+        PROTO.map(function (x) {
+          return '<a class="card card--interactive" href="' + x.href + '">' +
+            '<h3>' + x.title + '</h3>' +
+            '<p class="card-note">' + x.note + '</p></a>';
+        }).join('') +
+      '</div>' +
+    '</section>';
+
+  var links = [].slice.call(document.querySelectorAll('.ref-nav a'));
+  addEventListener('scroll', function () {
+    var best = null;
+    links.forEach(function (a) {
+      var sec = document.querySelector(a.getAttribute('href'));
+      if (sec && sec.getBoundingClientRect().top < 160) best = a;
+    });
+    links.forEach(function (a) { a.setAttribute('aria-current', String(a === best)); });
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+/* One table from the notes. The heading carries the row count, because the
+   first question anyone asks of a source table is how long it is. */
+.wrap { margin-bottom: var(--s-6); }
+
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font: 600 var(--fs-lg) / 1.2 var(--serif);
+}
+
+.ta { font-family: var(--tamil); font-size: var(--fs-sm); font-weight: 400; color: var(--muted); }
+
+.count { margin-left: auto; color: var(--muted); font-size: var(--fs-xs); white-space: nowrap; }
+
+/* A heading row inside the source becomes a sub-table with its own title,
+   rather than a row of one cell that reads as data. */
+.section + .section { margin-top: var(--s-4); }
+.sectionTitle {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--soft);
+}
+
+/* The second line of a cell is the gloss: the Tamil under the English, or the
+   English under the Tamil. Set as its own block so the two are read as a pair
+   rather than as one run-on string. */
+.gloss {
+  display: block;
+  font-family: var(--tamil);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+/* What this app does with the row — which verbs it can draw. Said quietly: the
+   table is the source's, and this is a note in the margin of it. */
+.note { color: var(--accent); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
+
+/* Opens the word-order diagram under the row it belongs to. Offered only for
+   the rows that have one — a button that opens an empty frame is worse than no
+   button. */
+.open {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--soft);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.open:hover { border-color: var(--line-strong); color: var(--ink); }
+.open[aria-expanded='true'] { border-color: var(--accent); color: var(--accent); }

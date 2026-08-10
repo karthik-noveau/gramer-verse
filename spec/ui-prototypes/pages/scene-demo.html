@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>English Space — concept: the sentence IS the picture</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<style>
+  :root {
+    --bg:#f7f5f0; --surface:#fff; --ink:#17150f; --soft:#5c554a; --muted:#8a8175;
+    --line:#e2dcd0; --accent:#2f6f4f; --accent-soft:#e4f0e9; --warn:#c25b28;
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Iowan Old Style", Palatino, Georgia, serif;
+  }
+  /* Light by default, matching the rest of the prototype. Dark is opt-in only. */
+  :root[data-theme="dark"] {
+    --bg:#14140f; --surface:#1d1d18; --ink:#f0eee7; --soft:#c4bfb4; --muted:#8f887c;
+    --line:#2e2e26; --accent:#7dc4a0; --accent-soft:#1e2f27; --warn:#e08a5c;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 var(--font); }
+  .wrap { max-width:980px; margin:0 auto; padding:28px 20px 64px; }
+
+  h1 { font:600 26px/1.2 var(--serif); margin:0 0 6px; }
+  .sub { color:var(--soft); margin:0 0 22px; max-width:64ch; }
+
+  .modes { display:flex; gap:6px; margin-bottom:22px; }
+  .modes button {
+    font:inherit; font-size:14px; padding:8px 18px; border-radius:99px; cursor:pointer;
+    background:var(--surface); color:var(--soft); border:1px solid var(--line);
+  }
+  .modes button[aria-pressed="true"] { background:var(--ink); border-color:var(--ink); color:var(--bg); font-weight:600; }
+
+  .sentence {
+    font:500 30px/1.45 var(--serif); letter-spacing:-.01em;
+    margin:0 0 18px; display:flex; flex-wrap:wrap; gap:0 9px; align-items:baseline; min-height:44px;
+  }
+  .sentence .w { padding:1px 2px; border-radius:4px; }
+  .sentence .w.tunable { border-bottom:2px solid var(--accent); }
+  .sentence .w.flash { animation:flash .55s ease; }
+  @keyframes flash { from { background:var(--accent-soft); } to { background:transparent; } }
+
+  .stage { background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:8px; margin-bottom:20px; }
+  .stage svg { display:block; width:100%; height:auto; }
+
+  .controls { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); }
+  .group { display:grid; gap:7px; align-content:start; }
+  .group > span { font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); }
+  .opts { display:flex; flex-wrap:wrap; gap:6px; }
+  .opts button {
+    font:inherit; font-size:13px; padding:5px 11px; border-radius:99px; cursor:pointer;
+    background:var(--surface); color:var(--soft); border:1px solid var(--line);
+  }
+  .opts button:hover { border-color:var(--muted); color:var(--ink); }
+  .opts button[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:#fff; font-weight:600; }
+
+  .note {
+    margin-top:26px; padding:16px 18px; background:var(--surface);
+    border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px;
+    color:var(--soft); font-size:14px;
+  }
+  .note b { color:var(--ink); }
+  .note ul { margin:8px 0 0; padding-left:18px; }
+  .note li { margin:4px 0; }
+  .swap { margin-top:10px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>The sentence <em>is</em> the picture.</h1>
+  <p class="sub">Change a word and the picture changes with it. Grammar becomes visible because
+    grammar is the only thing moving the apple — or deciding who eats whom.</p>
+
+  <div class="modes" id="modes" role="group" aria-label="Sentence pattern">
+    <button type="button" data-mode="place"  aria-pressed="true">Where it is</button>
+    <button type="button" data-mode="action" aria-pressed="false">Who does what</button>
+  </div>
+
+  <p class="sentence" id="sentence"></p>
+
+  <div class="stage">
+    <svg id="scene" viewBox="0 0 720 420" role="img" aria-labelledby="sceneDesc"></svg>
+    <span id="sceneDesc" hidden></span>
+  </div>
+
+  <div class="controls" id="controls"></div>
+
+  <div class="note" id="note"></div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var C = { wood:'#a9723f', wood2:'#8a5b30', leaf:'#3f8f5a', grey:'#9aa0a6', sky:'#5b9bd5',
+            skin:'#d9a06a', skin2:'#b97f4c', shirt:'#3d6fa8', shirt2:'#a8447a', hair:'#3a2a1c' };
+
+  function r(x,y,w,h,rad,fill){
+    return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+rad+'" fill="'+fill+'"/>';
+  }
+
+  /* ============================================================
+     THINGS. Each draws itself in a local w x h box.
+       surfaceY : where things sit ON it
+       inside   : [x,y,w,h] where things go IN it
+       anchors  : for actors — mouth / hand / foot / eye
+     ============================================================ */
+  var THINGS = {
+
+    /* --- places ------------------------------------------------ */
+    table: { w:300, h:150, surfaceY:14, draw:function(f){ return ''
+      + r(0,0,300,16,3,f||C.wood) + r(18,16,16,134,0,f||C.wood2) + r(266,16,16,134,0,f||C.wood2)
+      + r(34,26,232,8,0,f||C.wood2); } },
+
+    chair: { w:150, h:210, surfaceY:96, draw:function(f){ return ''
+      + r(16,0,14,104,3,f||C.wood2) + r(120,0,14,104,3,f||C.wood2)
+      + r(16,22,118,12,2,f||C.wood2) + r(16,54,118,12,2,f||C.wood2)
+      + r(0,96,150,16,3,f||C.wood) + r(10,112,14,98,0,f||C.wood2) + r(126,112,14,98,0,f||C.wood2); } },
+
+    box: { w:190, h:150, surfaceY:22, inside:[18,34,154,100], draw:function(f){ return ''
+      + r(0,22,190,128,4,f||'#c89a5e') + r(0,0,190,26,4,f||'#b3873f') + r(84,0,22,26,2,'#9a7233'); } },
+
+    tree: { w:260, h:300, surfaceY:null, inside:[40,20,180,150], draw:function(f){ return ''
+      + r(114,150,32,150,4,C.wood2)
+      + '<circle cx="130" cy="98" r="98" fill="'+(f||C.leaf)+'"/>'
+      + '<circle cx="66" cy="140" r="56" fill="'+(f||C.leaf)+'"/>'
+      + '<circle cx="196" cy="140" r="56" fill="'+(f||C.leaf)+'"/>'; } },
+
+    /* --- things that can be held, eaten, thrown ---------------- */
+    apple: { w:78, h:88, draw:function(f){ return ''
+      + '<circle cx="39" cy="52" r="34" fill="'+(f||'#d2452f')+'"/>' + r(36,8,7,26,3,C.wood2)
+      + '<ellipse cx="56" cy="18" rx="17" ry="9" fill="'+C.leaf+'" transform="rotate(-18 56 18)"/>'; } },
+
+    ball: { w:74, h:74, draw:function(f){ return ''
+      + '<circle cx="37" cy="37" r="35" fill="'+(f||'#e08a2e')+'"/>'
+      + '<path d="M4 37h66" stroke="rgba(0,0,0,.25)" stroke-width="4" fill="none"/>'
+      + '<path d="M37 2a48 48 0 0 0 0 70" stroke="rgba(0,0,0,.25)" stroke-width="4" fill="none"/>'; } },
+
+    cup: { w:70, h:78, draw:function(f){ return ''
+      + '<path d="M8 8h48l-7 62H15z" fill="'+(f||'#e8e4dc')+'" stroke="'+C.grey+'" stroke-width="3"/>'
+      + '<path d="M56 22c16 0 16 26 0 26" stroke="'+C.grey+'" stroke-width="6" fill="none"/>'; } },
+
+    book: { w:88, h:64, draw:function(f){ return ''
+      + r(0,0,88,64,4,f||'#8e4b6e') + r(6,6,34,52,2,'#f4efe6') + r(48,6,34,52,2,'#f4efe6')
+      + r(42,0,4,64,0,'#6d3854'); } },
+
+    /* --- actors ------------------------------------------------ */
+    boy: { w:96, h:196, actor:true,
+      anchors:{ mouth:[62,44], hand:[92,104], foot:[64,192], eye:[58,30] },
+      draw:function(f){ return ''
+        + '<circle cx="46" cy="30" r="24" fill="'+C.skin+'"/>'
+        + '<path d="M22 26a24 24 0 0 1 48 0c-6-10-42-12-48 0z" fill="'+C.hair+'"/>'
+        + '<circle cx="56" cy="27" r="3" fill="#111"/>'
+        + '<path d="M50 42q8 5 14 0" stroke="#8a4b32" stroke-width="3" fill="none" stroke-linecap="round"/>'
+        + r(28,56,38,68,8,f||C.shirt)
+        + '<path d="M30 66L10 108" stroke="'+C.skin+'" stroke-width="12" stroke-linecap="round"/>'
+        + '<path d="M64 66L92 104" stroke="'+C.skin+'" stroke-width="12" stroke-linecap="round"/>'
+        + r(32,124,13,70,5,'#2f3d55') + r(51,124,13,70,5,'#2f3d55'); } },
+
+    girl: { w:96, h:196, actor:true,
+      anchors:{ mouth:[62,44], hand:[92,104], foot:[64,192], eye:[58,30] },
+      draw:function(f){ return ''
+        + '<circle cx="46" cy="30" r="24" fill="'+C.skin+'"/>'
+        + '<path d="M20 34a26 26 0 0 1 52 0c0-22-52-24-52 0z" fill="'+C.hair+'"/>'
+        + '<circle cx="18" cy="46" r="9" fill="'+C.hair+'"/>'
+        + '<circle cx="56" cy="27" r="3" fill="#111"/>'
+        + '<path d="M50 42q8 5 14 0" stroke="#8a4b32" stroke-width="3" fill="none" stroke-linecap="round"/>'
+        + '<path d="M28 56h38l10 68H18z" fill="'+(f||C.shirt2)+'"/>'
+        + '<path d="M30 66L10 108" stroke="'+C.skin+'" stroke-width="12" stroke-linecap="round"/>'
+        + '<path d="M64 66L92 104" stroke="'+C.skin+'" stroke-width="12" stroke-linecap="round"/>'
+        + r(32,124,13,70,5,'#c9b6a0') + r(51,124,13,70,5,'#c9b6a0'); } },
+
+    cat: { w:110, h:92, actor:true,
+      anchors:{ mouth:[106,46], hand:[100,60], foot:[70,90], eye:[98,42] },
+      draw:function(f){ return '<g transform="translate(110,0) scale(-1,1)">'
+        + '<ellipse cx="58" cy="62" rx="44" ry="27" fill="'+(f||'#6b6259')+'"/>'
+        + '<circle cx="22" cy="42" r="22" fill="'+(f||'#6b6259')+'"/>'
+        + '<path d="M7 27l2-19 15 12z" fill="'+(f||'#6b6259')+'"/>'
+        + '<path d="M37 27l-2-19-15 12z" fill="'+(f||'#6b6259')+'"/>'
+        + '<path d="M100 54c23-6 15-36-2-27" stroke="'+(f||'#6b6259')+'" stroke-width="9" fill="none" stroke-linecap="round"/>'
+        + '<circle cx="14" cy="40" r="3" fill="#111"/><circle cx="29" cy="40" r="3" fill="#111"/>'
+        + '</g>'; } },
+
+    dog: { w:120, h:100, actor:true,
+      anchors:{ mouth:[116,52], hand:[108,66], foot:[76,98], eye:[106,44] },
+      draw:function(f){ return '<g transform="translate(120,0) scale(-1,1)">'
+        + '<ellipse cx="64" cy="66" rx="48" ry="29" fill="'+(f||'#b4813f')+'"/>'
+        + '<circle cx="24" cy="44" r="24" fill="'+(f||'#b4813f')+'"/>'
+        + '<ellipse cx="8" cy="30" rx="9" ry="18" fill="'+(f||'#96682e')+'" transform="rotate(-20 8 30)"/>'
+        + '<circle cx="4" cy="52" r="6" fill="#3a2a1c"/>'
+        + '<path d="M108 58c22-10 18-34 2-28" stroke="'+(f||'#b4813f')+'" stroke-width="10" fill="none" stroke-linecap="round"/>'
+        + '<circle cx="18" cy="42" r="3" fill="#111"/>'
+        + '</g>'; } }
+  };
+
+  /* ============================================================
+     VERBS. Each says where the patient goes and what cue to draw.
+     ============================================================ */
+  var VERBS = {
+    eats:   { base:'eat',   s:'eats',   past:'ate',    part:'eaten',  ing:'eating',  at:'mouth', cue:'chomp',  scale:0.62 },
+    drinks: { base:'drink', s:'drinks', past:'drank',  part:'drunk',  ing:'drinking',at:'mouth', cue:'chomp',  scale:0.72 },
+    holds:  { base:'hold',  s:'holds',  past:'held',   part:'held',   ing:'holding', at:'hand',  cue:null,     scale:0.7  },
+    reads:  { base:'read',  s:'reads',  past:'read',   part:'read',   ing:'reading', at:'hand',  cue:'gaze',   scale:0.8  },
+    throws: { base:'throw', s:'throws', past:'threw',  part:'thrown', ing:'throwing',at:'air',   cue:'arc',    scale:0.7  },
+    kicks:  { base:'kick',  s:'kicks',  past:'kicked', part:'kicked', ing:'kicking', at:'foot',  cue:'impact', scale:0.7  },
+    sees:   { base:'see',   s:'sees',   past:'saw',    part:'seen',   ing:'seeing',  at:'far',   cue:'gaze',   scale:1    }
+  };
+
+  var STATE = {
+    mode:'place',
+    // place mode
+    det:'the', num:1, adj:'', figure:'apple', prep:'on', ground:'table', tense:'is',
+    // action mode
+    actor:'boy', verb:'eats', patient:'apple', atense:'present', voice:'active'
+  };
+
+  var ADJ_COLOUR = { red:'#d2452f', green:'#3f8f5a' };
+  var ADJ_SCALE  = { big:1.35, small:0.62 };
+
+  var CONTROLS = {
+    place: [
+      { key:'det',    label:'Article',     opts:[['the','the'],['a','a']] },
+      { key:'num',    label:'How many',    opts:[[1,'one'],[2,'two'],[3,'three']] },
+      { key:'adj',    label:'Adjective',   opts:[['','—'],['red','red'],['green','green'],['big','big'],['small','small']] },
+      { key:'figure', label:'Subject',     opts:[['apple','apple'],['ball','ball'],['cup','cup'],['cat','cat']] },
+      { key:'prep',   label:'Preposition', opts:[['on','on'],['under','under'],['in','in'],['beside','beside'],['behind','behind'],['above','above']] },
+      { key:'ground', label:'Place',       opts:[['table','table'],['chair','chair'],['box','box'],['tree','tree']] },
+      { key:'tense',  label:'Tense',       opts:[['was','was'],['is','is'],['will be','will be']] }
+    ],
+    action: [
+      { key:'actor',   label:'Who (subject)', opts:[['boy','boy'],['girl','girl'],['cat','cat'],['dog','dog']] },
+      { key:'verb',    label:'Does what',     opts:[['eats','eats'],['drinks','drinks'],['holds','holds'],['reads','reads'],['throws','throws'],['kicks','kicks'],['sees','sees']] },
+      { key:'patient', label:'To what (object)', opts:[['apple','apple'],['ball','ball'],['cup','cup'],['book','book']] },
+      { key:'atense',  label:'Tense',         opts:[['past','ate'],['present','eats'],['progressive','is eating'],['future','will eat']] },
+      { key:'voice',   label:'Voice',         opts:[['active','active'],['passive','passive']] }
+    ]
+  };
+
+  /* ---- sentence assembly ------------------------------------- */
+  function plural(w){ return w === 'bird' ? 'birds' : w + 's'; }
+  function cap(w){ return w.charAt(0).toUpperCase() + w.slice(1); }
+  function an(w){ return 'aeiou'.indexOf(w.charAt(0)) > -1 ? 'an' : 'a'; }
+
+  function placeSentence(){
+    var s = STATE, n = s.num;
+    var subj = n === 1 ? s.figure : plural(s.figure);
+    var det  = n === 1 ? s.det : (n === 2 ? 'two' : 'three');
+    if (n === 1 && s.det === 'a') det = an(s.adj || s.figure);
+    var verb = n === 1
+      ? s.tense
+      : (s.tense === 'is' ? 'are' : s.tense === 'was' ? 'were' : 'will be');
+    return [
+      { t:cap(det), k:n === 1 ? 'det' : 'num' },
+      s.adj ? { t:s.adj, k:'adj' } : null,
+      { t:subj, k:'figure' },
+      { t:verb, k:'tense' },
+      { t:s.prep, k:'prep' },
+      { t:'the', k:null },
+      { t:s.ground, k:'ground' }
+    ].filter(Boolean);
+  }
+
+  function actionSentence(){
+    var s = STATE, v = VERBS[s.verb];
+    var A = { t:cap('the'), k:null }, a = s.actor, p = s.patient;
+    if (s.voice === 'active') {
+      var vf = s.atense === 'past' ? v.past
+             : s.atense === 'present' ? v.s
+             : s.atense === 'progressive' ? 'is ' + v.ing
+             : 'will ' + v.base;
+      return [ A, { t:a, k:'actor' }, { t:vf, k:'atense' }, { t:'the', k:null }, { t:p, k:'patient' } ];
+    }
+    var be = s.atense === 'past' ? 'was'
+           : s.atense === 'present' ? 'is'
+           : s.atense === 'progressive' ? 'is being'
+           : 'will be';
+    return [ A, { t:p, k:'patient' }, { t:be, k:'atense' }, { t:v.part, k:'verb' },
+             { t:'by', k:'voice' }, { t:'the', k:null }, { t:a, k:'actor' } ];
+  }
+
+  /* ---- geometry ---------------------------------------------- */
+  var W = 720, H = 420, FLOOR = 340;
+
+  function placeLayout(){
+    var s = STATE, g = THINGS[s.ground], f = THINGS[s.figure];
+    var scale = ADJ_SCALE[s.adj] || 1, fw = f.w * scale, fh = f.h * scale;
+    var gx = (W - g.w) / 2, gy = FLOOR - g.h, gcx = gx + g.w / 2;
+    var n = s.num, gap = 14, spots = [], behind = false;
+
+    function row(baseY, sc){
+      sc = sc || 1;
+      var w2 = fw * sc, t = n * w2 + (n - 1) * gap, x0 = gcx - t / 2, out = [];
+      for (var i = 0; i < n; i++) out.push({ x:x0 + i * (w2 + gap), y:baseY - fh * sc, s:scale * sc });
+      return out;
+    }
+
+    switch (s.prep) {
+      case 'on':     spots = g.surfaceY === null ? row(gy + 150) : row(gy + g.surfaceY); break;
+      case 'under':  spots = row(FLOOR - 4, Math.min(1, (FLOOR - gy - g.surfaceY - 10) / fh)); break;
+      case 'in':
+        var b = g.inside || [g.w * 0.2, g.h * 0.3, g.w * 0.6, g.h * 0.5];
+        var fit = Math.min(1, (b[2] - (n - 1) * gap) / (n * fw), b[3] / fh);
+        var w3 = fw * fit, t3 = n * w3 + (n - 1) * gap, x3 = gx + b[0] + b[2] / 2 - t3 / 2;
+        var cy = gy + b[1] + b[3] / 2;
+        spots = [];
+        for (var j = 0; j < n; j++) spots.push({ x:x3 + j * (w3 + gap), y:cy - fh * fit / 2, s:scale * fit });
+        break;
+      case 'beside':
+        spots = [];
+        for (var k = 0; k < n; k++) spots.push({ x:gx + g.w + 26 + k * (fw + gap), y:FLOOR - fh, s:scale });
+        break;
+      case 'behind': behind = true; spots = row(FLOOR - 46, 0.78); break;
+      case 'above':  spots = row(Math.max(gy - 34, fh + 10)); break;
+    }
+    return { gx:gx, gy:gy, spots:spots, behind:behind };
+  }
+
+  function actionLayout(){
+    var s = STATE, A = THINGS[s.actor], P = THINGS[s.patient], v = VERBS[s.verb];
+    var ax = 170, ay = FLOOR - A.h;
+    var ps = v.scale, pw = P.w * ps, ph = P.h * ps;
+    var anc = A.anchors, px, py, cue = null;
+
+    if (v.at === 'mouth') {
+      px = ax + anc.mouth[0] + 6; py = ay + anc.mouth[1] - ph / 2;
+    } else if (v.at === 'hand') {
+      px = ax + anc.hand[0] - pw / 2 + 14; py = ay + anc.hand[1] - ph / 2;
+    } else if (v.at === 'foot') {
+      px = ax + anc.foot[0] + 20; py = FLOOR - ph;
+    } else if (v.at === 'air') {
+      px = ax + A.w + 150; py = ay + 4;
+    } else { // far
+      px = ax + A.w + 210; py = FLOOR - ph;
+    }
+
+    if (v.cue === 'gaze') cue = { kind:'gaze', from:[ax + anc.eye[0], ay + anc.eye[1]], to:[px + pw / 2, py + ph / 2] };
+    if (v.cue === 'arc')  cue = { kind:'arc',  from:[ax + anc.hand[0], ay + anc.hand[1]], to:[px + pw / 2, py + ph / 2] };
+    if (v.cue === 'impact') cue = { kind:'impact', at:[px - 6, py + ph / 2] };
+    if (v.cue === 'chomp')  cue = { kind:'chomp',  at:[ax + anc.mouth[0], ay + anc.mouth[1]] };
+
+    return { ax:ax, ay:ay, px:px, py:py, ps:ps, pw:pw, ph:ph, cue:cue };
+  }
+
+  /* ---- rendering --------------------------------------------- */
+  function tick(x, label, on){
+    return '<line x1="'+x+'" y1="'+(FLOOR+26)+'" x2="'+x+'" y2="'+(FLOOR+42)+'" stroke="'
+      + (on ? 'var(--accent)' : 'var(--line)') + '" stroke-width="'+(on?4:2)+'"/>'
+      + '<text x="'+x+'" y="'+(FLOOR+62)+'" text-anchor="middle" font-family="system-ui" font-size="14" '
+      + 'font-weight="'+(on?700:400)+'" fill="'+(on?'var(--accent)':'var(--muted)')+'">'+label+'</text>';
+  }
+
+  function timeStrip(shift){
+    return '<g><line x1="60" y1="'+(FLOOR+34)+'" x2="660" y2="'+(FLOOR+34)+'" stroke="var(--line)" stroke-width="2"/>'
+      + tick(160,'past',shift===-1) + tick(360,'now',shift===0) + tick(560,'future',shift===1) + '</g>'
+      + '<line x1="40" y1="'+FLOOR+'" x2="680" y2="'+FLOOR+'" stroke="var(--line)" stroke-width="3"/>';
+  }
+
+  function renderPlace(){
+    var s = STATE, L = placeLayout(), g = THINGS[s.ground], f = THINGS[s.figure];
+    var fill = ADJ_COLOUR[s.adj] || '', dashed = s.det === 'a' && s.num === 1;
+    var shift = s.tense === 'was' ? -1 : s.tense === 'will be' ? 1 : 0;
+
+    var figs = L.spots.map(function (p) {
+      return '<g transform="translate('+p.x.toFixed(1)+','+p.y.toFixed(1)+') scale('+p.s.toFixed(3)+')">'
+        + f.draw(fill)
+        + (dashed ? '<rect x="-8" y="-8" width="'+(f.w+16)+'" height="'+(f.h+16)+'" rx="12" fill="none" '
+            + 'stroke="var(--accent)" stroke-width="3" stroke-dasharray="9 7"/>' : '')
+        + '</g>';
+    }).join('');
+
+    var ground = '<g transform="translate('+L.gx+','+L.gy+')">' + g.draw('') + '</g>';
+
+    return timeStrip(shift)
+      + '<g transform="translate('+(shift*26)+',0)" opacity="'+(shift===0?1:0.72)+'">'
+      + (L.behind ? figs + ground : ground + figs) + '</g>';
+  }
+
+  function renderAction(){
+    var s = STATE, L = actionLayout(), A = THINGS[s.actor], P = THINGS[s.patient];
+    var shift = s.atense === 'past' ? -1 : s.atense === 'future' ? 1 : 0;
+    var passive = s.voice === 'passive';
+
+    var cue = '';
+    if (L.cue) {
+      if (L.cue.kind === 'gaze') {
+        cue = '<line x1="'+L.cue.from[0]+'" y1="'+L.cue.from[1]+'" x2="'+L.cue.to[0]+'" y2="'+L.cue.to[1]
+          + '" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="7 6" opacity=".85"/>';
+      } else if (L.cue.kind === 'arc') {
+        var mx = (L.cue.from[0] + L.cue.to[0]) / 2, my = Math.min(L.cue.from[1], L.cue.to[1]) - 70;
+        cue = '<path d="M'+L.cue.from[0]+' '+L.cue.from[1]+' Q'+mx+' '+my+' '+L.cue.to[0]+' '+L.cue.to[1]
+          + '" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="8 7" fill="none"/>';
+      } else if (L.cue.kind === 'impact') {
+        cue = '<g stroke="var(--warn)" stroke-width="3.5" stroke-linecap="round">'
+          + '<path d="M'+(L.cue.at[0]-22)+' '+(L.cue.at[1]-16)+'l-16-10"/>'
+          + '<path d="M'+(L.cue.at[0]-22)+' '+L.cue.at[1]+'l-20 0"/>'
+          + '<path d="M'+(L.cue.at[0]-22)+' '+(L.cue.at[1]+16)+'l-16 10"/></g>';
+      } else if (L.cue.kind === 'chomp') {
+        cue = '<path d="M'+L.cue.at[0]+' '+(L.cue.at[1]-14)+'a15 15 0 1 0 0 28" fill="none" '
+          + 'stroke="var(--warn)" stroke-width="3.5"/>';
+      }
+    }
+
+    var progressive = s.atense === 'progressive';
+    var motion = progressive
+      ? '<g stroke="var(--accent)" stroke-width="3" stroke-linecap="round" opacity=".55">'
+        + '<path d="M'+(L.ax-26)+' '+(L.ay+70)+'h-24"/><path d="M'+(L.ax-26)+' '+(L.ay+92)+'h-34"/>'
+        + '<path d="M'+(L.ax-26)+' '+(L.ay+114)+'h-24"/></g>'
+      : '';
+
+    function ring(x,y,w,h){
+      return '<rect x="'+(x-10)+'" y="'+(y-10)+'" width="'+(w+20)+'" height="'+(h+20)+'" rx="14" fill="none" '
+        + 'stroke="var(--accent)" stroke-width="3.5"/>';
+    }
+
+    var actorG = '<g transform="translate('+L.ax+','+L.ay+')" opacity="'+(passive?0.5:1)+'">'+A.draw('')+'</g>'
+      + (passive ? '' : ring(L.ax, L.ay, A.w, A.h));
+    var patG = '<g transform="translate('+L.px.toFixed(1)+','+L.py.toFixed(1)+') scale('+L.ps+')">'+P.draw('')+'</g>'
+      + (passive ? ring(L.px, L.py, L.pw, L.ph) : '');
+
+    // "who the sentence is about" marker
+    var focusLabel = '<text x="'+(passive ? L.px + L.pw / 2 : L.ax + A.w / 2)+'" y="'
+      + (passive ? L.py - 22 : L.ay - 18) + '" text-anchor="middle" font-family="system-ui" '
+      + 'font-size="13" font-weight="700" fill="var(--accent)">the sentence is about this</text>';
+
+    return timeStrip(shift)
+      + '<g transform="translate('+(shift*26)+',0)" opacity="'+(shift===0?1:0.75)+'">'
+      + motion + cue + actorG + patG + focusLabel + '</g>';
+  }
+
+  function describe(){
+    var s = STATE;
+    if (s.mode === 'place') {
+      var subj = s.num === 1 ? s.figure : s.num + ' ' + plural(s.figure);
+      return (s.adj ? s.adj + ' ' : '') + subj + ' ' + s.prep + ' the ' + s.ground + '.';
+    }
+    return 'A ' + s.actor + ' ' + s.verb + ' a ' + s.patient
+      + '. The ' + (s.voice === 'passive' ? s.patient : s.actor) + ' is what the sentence is about.';
+  }
+
+  var NOTES = {
+    place: '<b>What each control is teaching, without saying so:</b><ul>'
+      + '<li><b>the / a</b> — the apple you know vs. any apple (solid vs. dashed outline)</li>'
+      + '<li><b>two / three</b> — plural is not an <em>-s</em>, it is a second apple appearing</li>'
+      + '<li><b>red / small</b> — the adjective is the colour and the size, literally</li>'
+      + '<li><b>on / under / in / behind</b> — the preposition is where the apple goes</li>'
+      + '<li><b>was / is / will be</b> — tense slides the whole scene along the time strip</li></ul>',
+    action: '<b>What each control is teaching, without saying so:</b><ul>'
+      + '<li><b>who / to what</b> — word order decides who acts on whom. Swap them and the picture '
+      + 'gets absurd, which is exactly the point.</li>'
+      + '<li><b>the verb</b> — the action is where the object goes: at the mouth, in the hand, at the '
+      + 'foot, or flying through the air.</li>'
+      + '<li><b>is eating</b> vs <b>eats</b> — progressive adds motion; it is happening right now.</li>'
+      + '<li><b>active / passive</b> — <em>the same picture</em>. Only the ring moves, because passive '
+      + 'changes what the sentence is about, not what happened.</li></ul>'
+      + '<div class="swap"><button class="btn" type="button" id="swapBtn" style="font:inherit;font-size:13px;'
+      + 'padding:6px 14px;border-radius:99px;cursor:pointer;background:var(--surface);color:var(--soft);'
+      + 'border:1px solid var(--line)">↔ Swap subject and object</button></div>'
+  };
+
+  /* ---- wiring ------------------------------------------------ */
+  function render(){
+    var s = STATE;
+    document.getElementById('scene').innerHTML = s.mode === 'place' ? renderPlace() : renderAction();
+    document.getElementById('sceneDesc').textContent = describe();
+
+    var parts = s.mode === 'place' ? placeSentence() : actionSentence();
+    document.getElementById('sentence').innerHTML = parts.map(function (p) {
+      return '<span class="w'+(p.k?' tunable':'')+'"'+(p.k?' data-k="'+p.k+'"':'')+'>'+p.t+'</span>';
+    }).join('') + '<span class="w">.</span>';
+
+    document.getElementById('note').innerHTML = NOTES[s.mode];
+    var sw = document.getElementById('swapBtn');
+    if (sw) sw.addEventListener('click', function () {
+      if (!THINGS[STATE.patient].actor) {
+        var a = STATE.actor; STATE.actor = STATE.patient; STATE.patient = a;
+        if (!THINGS[STATE.actor].anchors) THINGS[STATE.actor].anchors = { mouth:[STATE_W(STATE.actor),40], hand:[STATE_W(STATE.actor),50], foot:[30,60], eye:[STATE_W(STATE.actor),30] };
+      } else {
+        var b = STATE.actor; STATE.actor = STATE.patient; STATE.patient = b;
+      }
+      buildControls(); render();
+    });
+  }
+  function STATE_W(k){ return THINGS[k].w; }
+
+  function buildControls(){
+    var host = document.getElementById('controls');
+    host.innerHTML = CONTROLS[STATE.mode].map(function (c) {
+      return '<div class="group"><span>'+c.label+'</span><div class="opts" data-key="'+c.key+'">'
+        + c.opts.map(function (o) {
+            return '<button type="button" data-v="'+o[0]+'" aria-pressed="'
+              + (String(STATE[c.key]) === String(o[0]))+'">'+o[1]+'</button>';
+          }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  document.getElementById('controls').addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button[data-v]'); if (!btn) return;
+    var key = btn.parentNode.dataset.key, val = btn.dataset.v;
+    STATE[key] = (key === 'num') ? Number(val) : val;
+    [].forEach.call(btn.parentNode.children, function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+    render(); flash(key);
+  });
+
+  document.getElementById('modes').addEventListener('click', function (ev) {
+    var btn = ev.target.closest('button[data-mode]'); if (!btn) return;
+    STATE.mode = btn.dataset.mode;
+    [].forEach.call(this.children, function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+    buildControls(); render();
+  });
+
+  function flash(key){
+    var el = document.querySelector('.sentence .w[data-k="'+key+'"]');
+    if (!el) return;
+    el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  }
+
+  buildControls(); render();
+})();
+</script>
+</body>
+</html>

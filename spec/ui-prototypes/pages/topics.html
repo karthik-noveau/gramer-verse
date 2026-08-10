@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Topics — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="topics">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb" data-crumbs="Topics|"></nav>
+
+    <!-- This is the way in. There used to be a /dashboard as well, showing the
+         same grid from the same content with a different heading — with no
+         progress in the product there was nothing for it to report that this
+         page does not already say. One page, one grid. -->
+    <div class="page-head">
+      <h1>Start anywhere</h1>
+      <p class="sub" id="sub"></p>
+    </div>
+
+    <div class="grid grid--3" id="topicGrid"></div>
+
+    <!-- The two things that are not a topic. They were the dashboard's only
+         other content, and they belong wherever the topics are. -->
+    <div class="section-head" style="margin-top:var(--s-6)"><h2>Or</h2></div>
+    <div class="grid grid--2">
+      <a class="card card--interactive" href="visualizer.html">
+        <h3>Prepositions visualizer</h3>
+        <p class="card-note">Pick a preposition and watch the picture. The place
+          relations are a live scene you can change.
+          <span lang="ta" style="display:block">இடைச்சொல்லைப் படமாகப் பாருங்கள்.</span></p>
+      </a>
+      <a class="card card--interactive" href="reference.html">
+        <h3>Reference</h3>
+        <p class="card-note">Every source table, browsable, with the corrections
+          to the notes listed at the foot.
+          <span lang="ta" style="display:block">அனைத்து அட்டவணைகளும்.</span></p>
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script>
+(function () {
+  var topics = GV_CONTENT.topics;
+  var lessons = topics.reduce(function (n, t) { return n + t.count; }, 0);
+
+  /* Counted, not typed. The old dashboard said "Ten topics" in English over
+     "ஒன்பது" — nine — in Tamil, because the number was written twice by hand
+     and only one copy was updated when conjunctions were split out. */
+  document.getElementById('sub').innerHTML =
+    topics.length + ' topics, ' + lessons + ' lessons. Nothing is locked.' +
+    '<span lang="ta"> எங்கிருந்தும் தொடங்கலாம்.</span>';
+
+  document.getElementById('topicGrid').innerHTML = topics.map(function (t) {
+    return '<a class="card card--interactive topic-card" href="topic.html?topic=' + t.id + '">' +
+      '<div class="t-head"><span class="t-num">' + t.n + '</span>' +
+        '<div><h3>' + t.en + '</h3>' +
+        '<div lang="ta" style="color:var(--soft);font-size:var(--fs-sm)">' + t.ta + '</div></div>' +
+      '</div>' +
+      '<p class="card-note">' + t.sum_en +
+        '<span lang="ta" style="display:block">' + t.sum_ta + '</span></p>' +
+      '<div class="t-foot"><span>' + t.count + ' lessons</span></div></a>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

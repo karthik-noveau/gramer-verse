@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Prepositions — Grammer-Verse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/icons/brand-mark.svg" type="image/svg+xml">
+<link rel="mask-icon" href="../assets/icons/brand-mark.svg" color="#2f6f4f">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/components.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body data-page="topic" data-topic="prepositions">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="shell" data-sidebar="expanded" data-drawer="closed">
+  <div id="shell"></div>
+
+  <main class="main" id="main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"
+         data-crumbs="Topics|pages/topics.html,Prepositions|"></nav>
+
+    <div class="page-head">
+      <h1 id="topicTitle">Prepositions</h1>
+      <!-- Prepositions only. The scene engine draws a figure against a ground,
+           which is what a preposition of place is — no other topic has anything
+           for it to stage, so no other topic gets the button. -->
+      <p id="vizCta" class="head-cta" hidden><a class="btn btn--primary" href="visualizer.html">Try in visualizer</a></p>
+    </div>
+
+    <!-- The topic's source table, and nothing else. There was a Lessons list
+         under it that walked the same words one at a time; the table already
+         shows every one of them, with its picture and its word-order diagram
+         on the row. -->
+    <div id="topicTables"></div>
+
+  </main>
+</div>
+
+<script src="../assets/js/theme.js"></script>
+<script src="../assets/js/content.js"></script>
+<script src="../assets/js/tables.js"></script>
+<script src="../assets/js/scene.js"></script>
+<script src="../assets/js/icons-extra.js"></script>
+<!-- examples.js carries the spelling each drawing was written for; art.js reads it -->
+<script src="../assets/js/examples.js"></script>
+<script src="../assets/js/art.js"></script>
+<script src="../assets/js/formation.js"></script>
+<script>
+  /* Resolve the topic before the shell renders, so the sidebar highlight and
+     the breadcrumb are right on first paint rather than corrected after it. */
+  (function () {
+    var id = new URLSearchParams(location.search).get('topic') || 'prepositions';
+    var t = GV_CONTENT.topics.filter(function (x) { return x.id === id; })[0]
+         || GV_CONTENT.topics[0];
+    window.GV_TOPIC = t;
+    document.body.dataset.topic = t.id;
+    document.title = t.en + ' — Grammer-Verse';
+    document.querySelector('[data-crumbs]').dataset.crumbs =
+      'Topics|pages/topics.html,' + t.en + '|';
+  })();
+</script>
+<script src="../assets/js/logo.js"></script>
+<script src="../assets/js/shell.js"></script>
+<script>
+(function () {
+  var topic = window.GV_TOPIC;
+  document.getElementById('topicTitle').textContent = topic.en;
+  document.getElementById('vizCta').hidden = topic.id !== 'prepositions';
+
+  /* The topic's tables, rendered by the shared renderer. */
+  var tables = GV_Table.forTopic(topic.id);
+  document.getElementById('topicTables').innerHTML = tables.length
+    ? tables.map(function (t) { return GV_Table.section(t); }).join('')
+    : '<div class="callout" style="margin-bottom:var(--s-4)">' +
+        'No source table for this topic yet.' +
+      '</div>';
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+.tablist {
+  display: flex; gap: var(--s-1);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-4);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: var(--s-3) var(--s-4);
+  border: 0; background: transparent; cursor: pointer;
+  color: var(--muted); font-size: var(--fs-sm); font-weight: 600;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
+
+.panel[hidden] { display: none; }

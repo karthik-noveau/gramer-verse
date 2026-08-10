@@ -1,0 +1,30 @@
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  padding: var(--s-2) var(--s-4); border-radius: var(--r-pill);
+  border: 1px solid var(--line); background: var(--surface); color: var(--soft);
+  font-size: var(--fs-sm); font-weight: 600; cursor: pointer; text-decoration: none;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+/* text-decoration on the hover too: `a:hover` in overrides.css outranks a plain
+   `.btn`, so an anchor styled as a button underlines under the pointer unless
+   the button says otherwise at the same weight. */
+.btn:hover { border-color: var(--line-strong); color: var(--ink); text-decoration: none; }
+
+.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+/* The colour has to be restated: `.btn:hover` sets --ink and outranks the plain
+   `.primary`, so without this the label turned dark ink on the green fill the
+   moment the pointer touched it. */
+.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-ink); }
+
+.ghost { background: transparent; border-color: transparent; }
+.ghost:hover { background: var(--surface-sunk); }
+
+.danger { background: var(--danger); border-color: var(--danger); color: var(--danger-ink); }
+.danger:hover { color: var(--danger-ink); }   /* same reason as .primary above */
+
+.lg { padding: var(--s-3) var(--s-5); font-size: var(--fs-base); }
+.sm { padding: 5px var(--s-3); font-size: var(--fs-xs); }
+
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+
+.icon { padding: var(--s-2); width: 36px; height: 36px; border-radius: var(--r-md); }

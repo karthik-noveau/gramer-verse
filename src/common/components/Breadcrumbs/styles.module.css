@@ -1,0 +1,8 @@
+.breadcrumbs {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2);
+  font-size: var(--fs-sm); color: var(--muted);
+  margin-bottom: var(--s-3);
+}
+.breadcrumbs a { color: var(--soft); }
+.sep { color: var(--line-strong); }
+.current { color: var(--ink); font-weight: 600; }

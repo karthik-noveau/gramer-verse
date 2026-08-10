@@ -1,0 +1,105 @@
+/* ============================================================
+   /topics/prepositions/visualizer
+
+   Two columns: reading on the left, doing on the right, so the
+   picture sits directly above the control that moves it.
+   Neither is pinned — the right column is taller than the
+   viewport, and pinning it only fought the scroll.
+   ============================================================ */
+
+.title { font: 600 var(--fs-2xl) / 1.15 var(--serif); margin-bottom: var(--s-4); }
+
+.groups { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-5); }
+
+.columns {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: start;
+}
+
+/* One column below 1100px, with the drawing and its controls first: the
+   picture is the point, and reading about it comes after seeing it. */
+@media (max-width: 1100px) {
+  .columns { grid-template-columns: minmax(0, 1fr); }
+  .reading { order: 2; }
+  .doing { order: 1; }
+}
+
+.reading, .doing { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+
+.form { margin: 0; }
+
+/* A long sentence scrolls inside the field rather than stretching the column
+   it is in. */
+.input {
+  width: 100%;
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-md);
+}
+.input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.examples { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; }
+
+.cannot { margin-top: var(--s-2); }
+
+/* The two lines. Tamil first: this is a Tamil speaker's page, and the English
+   is what they are learning to say. */
+.lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--line);
+}
+.lineTa { font-family: var(--tamil); font-size: var(--fs-lg); color: var(--ink); }
+.lineEn { font: 500 var(--fs-md) / 1.4 var(--serif); color: var(--soft); }
+
+.stage { background: var(--surface-sunk); border-radius: var(--r-lg); padding: var(--s-3); }
+
+.picker { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.build {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: var(--s-4);
+}
+.buildHead { font: 600 var(--fs-md) / 1.25 var(--serif); margin-bottom: var(--s-3); }
+
+.knobs { display: flex; flex-wrap: wrap; gap: var(--s-4); }
+.knob { display: flex; flex-direction: column; gap: 6px; }
+.knobLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.knobOptions { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.ta { font-family: var(--tamil); font-size: var(--fs-sm); text-transform: none; letter-spacing: normal; }
+
+/* Said rather than shown as a picker that does nothing. */
+.diagramNote {
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--warn);
+  background: var(--warn-soft);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  color: var(--soft);
+  font-size: var(--fs-sm);
+}
+
+.more { margin: 0; }
+
+/* The word-order diagram, under the two lines it is a diagram of. */
+.formation {
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+}
