@@ -32,11 +32,15 @@ describe('TopicCard', () => {
     expect(screen.getByText('இடைச்சொல்')).toBeTruthy();
   });
 
-  it('says what the topic is about, in both languages', () => {
+  /* Led by the question the topic answers: the summaries are answers with no
+     subject, and ten of them under ten headings read as fragments. */
+  it('says what the topic is, in both languages', () => {
     renderCard();
 
-    expect(screen.getByText('Where things are.')).toBeTruthy();
-    expect(screen.getByText('பொருள்கள் எங்கே இருக்கின்றன.')).toBeTruthy();
+    expect(screen.getByText('What are Prepositions? Where things are.')).toBeTruthy();
+    expect(
+      screen.getByText('இடைச்சொல் என்றால் என்ன? பொருள்கள் எங்கே இருக்கின்றன.'),
+    ).toBeTruthy();
   });
 
   it('links to the topic, inside the app', () => {

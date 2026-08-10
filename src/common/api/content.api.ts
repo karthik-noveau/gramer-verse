@@ -165,6 +165,43 @@ export const outlineOfTopic = (
 ): TopicOutline | undefined =>
   curriculum.outlines.find((outline) => String(outline.topicId) === String(topicId));
 
+/**
+ * A topic's description, led by the question the topic answers.
+ *
+ * The summaries are answers with no subject — "When it happens." — which reads
+ * as a fragment sitting under a heading, and on the topics page it sits under
+ * ten of them. Naming the topic inside its own description gives each one a
+ * subject, so a card says what it is rather than only what it is about.
+ *
+ * Written once, here, because the topic page and the topic card both show it
+ * and two copies of a sentence is one copy that will be reworded.
+ *
+ * The question is this app's words, not the notes'. The source glosses the
+ * topic names and gives these one-line summaries; it never asks a question, so
+ * `என்றால் என்ன` is authored here the way every other line of this app's Tamil
+ * is — which is allowed, and is not the same as inventing a gloss for a row of
+ * somebody else's table.
+ */
+export const describeTopic = (topic: Topic): { readonly en: string; readonly ta: string } => {
+  const title = String(topic.title.en);
+
+  /* "What is Tenses?" is the mistake this app exists to correct, and nine of
+     the ten titles are plural — Tenses, Verbs, Articles, Adverbs. The verb has
+     to agree with the name.
+
+     By the final `s`, which decides all ten correctly: only "Sentence
+     formation" is singular. A future singular title ending in `s` would need
+     this to be a fact about the topic rather than a guess about its spelling,
+     and the test over all ten is what would catch it. */
+  const plural = /s$/i.test(title);
+
+  return {
+    en: `What ${plural ? 'are' : 'is'} ${title}? ${String(topic.summary.en)}`,
+    /* Tamil asks it the same way either way: `என்றால் என்ன` takes no number. */
+    ta: `${String(topic.title.ta)} என்றால் என்ன? ${String(topic.summary.ta)}`,
+  };
+};
+
 export const findTopic = (topics: readonly Topic[], id: string): Topic | undefined =>
   topics.find((topic) => String(topic.id) === id);
 

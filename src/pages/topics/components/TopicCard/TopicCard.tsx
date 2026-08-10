@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 
+import { describeTopic } from 'common/api/content.api';
 import { Card } from 'common/components/Card/Card';
 import { paths } from 'common/constants/routes';
 import type { Topic } from 'common/scene/types';
@@ -37,10 +38,12 @@ export function TopicCard({ topic, lessons }: TopicCardProps): JSX.Element {
         </span>
       </h3>
 
+      {/* The same line the topic's own page leads with, so a card and the page
+          it opens say the same thing. */}
       <p className={styles.summary}>
-        <span lang="en">{String(topic.summary.en)}</span>
+        <span lang="en">{describeTopic(topic).en}</span>
         <span className={styles.ta} lang="ta">
-          {String(topic.summary.ta)}
+          {describeTopic(topic).ta}
         </span>
       </p>
 

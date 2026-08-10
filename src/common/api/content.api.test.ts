@@ -1,4 +1,5 @@
 import {
+  describeTopic,
   findLesson,
   findTopic,
   lessonsOfTopic,
@@ -269,6 +270,52 @@ describe('the shipped content', () => {
       expect(keys.some((key) => key.startsWith('auxiliary#'))).toBe(false);
     });
 
+  });
+
+  describe('the topic description', () => {
+    it('leads with the question the topic answers, in both languages', async () => {
+      const { topics } = await loadContent();
+      const tenses = topics.find((topic) => String(topic.id) === 'tenses');
+      if (!tenses) throw new Error('tenses is missing');
+
+      expect(describeTopic(tenses).en).toBe('What are Tenses? When it happens.');
+      expect(describeTopic(tenses).ta).toBe('காலங்கள் என்றால் என்ன? எப்போது நடக்கிறது.');
+    });
+
+    /* "What is Tenses?" is the mistake this app exists to correct, so the
+       agreement is checked on every topic rather than trusted. */
+    it('agrees the verb with the name, for all ten', async () => {
+      const { topics } = await loadContent();
+      const asked = topics.map((topic) => describeTopic(topic).en.split('?')[0]);
+
+      expect(asked).toEqual([
+        'What are Tenses',
+        'What are Verbs',
+        'What are Nouns & pronouns',
+        'What are Articles',
+        'What are Prepositions',
+        'What are WH words',
+        'What are Adjectives',
+        'What are Adverbs',
+        'What are Conjunctions',
+        'What is Sentence formation',
+      ]);
+    });
+
+    /* Every topic, not just the one above: a summary that does not end in a
+       full stop, or a title the question reads badly against, shows up here
+       rather than on the page. */
+    it('reads as one line for all ten', async () => {
+      const { topics } = await loadContent();
+
+      topics.forEach((topic) => {
+        expect(describeTopic(topic).en).toContain(String(topic.title.en));
+        expect(describeTopic(topic).en).toContain(String(topic.summary.en));
+        expect(describeTopic(topic).ta).toContain(String(topic.title.ta));
+        expect(describeTopic(topic).ta).toContain(String(topic.summary.ta));
+        expect(describeTopic(topic).ta).toContain('என்றால் என்ன?');
+      });
+    });
   });
 
   describe('finders', () => {

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import type { JSX } from 'react';
 import { useParams } from 'react-router';
 
-import { formationFor, outlineOfTopic, tablesOfTopic } from 'common/api/content.api';
+import { describeTopic, formationFor, outlineOfTopic, tablesOfTopic } from 'common/api/content.api';
 import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
 import { Button } from 'common/components/Button/Button';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
@@ -104,10 +104,12 @@ function Topic({ topic, lessons, curriculum }: TopicProps): JSX.Element {
           <p className={styles.ta} lang="ta">
             {String(topic.title.ta)}
           </p>
+          {/* Led by the question the topic answers, so the line has a subject
+              of its own rather than reading as a fragment under the heading. */}
           <p className={styles.sub}>
-            <span lang="en">{String(topic.summary.en)}</span>
+            <span lang="en">{describeTopic(topic).en}</span>
             <span className={styles.ta} lang="ta">
-              {String(topic.summary.ta)}
+              {describeTopic(topic).ta}
             </span>
           </p>
         </div>
