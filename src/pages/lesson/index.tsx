@@ -18,6 +18,7 @@ import { KnobBar } from 'pages/lesson/components/KnobBar/KnobBar';
 import { LessonNav } from 'pages/lesson/components/LessonNav/LessonNav';
 import { PredictCard } from 'pages/lesson/components/PredictCard/PredictCard';
 import { PredictResult } from 'pages/lesson/components/PredictResult/PredictResult';
+import { PicWords } from 'pages/lesson/components/PicWords/PicWords';
 import { SentenceLine } from 'pages/lesson/components/SentenceLine/SentenceLine';
 import { WhyNote } from 'pages/lesson/components/WhyNote/WhyNote';
 import { useLessonScene } from 'pages/lesson/hooks/useLessonScene';
@@ -182,6 +183,14 @@ function Workspace({ lesson, topic, next, nextTopic, curriculum }: WorkspaceProp
               templates={lesson.sentence}
             />
           ) : null}
+
+          {/* Pictures first, text layered on a step at a time. It sits above
+              the sentence because it is the easier read of the two. */}
+          <PicWords
+            className={styles.picwords}
+            scene={open.scene}
+            templates={lesson.sentence}
+          />
 
           <SentenceLine
             className={styles.sentence}

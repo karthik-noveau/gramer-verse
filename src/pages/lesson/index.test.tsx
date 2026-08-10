@@ -25,7 +25,10 @@ const at = (path: string): ReturnType<typeof render> =>
     </MemoryRouter>,
   );
 
-const stage = (): SVGSVGElement => screen.getByRole('img') as unknown as SVGSVGElement;
+/* Scoped to the stage: the picture-words row above it is drawings too, and
+   every one of them is a labelled image. */
+const stage = (): SVGSVGElement =>
+  document.querySelector('.stage svg[role="img"]') as unknown as SVGSVGElement;
 
 beforeAll(async () => {
   await useContentStore.getState().load();

@@ -1,0 +1,88 @@
+.wrap {
+  display: grid;
+  gap: var(--s-3);
+}
+
+/* Which step is showing. Chips rather than a slider: there are four of them
+   and they are named, and a name is the whole point — a learner picks
+   "+ Pronunciation" because they want to say it. */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.step {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--soft);
+  border-radius: var(--r-pill);
+  padding: 4px 12px;
+  font-size: var(--fs-xs);
+  font-family: var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.step:hover { border-color: var(--accent); color: var(--accent); }
+.stepOn {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* One card per word, and the border is the word's job — the same five roles
+   the scene and the formation diagram colour by, so a learner who has seen
+   the diagram recognises the colour here. */
+.card {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  padding: var(--s-3);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 2px solid var(--line);
+  min-width: 88px;
+  box-shadow: var(--shadow-1);
+}
+.card[data-knob='figure'] { border-color: var(--r-figure); }
+.card[data-knob='ground'] { border-color: var(--r-ground); }
+.card[data-knob='relation'] { border-color: var(--r-rel); }
+.card[data-knob='determiner'] { border-color: var(--r-det); }
+
+.art {
+  display: block;
+  min-height: 44px;
+}
+
+/* `is` is the one word in the sentence that is not a thing, so it gets the
+   glyph rather than a picture of nothing. */
+.glyph {
+  display: block;
+  font-size: 26px;
+  color: var(--muted);
+  line-height: 44px;
+}
+
+.ta {
+  font-family: var(--tamil);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.say {
+  font-family: var(--tamil);
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.en {
+  font: 500 var(--fs-sm) / 1.2 var(--serif);
+  color: var(--soft);
+}

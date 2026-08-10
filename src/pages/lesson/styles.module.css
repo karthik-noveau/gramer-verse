@@ -38,6 +38,7 @@
 }
 
 .predict { margin-bottom: var(--s-4); }
+.picwords { margin-bottom: var(--s-4); }
 .sentence { margin-bottom: var(--s-3); }
 
 /* The stage keeps its own proportions and never shrinks below readable: the
