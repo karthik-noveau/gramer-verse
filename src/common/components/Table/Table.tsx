@@ -40,6 +40,9 @@ export type TableProps<Row> = {
    *  that run and spans what is left, so the merged label runs down the left
    *  of its own explanation. */
   readonly afterRowColSpan?: (row: Row, index: number) => number;
+  /** A class for the panel's cell. The panel usually wants none of the
+   *  padding a data cell carries. */
+  readonly afterRowClassName?: string;
   readonly className?: string;
 };
 
@@ -64,6 +67,7 @@ export function Table<Row>({
   initialSort,
   afterRow,
   afterRowColSpan,
+  afterRowClassName,
   className,
 }: TableProps<Row>): JSX.Element {
   const [sort, setSort] = useState<{ key: string; direction: SortDirection } | null>(
@@ -149,7 +153,12 @@ export function Table<Row>({
                 </tr>
                 {panel ? (
                   <tr>
-                    <td colSpan={afterRowColSpan?.(row, index) ?? columns.length}>{panel}</td>
+                    <td
+                      colSpan={afterRowColSpan?.(row, index) ?? columns.length}
+                      className={classNames(styles.panelCell, afterRowClassName)}
+                    >
+                      {panel}
+                    </td>
                   </tr>
                 ) : null}
               </Fragment>

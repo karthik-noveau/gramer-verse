@@ -318,6 +318,7 @@ export function SourceTable({
                          row, shown rather than written — so they sit under one
                          heading instead of two blank cells. */
                       header: 'Visualization',
+                      ...(styles.vizCell ? { className: styles.vizCell } : {}),
                       cell: (row: readonly string[]) => {
                         const word = drawsArt ? artCell(row) : null;
                         const spec = drawsFormation ? formationFor(row) : undefined;
@@ -368,6 +369,7 @@ export function SourceTable({
                     const spec = formationFor(row);
                     return spec ? <Formation spec={spec} /> : null;
                   },
+                  ...(styles.fmRow ? { afterRowClassName: styles.fmRow } : {}),
                   /* One narrower, when the run above took it in. */
                   afterRowColSpan: () =>
                     table.columns.length +

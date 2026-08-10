@@ -26,6 +26,11 @@
   position: sticky; top: 0;
   border-bottom: 1px solid var(--th-line);
 }
+/* A panel is not a data cell. It brings its own ground and its own edges, so
+   the padding every other cell carries would only inset it. Scoped here
+   because this is the rule that adds that padding. */
+.table td.panelCell { padding: 0; }
+
 .table thead th:first-child { border-right: 1px solid var(--th-line); }
 .table tbody tr:last-child td { border-bottom: 0; }
 

@@ -49,12 +49,17 @@
    the rows that have one — a button that opens an empty frame is worse than no
    button. */
 .open {
+  display: inline-flex;
+  align-items: center;
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--soft);
   border-radius: var(--r-pill);
-  padding: 3px 10px;
+  /* Asymmetric, and copied from the prototype: the caret sits inside the
+     button after the label, so the right side carries its width. */
+  padding: 4px 22px 5px 18px;
   font-size: var(--fs-xs);
+  font-family: var(--font);
   cursor: pointer;
   white-space: nowrap;
 }
@@ -66,14 +71,32 @@
 }
 
 /* The picture and the button are one idea — the row, shown rather than
-   written — so they share one cell under one heading. */
+   written — so they share one cell under one heading.
+
+   `flex`, not `inline-flex`: an inline box sits on the text baseline and
+   leaves room under it for descenders, which added six pixels to every row in
+   the table for nothing.
+
+   The gap is the 32px the prototype gets from two cells with 16px of padding
+   facing each other, so the drawing and the button sit apart by the same
+   amount here as there. */
 .viz {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--s-6);
   white-space: nowrap;
 }
 .viz svg { display: block; flex: none; }
+
+/* Shrink to what is in it, so the column takes no width from the sentences —
+   they are the part being read. */
+.vizCell { width: 1%; }
+
+/* --surface-sunk was 1.10 from the row above and 1.08 from the page: below the
+   threshold where a block this large reads as a separate surface at all, so
+   the opened panel dissolved into the background. --fm-bg sits clearly below
+   both. */
+.fmRow { background: var(--fm-bg); }
 
 /* Right when closed, down when open. The rotation is the state — the button
    says the same word either way, so the arrow is what tells you whether the
