@@ -92,16 +92,24 @@ export type FormationProps = {
 export function Formation({ spec, className }: FormationProps): JSX.Element {
   const tamil = useMemo(() => layOut(spec.taTokens), [spec]);
   const english = useMemo(() => layOut(spec.enTokens), [spec]);
-  const note = useMemo(() => noteFor(spec), [spec]);
+  const note = useMemo(() => noteParts(spec), [spec]);
 
   return (
     <div className={classNames(styles.formation, className)}>
       {/* One line, Tamil only, and nothing at all when the row has nothing to
           report. It is the one thing on the card written for a reader with no
           English — the rest is the English sentence and a diagram of it. */}
-      {note ? (
+      {note.length > 0 ? (
         <p className={styles.note} lang="ta">
-          {note}
+          {note.map((part, index) =>
+            part.en ? (
+              <b key={index} className={styles.noteEn} lang="en">
+                {part.text}
+              </b>
+            ) : (
+              <span key={index}>{part.text}</span>
+            ),
+          )}
         </p>
       ) : null}
 
@@ -203,23 +211,42 @@ function Word({
  * the end: it is true of every row here, so it printed on every card — and the
  * crossing lines say it better than a sentence repeated a hundred times.
  */
-export function noteFor(spec: FormationSpec): string {
+/** A run of the note, and whether it is one of the English words the note is
+ *  about. The line is Tamil and the English words inside it are its subject,
+ *  so they are set apart rather than left to blend into the sentence. */
+export type NotePart = { readonly text: string; readonly en: boolean };
+
+export function noteParts(spec: FormationSpec): readonly NotePart[] {
   const fused = spec.taTokens.find((token) => token.roles.length > 1);
   const orphans = spec.enTokens.filter((token) => token.roles.length === 0);
-  const notes: string[] = [];
+  const parts: NotePart[] = [];
 
   if (fused) {
     const pair = spec.enTokens
       .filter((token) => token.roles.some((role) => fused.roles.includes(role)))
       .map((token) => token.text)
       .join(' + ');
-    notes.push(`ஆங்கிலத்தில் இரண்டு சொல் — ${pair}. தமிழில் ஒரே சொல் — ${fused.text}.`);
+    parts.push(
+      { text: 'ஆங்கிலத்தில் இரண்டு சொல் — ', en: false },
+      { text: pair, en: true },
+      { text: `. தமிழில் ஒரே சொல் — ${fused.text}.`, en: false },
+    );
   }
   if (orphans.length > 0) {
-    notes.push(`${orphans.map((token) => token.text).join(', ')} — தமிழில் தனிச் சொல் இல்லை.`);
+    if (parts.length > 0) parts.push({ text: ' ', en: false });
+    parts.push(
+      { text: orphans.map((token) => token.text).join(', '), en: true },
+      { text: ' — தமிழில் தனிச் சொல் இல்லை.', en: false },
+    );
   }
 
-  return notes.join(' ');
+  return parts;
+}
+
+export function noteFor(spec: FormationSpec): string {
+  return noteParts(spec)
+    .map((part) => part.text)
+    .join('');
 }
 
 /* ---- from a live scene ------------------------------------- */

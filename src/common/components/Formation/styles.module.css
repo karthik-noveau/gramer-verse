@@ -5,7 +5,16 @@
    shows; naming it first made the card explain its own picture.
    ============================================================ */
 
-.formation { display: flex; flex-direction: column; gap: var(--s-2); }
+/* Its own padding, because the panel it opens in has none: a table cell's
+   padding would inset the diagram from three sides and not the fourth. No rule
+   on the panel either — the tint already separates it from the rows, and the
+   open button sits directly above it. */
+.formation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-4) var(--s-3);
+}
 
 /* One line, Tamil only, above the diagram it describes. It is the one thing
    here written for a reader who has no English yet. */
@@ -14,6 +23,16 @@
   font-family: var(--tamil);
   font-size: var(--fs-sm);
   color: var(--soft);
+  /* A measure, so the line breaks where a line should rather than running the
+     full width of a wide table. */
+  max-width: 76ch;
+}
+
+/* The line is Tamil and the English words in it are what it is about, so they
+   are set in the ink colour rather than left to blend into the sentence. */
+.noteEn {
+  color: var(--ink);
+  font-family: var(--serif);
 }
 
 /* The diagram scrolls, not the card: on a phone the drawing is wider than the
@@ -21,4 +40,16 @@
    sentence sideways along with the picture that explains it. */
 .scroll { overflow-x: auto; }
 
-.svg { display: block; width: 100%; min-width: 520px; height: auto; }
+/* Capped at the width it is drawn for. Left to fill the panel it scaled the
+   whole viewBox up — a 760-wide drawing stretched across a wide table renders
+   its 15px words at 23 and opens a gap between the two rows to match, which is
+   the diagram shouting at one size on a phone and another on a desktop.
+   `min-width` keeps it readable the other way and the row scrolls. */
+.svg {
+  display: block;
+  width: 100%;
+  min-width: 520px;
+  max-width: 760px;
+  height: auto;
+  margin-top: var(--s-2);
+}

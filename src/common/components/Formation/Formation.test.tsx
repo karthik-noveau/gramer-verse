@@ -63,7 +63,8 @@ describe('Formation', () => {
 
   it('draws no curve from a word with no counterpart', () => {
     render(<Formation spec={FUSED} />);
-    const article = screen.getByText('The');
+    /* On the drawing, not in the note above it — the note names the same word. */
+    const article = screen.getByText('The', { selector: 'text' });
 
     /* Tamil has no article, so the word is drawn faded and joined to nothing. */
     expect(article.getAttribute('opacity')).toBe('0.55');
@@ -78,10 +79,21 @@ describe('Formation', () => {
   });
 
   it('says the fusion and the orphan in one line, in Tamil', () => {
-    render(<Formation spec={FUSED} />);
+    const { container } = render(<Formation spec={FUSED} />);
+    /* The line is assembled from runs, so the English words in it can be set
+       apart from the Tamil around them; it is read whole here. */
+    const note = container.querySelector('p')?.textContent ?? '';
 
-    expect(screen.getByText(/ஆங்கிலத்தில் இரண்டு சொல்/).textContent).toContain('in + the box');
-    expect(screen.getByText(/தனிச் சொல் இல்லை/)).toBeTruthy();
+    expect(note).toContain('ஆங்கிலத்தில் இரண்டு சொல்');
+    expect(note).toContain('in + the box');
+    expect(note).toContain('தனிச் சொல் இல்லை');
+  });
+
+  it('sets the English words of the note apart from the Tamil', () => {
+    const { container } = render(<Formation spec={FUSED} />);
+    const english = [...container.querySelectorAll('p b')].map((b) => b.textContent);
+
+    expect(english).toEqual(['in + the box', 'The']);
   });
 
   it('says nothing at all when there is nothing to report', () => {
