@@ -1,5 +1,6 @@
 import {
   describeTopic,
+  explainTopic,
   findLesson,
   findTopic,
   lessonsOfTopic,
@@ -342,6 +343,26 @@ describe('the shipped content', () => {
       topics.forEach((topic) => {
         expect(usageOfTopic(topic)?.en).not.toBe(String(topic.summary.en));
       });
+    });
+
+    /* The page asks the question and then says when to use it. The source's
+       terse summary is not repeated there — "When it happens." beside "Use it
+       to say whether something is happening now…" is the same sentence twice,
+       the second time better. The short one keeps its job on the cards. */
+    it('explains on the page, and stays short on the cards', async () => {
+      const { topics } = await loadContent();
+      const tenses = topics.find((topic) => String(topic.id) === 'tenses');
+      if (!tenses) throw new Error('tenses is missing');
+
+      expect(explainTopic(tenses).en).toBe(
+        'What are Tenses? Use it to say whether something is happening now, happened before, or will happen later.',
+      );
+      expect(explainTopic(tenses).ta).toBe(
+        'காலங்கள் என்றால் என்ன? இப்போது, முன்பு, பிறகு — எப்போது நடக்கிறது என்பதைச் சொல்ல.',
+      );
+
+      expect(describeTopic(tenses).en).toBe('What are Tenses? When it happens.');
+      expect(explainTopic(tenses).en).not.toContain('When it happens.');
     });
   });
 

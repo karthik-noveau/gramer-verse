@@ -246,24 +246,58 @@ export const usageOfTopic = (
   topic: Topic,
 ): { readonly en: string; readonly ta: string } | undefined => USAGE[String(topic.id)];
 
-export const describeTopic = (topic: Topic): { readonly en: string; readonly ta: string } => {
+/**
+ * The question a topic answers, in both languages.
+ *
+ * "What is Tenses?" is the mistake this app exists to correct, and nine of the
+ * ten titles are plural — Tenses, Verbs, Articles, Adverbs. The verb has to
+ * agree with the name.
+ *
+ * By the final `s`, which decides all ten correctly: only "Sentence formation"
+ * is singular. A future singular title ending in `s` would need this to be a
+ * fact about the topic rather than a guess about its spelling, and the test
+ * over all ten is what would catch it.
+ *
+ * Tamil asks it the same way either way: `என்றால் என்ன` takes no number.
+ */
+const askOf = (topic: Topic): { readonly en: string; readonly ta: string } => {
   const title = String(topic.title.en);
 
-  /* "What is Tenses?" is the mistake this app exists to correct, and nine of
-     the ten titles are plural — Tenses, Verbs, Articles, Adverbs. The verb has
-     to agree with the name.
+  return {
+    en: `What ${/s$/i.test(title) ? 'are' : 'is'} ${title}?`,
+    ta: `${String(topic.title.ta)} என்றால் என்ன?`,
+  };
+};
 
-     By the final `s`, which decides all ten correctly: only "Sentence
-     formation" is singular. A future singular title ending in `s` would need
-     this to be a fact about the topic rather than a guess about its spelling,
-     and the test over all ten is what would catch it. */
-  const plural = /s$/i.test(title);
+/** The question and the source's own one-line summary. Short on purpose: this
+ *  is what the topic cards carry, and ten of them have to scan. */
+export const describeTopic = (topic: Topic): { readonly en: string; readonly ta: string } => {
+  const ask = askOf(topic);
 
   return {
-    en: `What ${plural ? 'are' : 'is'} ${title}? ${String(topic.summary.en)}`,
-    /* Tamil asks it the same way either way: `என்றால் என்ன` takes no number. */
-    ta: `${String(topic.title.ta)} என்றால் என்ன? ${String(topic.summary.ta)}`,
+    en: `${ask.en} ${String(topic.summary.en)}`,
+    ta: `${ask.ta} ${String(topic.summary.ta)}`,
   };
+};
+
+/**
+ * The topic's page copy: the question, then when to reach for it.
+ *
+ * One paragraph per language, laid out the way the heading above it is — the
+ * English and then the Tamil saying the same thing, so a reader takes the same
+ * path down both.
+ *
+ * The source's terse summary is not repeated here. "When it happens." next to
+ * "Use it to say whether something is happening now, happened before, or will
+ * happen later" is the same sentence twice, the second time better; the short
+ * one keeps its job on the cards.
+ */
+export const explainTopic = (topic: Topic): { readonly en: string; readonly ta: string } => {
+  const ask = askOf(topic);
+  const usage = usageOfTopic(topic);
+
+  if (!usage) return describeTopic(topic);
+  return { en: `${ask.en} ${usage.en}`, ta: `${ask.ta} ${usage.ta}` };
 };
 
 export const findTopic = (topics: readonly Topic[], id: string): Topic | undefined =>

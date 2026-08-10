@@ -39,18 +39,16 @@
 
 .ta { font-family: var(--tamil); color: var(--muted); }
 
-.sub { margin-top: var(--s-2); display: flex; flex-direction: column; gap: 1px; color: var(--soft); max-width: 60ch; }
-
-/* When to reach for it. Set below the description and quieter than it: it is
-   the second thing read, not the first. */
-.use {
+/* The English, then the Tamil under it — the same two scripts in the same
+   order as the heading above. A little air between them, because they are two
+   readings of one thing rather than two sentences. */
+.sub {
   margin-top: var(--s-2);
   display: flex;
   flex-direction: column;
-  gap: 1px;
-  color: var(--muted);
-  font-size: var(--fs-sm);
-  max-width: 60ch;
+  gap: var(--s-1);
+  color: var(--soft);
+  max-width: 66ch;
 }
 
 .cta { margin-left: auto; display: flex; gap: var(--s-2); flex-wrap: wrap; }
