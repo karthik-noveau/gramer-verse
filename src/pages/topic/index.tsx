@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import type { JSX } from 'react';
 import { useParams } from 'react-router';
 
-import { outlineOfTopic, tablesOfTopic } from 'common/api/content.api';
+import { formationFor, outlineOfTopic, tablesOfTopic } from 'common/api/content.api';
 import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
 import { Button } from 'common/components/Button/Button';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
@@ -113,19 +113,39 @@ function Topic({ topic, lessons, curriculum }: TopicProps): JSX.Element {
         </div>
 
         {/* There is no progress record, so there is no "resume" — this is the
-            first lesson of the topic, every time. */}
-        {first ? (
-          <p className={styles.cta}>
-            <Button variant="primary" to={paths.lesson(String(first.id))}>
+            first lesson of the topic, every time.
+
+            The visualizer is offered on prepositions alone: the scene engine
+            draws a figure against a ground, which is what a preposition of
+            place is, and no other topic has anything for it to stage. */}
+        <p className={styles.cta}>
+          {String(topic.id) === 'prepositions' ? (
+            <Button variant="primary" to={paths.visualizer()}>
+              Try in visualizer
+            </Button>
+          ) : null}
+          {first ? (
+            <Button
+              variant={String(topic.id) === 'prepositions' ? 'default' : 'primary'}
+              to={paths.lesson(String(first.id))}
+            >
               Start with “{String(first.title.en)}”
             </Button>
-          </p>
-        ) : null}
+          ) : null}
+        </p>
       </div>
 
       <section className={styles.tables}>
         {tables.length > 0 ? (
-          tables.map((table) => <SourceTable key={table.id} table={table} />)
+          tables.map((table) => (
+            <SourceTable
+              key={table.id}
+              table={table}
+              /* Where the notes gave a sentence in both languages, the row can
+                 be opened into a diagram of how the two are ordered. */
+              formationOf={(row, index) => formationFor(curriculum, table.id, index, row)}
+            />
+          ))
         ) : (
           <p className={styles.none}>No source table for this topic yet.</p>
         )}

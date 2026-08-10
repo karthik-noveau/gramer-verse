@@ -35,6 +35,11 @@ export type TableProps<Row> = {
    *  leaves the row as it was — which is what every row does until one is
    *  opened. */
   readonly afterRow?: (row: Row, index: number) => ReactNode;
+  /** How many columns the panel spans. The whole width unless the caller says
+   *  otherwise — a panel opened inside a run of merged cells is taken into
+   *  that run and spans what is left, so the merged label runs down the left
+   *  of its own explanation. */
+  readonly afterRowColSpan?: (row: Row, index: number) => number;
   readonly className?: string;
 };
 
@@ -58,6 +63,7 @@ export function Table<Row>({
   captionHidden = false,
   initialSort,
   afterRow,
+  afterRowColSpan,
   className,
 }: TableProps<Row>): JSX.Element {
   const [sort, setSort] = useState<{ key: string; direction: SortDirection } | null>(
@@ -143,7 +149,7 @@ export function Table<Row>({
                 </tr>
                 {panel ? (
                   <tr>
-                    <td colSpan={columns.length}>{panel}</td>
+                    <td colSpan={afterRowColSpan?.(row, index) ?? columns.length}>{panel}</td>
                   </tr>
                 ) : null}
               </Fragment>

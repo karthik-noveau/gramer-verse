@@ -58,5 +58,33 @@
   cursor: pointer;
   white-space: nowrap;
 }
-.open:hover { border-color: var(--line-strong); color: var(--ink); }
-.open[aria-expanded='true'] { border-color: var(--accent); color: var(--accent); }
+.open:hover { border-color: var(--accent); color: var(--accent); }
+.open[aria-expanded='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* The picture and the button are one idea — the row, shown rather than
+   written — so they share one cell under one heading. */
+.viz {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+.viz svg { display: block; flex: none; }
+
+/* Right when closed, down when open. The rotation is the state — the button
+   says the same word either way, so the arrow is what tells you whether the
+   panel is showing. A span around the chevron, and the span is what turns. */
+.caret {
+  display: inline-flex;
+  flex: none;
+  margin-left: 5px;
+  transition: transform var(--t-fast) var(--ease);
+}
+/* Smaller than the label, and thinner with it: the stroke is set in the
+   viewBox, so scaling the box down scales the line too. */
+.caret svg { width: 7px; height: 10px; display: block; }
+.caretOpen { transform: rotate(90deg); }

@@ -19,7 +19,7 @@
 
 .sub { margin-top: var(--s-2); display: flex; flex-direction: column; gap: 1px; color: var(--soft); max-width: 60ch; }
 
-.cta { margin-left: auto; }
+.cta { margin-left: auto; display: flex; gap: var(--s-2); flex-wrap: wrap; }
 @media (max-width: 640px) { .cta { margin-left: 0; } }
 
 .tables { margin-bottom: var(--s-6); }
