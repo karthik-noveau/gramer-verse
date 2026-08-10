@@ -76,7 +76,7 @@ describe('AppShell', () => {
     renderShell();
     const sidebar = screen.getByRole('complementary', { name: 'Topics' });
 
-    expect(sidebar.querySelectorAll('a')).toHaveLength(TOPICS.length + 1);
+    expect(sidebar.querySelectorAll('a')).toHaveLength(TOPICS.length);
     expect(screen.getByRole('link', { name: 'Prepositions' }).getAttribute('aria-current')).toBe('page');
   });
 
@@ -173,14 +173,10 @@ describe('AppShell', () => {
     renderShell();
     const nav = screen.getByRole('navigation', { name: 'Mobile' });
 
-    expect([...nav.querySelectorAll('a')].map((a) => a.textContent)).toEqual([
-      'Home',
-      'Topics',
-      'Reference',
-    ]);
+    expect([...nav.querySelectorAll('a')].map((a) => a.textContent)).toEqual(['Home', 'Topics']);
   });
 
-  it('renders only the Tools group until the content store supplies topics', () => {
+  it('renders an empty sidebar until the content store supplies topics', () => {
     render(
       <MemoryRouter>
         <AppShell>
@@ -192,6 +188,6 @@ describe('AppShell', () => {
     const sidebar = screen.getByRole('complementary', { name: 'Topics' });
 
     expect(screen.queryByRole('link', { name: 'Tenses' })).toBeNull();
-    expect(within(sidebar).getByRole('link', { name: 'Reference' })).toBeTruthy();
+    expect(within(sidebar).queryAllByRole('link')).toHaveLength(0);
   });
 });

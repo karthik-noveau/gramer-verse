@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import type { FormEvent, JSX } from 'react';
 
 import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
-import { Button } from 'common/components/Button/Button';
 import { Chip } from 'common/components/Chip/Chip';
 import { Formation, fromScene } from 'common/components/Formation/Formation';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
@@ -300,11 +299,6 @@ export default function VisualizerPage(): JSX.Element {
             </p>
           )}
 
-          <p className={styles.more}>
-            <Button size="sm" to={paths.reference()}>
-              What can be drawn
-            </Button>
-          </p>
         </aside>
       </div>
     </>

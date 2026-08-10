@@ -1,10 +1,7 @@
 import type { JSX } from 'react';
 
-import { useState } from 'react';
-
-import { Formation } from 'common/components/Formation/Formation';
 import { Table } from 'common/components/Table/Table';
-import type { FormationSpec, SourceTable as SourceTableData } from 'common/scene/types';
+import type { SourceTable as SourceTableData } from 'common/scene/types';
 import { classNames } from 'common/utils/classNames';
 
 import styles from './styles.module.css';
@@ -12,10 +9,10 @@ import styles from './styles.module.css';
 /* ============================================================
    SourceTable — one table from the notes, as it was written.
 
-   The same component the topic page and the reference page both
+   The same component the topic page and the lesson notes both
    use, so a fix lands in both. Nothing here corrects anything:
-   where the notes are wrong the app says so at the foot of the
-   reference page rather than quietly rewriting the row.
+   where the notes are wrong the app says so rather than quietly
+   rewriting the row.
 
    Two things about the source's shape are handled here. A cell
    may carry two lines — the English and its Tamil — and a row
@@ -25,19 +22,13 @@ import styles from './styles.module.css';
 
 export type SourceTableProps = {
   readonly table: SourceTableData;
-  /** Off for the reference page, which prints its own heading above the
-   *  table it is scrolled to. */
+  /** Off for a caller that prints its own heading above the table. */
   readonly heading?: boolean;
-  /** Show only these rows. The reference page filters; the topic page does
-   *  not, and passing nothing shows everything. */
+  /** Show only these rows. Passing nothing shows everything. */
   readonly rows?: readonly (readonly string[])[] | undefined;
   /** A last column saying what this app does with the row — which verbs it can
    *  draw, for one. Null for a row there is nothing to say about. */
   readonly annotate?: { readonly header: string; readonly of: (row: readonly string[]) => string | null } | undefined;
-  /** The word-order diagram for a row, where one has been aligned. A row
-   *  without one is not offered the button: an empty frame is worse than no
-   *  frame. */
-  readonly formationOf?: ((row: readonly string[], index: number) => FormationSpec | undefined) | undefined;
   readonly className?: string | undefined;
 };
 
@@ -129,13 +120,9 @@ export function SourceTable({
   heading = true,
   rows,
   annotate,
-  formationOf,
   className,
 }: SourceTableProps): JSX.Element {
   const sections = sectionsOf(rows ?? table.rows);
-  /* Which row is open, by the text of its first cell — an index would move
-     under it the moment the table above is filtered. */
-  const [open, setOpen] = useState<string | null>(null);
 
   return (
     <section className={classNames(styles.wrap, className)} id={table.id}>
@@ -177,30 +164,6 @@ export function SourceTable({
                     }
                   : {}),
               })),
-              ...(formationOf
-                ? [
-                    {
-                      key: 'formation',
-                      header: 'Visualization',
-                      cell: (row: readonly string[]) => {
-                        const found = formationOf(row, (rows ?? table.rows).indexOf(row));
-                        if (!found) return null;
-                        const key = row.join('|');
-
-                        return (
-                          <button
-                            type="button"
-                            className={styles.open}
-                            aria-expanded={open === key}
-                            onClick={() => setOpen(open === key ? null : key)}
-                          >
-                            {open === key ? 'Hide' : 'How it is built'}
-                          </button>
-                        );
-                      },
-                    },
-                  ]
-                : []),
               ...(annotate
                 ? [
                     {
@@ -215,16 +178,6 @@ export function SourceTable({
             ]}
             rows={section.rows}
             rowKey={(row, index_) => `${index}-${index_}-${row[0] ?? ''}`}
-            {...(formationOf
-              ? {
-                  afterRow: (row: readonly string[]) => {
-                    const key = row.join('|');
-                    if (open !== key) return null;
-                    const found = formationOf(row, (rows ?? table.rows).indexOf(row));
-                    return found ? <Formation spec={found} /> : null;
-                  },
-                }
-              : {})}
           />
         </div>
       ))}

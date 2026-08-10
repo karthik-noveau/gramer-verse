@@ -230,7 +230,7 @@ function Workspace({ lesson, topic, next, nextTopic, curriculum }: WorkspaceProp
           </section>
 
           <section className={styles.source}>
-            Source: Spoken English notes. <a href={paths.reference()}>Table</a>
+            Source: Spoken English notes.
           </section>
         </aside>
       </div>

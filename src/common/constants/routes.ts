@@ -11,8 +11,6 @@ export type RouteId =
   | 'topic'
   | 'lesson'
   | 'visualizer'
-  | 'reference'
-  | 'referenceTable'
   | 'notFound';
 
 export type RouteEntry = {
@@ -40,12 +38,6 @@ export const ROUTES: readonly RouteEntry[] = Object.freeze([
   },
   { id: 'topic', path: '/topics/:topicId', component: lazy(() => import('pages/topic')) },
   { id: 'lesson', path: '/lessons/:lessonId', component: lazy(() => import('pages/lesson')) },
-  { id: 'reference', path: '/reference', component: lazy(() => import('pages/reference')) },
-  {
-    id: 'referenceTable',
-    path: '/reference/:tableId',
-    component: lazy(() => import('pages/reference')),
-  },
   { id: 'notFound', path: '*', component: lazy(() => import('pages/not-found')) },
 ]);
 
@@ -69,6 +61,4 @@ export const paths = {
   topic: (topicId: string): string => `/topics/${topicId}`,
   lesson: (lessonId: string): string => `/lessons/${lessonId}`,
   visualizer: (): string => pathOf('visualizer'),
-  reference: (): string => pathOf('reference'),
-  referenceTable: (tableId: string): string => `/reference/${tableId}`,
 } as const;

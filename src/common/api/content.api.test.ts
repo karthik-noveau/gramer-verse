@@ -1,7 +1,6 @@
 import {
   findLesson,
   findTopic,
-  formationFor,
   lessonsOfTopic,
   loadContent,
   loadTopics,
@@ -270,18 +269,6 @@ describe('the shipped content', () => {
       expect(keys.some((key) => key.startsWith('auxiliary#'))).toBe(false);
     });
 
-    it('finds a pronoun row by its word, because that table is ragged', async () => {
-      const { curriculum } = await loadContent();
-
-      expect(formationFor(curriculum, 'pronouns', 0, ['First Person', 'singular', 'I'])).toBeDefined();
-      expect(formationFor(curriculum, 'pronouns', 99, ['', '', 'He'])).toBeDefined();
-    });
-
-    it('finds nothing for a row nobody aligned', async () => {
-      const { curriculum } = await loadContent();
-
-      expect(formationFor(curriculum, 'main-verbs', 0, ['do', 'does'])).toBeUndefined();
-    });
   });
 
   describe('finders', () => {

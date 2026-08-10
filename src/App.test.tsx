@@ -27,12 +27,12 @@ describe('routing', () => {
   /* First in the file on purpose: once a chunk has been imported, Jest's
      module cache resolves it immediately and the fallback never renders. */
   it('shows a spinner while the chunk resolves, not a blank frame', async () => {
-    at('/reference');
+    at('/topics');
 
     expect(screen.getByRole('status')).toBeTruthy();
     /* Let the chunk land before the test ends: a suspended resource that
        resolves after the last assertion resolves outside act(). */
-    await screen.findByRole('heading', { level: 1, name: 'Reference' });
+    await screen.findByRole('heading', { level: 1, name: 'Start anywhere' });
   });
 
   it.each([
@@ -43,9 +43,6 @@ describe('routing', () => {
     ['/topics/prepositions', 'Prepositions'],
     ['/lessons/prep-place-in', 'in'],
     ['/topics/prepositions/visualizer', 'Preposition visualizer'],
-    ['/reference', 'Reference'],
-    /* A deep link is the same page, scrolled to one of its tables. */
-    ['/reference/prep-place', 'Reference'],
   ] as readonly (readonly [string, string | RegExp])[])('%s renders its page', async (path, heading) => {
     at(path);
 
@@ -80,8 +77,8 @@ describe('routing', () => {
     await waitFor(() =>
       expect(within(sidebar).getByRole('link', { name: 'Prepositions' })).toBeTruthy(),
     );
-    /* Ten topics and the Reference tool. */
-    expect(sidebar.querySelectorAll('a')).toHaveLength(11);
+    /* Ten topics. */
+    expect(sidebar.querySelectorAll('a')).toHaveLength(10);
   });
 
   it('marks the topic a lesson belongs to, which its URL does not say', async () => {

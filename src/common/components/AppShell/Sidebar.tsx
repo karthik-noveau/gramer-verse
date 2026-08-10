@@ -1,7 +1,6 @@
 import type { JSX } from 'react';
-import { Link, NavLink, useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
-import { Icon } from 'common/components/Icon/Icon';
 import { paths } from 'common/constants/routes';
 
 import styles from './styles.module.css';
@@ -59,17 +58,6 @@ export function Sidebar({ topics, activeTopicId, collapsed }: SidebarProps): JSX
         </>
       ) : null}
 
-      <h4>Tools</h4>
-      <ul>
-        <li>
-          <NavLink to={paths.reference()}>
-            <span className={styles.num} aria-hidden="true">
-              <Icon name="book" size="sm" />
-            </span>
-            <span className={labelClass}>Reference</span>
-          </NavLink>
-        </li>
-      </ul>
     </aside>
   );
 }

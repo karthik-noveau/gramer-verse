@@ -326,7 +326,6 @@ function Foot(): JSX.Element {
         <nav aria-label="Footer">
           <Link to={paths.topics()}>Topics</Link>
           <Link to={paths.visualizer()}>Visualizer</Link>
-          <Link to={paths.reference()}>Reference</Link>
         </nav>
       </div>
     </footer>

@@ -14,10 +14,9 @@ const ITEMS: readonly Item[] = [
      the current page. */
   { to: paths.landing(), label: 'Home', icon: 'grid', end: true },
   { to: paths.topics(), label: 'Topics', icon: 'book' },
-  { to: paths.reference(), label: 'Reference', icon: 'search' },
 ];
 
-/** The bottom bar below 900px. The same three places the header nav offers. */
+/** The bottom bar below 900px. The same places the header nav offers. */
 export function MobileNav(): JSX.Element {
   return (
     <nav className={styles.mobileNav} aria-label="Mobile">

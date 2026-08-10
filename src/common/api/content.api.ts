@@ -9,7 +9,6 @@ import {
 } from 'common/api/validate';
 import type {
   Curriculum,
-  FormationSpec,
   Lesson,
   LessonId,
   SourceTable,
@@ -128,30 +127,6 @@ export const tablesOfTopic = (
   topicId: TopicId | string,
 ): readonly SourceTable[] =>
   curriculum.tables.filter((table) => String(table.topicId) === String(topicId));
-
-/**
- * The alignment for one row of one table, if there is one.
- *
- * By table and row first, then by any word in the row that has one: the
- * pronouns table is ragged — some rows drop the leading cell — so the pronoun
- * is found by looking rather than by counting columns.
- */
-export const formationFor = (
-  curriculum: Curriculum,
-  tableId: string,
-  rowIndex: number,
-  cells: readonly string[] = [],
-): FormationSpec | undefined => {
-  const direct = curriculum.formation.rows[`${tableId}#${rowIndex}`];
-  if (direct) return direct;
-
-  for (const cell of cells) {
-    const first = (cell.split('\n')[0] ?? '').trim().toLowerCase();
-    const found = curriculum.formation.words[first];
-    if (found) return found;
-  }
-  return undefined;
-};
 
 export const outlineOfTopic = (
   curriculum: Curriculum,

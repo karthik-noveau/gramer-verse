@@ -119,18 +119,6 @@ export default function TopicsPage(): JSX.Element {
             </CardNote>
           </Card>
         </li>
-        <li>
-          <Card to={paths.reference()}>
-            <h3 className={styles.otherTitle}>Reference</h3>
-            <CardNote>
-              Every source table, browsable, with the corrections to the notes listed at the
-              foot.
-              <span className={styles.ta} lang="ta">
-                அனைத்து அட்டவணைகளும்.
-              </span>
-            </CardNote>
-          </Card>
-        </li>
       </ul>
     </>
   );

@@ -67,12 +67,11 @@ describe('TopicsPage', () => {
       expect(screen.getByText(/எங்கிருந்தும் தொடங்கலாம்/)).toBeTruthy();
     });
 
-    it('offers the two things that are not a topic, in one click each', () => {
+    it('offers the one thing that is not a topic, in one click', () => {
       renderPage();
       const hrefs = screen.getAllByRole('link').map((link) => link.getAttribute('href'));
 
       expect(hrefs).toContain('/topics/prepositions/visualizer');
-      expect(hrefs).toContain('/reference');
     });
 
     it('reports no progress of any kind', () => {

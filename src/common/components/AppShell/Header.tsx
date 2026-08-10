@@ -65,7 +65,6 @@ export function Header({
 
       <nav className={styles.topNav} aria-label="Primary">
         <NavLink to={paths.topics()}>Topics</NavLink>
-        <NavLink to={paths.reference()}>Reference</NavLink>
       </nav>
 
       <Button
