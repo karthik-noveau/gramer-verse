@@ -100,10 +100,15 @@ function Topic({ topic, lessons, curriculum }: TopicProps): JSX.Element {
 
       <div className={styles.head}>
         <div>
-          <h1>{String(topic.title.en)}</h1>
-          <p className={styles.ta} lang="ta">
-            {String(topic.title.ta)}
-          </p>
+          {/* Both scripts in the one heading, the Tamil beside the English
+              rather than under it — the same shape the source tables use for
+              their titles, so a heading reads the same wherever it is. */}
+          <h1 className={styles.title}>
+            <span lang="en">{String(topic.title.en)}</span>
+            <span className={styles.titleTa} lang="ta">
+              {String(topic.title.ta)}
+            </span>
+          </h1>
           {/* Led by the question the topic answers, so the line has a subject
               of its own rather than reading as a fragment under the heading. */}
           <p className={styles.sub}>

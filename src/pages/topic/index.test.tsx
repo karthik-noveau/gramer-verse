@@ -32,8 +32,11 @@ describe('TopicPage', () => {
     it('names the topic in both languages', () => {
       at('/topics/prepositions');
 
-      expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Prepositions');
-      expect(screen.getByText('இடைச்சொல்')).toBeTruthy();
+      /* One heading carrying both scripts, the Tamil beside the English. */
+      const heading = screen.getByRole('heading', { level: 1 });
+
+      expect(heading.querySelector('[lang="en"]')?.textContent).toBe('Prepositions');
+      expect(heading.querySelector('[lang="ta"]')?.textContent).toBe('இடைச்சொல்');
     });
 
     it('renders the topic’s source tables above the outline', () => {

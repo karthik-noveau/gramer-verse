@@ -15,6 +15,24 @@
 }
 .head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); }
 
+/* Baseline-aligned, so the two scripts sit on one line rather than one being
+   centred against the other's cap height. Wraps on a narrow screen instead of
+   pushing the Tamil off the edge. */
+.title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+/* The size it was when it sat underneath: this moves the Tamil, it does not
+   promote it. */
+.titleTa {
+  font-family: var(--tamil);
+  font-size: var(--fs-md);
+  font-weight: 400;
+  color: var(--muted);
+}
+
 .ta { font-family: var(--tamil); color: var(--muted); }
 
 .sub { margin-top: var(--s-2); display: flex; flex-direction: column; gap: 1px; color: var(--soft); max-width: 60ch; }

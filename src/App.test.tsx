@@ -40,7 +40,9 @@ describe('routing', () => {
        word, so its accessible name is assembled rather than typed. */
     ['/', /English grammar/],
     ['/topics', 'Start anywhere'],
-    ['/topics/prepositions', 'Prepositions'],
+    /* A regex again: the topic heading carries the Tamil beside the English,
+       so its accessible name is both. */
+    ['/topics/prepositions', /Prepositions/],
     ['/lessons/prep-place-in', 'in'],
     ['/topics/prepositions/visualizer', 'Preposition visualizer'],
   ] as readonly (readonly [string, string | RegExp])[])('%s renders its page', async (path, heading) => {
