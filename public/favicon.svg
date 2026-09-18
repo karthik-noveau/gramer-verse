@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .frame { stroke: #17160f; }
+    .ball { fill: #2f6f4f; }
+    @media (prefers-color-scheme: dark) {
+      .frame { stroke: #f2f1ec; }
+      .ball { fill: #7dc4a0; }
+    }
+  </style>
+  <path
+    class="frame"
+    d="M11 4H7.5A3.5 3.5 0 0 0 4 7.5v17A3.5 3.5 0 0 0 7.5 28h17a3.5 3.5 0 0 0 3.5-3.5v-17A3.5 3.5 0 0 0 24.5 4H21"
+    fill="none"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+  <circle class="ball" cx="16" cy="19" r="6" />
+</svg>
