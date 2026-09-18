@@ -28,3 +28,8 @@
 .btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
 
 .icon { padding: var(--s-2); width: 36px; height: 36px; border-radius: var(--r-md); }
+
+@media (max-width: 900px), (pointer: coarse) {
+  .btn { min-height: 44px; }
+  .icon { width: 44px; height: 44px; }
+}

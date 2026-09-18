@@ -19,7 +19,9 @@
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   background: var(--surface);
+  animation: comparison-in 500ms cubic-bezier(.16, 1, .3, 1) both;
 }
+.column[data-tone='truth'] { animation-delay: 110ms; }
 
 /* What was said is marked as a claim that did not hold — with the warn
    colour, which this app uses for "cannot draw" rather than for an error.
@@ -56,4 +58,13 @@
   font-family: var(--tamil);
   text-transform: none;
   letter-spacing: normal;
+}
+
+@keyframes comparison-in {
+  from { opacity: 0; transform: translateY(12px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .column { animation: none; }
 }

@@ -18,7 +18,14 @@
 [hidden] { display: none !important; }
 
 html,
-body { height: 100%; }
+body,
+#root { min-height: 100%; }
+
+html {
+  /* Prevent controls from being auto-enlarged after an orientation change. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   margin: 0;
@@ -26,12 +33,14 @@ body {
   color: var(--ink);
   font: var(--fs-base)/1.6 var(--font);
   -webkit-font-smoothing: antialiased;
+  overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4, p, figure, ul, ol { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 img, svg { display: block; max-width: 100%; }
 button, input, select, textarea { font: inherit; color: inherit; }
+button, select { touch-action: manipulation; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -67,4 +76,8 @@ a:hover { text-decoration: underline; }
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+@media (max-width: 480px) {
+  :root { --fs-2xl: 28px; }
 }

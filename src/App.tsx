@@ -57,7 +57,7 @@ function Layout(): JSX.Element {
   return (
     <AppShell topics={topics} activeTopicId={activeTopicId}>
       <ErrorBoundary resetKey={pathname}>
-        <Suspense fallback={<Spinner label="Loading the page" />}>
+        <Suspense fallback={<Spinner label="Loading the page" centered />}>
           <Outlet />
         </Suspense>
       </ErrorBoundary>
@@ -85,7 +85,7 @@ export function AppRoutes(): JSX.Element {
           path={path}
           element={
             <ErrorBoundary resetKey={path}>
-              <Suspense fallback={<Spinner label="Loading the page" />}>
+              <Suspense fallback={<Spinner label="Loading the page" centered />}>
                 <Page />
               </Suspense>
             </ErrorBoundary>

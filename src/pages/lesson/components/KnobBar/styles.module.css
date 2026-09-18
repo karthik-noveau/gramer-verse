@@ -46,6 +46,8 @@
   gap: 6px;
 }
 
+.options svg { flex: 0 0 auto; }
+
 /* A knob with one option is a label, not a button that does nothing. */
 .only {
   display: inline-flex;

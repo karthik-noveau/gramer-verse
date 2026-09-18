@@ -56,6 +56,101 @@ describe('the shipped content', () => {
     }
   });
 
+  it('classifies auxiliaries and main-verb forms accurately', async () => {
+    const { curriculum } = await loadContent();
+    const auxiliary = curriculum.tables.find((table) => table.id === 'auxiliary');
+    const main = curriculum.tables.find((table) => table.id === 'main-verbs');
+
+    expect(auxiliary?.title.en).toBe('Primary auxiliary verbs');
+    expect(auxiliary?.rows.map((row) => row[0])).toEqual(['be', 'have', 'do']);
+    expect(main?.columns).toEqual([
+      'Base Verb',
+      'Present (base / -s)',
+      'Past',
+      'Past participle',
+      '-ing form',
+    ]);
+    expect(main?.rows.some((row) => row[0]?.startsWith('permission\n'))).toBe(false);
+    expect(main?.rows.filter((row) => row[0]?.startsWith('like\n'))).toHaveLength(1);
+  });
+
+  it('ships complete bilingual outlines and rectangular tables', async () => {
+    const { curriculum } = await loadContent();
+
+    for (const outline of curriculum.outlines) {
+      for (const group of outline.groups) {
+        for (const lesson of group.lessons) {
+          expect(lesson.titleTa).not.toBeNull();
+          expect(lesson.example).not.toBeNull();
+        }
+      }
+    }
+
+    for (const table of curriculum.tables) {
+      for (const row of table.rows) {
+        expect([table.id, row.length]).toEqual([table.id, table.columns.length]);
+      }
+    }
+  });
+
+  it('uses the canonical structures for all twelve tense forms', async () => {
+    const { curriculum } = await loadContent();
+    const table = curriculum.tables.find((candidate) => candidate.id === 'tense-forms');
+    const structures = table?.rows.filter((row) => row[1]).map((row) => row[1]);
+
+    expect(structures).toEqual([
+      'base verb / base verb + s',
+      'am / is / are + verb-ing',
+      'have / has + past participle',
+      'have / has been + verb-ing',
+      'past form',
+      'was / were + verb-ing',
+      'had + past participle',
+      'had been + verb-ing',
+      'will + base verb',
+      'will be + verb-ing',
+      'will have + past participle',
+      'will have been + verb-ing',
+    ]);
+  });
+
+  it('lists a past participle for every main verb', async () => {
+    const { curriculum } = await loadContent();
+    const table = curriculum.tables.find((candidate) => candidate.id === 'main-verbs');
+    const english = table?.rows.map((row) => row[3]?.split('\n')[0]);
+
+    expect(english).toEqual([
+      'done', 'read', 'seen', 'asked', 'slept', 'said', 'told', 'listened',
+      'opened', 'closed', 'pulled', 'bathed', 'cried', 'got / gotten', 'washed',
+      'scolded', 'fought', 'taken', 'liked', 'joined', 'given', 'eaten', 'stopped',
+      'sent', 'laughed', 'bugged', 'cleaned', 'brought', 'gone', 'left', 'drunk',
+      'warned', 'written', 'found', 'rolled', 'played', 'touched', 'earned',
+      'remembered', 'waited', 'sat', 'shown', 'permitted', 'worked',
+      'answered', 'forced',
+    ]);
+  });
+
+  it('keeps article rules based on sound and sentence Tamil in Tamil script', async () => {
+    const { curriculum } = await loadContent();
+    const articles = curriculum.tables.find((table) => table.id === 'articles');
+    const sentences = curriculum.tables.find((table) => table.id === 'sentence-types');
+
+    expect(articles?.rows[0]?.[2]).toContain('consonant sound');
+    expect(articles?.rows[1]?.[2]).toContain('vowel sound');
+    for (const row of sentences?.rows.filter((candidate) => candidate[3]) ?? []) {
+      expect(row[3]).not.toMatch(/[A-Za-z]/);
+    }
+  });
+
+  it('does not reintroduce known source-note errors', async () => {
+    const { curriculum } = await loadContent();
+    const text = curriculum.tables.flatMap((table) => table.rows.flat()).join('\n');
+
+    expect(text).not.toMatch(
+      /has been being|will have been being|Perposition|Subjust|Possesive|விளையாடுற|கிட்டிருக்க|போற|\.\.| {2,}/,
+    );
+  });
+
   it('draws every lesson from props that exist', async () => {
     const { lessons, lexicon } = await loadContent();
 

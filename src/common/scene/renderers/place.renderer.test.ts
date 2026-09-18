@@ -263,10 +263,14 @@ describe('renderPlace — every relation', () => {
     const ground = boxOf(nodes, 'ground', prop('table'));
     const [figure] = figureBoxes(nodes, 'ball');
     const level = find(nodes, 'mark-level');
+    const dropTop = find(nodes, 'mark-drop-top');
 
     expect(figure?.top).toBeGreaterThan(ground.top);
     expect(figure?.left).toBeGreaterThan(ground.right);
     expect(Number(level?.attrs.y1)).toBeCloseTo(ground.top, 1);
+    expect(Number(level?.attrs.x1)).toBeGreaterThan(ground.right);
+    expect(Number(level?.attrs.x2)).toBeLessThan(Number(dropTop?.attrs.x1));
+    expect(Number(level?.attrs.y1)).toBeLessThan(Number(dropTop?.attrs.y1));
     expect(find(nodes, 'mark-drop')).toBeDefined();
   });
 
@@ -440,20 +444,12 @@ describe('renderPlace — article', () => {
     expect(ringOf(definite)?.attrs.stroke).toBe('var(--accent)');
   });
 
-  it('says the word too — a difference in line style alone is not enough', () => {
-    for (const determiner of ['a', 'the'] as const) {
-      const nodes = renderPlace(sceneFor('on', { determiner }));
+  it('keeps grammar words out of the drawing where relation markers need the space', () => {
+    const nodes = renderPlace(sceneFor('below', { figure: id('ball'), ground: id('table') }));
 
-      expect(find(nodes, 'determiner-label')?.text).toBe(determiner);
-    }
-  });
-
-  it('keeps the label on the stage even when the figure is at the top of it', () => {
-    const nodes = renderPlace(sceneFor('above', { figure: id('clock') }));
-    const label = find(nodes, 'determiner-label');
-
-    expect(Number(label?.attrs.y)).toBeGreaterThan(0);
-    expect(Number(label?.attrs.y)).toBeLessThan(STAGE.height);
+    expect(find(nodes, 'determiner-label')).toBeUndefined();
+    expect(find(nodes, 'determiner-label-bg')).toBeUndefined();
+    expect(flatten(nodes).some((node) => node.tag === 'text')).toBe(false);
   });
 
   it('drops both when there is more than one figure — two balls are not "a two balls"', () => {

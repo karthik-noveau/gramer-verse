@@ -51,8 +51,8 @@ w(`**${C.topics.length} topics · ${lessons} lessons · ${C.tables.length} sourc
   `· ${rows} table rows · ${C.corrections.length} corrections to the source ` +
   `· ${authored} lessons carrying a field not in the notes**`);
 w();
-w('Every field is bilingual. Where a Tamil cell is blank the source left it blank —');
-w('that is a gap in the notes, not a gap in the port.');
+w('Every lesson field is bilingual. Missing Tamil labels and shifted table rows');
+w('are rejected by content validation before they can reach a learner.');
 w();
 w('**¹ marks a field the notes do not contain.** Everything else is verified');
 w('present in the source document, whole or as the parts of a joined cell. The');

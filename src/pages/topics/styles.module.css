@@ -7,11 +7,11 @@
    product and a page must not invent a metric to fill space.
    ============================================================ */
 
-.head { margin-bottom: var(--s-5); }
-.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); }
-
-.sub { margin-top: var(--s-2); color: var(--soft); }
-.ta { font-family: var(--tamil); color: var(--muted); }
+.head { margin-bottom: var(--s-4); }
+.head h1 {
+  font: 500 var(--fs-md) / 1.5 var(--font);
+  color: var(--soft);
+}
 
 /* Three across on a desktop, two on a tablet, one on a phone. `auto-fill`
    rather than a fixed three, so the row does not leave a gap on the widths in
@@ -19,7 +19,7 @@
 .grid {
   display: grid;
   gap: var(--s-4);
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -28,19 +28,13 @@
 .pair {
   display: grid;
   gap: var(--s-4);
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  margin: var(--s-6) 0 0;
   padding: 0;
   list-style: none;
 }
 
-.or {
-  margin: var(--s-6) 0 var(--s-3);
-  font: 600 var(--fs-lg) / 1.2 var(--serif);
-  color: var(--soft);
-}
-
-.otherTitle { font: 600 var(--fs-md) / 1.25 var(--serif); margin-bottom: var(--s-1); }
+.otherTitle { font: 600 var(--fs-md) / 1.25 var(--serif); }
 
 /* The shape of the answer while it is on its way. Same height as a card, so
    the page does not jump when the content lands. */

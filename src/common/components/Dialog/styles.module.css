@@ -3,6 +3,7 @@
   display: grid; place-items: center;
   background: var(--scrim);
   padding: var(--s-4);
+  animation: scrim-in var(--t-base) var(--ease) both;
 }
 
 .dialog {
@@ -12,6 +13,13 @@
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-3);
   padding: var(--s-5);
+  animation: dialog-in 280ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@media (max-width: 480px) {
+  .scrim { padding: var(--s-3); }
+  .dialog { padding: var(--s-4); }
+  .actions { flex-wrap: wrap; }
 }
 
 .title { font: 600 var(--fs-lg)/1.2 var(--serif); margin-bottom: var(--s-2); }
@@ -20,4 +28,13 @@
 .actions {
   display: flex; justify-content: flex-end; gap: var(--s-2);
   margin-top: var(--s-5);
+}
+
+@keyframes scrim-in { from { opacity: 0; } }
+@keyframes dialog-in {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrim, .dialog { animation: none; }
 }

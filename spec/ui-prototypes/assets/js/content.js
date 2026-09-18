@@ -27,7 +27,7 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Simple present",
-       "ta": "எளிய நிகழ்காலம்",
+       "ta": "சாதாரண நிகழ்காலம்",
        "ex": "I write.",
        "exTa": "நான் எழுதுகிறேன்.",
        "authored": [
@@ -37,7 +37,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Present continuous",
-       "ta": "தொடர்ந்து நிகழ்காலம்",
+       "ta": "நிகழ்காலத் தொடர்நிலை",
        "ex": "I am writing.",
        "exTa": "நான் எழுதிக்கொண்டிருக்கிறேன்.",
        "authored": [
@@ -47,7 +47,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Present perfect",
-       "ta": "சரியான நிகழ்காலம்",
+       "ta": "நிகழ்கால நிறைவுநிலை",
        "ex": "I have written.",
        "exTa": "நான் எழுதிவிட்டேன்.",
        "authored": [
@@ -57,7 +57,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Present perfect continuous",
-       "ta": "சரியான தொடர்ச்சியான நிகழ்காலம்",
+       "ta": "நிகழ்கால நிறைவுத் தொடர்நிலை",
        "ex": "I have been writing for an hour.",
        "exTa": "நான் ஒரு மணி நேரமாக எழுதி வருகிறேன்.",
        "authored": [
@@ -73,7 +73,7 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Simple past",
-       "ta": "எளிய கடந்த காலம்",
+       "ta": "சாதாரண இறந்தகாலம்",
        "ex": "I wrote.",
        "exTa": "நான் எழுதினேன்.",
        "authored": [
@@ -83,7 +83,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Past continuous",
-       "ta": "கடந்த தொடர்ச்சியான காலம்",
+       "ta": "இறந்தகாலத் தொடர்நிலை",
        "ex": "I was writing.",
        "exTa": "நான் எழுதிக்கொண்டிருந்தேன்.",
        "authored": [
@@ -93,7 +93,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Past perfect",
-       "ta": "முற்பட்ட கடந்த காலம்",
+       "ta": "இறந்தகால நிறைவுநிலை",
        "ex": "I had written.",
        "exTa": "நான் எழுதி முடித்திருந்தேன்.",
        "authored": [
@@ -103,7 +103,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Past perfect continuous",
-       "ta": "முற்பட்ட தொடர்ச்சியான கடந்த காலம்",
+       "ta": "இறந்தகால நிறைவுத் தொடர்நிலை",
        "ex": "I had been writing for an hour.",
        "exTa": "நான் ஒரு மணி நேரமாக எழுதி வந்தேன்."
       }
@@ -115,7 +115,7 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Simple future",
-       "ta": "எளிய எதிர்காலம்",
+       "ta": "சாதாரண எதிர்காலம்",
        "ex": "I will write.",
        "exTa": "நான் எழுதுவேன்.",
        "authored": [
@@ -125,7 +125,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Future continuous",
-       "ta": "எதிர்கால தொடர்ச்சி",
+       "ta": "எதிர்காலத் தொடர்நிலை",
        "ex": "I will be writing.",
        "exTa": "நான் எழுதிக்கொண்டிருப்பேன்.",
        "authored": [
@@ -135,7 +135,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Future perfect",
-       "ta": "எதிர்கால பூர்த்தி",
+       "ta": "எதிர்கால நிறைவுநிலை",
        "ex": "I will have written.",
        "exTa": "நான் எழுதி முடித்திருப்பேன்.",
        "authored": [
@@ -145,7 +145,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "Future perfect continuous",
-       "ta": "எதிர்கால பூர்த்தி தொடர்ச்சி",
+       "ta": "எதிர்கால நிறைவுத் தொடர்நிலை",
        "ex": "I will have been writing for an hour.",
        "exTa": "நான் ஒரு மணி நேரமாக எழுதி வந்திருப்பேன்.",
        "authored": [
@@ -162,57 +162,66 @@ window.GV_CONTENT = {
    "n": 2,
    "en": "Verbs",
    "ta": "வினைச்சொல்",
-   "sum_en": "The action word.",
-   "sum_ta": "செயல் சொல்.",
+   "sum_en": "An action, event or state.",
+   "sum_ta": "செயல், நிகழ்வு அல்லது நிலையைக் குறிக்கும் சொல்.",
    "groups": [
     {
-     "en": "Verb forms",
-     "ta": "வினை வடிவங்கள்",
+     "en": "Primary auxiliary verbs",
+     "ta": "உதவி வினைச்சொல்",
      "lessons": [
       {
-       "en": "Be form",
+       "en": "be",
        "ta": "இரு",
-       "ex": "am, is, are · was, were · will be",
-       "exTa": "இருக்கிறேன் · இருந்தது · இருக்கும்"
+       "ex": "am, is, are · was, were · been",
+       "exTa": "நிலை, தொடர்ச்சி, செயப்பாட்டு வாக்கியம்"
       },
       {
-       "en": "Have form",
-       "ta": "உள்ளது",
+       "en": "have",
+       "ta": "உடை / பெற்றிரு",
        "ex": "have, has · had",
-       "exTa": "உள்ளது · இருந்தது",
-       "authored": [
-        "ex"
-       ]
+       "exTa": "நிறைவுக் காலங்களுக்கு உதவும்"
+      },
+      {
+       "en": "do",
+       "ta": "செய்",
+       "ex": "do, does · did",
+       "exTa": "கேள்வி, மறுப்பு, வலியுறுத்தல்"
       }
      ]
     },
     {
-     "en": "Auxiliary verbs",
-     "ta": "உதவி வினைச்சொல்",
+     "en": "Main verb forms",
+     "ta": "முதன்மை வினை வடிவங்கள்",
      "lessons": [
       {
-       "en": "Simple",
-       "ta": "",
-       "ex": "am,is,are / Was,Were / Will be,shall be",
-       "exTa": ""
+       "en": "Base form",
+       "ta": "அடிப்படை வடிவம்",
+       "ex": "write",
+       "exTa": "எழுது"
       },
       {
-       "en": "Continuous",
-       "ta": "",
-       "ex": "am being,is being,are being / Was being,were being / Will be being,shall be being",
-       "exTa": ""
+       "en": "Present form",
+       "ta": "நிகழ்கால வடிவம்",
+       "ex": "write / writes",
+       "exTa": "எழுதுகிறேன் / எழுதுகிறார்"
       },
       {
-       "en": "Perfect",
-       "ta": "",
-       "ex": "Has been,have been / Had been / Will have been,shall have been",
-       "exTa": ""
+       "en": "Past form",
+       "ta": "கடந்தகால வடிவம்",
+       "ex": "wrote",
+       "exTa": "எழுதினேன்"
       },
       {
-       "en": "Perfect continuous",
-       "ta": "",
-       "ex": "Has been being,have been being / Had been being / Will have been being,shall have been being",
-       "exTa": ""
+       "en": "Past participle",
+       "ta": "இறந்தகால வினையெச்சம்",
+       "ex": "written",
+       "exTa": "எழுதிய / எழுதப்பட்ட"
+      },
+      {
+       "en": "-ing form",
+       "ta": "-ing வடிவம்",
+       "ex": "writing",
+       "exTa": "எழுதிக்கொண்டு"
       }
      ]
     },
@@ -228,31 +237,31 @@ window.GV_CONTENT = {
       },
       {
        "en": "could",
-       "ta": "முடிந்த செயல்",
-       "ex": "I could go.",
-       "exTa": "நான் போக முடியும்."
+       "ta": "திறன் / சாத்தியம் / மரியாதையான கோரிக்கை",
+       "ex": "Could you help me?",
+       "exTa": "நீங்கள் எனக்கு உதவ முடியுமா?"
       },
       {
        "en": "will",
        "ta": "எதிர்காலம்",
-       "ex": "I will write",
-       "exTa": "நான் எழுதப் போகிறேன்."
+       "ex": "I will write.",
+       "exTa": "நான் எழுதுவேன்."
       },
       {
        "en": "would",
-       "ta": "கற்பனையான செயல்",
-       "ex": "I would like tea.",
-       "exTa": "நான் தேனீர் விரும்புகிறேன்."
+       "ta": "விருப்பம் / மரியாதை / கற்பனை நிலை",
+       "ex": "I would like some tea.",
+       "exTa": "எனக்கு கொஞ்சம் தேநீர் வேண்டும்."
       },
       {
        "en": "may",
-       "ta": "செயல் நிகழலாம்",
-       "ex": "I may come",
-       "exTa": "நான் வர வாய்ப்பு இருக்கிறது"
+       "ta": "அனுமதி / சாத்தியம்",
+       "ex": "I may come.",
+       "exTa": "நான் வரலாம்."
       },
       {
        "en": "might",
-       "ta": "செயல் நிகழலாம்",
+       "ta": "உறுதியில்லாத சாத்தியம்",
        "ex": "It might rain today.",
        "exTa": "இன்று மழை பெய்யலாம்"
       },
@@ -264,34 +273,34 @@ window.GV_CONTENT = {
       },
       {
        "en": "shall",
-       "ta": "செய்யப்போகிறேன்",
-       "ex": "I shall help you",
-       "exTa": "நான் உங்களுக்கு உதவப்போகிறேன்."
+       "ta": "முறையான எதிர்கால நோக்கம் / பரிந்துரை",
+       "ex": "Shall we begin?",
+       "exTa": "நாம் தொடங்கலாமா?"
       },
       {
        "en": "should",
-       "ta": "கட்டாயம் செய்ய வேண்டும்",
+       "ta": "ஆலோசனை / எதிர்பார்ப்பு",
        "ex": "You should study.",
        "exTa": "நீ படிக்க வேண்டும்."
       },
       {
        "en": "ought to",
-       "ta": "செய்யவேண்டும்",
+       "ta": "ஆலோசனை / ஒழுக்கக் கடமை",
        "ex": "You ought to help.",
        "exTa": "நீ உதவ வேண்டும்."
       }
      ]
     }
    ],
-   "count": 16
+   "count": 18
   },
   {
    "id": "nouns",
    "n": 3,
    "en": "Nouns & pronouns",
-   "ta": "பெயர்ச்சொல்",
+   "ta": "பெயர்ச்சொற்களும் பிரதிப்பெயர்களும்",
    "sum_en": "Names, and stand-ins.",
-   "sum_ta": "பெயர்ச்சொற்கள்.",
+   "sum_ta": "பெயர்களும் அவற்றுக்குப் பதிலாக வரும் சொற்களும்.",
    "groups": [
     {
      "en": "Nouns",
@@ -299,25 +308,25 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Ravi is a student",
-       "ta": "",
+       "ta": "ரவி ஒரு மாணவர்",
        "ex": "Ravi is a student",
        "exTa": "ரவி ஒரு மாணவர்"
       },
       {
        "en": "Chennai is big",
-       "ta": "",
+       "ta": "சென்னை பெரியது",
        "ex": "Chennai is big",
        "exTa": "சென்னை பெரியது"
       },
       {
        "en": "This is a pen",
-       "ta": "",
+       "ta": "இது ஒரு பேனா",
        "ex": "This is a pen",
        "exTa": "இது ஒரு பேனா"
       },
       {
        "en": "The dog is barking.",
-       "ta": "",
+       "ta": "நாய் குரைக்கிறது",
        "ex": "The dog is barking.",
        "exTa": "நாய் குரைக்கிறது"
       }
@@ -329,27 +338,27 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "He is a student.",
-       "ta": "",
+       "ta": "அவன் ஒரு மாணவன்",
        "ex": "He is a student.",
        "exTa": "அவன் ஒரு மாணவன்"
       },
       {
        "en": "It is big",
-       "ta": "",
+       "ta": "அது பெரியது",
        "ex": "It is big",
        "exTa": "அது பெரியது"
       },
       {
        "en": "This is it",
-       "ta": "",
+       "ta": "இதுதான்",
        "ex": "This is it",
        "exTa": "இதுதான்"
       },
       {
        "en": "It is barking",
-       "ta": "",
+       "ta": "அது குரைக்கிறது",
        "ex": "It is barking",
-       "exTa": "அதுகுரைக்கிறது"
+       "exTa": "அது குரைக்கிறது"
       }
      ]
     },
@@ -435,7 +444,7 @@ window.GV_CONTENT = {
        "en": "a",
        "ta": "ஒரு",
        "ex": "I have a pen.",
-       "exTa": "எனக்கு ஒரு பேனா             இருக்கிறது."
+       "exTa": "எனக்கு ஒரு பேனா இருக்கிறது."
       },
       {
        "en": "an",
@@ -445,15 +454,15 @@ window.GV_CONTENT = {
       },
       {
        "en": "the",
-       "ta": "அந்த",
+       "ta": "குறிப்பிட்ட பொருள்",
        "ex": "The sun is bright.",
-       "exTa": "அந்த சூரியன் பிரகாசமாக உள்ளது."
+       "exTa": "சூரியன் பிரகாசமாக உள்ளது."
       },
       {
        "en": "a → the",
-       "ta": "முதல் முறை → a",
+       "ta": "முதல் முறை a → அடுத்த முறை the",
        "ex": "I saw a dog. The dog is black.",
-       "exTa": "நான் ஒரு நாய் பார்த்தேன். அந்த நாய் கருப்பு.",
+       "exTa": "நான் ஒரு நாயைப் பார்த்தேன். அந்த நாய் கருப்பாக இருந்தது.",
        "authored": [
         "en",
         "ta",
@@ -500,13 +509,13 @@ window.GV_CONTENT = {
        "en": "under",
        "ta": "கீழ்",
        "ex": "The cat is under the table",
-       "exTa": "பூனை மேசைய கீழே உள்ளது."
+       "exTa": "பூனை மேசைக்குக் கீழே உள்ளது."
       },
       {
        "en": "above",
        "ta": "மேலே",
        "ex": "The clock is above the door",
-       "exTa": "கடிகாரம் கதவின் மேலே உள்ளது."
+       "exTa": "கடிகாரம் கதவுக்கு மேலே உள்ளது."
       },
       {
        "en": "below",
@@ -521,16 +530,16 @@ window.GV_CONTENT = {
        "exTa": "நாய் காரின் பின்புறம் உள்ளது."
       },
       {
-       "en": "In front of",
+       "en": "in front of",
        "ta": "முன்னால்",
-       "ex": "He is standing in front of",
+       "ex": "He is standing in front of the shop",
        "exTa": "அவன் கடையின் முன்னால் நிற்கிறான்."
       },
       {
        "en": "between",
        "ta": "இடையில்",
        "ex": "The park is between the school and the hospital",
-       "exTa": "பூங்கா பள்ளி மற்றும் மருத்துவமனைக்கு நடுவில் உள்ளது."
+       "exTa": "பூங்கா பள்ளிக்கும் மருத்துவமனைக்கும் இடையில் உள்ளது."
       },
       {
        "en": "near",
@@ -545,16 +554,16 @@ window.GV_CONTENT = {
        "exTa": "அவன் தனது நண்பரின் அருகில் உட்கார்ந்துள்ளான்."
       },
       {
-       "en": "There",
+       "en": "there",
        "ta": "அங்கு / அங்கே",
        "ex": "He is standing there",
        "exTa": "அவன் அங்கே நிற்கிறான்."
       },
       {
-       "en": "Here",
+       "en": "here",
        "ta": "இங்கு / இங்கே",
        "ex": "He is standing here",
-       "exTa": "அவன் இங்கே நிற்கிறான்"
+       "exTa": "அவன் இங்கே நிற்கிறான்."
       }
      ]
     },
@@ -578,7 +587,7 @@ window.GV_CONTENT = {
        "en": "towards",
        "ta": "நோக்கி",
        "ex": "Walk towards the station",
-       "exTa": "நிலையத்தைக் நோக்கி நடந்தேறு"
+       "exTa": "நிலையத்தை நோக்கி நட."
       },
       {
        "en": "along",
@@ -590,13 +599,13 @@ window.GV_CONTENT = {
        "en": "across",
        "ta": "கடந்து",
        "ex": "He ran across the road",
-       "exTa": "அவன் சாலையை கடந்து"
+       "exTa": "அவன் சாலையைக் கடந்து ஓடினான்."
       },
       {
        "en": "over",
        "ta": "மேலாக",
        "ex": "The plane flew over the city",
-       "exTa": "விமானம் நகரத்தின் மேலே"
+       "exTa": "விமானம் நகரத்தின் மேல் பறந்தது."
       },
       {
        "en": "past",
@@ -608,7 +617,7 @@ window.GV_CONTENT = {
        "en": "from",
        "ta": "இருந்து",
        "ex": "He came from the office",
-       "exTa": "அவன் அலுவலகத்திலிருந்து"
+       "exTa": "அவன் அலுவலகத்திலிருந்து வந்தான்."
       }
      ]
     },
@@ -624,9 +633,9 @@ window.GV_CONTENT = {
       },
       {
        "en": "at",
-       "ta": "க்இ",
+       "ta": "மணிக்கு",
        "ex": "The train arrives at 5 PM",
-       "exTa": "ரயில் மாலை 5 மணிக்கு வருகிறது.."
+       "exTa": "ரயில் மாலை 5 மணிக்கு வருகிறது."
       },
       {
        "en": "on",
@@ -636,15 +645,15 @@ window.GV_CONTENT = {
       },
       {
        "en": "before",
-       "ta": "முன்பு",
+       "ta": "முன்",
        "ex": "Come before 8 AM",
-       "exTa": "காலை 8 மணிக்கு முன்னால் வா."
+       "exTa": "காலை 8 மணிக்கு முன் வா."
       },
       {
        "en": "after",
        "ta": "பிறகு",
        "ex": "We’ll meet after lunch",
-       "exTa": "மதிய உணவுக்குப் பிறகு"
+       "exTa": "மதிய உணவுக்குப் பிறகு நாம் சந்திப்போம்."
       },
       {
        "en": "by",
@@ -680,11 +689,11 @@ window.GV_CONTENT = {
        "en": "about",
        "ta": "பற்றி",
        "ex": "This book is about history",
-       "exTa": "இந்த புத்தகம் வரலாற்றைப் பற்றி."
+       "exTa": "இந்தப் புத்தகம் வரலாற்றைப் பற்றியது."
       },
       {
        "en": "for",
-       "ta": "க்கு,",
+       "ta": "க்காக",
        "ex": "The gift is for you",
        "exTa": "இந்த பரிசு உங்களுக்காக."
       },
@@ -692,11 +701,11 @@ window.GV_CONTENT = {
        "en": "with",
        "ta": "உடன்",
        "ex": "I will go with my friend",
-       "exTa": "நான் என் நண்பருடன்"
+       "exTa": "நான் என் நண்பருடன் போவேன்."
       },
       {
        "en": "as",
-       "ta": "போல",
+       "ta": "ஆக",
        "ex": "He works as a driver",
        "exTa": "அவன் ஒரு டிரைவராக வேலை செய்கிறான்."
       },
@@ -704,7 +713,7 @@ window.GV_CONTENT = {
        "en": "like",
        "ta": "போன்ற",
        "ex": "She sings like a bird",
-       "exTa": "அவள் பறவையைப் போன்று"
+       "exTa": "அவள் பறவையைப் போன்று பாடுகிறாள்."
       },
       {
        "en": "per",
@@ -774,8 +783,8 @@ window.GV_CONTENT = {
       {
        "en": "How",
        "ta": "எப்படி",
-       "ex": "How do you come to school?",
-       "exTa": "நீங்கள் எப்படி பள்ளிக்கு வருகிறீர்கள்?"
+       "ex": "How do you get to school?",
+       "exTa": "நீங்கள் பள்ளிக்கு எப்படிச் செல்கிறீர்கள்?"
       },
       {
        "en": "How much",
@@ -850,9 +859,9 @@ window.GV_CONTENT = {
       },
       {
        "en": "short",
-       "ta": "குறுகிய",
+       "ta": "குள்ளமான",
        "ex": "She is short.",
-       "exTa": "அவள் குறுகியவள்."
+       "exTa": "அவள் குள்ளமானவள்."
       },
       {
        "en": "happy",
@@ -874,7 +883,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "good",
-       "ta": "நல்லது",
+       "ta": "நல்ல",
        "ex": "He is a good boy.",
        "exTa": "அவன் ஒரு நல்ல பையன்."
       },
@@ -981,7 +990,7 @@ window.GV_CONTENT = {
       },
       {
        "en": "never",
-       "ta": "ஒருபோதும் இல்லை",
+       "ta": "ஒருபோதும்",
        "ex": "I never lie.",
        "exTa": "நான் ஒருபோதும் பொய் பேசுவதில்லை."
       },
@@ -1001,7 +1010,7 @@ window.GV_CONTENT = {
        "en": "usually",
        "ta": "வழக்கமாக",
        "ex": "He usually eats early.",
-       "exTa": "அவன் வழக்கமாக விரைவாக சாப்பிடுகிறான்"
+       "exTa": "அவன் வழக்கமாக சீக்கிரமாகச் சாப்பிடுகிறான்."
       },
       {
        "en": "yesterday",
@@ -1071,8 +1080,8 @@ window.GV_CONTENT = {
       {
        "en": "because",
        "ta": "ஏனெனில்",
-       "ex": "I came because of you",
-       "exTa": "நான் வந்தேன் ஏனெனில் நீ தான் அழைத்தாய்."
+       "ex": "I came because you called me.",
+       "exTa": "நீ என்னை அழைத்ததால் நான் வந்தேன்."
       },
       {
        "en": "so",
@@ -1094,36 +1103,36 @@ window.GV_CONTENT = {
    "sum_ta": "வாக்கிய அமைப்பு.",
    "groups": [
     {
-     "en": "Positive",
-     "ta": "உடன்பாடு",
+     "en": "Affirmative",
+     "ta": "உறுதிவாக்கியம்",
      "lessons": [
       {
        "en": "Present tense",
-       "ta": "",
-       "ex": "I play cricket",
-       "exTa": "நான் cricket விளையாடுறேன்",
-       "pattern": "Subject + Main Verb + Object"
+       "ta": "நிகழ்காலம்",
+       "ex": "I play cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடுகிறேன்.",
+       "pattern": "Subject + Verb + Object"
       },
       {
        "en": "Present continuous",
-       "ta": "",
-       "ex": "I am playing cricket",
-       "exTa": "நான் cricket விளையாடிக்கிட்டிருக்கேன்",
-       "pattern": "Subject + Helping Verb + Main Verb + ing + Object"
+       "ta": "நிகழ்காலத் தொடர்நிலை",
+       "ex": "I am playing cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடிக்கொண்டிருக்கிறேன்.",
+       "pattern": "Subject + am/is/are + Verb-ing + Object"
       },
       {
        "en": "Past tense",
-       "ta": "",
-       "ex": "I played cricket",
-       "exTa": "நான் cricket விளையாடினேன்",
-       "pattern": "Subject + Past Verb + Object"
+       "ta": "இறந்தகாலம்",
+       "ex": "I played cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடினேன்.",
+       "pattern": "Subject + past-tense Verb + Object"
       },
       {
        "en": "Future tense",
-       "ta": "",
-       "ex": "I will play cricket",
-       "exTa": "நான் cricket விளையாட போறேன்",
-       "pattern": "Subject + will + Main Verb + Object"
+       "ta": "எதிர்காலம்",
+       "ex": "I will play cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடுவேன்.",
+       "pattern": "Subject + will + base Verb + Object"
       }
      ]
     },
@@ -1133,65 +1142,65 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Present tense",
-       "ta": "",
-       "ex": "I do not play cricket",
-       "exTa": "நான் cricket விளையாட மாட்டேன்",
-       "pattern": "Subject + do/does not + Main Verb + Object"
+       "ta": "நிகழ்காலம்",
+       "ex": "I do not play cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடுவதில்லை.",
+       "pattern": "Subject + do/does not + base Verb + Object"
       },
       {
        "en": "Present continuous",
-       "ta": "",
-       "ex": "I am not playing cricket",
-       "exTa": "நான் cricket விளையாடல",
-       "pattern": "Subject + am/is/are not + Verb + ing + Object"
+       "ta": "நிகழ்காலத் தொடர்நிலை",
+       "ex": "I am not playing cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடிக்கொண்டிருக்கவில்லை.",
+       "pattern": "Subject + am/is/are not + Verb-ing + Object"
       },
       {
        "en": "Past tense",
-       "ta": "",
-       "ex": "I did not play cricket",
-       "exTa": "நான் cricket விளையாடல",
-       "pattern": "Subject + did not + Main Verb + Object"
+       "ta": "இறந்தகாலம்",
+       "ex": "I did not play cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாடவில்லை.",
+       "pattern": "Subject + did not + base Verb + Object"
       },
       {
        "en": "Future tense",
-       "ta": "",
-       "ex": "I will not play cricket",
-       "exTa": "நான் cricket விளையாட மாட்டேன்",
-       "pattern": "Subject + will not + Main Verb + Object"
+       "ta": "எதிர்காலம்",
+       "ex": "I will not play cricket.",
+       "exTa": "நான் கிரிக்கெட் விளையாட மாட்டேன்.",
+       "pattern": "Subject + will not + base Verb + Object"
       }
      ]
     },
     {
-     "en": "Question",
-     "ta": "வினா",
+     "en": "WH questions",
+     "ta": "வினாச்சொல் கேள்விகள்",
      "lessons": [
       {
        "en": "Present tense",
-       "ta": "",
-       "ex": "Where do you play cricket ?",
-       "exTa": "நீ எங்கே cricket விளையாடுறா ?",
-       "pattern": "WH + do/does + Subject + Main Verb + Object ?"
+       "ta": "நிகழ்காலம்",
+       "ex": "Where do you play cricket?",
+       "exTa": "நீங்கள் எங்கே கிரிக்கெட் விளையாடுகிறீர்கள்?",
+       "pattern": "WH word + do/does + Subject + base Verb + Object?"
       },
       {
        "en": "Present continuous",
-       "ta": "",
-       "ex": "Where are you playing cricket ?",
-       "exTa": "நீ எங்கே cricket விளையாடிக்கிட்டிருக்கா?",
-       "pattern": "WH + am/is/are + Subject + Verb + ing + Object ?"
+       "ta": "நிகழ்காலத் தொடர்நிலை",
+       "ex": "Where are you playing cricket?",
+       "exTa": "நீங்கள் எங்கே கிரிக்கெட் விளையாடிக்கொண்டிருக்கிறீர்கள்?",
+       "pattern": "WH word + am/is/are + Subject + Verb-ing + Object?"
       },
       {
        "en": "Past tense",
-       "ta": "",
-       "ex": "Where did you play cricket ?",
-       "exTa": "நீ எங்கே cricket விளையாடினா ?",
-       "pattern": "WH + did + Subject + Main Verb + Object ?"
+       "ta": "இறந்தகாலம்",
+       "ex": "Where did you play cricket?",
+       "exTa": "நீங்கள் எங்கே கிரிக்கெட் விளையாடினீர்கள்?",
+       "pattern": "WH word + did + Subject + base Verb + Object?"
       },
       {
        "en": "Future tense",
-       "ta": "",
-       "ex": "Where will you play cricket ?",
-       "exTa": "நீ எங்கே cricket விளையாட போறா ?",
-       "pattern": "WH + will + Subject + Main Verb + Object ?"
+       "ta": "எதிர்காலம்",
+       "ex": "Where will you play cricket?",
+       "exTa": "நீங்கள் எங்கே கிரிக்கெட் விளையாடுவீர்கள்?",
+       "pattern": "WH word + will + Subject + base Verb + Object?"
       }
      ]
     },
@@ -1201,31 +1210,31 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Present tense",
-       "ta": "",
-       "ex": "Do you play cricket ?",
-       "exTa": "நீ எங்கே cricket விளையாடுறா ?",
-       "pattern": "Do/Does + Subject + Main Verb + Object ?"
+       "ta": "நிகழ்காலம்",
+       "ex": "Do you play cricket?",
+       "exTa": "நீங்கள் கிரிக்கெட் விளையாடுகிறீர்களா?",
+       "pattern": "Do/Does + Subject + base Verb + Object?"
       },
       {
        "en": "Present continuous",
-       "ta": "",
-       "ex": "Are you playing cricket ?",
-       "exTa": "நீ cricket விளையாடிக்கிட்டிருக்கியா ?",
-       "pattern": "Am/Is/Are + Subject + Verb + ing + Object ?"
+       "ta": "நிகழ்காலத் தொடர்நிலை",
+       "ex": "Are you playing cricket?",
+       "exTa": "நீங்கள் கிரிக்கெட் விளையாடிக்கொண்டிருக்கிறீர்களா?",
+       "pattern": "Am/Is/Are + Subject + Verb-ing + Object?"
       },
       {
        "en": "Past tense",
-       "ta": "",
-       "ex": "Did you play cricket ?",
-       "exTa": "நீ cricket விளையாடினியா ?",
-       "pattern": "Did + Subject + Main Verb + Object ?"
+       "ta": "இறந்தகாலம்",
+       "ex": "Did you play cricket?",
+       "exTa": "நீங்கள் கிரிக்கெட் விளையாடினீர்களா?",
+       "pattern": "Did + Subject + base Verb + Object?"
       },
       {
        "en": "Future tense",
-       "ta": "",
-       "ex": "Will you play cricket ?",
-       "exTa": "நீ cricket விளையாட போறியா ?",
-       "pattern": "Will + Subject + Main Verb + Object ?"
+       "ta": "எதிர்காலம்",
+       "ex": "Will you play cricket?",
+       "exTa": "நீங்கள் கிரிக்கெட் விளையாடுவீர்களா?",
+       "pattern": "Will + Subject + base Verb + Object?"
       }
      ]
     },
@@ -1235,15 +1244,15 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Order",
-       "ta": "",
-       "ex": "Close the door",
-       "exTa": "கதவு மூடு"
+       "ta": "கட்டளை",
+       "ex": "Close the door.",
+       "exTa": "கதவை மூடு."
       },
       {
        "en": "Request Example",
-       "ta": "",
-       "ex": "Please open the window",
-       "exTa": "தயவு செய்து ஜன்னல் திற"
+       "ta": "வேண்டுகோள்",
+       "ex": "Please open the window.",
+       "exTa": "தயவுசெய்து ஜன்னலைத் திற."
       }
      ]
     },
@@ -1253,14 +1262,14 @@ window.GV_CONTENT = {
      "lessons": [
       {
        "en": "Exclamatory",
-       "ta": "",
+       "ta": "வியப்பு",
        "ex": "What a beautiful place!",
        "exTa": "என்ன ஒரு அழகான இடம்!"
       },
       {
        "en": "Exclamatory",
-       "ta": "",
-       "ex": "Wow! It's amazing",
+       "ta": "வியப்பு",
+       "ex": "Wow! It's amazing!",
        "exTa": "வாவ்! இது அருமை!"
       }
      ]
@@ -1277,8 +1286,8 @@ window.GV_CONTENT = {
    "ta": "கால வடிவங்கள்",
    "cols": [
     "Tense",
-    "Auxiliary verb",
-    "Usage example",
+    "Structure",
+    "English Example",
     "Tamil Example"
    ],
    "rows": [
@@ -1290,27 +1299,27 @@ window.GV_CONTENT = {
     ],
     [
      "Simple present",
-     "am, is, are",
-     "I am a writer\nHe is a writer\nThey are writers",
-     "நான் ஒரு எழுத்தாளன்.\nஅவன் ஒரு எழுத்தாளர்.\nஅவர்கள் எழுத்தாளர்கள்."
+     "base verb / base verb + s",
+     "I write every day.",
+     "நான் தினமும் எழுதுகிறேன்."
     ],
     [
      "Present continuous",
-     "am being, is being, are being",
-     "I am writing now..\nI am being careful in writing\nHe is being careful in writing",
-     "நான் இப்போது எழுதுகிறேன்.\nஅவன் எழுதுவதில் கவனமாக இருக்கிறான்.\nஅவர்கள் எழுதுவதில் கவனமாக இருக்கிறார்கள்."
+     "am / is / are + verb-ing",
+     "I am writing now.",
+     "நான் இப்போது எழுதிக்கொண்டிருக்கிறேன்."
     ],
     [
      "Present perfect",
-     "has been, have been",
-     "He has been  writing for an hour\nThey have been writing",
-     "அவன் ஒரு மணி நேரமாக எழுதிவருகிறான்.\nஅவர்கள் எழுதிக்கொண்டிருக்கிறார்கள்."
+     "have / has + past participle",
+     "I have written the letter.",
+     "நான் கடிதத்தை எழுதி முடித்துவிட்டேன்."
     ],
     [
      "Present perfect continuous",
-     "Has been being, have been being",
-     "He has been being careful in writing.\nThey have been being careful in writing",
-     "அவன் எழுதும் பொழுது கவனமாக இருந்து வந்தான்.\nஅவர்கள் எழுதுவதில் கவனமாக இருந்து கொண்டிருக்கிறார்கள்."
+     "have / has been + verb-ing",
+     "I have been writing for an hour.",
+     "நான் ஒரு மணி நேரமாக எழுதிக்கொண்டிருக்கிறேன்."
     ],
     [
      "PAST TENSE",
@@ -1320,27 +1329,27 @@ window.GV_CONTENT = {
     ],
     [
      "Simple past",
-     "was, were",
-     "I was a writer.\nThey were writers.",
-     "நான் ஒரு எழுத்தாளன் இருந்தேன்\n.\nஅவர்கள் எழுத்தாளர்கள் இருந்தனர்."
+     "past form",
+     "I wrote yesterday.",
+     "நான் நேற்று எழுதினேன்."
     ],
     [
      "Past continuous",
-     "was being, were being",
-     "I was writing yesterday.\nThey were being careful in writing.",
-     "நேற்று எழுதிக் கொண்டிருந்தேன்.\nஅவர்கள் எழுதுவதில் கவனமாக இருந்தனர்."
+     "was / were + verb-ing",
+     "I was writing at 5 PM.",
+     "நான் மாலை 5 மணிக்கு எழுதிக்கொண்டிருந்தேன்."
     ],
     [
      "Past perfect",
-     "Had been",
-     "I had been writing  for an hour..",
-     "நான் ஒரு மணி நேரமாக எழுதி வந்தேன்."
+     "had + past participle",
+     "I had written before he arrived.",
+     "அவர் வருவதற்கு முன் நான் எழுதி முடித்திருந்தேன்."
     ],
     [
      "Past perfect continuous",
-     "Had been being",
-     "He had been being careful in writing.",
-     "அவன் எழுதும் போது கவனமாக இருந்து வந்தான்."
+     "had been + verb-ing",
+     "I had been writing for an hour before he arrived.",
+     "அவர் வருவதற்கு முன் நான் ஒரு மணி நேரமாக எழுதிக்கொண்டிருந்தேன்."
     ],
     [
      "FUTURE TENSE",
@@ -1350,65 +1359,59 @@ window.GV_CONTENT = {
     ],
     [
      "Simple future",
-     "will be, shall be",
-     "I will be a writer.\nWe shall be writers.",
-     "நான் ஒரு எழுத்தாளன் ஆக இருப்பேன்.\nநாங்கள் எழுத்தாளர்கள் ஆக இருப்போம்."
+     "will + base verb",
+     "I will write tomorrow.",
+     "நான் நாளை எழுதுவேன்."
     ],
     [
      "Future continuous",
-     "will be being, shall be being",
-     "I will be being careful while writing\nWe shall be being careful in writing.",
-     "நான் எழுதும் போது கவனமாக இருந்து கொண்டிருப்பேன்.\nநாங்கள் எழுதுவதில் கவனமாக இருக்க இருப்போம்."
+     "will be + verb-ing",
+     "I will be writing at 5 PM.",
+     "நான் மாலை 5 மணிக்கு எழுதிக்கொண்டிருப்பேன்."
     ],
     [
      "Future perfect",
-     "will have been,shall have been",
-     "I will have been writing for an hour.\nWe shall have been writing.",
-     "நான் ஒரு மணி நேரமாக எழுதி முடித்திருப்பேன்.\nநாங்கள் எழுதிக் கொண்டிருப்போம்."
+     "will have + past participle",
+     "I will have written the letter by 5 PM.",
+     "மாலை 5 மணிக்குள் நான் கடிதத்தை எழுதி முடித்திருப்பேன்."
     ],
     [
      "Future perfect continuous",
-     "will have been being, shall have been being",
-     "I will have been being careful in writing.\nWe shall have been being careful in writing.",
-     "நான் எழுதும் போது கவனமாக இருந்து வந்திருப்பேன்.\nநாங்கள் எழுதுவதில் கவனமாக இருந்து கொண்டிருப்போம்."
+     "will have been + verb-ing",
+     "By 5 PM, I will have been writing for an hour.",
+     "மாலை 5 மணிக்குள் நான் ஒரு மணி நேரமாக எழுதிக்கொண்டிருப்பேன்."
     ]
    ]
   },
   {
    "id": "auxiliary",
    "topic": "verbs",
-   "en": "Auxiliary verb forms",
+   "en": "Primary auxiliary verbs",
    "ta": "உதவி வினை",
    "cols": [
-    "Auxiliary verb forms",
+    "Auxiliary verb",
     "Present",
     "Past",
-    "Future"
+    "Main uses"
    ],
    "rows": [
     [
-     "",
-     "am,is,are",
-     "Was,Were",
-     "Will be,shall be"
+     "be",
+     "am, is, are",
+     "was, were",
+     "continuous forms and passive voice"
     ],
     [
-     "Continuous",
-     "am being,is being,are being",
-     "Was being,were being",
-     "Will be being,shall be being"
+     "have",
+     "have, has",
+     "had",
+     "perfect forms"
     ],
     [
-     "Perfect",
-     "Has been,have been",
-     "Had been",
-     "Will have been,shall have been"
-    ],
-    [
-     "Perfect continuous",
-     "Has been being,have been being",
-     "Had been being",
-     "Will have been being,shall have been being"
+     "do",
+     "do, does",
+     "did",
+     "questions, negatives and emphasis"
     ]
    ]
   },
@@ -1432,31 +1435,31 @@ window.GV_CONTENT = {
     ],
     [
      "could",
-     "முடிந்த செயல்",
-     "I could go.",
-     "நான் போக முடியும்."
+     "திறன் / சாத்தியம் / மரியாதையான கோரிக்கை",
+     "Could you help me?",
+     "நீங்கள் எனக்கு உதவ முடியுமா?"
     ],
     [
      "will",
      "எதிர்காலம்",
-     "I will write",
-     "நான் எழுதப் போகிறேன்."
+     "I will write.",
+     "நான் எழுதுவேன்."
     ],
     [
      "would",
-     "கற்பனையான செயல்\n( Imaginary action )",
-     "I would like tea.",
-     "நான் தேனீர் விரும்புகிறேன்."
+     "விருப்பம் / மரியாதை / கற்பனை நிலை",
+     "I would like some tea.",
+     "எனக்கு கொஞ்சம் தேநீர் வேண்டும்."
     ],
     [
      "may",
-     "செயல் நிகழலாம்\n( செயல் நிகழ்வதற்கான சாத்தியங்கள் அதிகம் )",
-     "I may come",
-     "நான் வர வாய்ப்பு இருக்கிறது"
+     "அனுமதி / சாத்தியம்",
+     "I may come.",
+     "நான் வரலாம்."
     ],
     [
      "might",
-     "செயல் நிகழலாம்\n( செயல் நிகழ்வதற்கான சாத்தியங்கள் குறைவு )",
+     "உறுதியில்லாத சாத்தியம்",
      "It might rain today.",
      "இன்று மழை பெய்யலாம்"
     ],
@@ -1468,19 +1471,19 @@ window.GV_CONTENT = {
     ],
     [
      "shall",
-     "செய்யப்போகிறேன்\n( மரியாதையான )",
-     "I shall help you",
-     "நான் உங்களுக்கு உதவப்போகிறேன்."
+     "முறையான எதிர்கால நோக்கம் / பரிந்துரை",
+     "Shall we begin?",
+     "நாம் தொடங்கலாமா?"
     ],
     [
      "should",
-     "கட்டாயம் செய்ய வேண்டும்\n( மரியாதையான )",
+     "ஆலோசனை / எதிர்பார்ப்பு",
      "You should study.",
      "நீ படிக்க வேண்டும்."
     ],
     [
      "ought to",
-     "செய்யவேண்டும்\n( ஒழுக்கத்தை குறிக்கக்கூடிய செயல்",
+     "ஆலோசனை / ஒழுக்கக் கடமை",
      "You ought to help.",
      "நீ உதவ வேண்டும்."
     ]
@@ -1492,341 +1495,334 @@ window.GV_CONTENT = {
    "en": "Main verbs",
    "ta": "முதன்மை வினை",
    "cols": [
-    "Root Verb",
-    "Present",
+    "Base Verb",
+    "Present (base / -s)",
     "Past",
-    "Future",
-    "Present Participle"
+    "Past participle",
+    "-ing form"
    ],
    "rows": [
     [
      "do\nசெய்",
      "do/does\nசெய்கிறேன்",
      "did\nசெய்தேன்",
-     "will do / shall do\nசெய்வேன்",
-     "doing\nசெய்து கொண்டு"
+     "done\nசெய்த",
+     "doing\nசெய்வது"
     ],
     [
      "read\nபடி",
      "read(s)\nபடிக்கிறேன்",
      "read\nபடித்தேன்",
-     "will read / shall read\nபடிப்பேன்",
-     "reading\nபடித்து கொண்டு"
+     "read\nபடித்த",
+     "reading\nபடிப்பது"
     ],
     [
      "see\nபார்",
      "see(s)\nபார்க்கிறேன்",
      "saw\nபார்த்தேன்",
-     "will see / shall see\nபார்ப்பேன்",
-     "seeing\nபார்த்துக் கொண்டு"
+     "seen\nபார்த்த",
+     "seeing\nபார்ப்பது"
     ],
     [
      "ask\nகேள்",
      "ask(s)\nகேட்கிறேன்",
      "asked\nகேட்டேன்",
-     "will ask / shall ask\nகேட்பேன்",
-     "asking\nகேட்டுக் கொண்டு"
+     "asked\nகேட்ட",
+     "asking\nகேட்பது"
     ],
     [
      "sleep\nதூங்கு",
      "sleep(s)\nதூங்குகிறேன்",
      "slept\nதூங்கினேன்",
-     "will sleep / shall sleep\nதூங்குவேன்",
-     "sleeping\nதூங்கிக் கொண்டு"
+     "slept\nதூங்கிய",
+     "sleeping\nதூங்குவது"
     ],
     [
      "say\nசொல்",
      "say(s)\nசொல்கிறேன்",
      "said\nசொன்னேன்",
-     "will say / shall say\nசொல்வேன்",
-     "saying\nசொல்லிக் கொண்டு"
+     "said\nசொன்ன",
+     "saying\nசொல்வது"
     ],
     [
      "tell\nசொல்",
      "tell(s)\nசொல்கிறேன்",
      "told\nசொன்னேன்",
-     "will tell / shall tell\nசொல்வேன்",
-     "telling\nசொல்லிக் கொண்டு"
+     "told\nசொன்ன",
+     "telling\nசொல்வது"
     ],
     [
      "listen\nகேள்",
      "listen(s)\nகேட்கிறேன்",
      "listened\nகேட்டேன்",
-     "will listen / shall listen\nகேட்பேன்",
-     "listening\nகேட்டுக் கொண்டு"
+     "listened\nகேட்ட",
+     "listening\nகேட்பது"
     ],
     [
      "open\nதிற",
      "open(s)\nதிறக்கிறேன்",
      "opened\nதிறந்தேன்",
-     "will open / shall open\nதிறப்பேன்",
-     "opening\nதிறந்து கொண்டு"
+     "opened\nதிறந்த",
+     "opening\nதிறப்பது"
     ],
     [
      "close\nமூடு",
      "close(s)\nமூடுகிறேன்",
      "closed\nமூடினேன்",
-     "will close / shall close\nமூடுவேன்",
-     "closing\nமூடிக் கொண்டு"
+     "closed\nமூடிய",
+     "closing\nமூடுவது"
     ],
     [
      "pull\nஇழு",
      "pull(s)\nஇழுக்கிறேன்",
      "pulled\nஇழுத்தேன்",
-     "will pull / shall pull\nஇழுப்பேன்",
-     "pulling\nஇழுத்துக் கொண்டு"
+     "pulled\nஇழுத்த",
+     "pulling\nஇழுப்பது"
     ],
     [
-     "bath\nகுளி",
-     "bath(s)\nகுளிக்கிறேன்",
+     "bathe\nகுளி",
+     "bathe(s)\nகுளிக்கிறேன்",
      "bathed\nகுளித்தேன்",
-     "will bath / shall bath\nகுளிப்பேன்",
-     "bathing\nகுளித்துக் கொண்டு"
+     "bathed\nகுளித்த",
+     "bathing\nகுளிப்பது"
     ],
     [
      "cry\nஅழு",
      "cry(s)\nஅழுகிறேன்",
      "cried\nஅழுதேன்",
-     "will cry / shall cry\nஅழுவேன்",
-     "crying\nஅழத்துக் கொண்டு"
+     "cried\nஅழுத",
+     "crying\nஅழுவது"
     ],
     [
      "get\nபெறு",
      "get(s)\nபெறுகிறேன்",
      "got\nபெற்றேன்",
-     "will get / shall get\nபெறுவேன்",
-     "getting\nபெற்று கொண்டு"
+     "got / gotten\nபெற்ற",
+     "getting\nபெறுவது"
     ],
     [
      "wash\nகழுவு",
      "wash(s)\nகழுவுகிறேன்",
      "washed\nகழுவினேன்",
-     "will wash / shall wash\nகழுவுவேன்",
-     "washing\nகழுவிக் கொண்டு"
+     "washed\nகழுவிய",
+     "washing\nகழுவுவது"
     ],
     [
      "scold\nதிட்டு",
      "scold(s)\nதிட்டுகிறேன்",
      "scolded\nதிட்டினேன்",
-     "will scold / shall scold\nதிட்டுவேன்",
-     "scolding\nதிட்டிக் கொண்டு"
+     "scolded\nதிட்டிய",
+     "scolding\nதிட்டுவது"
     ],
     [
      "fight\nபோராடு",
      "fight(s)\nபோராடுகிறேன்",
      "fought\nபோராடினேன்",
-     "will fight / shall fight\nபோராடுவேன்",
-     "fighting\nபோராடிக் கொண்டு"
+     "fought\nபோராடிய",
+     "fighting\nபோராடுவது"
     ],
     [
      "take\nஎடு",
      "take(s)\nஎடுக்கிறேன்",
      "took\nஎடுத்தேன்",
-     "will take / shall take\nஎடுப்பேன்",
-     "taking\nஎடுத்துக் கொண்டு"
+     "taken\nஎடுத்த",
+     "taking\nஎடுப்பது"
     ],
     [
      "like\nவிரும்பு",
      "like(s)\nவிரும்புகிறேன்",
      "liked\nவிரும்பினேன்",
-     "will like / shall like\nவிரும்புவேன்",
-     "liking\nவிரும்பிக் கொண்டு"
+     "liked\nவிரும்பிய",
+     "liking\nவிரும்புவது"
     ],
     [
-     "join\nசேர்ந்து",
+     "join\nசேர்",
      "join(s)\nசேர்கிறேன்",
      "joined\nசேர்ந்தேன்",
-     "will join / shall join\nசேர்வேன்",
-     "joining\nசேர்ந்துக் கொண்டு"
+     "joined\nசேர்ந்த",
+     "joining\nசேருவது"
     ],
     [
      "give\nகொடு",
      "give(s)\nகொடுக்கிறேன்",
      "gave\nகொடுத்தேன்",
-     "will give / shall give\nகொடுப்பேன்",
-     "giving\nகொடுத்துக் கொண்டு"
+     "given\nகொடுத்த",
+     "giving\nகொடுப்பது"
     ],
     [
      "eat\nசாப்பிடு",
      "eat(s)\nசாப்பிடுகிறேன்",
      "ate\nசாப்பிட்டேன்",
-     "will eat / shall eat\nசாப்பிடுவேன்",
-     "eating\nசாப்பிட்டுக் கொண்டு"
+     "eaten\nசாப்பிட்ட",
+     "eating\nசாப்பிடுவது"
     ],
     [
      "stop\nநிறுத்து",
      "stop(s)\nநிறுத்துகிறேன்",
      "stopped\nநிறுத்தினேன்",
-     "will stop / shall stop\nநிறுத்துவேன்",
-     "stopping\nநிறுத்திக் கொண்டு"
+     "stopped\nநிறுத்திய",
+     "stopping\nநிறுத்துவது"
     ],
     [
      "send\nஅனுப்பு",
      "send(s)\nஅனுப்புகிறேன்",
      "sent\nஅனுப்பினேன்",
-     "will send / shall send\nஅனுப்புவேன்",
-     "sending\nஅனுப்பிக் கொண்டு"
+     "sent\nஅனுப்பிய",
+     "sending\nஅனுப்புவது"
     ],
     [
      "laugh\nசிரி",
      "laugh(s)\nசிரிக்கிறேன்",
      "laughed\nசிரித்தேன்",
-     "will laugh / shall laugh\nசிரிப்பேன்",
-     "laughing\nசிரித்துக் கொண்டு"
+     "laughed\nசிரித்த",
+     "laughing\nசிரிப்பது"
     ],
     [
      "bug\nதொந்தரவு செய்",
      "bug(s)\nதொந்தரவு செய்கிறேன்",
      "bugged\nதொந்தரவு செய்தேன்",
-     "will bug / shall bug\nதொந்தரவு செய்வேன்",
-     "bugging\nதொந்தரவு செய்து கொண்டு"
+     "bugged\nதொந்தரவு செய்த",
+     "bugging\nதொந்தரவு செய்வது"
     ],
     [
      "clean\nசுத்தம் செய்",
      "clean(s)\nசுத்தம் செய்கிறேன்",
      "cleaned\nசுத்தம் செய்தேன்",
-     "will clean / shall clean\nசுத்தம் செய்வேன்",
-     "cleaning\nசுத்தம் செய்து கொண்டு"
+     "cleaned\nசுத்தம் செய்த",
+     "cleaning\nசுத்தம் செய்வது"
     ],
     [
      "bring\nகொண்டு வா",
      "bring(s)\nகொண்டு வருகிறேன்",
      "brought\nகொண்டு வந்தேன்",
-     "will bring / shall bring\nகொண்டு வருவேன்",
-     "bringing\nகொண்டு வந்து கொண்டு"
+     "brought\nகொண்டு வந்த",
+     "bringing\nகொண்டு வருவது"
     ],
     [
      "go\nபோ",
      "go(es)\nபோகிறேன்",
      "went\nசென்றேன்",
-     "will go / shall go\nபோவேன்",
-     "going\nபோய் கொண்டு"
+     "gone\nசென்ற",
+     "going\nபோவது"
     ],
     [
      "leave\nவிடு",
      "leave(s)\nவிடுகிறேன்",
      "left\nவிட்டேன்",
-     "will leave / shall leave\nவிடுவேன்",
-     "leaving\nவிட்டுக் கொண்டு"
+     "left\nவிட்ட",
+     "leaving\nவிடுவது"
     ],
     [
      "drink\nகுடி",
      "drink(s)\nகுடிக்கிறேன்",
      "drank\nகுடித்தேன்",
-     "will drink / shall drink\nகுடிப்பேன்",
-     "drinking\nகுடித்துக் கொண்டு"
+     "drunk\nகுடித்த",
+     "drinking\nகுடிப்பது"
     ],
     [
      "warn\nஎச்சரிக்கை செய்",
      "warn(s)\nஎச்சரிக்கை செய்கிறேன்",
      "warned\nஎச்சரிக்கை செய்தேன்",
-     "will warn / shall warn\nஎச்சரிக்கை செய்வேன்",
-     "warning\nஎச்சரிக்கை செய்து கொண்டு"
-    ],
-    [
-     "like\nவிரும்பு",
-     "like(s)\nவிரும்புகிறேன்",
-     "liked\nவிரும்பினேன்",
-     "will like / shall like\nவிரும்புவேன்",
-     "liking\nவிரும்பிக் கொண்டு"
+     "warned\nஎச்சரிக்கை செய்த",
+     "warning\nஎச்சரிப்பது"
     ],
     [
      "write\nஎழுது",
      "write(s)\nஎழுதுகிறேன்",
-     "wrote\nஎழுதியேன்",
-     "will write / shall write\nஎழுதுவேன்",
-     "writing\nஎழுதி கொண்டு"
+     "wrote\nஎழுதினேன்",
+     "written\nஎழுதிய",
+     "writing\nஎழுதுவது"
     ],
     [
      "find\nகண்டுபிடி",
      "find(s)\nகண்டுபிடிக்கிறேன்",
      "found\nகண்டுபிடித்தேன்",
-     "will find / shall find\nகண்டுபிடிப்பேன்",
-     "finding\nகண்டுபிடித்து கொண்டு"
+     "found\nகண்டுபிடித்த",
+     "finding\nகண்டுபிடிப்பது"
     ],
     [
      "roll\nஉருட்டு",
      "roll(s)\nஉருட்டுகிறேன்",
      "rolled\nஉருட்டினேன்",
-     "will roll / shall roll\nஉருட்டுவேன்",
-     "rolling\nஉருட்டிக் கொண்டு"
+     "rolled\nஉருட்டிய",
+     "rolling\nஉருட்டுவது"
     ],
     [
      "play\nவிளையாடு",
      "play(s)\nவிளையாடுகிறேன்",
      "played\nவிளையாடினேன்",
-     "will play / shall play\nவிளையாடுவேன்",
-     "playing\nவிளையாடிக் கொண்டு"
+     "played\nவிளையாடிய",
+     "playing\nவிளையாடுவது"
     ],
     [
      "touch\nதொடு",
      "touch(es)\nதொடுகிறேன்",
-     "touched\nதொடைத்தேன்",
-     "will touch / shall touch\nதொடுவேன்",
-     "touching\nதொடத் கொண்டு"
+     "touched\nதொட்டேன்",
+     "touched\nதொட்ட",
+     "touching\nதொடுவது"
     ],
     [
      "earn\nசம்பாதி",
      "earn(s)\nசம்பாதிக்கிறேன்",
      "earned\nசம்பாதித்தேன்",
-     "will earn / shall earn\nசம்பாதிப்பேன்",
-     "earning\nசம்பாதித்து கொண்டு"
+     "earned\nசம்பாதித்த",
+     "earning\nசம்பாதிப்பது"
     ],
     [
-     "remember\nநினை",
-     "remember(s)\nநினைக்கிறேன்",
-     "remembered\nநினைத்தேன்",
-     "will remember / shall remember\nநினைப்பேன்",
-     "remembering\nநினைத்து கொண்டு"
+     "remember\nநினைவில் கொள்",
+     "remember(s)\nநினைவில் கொள்கிறேன்",
+     "remembered\nநினைவில் கொண்டேன்",
+     "remembered\nநினைவில் கொண்ட",
+     "remembering\nநினைவில் கொள்வது"
     ],
     [
      "wait\nகாத்திரு",
      "wait(s)\nகாத்திருக்கிறேன்",
      "waited\nகாத்திருந்தேன்",
-     "will wait / shall wait\nகாத்திருப்பேன்",
-     "waiting\nகாத்திருந்து கொண்டு"
+     "waited\nகாத்திருந்த",
+     "waiting\nகாத்திருப்பது"
     ],
     [
      "sit\nஉட்கார்",
      "sit(s)\nஉட்கார்கிறேன்",
      "sat\nஉட்கார்ந்தேன்",
-     "will sit / shall sit\nஉட்கார்வேன்",
-     "sitting\nஉட்கார்ந்து கொண்டு"
+     "sat\nஉட்கார்ந்த",
+     "sitting\nஉட்காருவது"
     ],
     [
      "show\nகாட்டு",
      "show(s)\nகாட்டுகிறேன்",
      "showed\nகாட்டினேன்",
-     "will show / shall show\nகாட்டுவேன்",
-     "showing\nகாட்டிக் கொண்டு"
+     "shown\nகாட்டிய",
+     "showing\nகாட்டுவது"
     ],
     [
-     "permission\nஅனுமதி கொடு",
-     "give permission\nஅனுமதி கொடுக்கிறேன்",
-     "gave permission\nஅனுமதி கொடுத்தேன்",
-     "will give permission\nஅனுமதி கொடுப்பேன்",
-     "giving permission\nஅனுமதி கொடுத்து கொண்டு"
+     "permit\nஅனுமதி கொடு",
+     "permit(s)\nஅனுமதி கொடுக்கிறேன்",
+     "permitted\nஅனுமதி கொடுத்தேன்",
+     "permitted\nஅனுமதி கொடுத்த",
+     "permitting\nஅனுமதி கொடுப்பது"
     ],
     [
      "work\nவேலை செய்",
      "work(s)\nவேலை செய்கிறேன்",
      "worked\nவேலை செய்தேன்",
-     "will work / shall work\nவேலை செய்வேன்",
-     "working\nவேலை செய்து கொண்டு"
+     "worked\nவேலை செய்த",
+     "working\nவேலை செய்வது"
     ],
     [
      "answer\nபதில் சொல்",
      "answer(s)\nபதில் சொல்கிறேன்",
      "answered\nபதில் சொன்னேன்",
-     "will answer / shall answer\nபதில் சொல்வேன்",
-     "answering\nபதில் சொல்லிக் கொண்டு"
+     "answered\nபதில் சொன்ன",
+     "answering\nபதில் சொல்வது"
     ],
     [
-     "force\nவலியுறுத்து",
-     "force(s)\nவலியுறுத்துகிறேன்",
-     "forced\nவலியுறுத்தினேன்",
-     "will force / shall force\nவலியுறுத்துவேன்",
-     "forcing\nவலியுறுத்திக் கொண்டு"
+     "force\nகட்டாயப்படுத்து",
+     "force(s)\nகட்டாயப்படுத்துகிறேன்",
+     "forced\nகட்டாயப்படுத்தினேன்",
+     "forced\nகட்டாயப்படுத்திய",
+     "forcing\nகட்டாயப்படுத்துவது"
     ]
    ]
   },
@@ -1836,13 +1832,13 @@ window.GV_CONTENT = {
    "en": "Personal pronouns",
    "ta": "ஆள்பெயர்",
    "cols": [
-    "Persons",
-    "Numbers",
+    "Person",
+    "Number",
     "Subject",
-    "Object-ஐ/குடம்",
-    "Adjective+noun",
-    "Possessive",
-    "Reflexive and empathic"
+    "Object",
+    "Possessive determiner",
+    "Possessive pronoun",
+    "Reflexive / emphatic"
    ],
    "rows": [
     [
@@ -1852,16 +1848,16 @@ window.GV_CONTENT = {
      "Me\nஎன்னை\nஎனக்கு",
      "My\nஎன்னுடைய",
      "Mine\nஎன்னுடையது",
-     "Myself\nதானே"
+     "Myself\nநானே / என்னையே"
     ],
     [
      "First Person",
      "Plural",
      "We\nநாம்\nநாங்கள்",
-     "Us\nஎங்களை\nஎங்களுக்கு",
+     "Us\nநம்மை / எங்களை\nநமக்கு / எங்களுக்கு",
      "Our\nநம்முடைய\nஎங்களுடைய",
-     "Ours\nநம்முடையது\nஎங்களுடைது",
-     "Ourselves\nதாங்களே"
+     "Ours\nநம்முடையது\nஎங்களுடையது",
+     "Ourselves\nநாமே / நாங்களே"
     ],
     [
      "Second Person",
@@ -1870,7 +1866,7 @@ window.GV_CONTENT = {
      "You\nஉன்னை\nஉனக்கு",
      "Your\nஉன்னுடைய\nஉங்களுடைய",
      "Yours\nஉன்னுடையது\nஉங்களுடையது",
-     "Yourself\nதானே"
+     "Yourself\nநீயே / உன்னையே"
     ],
     [
      "Second Person",
@@ -1878,8 +1874,8 @@ window.GV_CONTENT = {
      "You\nநீங்கள்",
      "You\nஉங்களை\nஉங்களுக்கு\nஉங்களிடம்",
      "Your\nஉங்களுடைய",
-     "Your\nஉங்களுடையது",
-     "Yourselves\nதாங்களே"
+     "Yours\nஉங்களுடையது",
+     "Yourselves\nநீங்களே / உங்களையே"
     ],
     [
      "Third Person",
@@ -1888,16 +1884,16 @@ window.GV_CONTENT = {
      "Him\nஅவனை\nஅவனிடம்\nஅவனுக்கு",
      "His\nஅவனுடைய\nஅவருடைய",
      "His\nஅவனுடையது\nஅவருடையது",
-     "Himself\nதானே"
+     "Himself\nஅவனே / அவரே"
     ],
     [
      "Third Person",
      "singular",
-     "She\nஅவள்\nஅவங்க",
+     "She\nஅவள்",
      "Her\nஅவளை\nஅவளுக்கு\nஅவளிடம்",
      "Her\nஅவளுடைய",
      "Her\nஅவளுடையது",
-     "Herself\nதானே"
+     "Herself\nஅவளே"
     ],
     [
      "Third Person",
@@ -1906,16 +1902,16 @@ window.GV_CONTENT = {
      "It\nஅதை\nஅதற்கு\nஅதனிடம்",
      "Its\nஅதனுடைய",
      "Its\nஅதனுடையது",
-     "Itself\nதானே"
+     "Itself\nஅதுவே"
     ],
     [
      "Third Person",
      "plural",
-     "They\nஅவர்கள்\nஅவைகள்",
+     "They\nஅவர்கள்\nஅவை",
      "Them\nஅவர்களை\nஅவர்களுக்கு\nஅவர்களிடம்",
-     "Their\nஅவர்களுடைய\nஅவைகளுடைய",
-     "Theirs\nஅவர்களுடையது\nஅவைகளுடைது",
-     "Themselves\nதாங்களே"
+     "Their\nஅவர்களுடைய\nஅவற்றின்",
+     "Theirs\nஅவர்களுடையது\nஅவற்றுடையது",
+     "Themselves\nஅவர்களே / அவையே"
     ]
    ]
   },
@@ -1935,23 +1931,23 @@ window.GV_CONTENT = {
     [
      "a",
      "ஒரு",
-     "Singular",
+     "One non-specific singular noun before a consonant sound",
      "I have a pen.",
-     "எனக்கு ஒரு பேனா             இருக்கிறது."
+     "எனக்கு ஒரு பேனா இருக்கிறது."
     ],
     [
      "an",
      "ஒரு",
-     "Singular,\nIf noun starts with vowels (அ, ஆ, இ, ஈ, உ)",
+     "One non-specific singular noun before a vowel sound",
      "She eats an apple.",
      "அவள் ஒரு ஆப்பிள் சாப்பிட்டாள்."
     ],
     [
      "the",
-     "அந்த",
-     "Specific nouns\n(அந்த குறிப்பிட்ட பொருள்)",
+     "குறிப்பிட்ட பொருள்",
+     "A specific, already known or unique noun",
      "The sun is bright.",
-     "அந்த சூரியன் பிரகாசமாக உள்ளது."
+     "சூரியன் பிரகாசமாக உள்ளது."
     ]
    ]
   },
@@ -1962,7 +1958,7 @@ window.GV_CONTENT = {
    "ta": "இடமும் காலமும்",
    "cols": [
     "Preposition",
-    "",
+    "Use",
     "Tamil Meaning",
     "English Example",
     "Tamil Example"
@@ -1976,6 +1972,7 @@ window.GV_CONTENT = {
      "பந்து பெட்டியில் உள்ளது."
     ],
     [
+     "in",
      "Time",
      "இல்",
      "I was born in 2000",
@@ -1989,10 +1986,11 @@ window.GV_CONTENT = {
      "அவள் பள்ளியில் இருக்கிறாள்."
     ],
     [
+     "at",
      "Time",
-     "க்இ",
+     "மணிக்கு",
      "The train arrives at 5 PM",
-     "ரயில் மாலை 5 மணிக்கு வருகிறது.."
+     "ரயில் மாலை 5 மணிக்கு வருகிறது."
     ],
     [
      "on",
@@ -2002,6 +2000,7 @@ window.GV_CONTENT = {
      "புத்தகம் மேசையின் மீது உள்ளது."
     ],
     [
+     "on",
      "Time",
      "குறிப்பிட்ட நாளில்",
      "The meeting is on Monday",
@@ -2012,8 +2011,8 @@ window.GV_CONTENT = {
   {
    "id": "prep-place",
    "topic": "prepositions",
-   "en": "Prepositions of place",
-   "ta": "இட இடைச்சொல்",
+   "en": "Place prepositions and adverbs",
+   "ta": "இடத்தைக் குறிக்கும் சொற்கள்",
    "cols": [
     "Preposition",
     "Tamil Meaning",
@@ -2025,13 +2024,13 @@ window.GV_CONTENT = {
      "under",
      "கீழ்",
      "The cat is under the table",
-     "பூனை மேசைய கீழே உள்ளது."
+     "பூனை மேசைக்குக் கீழே உள்ளது."
     ],
     [
      "above",
      "மேலே",
      "The clock is above the door",
-     "கடிகாரம் கதவின் மேலே உள்ளது."
+     "கடிகாரம் கதவுக்கு மேலே உள்ளது."
     ],
     [
      "below",
@@ -2046,16 +2045,16 @@ window.GV_CONTENT = {
      "நாய் காரின் பின்புறம் உள்ளது."
     ],
     [
-     "In front of",
+     "in front of",
      "முன்னால்",
-     "He is standing in front of\nthe shop",
+     "He is standing in front of the shop",
      "அவன் கடையின் முன்னால் நிற்கிறான்."
     ],
     [
      "between",
      "இடையில்",
      "The park is between the school and the hospital",
-     "பூங்கா பள்ளி மற்றும் மருத்துவமனைக்கு நடுவில் உள்ளது."
+     "பூங்கா பள்ளிக்கும் மருத்துவமனைக்கும் இடையில் உள்ளது."
     ],
     [
      "near",
@@ -2070,16 +2069,16 @@ window.GV_CONTENT = {
      "அவன் தனது நண்பரின் அருகில் உட்கார்ந்துள்ளான்."
     ],
     [
-     "There",
+     "there",
      "அங்கு / அங்கே",
      "He is standing there",
      "அவன் அங்கே நிற்கிறான்."
     ],
     [
-     "Here",
+     "here",
      "இங்கு / இங்கே",
      "He is standing here",
-     "அவன் இங்கே நிற்கிறான்"
+     "அவன் இங்கே நிற்கிறான்."
     ]
    ]
   },
@@ -2097,9 +2096,9 @@ window.GV_CONTENT = {
    "rows": [
     [
      "before",
-     "முன்பு",
+     "முன்",
      "Come before 8 AM",
-     "காலை 8 மணிக்கு முன்னால் வா."
+     "காலை 8 மணிக்கு முன் வா."
     ],
     [
      "after",
@@ -2139,7 +2138,7 @@ window.GV_CONTENT = {
    "en": "Prepositions of direction",
    "ta": "திசை இடைச்சொல்",
    "cols": [
-    "Perposition",
+    "Preposition",
     "Tamil Meaning",
     "English Example",
     "Tamil Example"
@@ -2161,7 +2160,7 @@ window.GV_CONTENT = {
      "towards",
      "நோக்கி",
      "Walk towards the station",
-     "நிலையத்தைக் நோக்கி நடந்தேறு"
+     "நிலையத்தை நோக்கி நட."
     ],
     [
      "along",
@@ -2173,13 +2172,13 @@ window.GV_CONTENT = {
      "across",
      "கடந்து",
      "He ran across the road",
-     "அவன் சாலையை கடந்து\nஓடினான்."
+     "அவன் சாலையைக் கடந்து ஓடினான்."
     ],
     [
      "over",
      "மேலாக",
      "The plane flew over the city",
-     "விமானம் நகரத்தின் மேலே\nபறந்தது."
+     "விமானம் நகரத்தின் மேல் பறந்தது."
     ],
     [
      "past",
@@ -2191,7 +2190,7 @@ window.GV_CONTENT = {
      "from",
      "இருந்து",
      "He came from the office",
-     "அவன் அலுவலகத்திலிருந்து\nவந்தான்."
+     "அவன் அலுவலகத்திலிருந்து வந்தான்."
     ]
    ]
   },
@@ -2211,11 +2210,11 @@ window.GV_CONTENT = {
      "about",
      "பற்றி",
      "This book is about history",
-     "இந்த புத்தகம் வரலாற்றைப் பற்றி."
+     "இந்தப் புத்தகம் வரலாற்றைப் பற்றியது."
     ],
     [
      "for",
-     "க்கு,",
+     "க்காக",
      "The gift is for you",
      "இந்த பரிசு உங்களுக்காக."
     ],
@@ -2223,11 +2222,11 @@ window.GV_CONTENT = {
      "with",
      "உடன்",
      "I will go with my friend",
-     "நான் என் நண்பருடன்\nபோவேன்."
+     "நான் என் நண்பருடன் போவேன்."
     ],
     [
      "as",
-     "போல",
+     "ஆக",
      "He works as a driver",
      "அவன் ஒரு டிரைவராக வேலை செய்கிறான்."
     ],
@@ -2235,7 +2234,7 @@ window.GV_CONTENT = {
      "like",
      "போன்ற",
      "She sings like a bird",
-     "அவள் பறவையைப் போன்று\nபாடுகிறாள்."
+     "அவள் பறவையைப் போன்று பாடுகிறாள்."
     ],
     [
      "per",
@@ -2302,8 +2301,8 @@ window.GV_CONTENT = {
     [
      "How",
      "எப்படி",
-     "How do you come to school?",
-     "நீங்கள் எப்படி பள்ளிக்கு வருகிறீர்கள்?"
+     "How do you get to school?",
+     "நீங்கள் பள்ளிக்கு எப்படிச் செல்கிறீர்கள்?"
     ],
     [
      "How much",
@@ -2375,9 +2374,9 @@ window.GV_CONTENT = {
     ],
     [
      "short",
-     "குறுகிய",
+     "குள்ளமான",
      "She is short.",
-     "அவள் குறுகியவள்."
+     "அவள் குள்ளமானவள்."
     ],
     [
      "happy",
@@ -2399,7 +2398,7 @@ window.GV_CONTENT = {
     ],
     [
      "good",
-     "நல்லது",
+     "நல்ல",
      "He is a good boy.",
      "அவன் ஒரு நல்ல பையன்."
     ],
@@ -2503,7 +2502,7 @@ window.GV_CONTENT = {
     ],
     [
      "never",
-     "ஒருபோதும் இல்லை",
+     "ஒருபோதும்",
      "I never lie.",
      "நான் ஒருபோதும் பொய் பேசுவதில்லை."
     ],
@@ -2523,7 +2522,7 @@ window.GV_CONTENT = {
      "usually",
      "வழக்கமாக",
      "He usually eats early.",
-     "அவன் வழக்கமாக விரைவாக சாப்பிடுகிறான்"
+     "அவன் வழக்கமாக சீக்கிரமாகச் சாப்பிடுகிறான்."
     ],
     [
      "yesterday",
@@ -2590,8 +2589,8 @@ window.GV_CONTENT = {
     [
      "because",
      "ஏனெனில்",
-     "I came because of you",
-     "நான் வந்தேன் ஏனெனில் நீ தான் அழைத்தாய்."
+     "I came because you called me.",
+     "நீ என்னை அழைத்ததால் நான் வந்தேன்."
     ],
     [
      "so",
@@ -2614,34 +2613,34 @@ window.GV_CONTENT = {
    ],
    "rows": [
     [
-     "Positive",
+     "Affirmative",
      "",
      "",
      ""
     ],
     [
      "Present tense",
-     "Subject + Main Verb + Object",
-     "I play cricket",
-     "நான் cricket விளையாடுறேன்"
+     "Subject + Verb + Object",
+     "I play cricket.",
+     "நான் கிரிக்கெட் விளையாடுகிறேன்."
     ],
     [
      "Present continuous",
-     "Subject + Helping Verb + Main Verb + ing + Object",
-     "I am playing cricket",
-     "நான் cricket விளையாடிக்கிட்டிருக்கேன்"
+     "Subject + am/is/are + Verb-ing + Object",
+     "I am playing cricket.",
+     "நான் கிரிக்கெட் விளையாடிக்கொண்டிருக்கிறேன்."
     ],
     [
      "Past tense",
-     "Subject + Past Verb + Object",
-     "I played cricket",
-     "நான் cricket விளையாடினேன்"
+     "Subject + past-tense Verb + Object",
+     "I played cricket.",
+     "நான் கிரிக்கெட் விளையாடினேன்."
     ],
     [
      "Future tense",
-     "Subject + will + Main Verb + Object",
-     "I will play cricket",
-     "நான் cricket விளையாட போறேன்"
+     "Subject + will + base Verb + Object",
+     "I will play cricket.",
+     "நான் கிரிக்கெட் விளையாடுவேன்."
     ],
     [
      "Negative",
@@ -2651,57 +2650,57 @@ window.GV_CONTENT = {
     ],
     [
      "Present tense",
-     "Subject + do/does not + Main Verb + Object",
-     "I do not play cricket",
-     "நான் cricket விளையாட மாட்டேன்"
+     "Subject + do/does not + base Verb + Object",
+     "I do not play cricket.",
+     "நான் கிரிக்கெட் விளையாடுவதில்லை."
     ],
     [
      "Present continuous",
-     "Subject + am/is/are not + Verb + ing + Object",
-     "I am not playing cricket",
-     "நான் cricket விளையாடல"
+     "Subject + am/is/are not + Verb-ing + Object",
+     "I am not playing cricket.",
+     "நான் கிரிக்கெட் விளையாடிக்கொண்டிருக்கவில்லை."
     ],
     [
      "Past tense",
-     "Subject + did not + Main Verb + Object",
-     "I did not play cricket",
-     "நான் cricket விளையாடல"
+     "Subject + did not + base Verb + Object",
+     "I did not play cricket.",
+     "நான் கிரிக்கெட் விளையாடவில்லை."
     ],
     [
      "Future tense",
-     "Subject + will not + Main Verb + Object",
-     "I will not play cricket",
-     "நான் cricket விளையாட மாட்டேன்"
+     "Subject + will not + base Verb + Object",
+     "I will not play cricket.",
+     "நான் கிரிக்கெட் விளையாட மாட்டேன்."
     ],
     [
-     "Question",
+     "WH questions",
      "",
      "",
      ""
     ],
     [
      "Present tense",
-     "WH + do/does + Subject + Main Verb + Object ?",
-     "Where do you play cricket ?",
-     "நீ எங்கே cricket விளையாடுறா ?"
+     "WH word + do/does + Subject + base Verb + Object?",
+     "Where do you play cricket?",
+     "நீங்கள் எங்கே கிரிக்கெட் விளையாடுகிறீர்கள்?"
     ],
     [
      "Present continuous",
-     "WH + am/is/are + Subject + Verb + ing + Object ?",
-     "Where are you playing cricket ?",
-     "நீ எங்கே cricket விளையாடிக்கிட்டிருக்கா?"
+     "WH word + am/is/are + Subject + Verb-ing + Object?",
+     "Where are you playing cricket?",
+     "நீங்கள் எங்கே கிரிக்கெட் விளையாடிக்கொண்டிருக்கிறீர்கள்?"
     ],
     [
      "Past tense",
-     "WH + did + Subject + Main Verb + Object ?",
-     "Where did you play cricket ?",
-     "நீ எங்கே cricket விளையாடினா ?"
+     "WH word + did + Subject + base Verb + Object?",
+     "Where did you play cricket?",
+     "நீங்கள் எங்கே கிரிக்கெட் விளையாடினீர்கள்?"
     ],
     [
      "Future tense",
-     "WH + will + Subject + Main Verb + Object ?",
-     "Where will you play cricket ?",
-     "நீ எங்கே cricket விளையாட போறா ?"
+     "WH word + will + Subject + base Verb + Object?",
+     "Where will you play cricket?",
+     "நீங்கள் எங்கே கிரிக்கெட் விளையாடுவீர்கள்?"
     ],
     [
      "Yes / No question",
@@ -2711,27 +2710,27 @@ window.GV_CONTENT = {
     ],
     [
      "Present tense",
-     "Do/Does + Subject + Main Verb + Object ?",
-     "Do you play cricket ?",
-     "நீ எங்கே cricket விளையாடுறா ?"
+     "Do/Does + Subject + base Verb + Object?",
+     "Do you play cricket?",
+     "நீங்கள் கிரிக்கெட் விளையாடுகிறீர்களா?"
     ],
     [
      "Present continuous",
-     "Am/Is/Are + Subject + Verb + ing + Object ?",
-     "Are you playing cricket ?",
-     "நீ cricket விளையாடிக்கிட்டிருக்கியா ?"
+     "Am/Is/Are + Subject + Verb-ing + Object?",
+     "Are you playing cricket?",
+     "நீங்கள் கிரிக்கெட் விளையாடிக்கொண்டிருக்கிறீர்களா?"
     ],
     [
      "Past tense",
-     "Did + Subject + Main Verb + Object ?",
-     "Did you play cricket ?",
-     "நீ cricket விளையாடினியா ?"
+     "Did + Subject + base Verb + Object?",
+     "Did you play cricket?",
+     "நீங்கள் கிரிக்கெட் விளையாடினீர்களா?"
     ],
     [
      "Future tense",
-     "Will + Subject + Main Verb + Object ?",
-     "Will you play cricket ?",
-     "நீ cricket விளையாட போறியா ?"
+     "Will + Subject + base Verb + Object?",
+     "Will you play cricket?",
+     "நீங்கள் கிரிக்கெட் விளையாடுவீர்களா?"
     ],
     [
      "Imperative",
@@ -2742,14 +2741,14 @@ window.GV_CONTENT = {
     [
      "Order",
      "",
-     "Close the door",
-     "கதவு மூடு"
+     "Close the door.",
+     "கதவை மூடு."
     ],
     [
      "Request Example",
      "",
-     "Please open the window",
-     "தயவு செய்து ஜன்னல் திற"
+     "Please open the window.",
+     "தயவுசெய்து ஜன்னலைத் திற."
     ],
     [
      "Exclamatory",
@@ -2766,7 +2765,7 @@ window.GV_CONTENT = {
     [
      "Exclamatory",
      "",
-     "Wow! It's amazing",
+     "Wow! It's amazing!",
      "வாவ்! இது அருமை!"
     ]
    ]
@@ -2776,17 +2775,17 @@ window.GV_CONTENT = {
   {
    "where": "Tense forms",
    "was": "\"He has been writing for an hour\" is labelled present perfect.",
-   "now": "That is present perfect continuous. Present perfect is has/have + past participle — \"he has written\". The row is left as the notes wrote it and flagged here; rewriting it would mean inventing an English and a Tamil sentence the notes do not contain."
+   "now": "Corrected all twelve structures and examples. Present perfect is have/has + past participle; present perfect continuous is have/has been + verb-ing."
   },
   {
    "where": "Auxiliary verb forms",
    "was": "\"has been being\", \"had been being\", \"will have been being\".",
-   "now": "Not real English usage. Kept, because it is what the notes say and removing a row would hide the error rather than name it — the perfect continuous is has/have been + -ing."
+   "now": "Replaced the misleading aspect grid with the three primary auxiliaries: be, have and do. The rare, unsuitable-for-beginners forms were removed."
   },
   {
    "where": "Modal verbs",
    "was": "may = fewer possibilities, might = more possibilities.",
-   "now": "Reversed. \"may\" is the more likely of the two; \"might\" is the more tentative."
+   "now": "Removed the fixed probability ranking. May, might and could can all express uncertain possibility; the choice also depends on context and formality."
   },
   {
    "where": "Prepositions of place",
@@ -2851,7 +2850,7 @@ window.GV_CONTENT = {
   {
    "where": "Sentence formation",
    "was": "the Yes / No present-tense row is glossed \"நீ எங்கே cricket விளையாடுறா ?\" — a where-question.",
-   "now": "That Tamil belongs to the WH row above it. Left as written and flagged; correcting it would mean writing a Tamil sentence the notes do not contain."
+   "now": "Corrected to \"நீங்கள் கிரிக்கெட் விளையாடுகிறீர்களா?\" and standardised all sentence examples to written Tamil."
   },
   {
    "where": "Exclamatory sentences",

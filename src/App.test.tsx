@@ -79,8 +79,9 @@ describe('routing', () => {
     await waitFor(() =>
       expect(within(sidebar).getByRole('link', { name: 'Prepositions' })).toBeTruthy(),
     );
-    /* Ten topics. */
-    expect(sidebar.querySelectorAll('a')).toHaveLength(10);
+    /* The topic index, followed by ten individual topics. */
+    expect(within(sidebar).getByRole('link', { name: 'All topics' })).toBeTruthy();
+    expect(sidebar.querySelectorAll('a')).toHaveLength(11);
   });
 
   it('marks the topic a lesson belongs to, which its URL does not say', async () => {

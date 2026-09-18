@@ -46,9 +46,65 @@
   margin-top: var(--s-2);
   display: flex;
   flex-direction: column;
-  gap: var(--s-1);
-  color: var(--soft);
+  gap: var(--s-2);
   max-width: 66ch;
+}
+.topicAnswer { margin: 0; }
+.topicAnswer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding-left: var(--s-3);
+  border-left: 2px solid var(--accent);
+  color: var(--soft);
+}
+
+.topicKindsBlock {
+  max-width: 440px;
+  margin: var(--s-5) 0 var(--s-4);
+}
+.topicKindsBlock > p {
+  margin: 0 0 var(--s-3);
+  color: var(--ink);
+  font: 600 var(--fs-lg) / 1.2 var(--serif);
+}
+.topicKinds {
+  display: grid;
+  gap: var(--s-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.topicKinds li {
+  display: grid;
+  grid-template-columns: 16px minmax(90px, 1fr) auto;
+  align-items: baseline;
+  gap: var(--s-2);
+  padding: 10px var(--s-3);
+  border-radius: var(--r-sm);
+  background: #fbfbfb;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+}
+.typeArrow {
+  display: inline-flex;
+  align-self: center;
+  width: 14px;
+  height: 12px;
+  color: var(--accent);
+}
+.typeArrow svg { display: block; width: 14px; height: 12px; }
+.topicKinds li span[lang='ta'] {
+  color: var(--muted);
+  font-family: var(--tamil);
+  font-weight: 400;
+  text-align: right;
+}
+
+@media (max-width: 480px) {
+  .topicKinds li { grid-template-columns: 16px minmax(0, 1fr); }
+  .topicKinds li span[lang='ta'] { grid-column: 2; text-align: left; }
 }
 
 .cta { margin-left: auto; display: flex; gap: var(--s-2); flex-wrap: wrap; }
@@ -63,3 +119,71 @@
 /* Said plainly rather than left as an empty region: a topic with no table is a
    fact about the notes, not a page that failed to load. */
 .none { color: var(--muted); font-size: var(--fs-sm); }
+
+/* The opening view intentionally has the same calm table language as Nouns:
+   three familiar time words, with the grammar name beside each one. */
+.tenseIntro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin: 0 0 var(--s-4);
+  color: var(--soft);
+  font-size: var(--fs-sm);
+}
+.tenseIntro strong { color: var(--ink); }
+.tenseIntro span { color: var(--muted); font-family: var(--tamil); }
+.perfectNote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin: var(--s-3) 0 0;
+  padding: var(--s-3) var(--s-4);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--soft);
+  font-size: var(--fs-sm);
+}
+.perfectNote strong { color: var(--ink); }
+.perfectNote span { font-family: var(--tamil); }
+.allTensesHead h2 { margin: 0; font: 600 var(--fs-xl) / 1.2 var(--serif); }
+.allTensesHead p { margin: var(--s-1) 0 0; color: var(--soft); font-size: var(--fs-sm); }
+
+.allTensesControl { display: flex; justify-content: center; margin-top: var(--s-4); }
+.pageMore { display: flex; justify-content: center; margin: calc(-1 * var(--s-3)) 0 var(--s-6); }
+.allTensesButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--soft);
+  font: 700 var(--fs-sm) / 1 var(--font);
+  cursor: pointer;
+}
+.allTensesButton:hover { border-color: var(--accent); color: var(--accent); }
+.allTensesCaret {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  flex: none;
+  transition: transform var(--t-fast) var(--ease);
+}
+.allTensesCaret svg { display: block; width: 12px; height: 8px; }
+.allTensesButton[aria-expanded='true'] .allTensesCaret { transform: rotate(180deg); }
+.allTenses { margin-top: var(--s-5); animation: tense-reference-open 280ms var(--ease) both; }
+.allTensesHead { margin-bottom: var(--s-3); }
+
+@keyframes tense-reference-open {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .allTenses { animation: none; }
+  .allTensesCaret { transition: none; }
+}

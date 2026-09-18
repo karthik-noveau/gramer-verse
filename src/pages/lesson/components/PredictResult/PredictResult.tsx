@@ -72,7 +72,7 @@ function Column({ title, titleTa, option, scene, templates, tone }: ColumnProps)
   const sentence = buildSentence(scene, templates);
 
   return (
-    <section className={classNames(styles.column, styles[tone])}>
+    <section className={classNames(styles.column, styles[tone])} data-tone={tone}>
       <h3 className={styles.title}>
         <span lang="en">{title}</span>
         <span className={styles.ta} lang="ta">

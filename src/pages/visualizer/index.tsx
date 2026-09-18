@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
 import type { FormEvent, JSX } from 'react';
 
-import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
 import { Chip } from 'common/components/Chip/Chip';
 import { Formation, fromScene } from 'common/components/Formation/Formation';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
 import { Stage } from 'common/components/Stage/Stage';
-import { paths } from 'common/constants/routes';
+import { useSpeech } from 'common/hooks/useSpeech';
 import { buildSentence, sentenceText } from 'common/scene/sentence';
 import type { PlaceSpec, SentenceTemplates } from 'common/scene/types';
 import { CannotDraw } from 'pages/visualizer/components/CannotDraw/CannotDraw';
@@ -153,14 +152,6 @@ export default function VisualizerPage(): JSX.Element {
 
   return (
     <>
-      <Breadcrumbs
-        items={[
-          { label: 'Topics', href: paths.topics() },
-          { label: 'Prepositions', href: paths.topic('prepositions') },
-          { label: 'Visualizer' },
-        ]}
-      />
-
       <h1 className={styles.title}>Preposition visualizer</h1>
 
       {/* Above the thing it navigates rather than inside it. */}
@@ -236,7 +227,7 @@ export default function VisualizerPage(): JSX.Element {
         <aside className={styles.doing}>
           <div className={styles.stage}>
             {scene ? (
-              <Stage spec={scene} />
+              <Stage spec={scene} guide />
             ) : (
               <EmptyState
                 title="Nothing to draw"
@@ -314,6 +305,8 @@ export default function VisualizerPage(): JSX.Element {
  */
 function Lines({ spec }: { readonly spec: PlaceSpec }): JSX.Element {
   const sentence = useMemo(() => buildSentence(spec, TEMPLATE), [spec]);
+  const speech = useSpeech();
+  const english = sentenceText(sentence.en);
 
   return (
     <div className={styles.lines}>
@@ -321,8 +314,26 @@ function Lines({ spec }: { readonly spec: PlaceSpec }): JSX.Element {
         {sentenceText(sentence.ta)}
       </p>
       <p className={styles.lineEn} lang="en">
-        {sentenceText(sentence.en)}
+        {english}
       </p>
+      <div className={styles.listen} role="group" aria-label="Listen to the visualized sentence">
+        <button
+          type="button"
+          className={styles.listenButton}
+          disabled={!speech.supported}
+          onClick={() => speech.speak(english)}
+        >
+          <span aria-hidden="true">▶</span> Hear
+        </button>
+        <button
+          type="button"
+          className={styles.listenButton}
+          disabled={!speech.supported}
+          onClick={() => speech.speak(english, 'slow')}
+        >
+          <span aria-hidden="true">½×</span> Slow
+        </button>
+      </div>
     </div>
   );
 }

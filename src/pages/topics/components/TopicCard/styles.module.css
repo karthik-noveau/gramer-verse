@@ -27,15 +27,6 @@
   font: 600 var(--fs-lg) / 1.2 var(--serif);
 }
 
-.summary {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  color: var(--soft);
-  font-size: var(--fs-sm);
-}
-
 .ta {
   font-family: var(--tamil);
   color: var(--muted);

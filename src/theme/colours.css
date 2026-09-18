@@ -34,43 +34,43 @@
      page, between white and the ground. Getting that backwards is what made
      table heads dissolve into the page.
 
-       page  #e9edeb   the ground, darkest
-       card  #ffffff   raised, 1.18 above the page
-       sunk  #f2f5f4   recessed within the card, still 1.08 above the page
+     page  #f0f2f1   the ground, darkest
+     card  #ffffff   raised, 1.18 above the page
+     sunk  #f7f8f7   recessed within the card
 
      Rule: --surface-sunk sits strictly between --surface and --bg, and never
      within ~1.05 of --bg. The same floor applies to the tinted *-soft fills:
      badges and callouts sit directly on the page, so a tint pitched for a
      near-white background disappears against this one. */
-  --bg:            #e9edeb;   /* the ground. neutral, cast -2 */
-  --surface:       #ffffff;   /* raised, 1.18 above --bg */
-  --surface-sunk:  #f2f5f4;   /* recessed in the card, 1.08 above --bg */
-  --line:          #d7dcda;
-  --line-strong:   #b4bbb8;
+  --bg:            #f0f2f1;   /* clean neutral ground */
+  --surface:       #ffffff;   /* raised above --bg */
+  --surface-sunk:  #f7f8f7;   /* recessed within a card */
+  --line:          #c9d0cc;
+  --line-strong:   #98a39e;
 
   /* --- ink ------------------------------------------------- */
-  --ink:           #17160f;   /* 15.4:1 on --bg */
-  --soft:          #56544c;   /*  6.4:1 */
-  --muted:         #6c6a62;   /*  4.6:1 */
+  --ink:           #111512;
+  --soft:          #3f4944;
+  --muted:         #5d6862;
 
   /* --- accent ---------------------------------------------- */
-  --accent:        #2f6f4f;   /*  5.1:1 on --bg, 6.0:1 behind white */
-  --accent-hover:  #275c42;
-  --accent-soft:   #eefaf4;   /* 1.10 above --bg — tints must read as chips */
+  --accent:        #176b46;
+  --accent-hover:  #0e5938;
+  --accent-soft:   #cdebd9;
   --accent-ink:    #ffffff;   /*  6.0:1 on --accent */
 
   /* --- status ---------------------------------------------- */
   --warn:          #a8490b;   /*  4.9:1 on --bg — "cannot draw", not an error */
-  --warn-soft:     #fef6ee;   /* 1.10 */
+  --warn-soft:     #fbe8d5;
   --danger:        #a83226;   /*  5.7:1 */
-  --danger-soft:   #fef3f1;   /* 1.09 */
+  --danger-soft:   #fae2df;
   /* The label on a filled danger button. The prototype hardcoded #fff here —
      the one colour in it that lived outside the token file, and the one that
      could not follow the scheme: in dark, --danger is a pale salmon and white
      on it reads at 1.6:1. */
   --danger-ink:    #ffffff;   /*  6.7:1 on --danger */
   --info:          #28557f;   /*  6.6:1 */
-  --info-soft:     #f0f6fd;   /* 1.09 */
+  --info-soft:     #e2edf9;
 
   /* The opened word-order panel. It must read as inset against the white row
      above it, and it is a big flat block, so a hairline step is enough — 1.35
@@ -148,12 +148,12 @@
      places and they had drifted to .45 and .5. */
   --scrim: rgba(23, 21, 15, .5);
 
-  --shadow-1: 0 1px 2px rgba(20, 26, 24, .07), 0 1px 1px rgba(20, 26, 24, .04);
-  --shadow-2: 0 4px 14px rgba(20, 26, 24, .10), 0 1px 3px rgba(20, 26, 24, .06);
-  --shadow-3: 0 14px 40px rgba(20, 26, 24, .20);
+  --shadow-1: 0 1px 3px rgba(20, 26, 24, .12), 0 1px 1px rgba(20, 26, 24, .07);
+  --shadow-2: 0 6px 18px rgba(20, 26, 24, .15), 0 2px 5px rgba(20, 26, 24, .08);
+  --shadow-3: 0 18px 46px rgba(20, 26, 24, .24);
 
   /* --- layout ----------------------------------------------- */
-  --header-h:   52px;
+  --header-h:   60px;
   --sidebar-w:  216px;
   --detail-w:   288px;
   --content-max: 1180px;
@@ -172,20 +172,20 @@
   /* Same three planes, inverted: raised surfaces are LIGHTER than the ground
      and sunk ones DARKER. --surface-sunk lighter than --bg made every "sunk"
      element read as raised. */
-  --bg:           #171716;   /* the ground */
-  --surface:      #232321;   /* raised, 1.14 above --bg */
-  --surface-sunk: #1d1d1b;   /* recessed in the card, still above --bg */
-  --line:         #302f2c;
-  --line-strong:  #46453f;
+  --bg:           #131514;
+  --surface:      #242725;
+  --surface-sunk: #1b1e1c;
+  --line:         #3c423e;
+  --line-strong:  #59655e;
 
-  --ink:          #f2f1ec;   /* 15.9:1 on --bg, 11.3:1 on --fm-bg */
-  --soft:         #c0bdb5;   /*  9.6:1 / 6.8:1 */
-  --muted:        #9d9a8f;   /*  6.4:1 / 4.6:1 — see the note below */
+  --ink:          #f7faf8;
+  --soft:         #d2d8d4;
+  --muted:        #a8b2ac;
 
-  --accent:       #7dc4a0;   /*  8.8:1 on --bg, 8.3:1 behind --accent-ink */
-  --accent-hover: #96d3b3;
-  --accent-soft:  #1c2f26;
-  --accent-ink:   #10201a;
+  --accent:       #58d894;
+  --accent-hover: #70e3a7;
+  --accent-soft:  #163526;
+  --accent-ink:   #0a2114;
 
   --warn:         #e0a45c;   /*  8.2:1 */
   --warn-soft:    #2e2318;

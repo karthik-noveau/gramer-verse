@@ -1,17 +1,15 @@
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
 import LandingPage from 'pages/landing/index';
-import { useContentStore } from 'store/content.store';
 
 /* ============================================================
    The front door.
 
    Two things it has to do that no other page does: carry its own
    chrome, and prove the product works before the visitor has
-   agreed to open it. The demo beside the headline is the real
-   renderer with the real sentence builder under it, so most of
-   what is asserted here is that it is running.
+   agreed to open it. The sentence canvas is interactive, calm,
+   and available before curriculum metadata finishes loading.
    ============================================================ */
 
 const renderPage = (): ReturnType<typeof render> =>
@@ -20,13 +18,6 @@ const renderPage = (): ReturnType<typeof render> =>
       <LandingPage />
     </MemoryRouter>,
   );
-
-/* Loaded once, before anything renders. The store caches it, so every test
-   below starts with the count already in hand and nothing settles mid-test —
-   except the one test that is about exactly that, which clears it first. */
-beforeAll(async () => {
-  await useContentStore.getState().load();
-});
 
 describe('LandingPage', () => {
   it('carries its own brand bar and footer', () => {
@@ -42,14 +33,14 @@ describe('LandingPage', () => {
   it('says what the product is, in both languages', () => {
     renderPage();
 
-    expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('English grammar');
-    expect(screen.getByText('ஒரு சொல்லை மாற்றுங்கள், படம் மாறும்.')).toBeTruthy();
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toContain('See how English');
+    expect(screen.getByText('வாக்கிய அமைப்பும் தமிழ் விளக்கமும் ஒரே இடத்தில்.')).toBeTruthy();
   });
 
   it('offers one way in, and the bar offers the same one', () => {
     renderPage();
-    const start = screen.getByRole('link', { name: 'Start' });
-    const open = screen.getByRole('link', { name: 'Open the app' });
+    const start = screen.getByRole('link', { name: 'Start learning' });
+    const open = screen.getByRole('link', { name: 'Explore topics' });
 
     expect(start.getAttribute('href')).toBe('/topics');
     expect(open.getAttribute('href')).toBe('/topics');
@@ -69,134 +60,55 @@ describe('LandingPage', () => {
   });
 
   describe('the demo', () => {
-    it('draws a real scene, cropped to the part that matters', () => {
-      renderPage();
-      const stage = screen.getByRole('img');
-
-      expect(stage.getAttribute('viewBox')).toBe('196 100 384 252');
-      expect(stage.querySelectorAll('g').length).toBeGreaterThan(0);
-    });
-
-    it('describes the scene it is showing', () => {
+    it('shows the sentence as visible grammatical roles', () => {
       renderPage();
 
-      expect(screen.getByRole('img').getAttribute('aria-label')).toBe('the ball in the box');
+      expect(screen.getByText('Subject')).toBeTruthy();
+      expect(screen.getByText('Verb')).toBeTruthy();
+      expect(screen.getByText('Preposition')).toBeTruthy();
+      expect(screen.getByText('Object')).toBeTruthy();
     });
 
     it('says the sentence under it, in both languages', () => {
       const { container } = renderPage();
 
-      expect(container.querySelector('[lang="en"]')?.textContent).toContain('The ball is in');
+      expect(screen.getByLabelText('The ball is in the box.')).toBeTruthy();
       expect(container.textContent).toContain('பெட்டியில்');
     });
 
-    it('changes the picture and the sentence when a word is pressed', () => {
+    it('changes both languages when a word is pressed', () => {
       renderPage();
 
       fireEvent.click(screen.getByRole('button', { name: /behind/ }));
 
-      expect(screen.getByRole('img').getAttribute('aria-label')).toBe('the ball behind the box');
+      expect(screen.getByText('பந்து பெட்டிக்குப் பின்னால் உள்ளது.')).toBeTruthy();
       expect(screen.getByRole('button', { name: /behind/ }).getAttribute('aria-pressed')).toBe(
         'true',
       );
     });
 
-    it('swaps the ground rather than drawing a lie', () => {
-      /* A box has nothing beneath it. The renderer is asked; the page keeps no
-         second list of what fits under what. */
+    it('uses a table for the under example', () => {
       renderPage();
 
       fireEvent.click(screen.getByRole('button', { name: /under/ }));
 
-      expect(screen.getByRole('img').getAttribute('aria-label')).toBe('the ball under the table');
+      expect(screen.getByText('the table.')).toBeTruthy();
+      expect(screen.getByText('பந்து மேசைக்குக் கீழே உள்ளது.')).toBeTruthy();
     });
   });
 
-  describe('the eyebrow', () => {
-    it('renders the hero before the content has loaded', async () => {
-      /* A blank hero during load defeats the purpose of the page. */
-      act(() => {
-        useContentStore.getState().reset();
-      });
-      renderPage();
+  it('keeps catalog counts out of the brand promise', () => {
+    renderPage();
 
-      expect(useContentStore.getState().status).not.toBe('ready');
-      expect(screen.getByRole('img')).toBeTruthy();
-      expect(screen.getByRole('link', { name: 'Start' })).toBeTruthy();
-      expect(screen.queryByText(/topics · .* lessons/)).toBeNull();
-
-      await waitFor(() => expect(useContentStore.getState().status).toBe('ready'));
-    });
-
-    it('counts the topics and lessons from the content, not from the markup', async () => {
-      renderPage();
-
-      await waitFor(() =>
-        expect(screen.getByText(/topics · .* lessons/).textContent).toContain('10 topics'),
-      );
-      expect(screen.getByText(/topics · .* lessons/).textContent).toContain('13 lessons');
-    });
-  });
-
-  describe('the cycle', () => {
-    beforeEach(() => {
-      jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-      act(() => {
-        jest.runOnlyPendingTimers();
-      });
-      jest.useRealTimers();
-    });
-
-    it('moves on by itself, so the page demonstrates itself without a click', () => {
-      renderPage();
-      expect(screen.getByRole('img').getAttribute('aria-label')).toContain('in the box');
-
-      act(() => {
-        jest.advanceTimersByTime(2300);
-      });
-
-      expect(screen.getByRole('img').getAttribute('aria-label')).toContain('on the box');
-    });
-
-    it('stops as soon as the visitor takes over', () => {
-      renderPage();
-
-      fireEvent.click(screen.getByRole('button', { name: /beside/ }));
-      act(() => {
-        jest.advanceTimersByTime(9000);
-      });
-
-      expect(screen.getByRole('img').getAttribute('aria-label')).toContain('beside the box');
-    });
-
-    it('never starts for a visitor who asked for less motion', () => {
-      window.matchMedia = ((query: string) => ({
-        matches: query.includes('reduce'),
-        media: query,
-        addEventListener: () => undefined,
-        removeEventListener: () => undefined,
-      })) as unknown as typeof window.matchMedia;
-
-      renderPage();
-      act(() => {
-        jest.advanceTimersByTime(9000);
-      });
-
-      expect(screen.getByRole('img').getAttribute('aria-label')).toContain('in the box');
-
-      // @ts-expect-error putting jsdom back the way it was found
-      delete window.matchMedia;
-    });
+    expect(screen.getByText(/English grammar/).textContent).toContain('தமிழ் வழியில்');
+    expect(screen.queryByText(/topics · .* lessons/)).toBeNull();
   });
 
   it('explains a lesson in three lines, in both languages', () => {
     renderPage();
 
     expect(screen.getByText('யூகியுங்கள்')).toBeTruthy();
-    expect(screen.getByText(/Being wrong here is the point/)).toBeTruthy();
+    expect(screen.getByText(/choose the word that fits/)).toBeTruthy();
     expect(screen.getAllByRole('listitem')).toHaveLength(3);
   });
 });

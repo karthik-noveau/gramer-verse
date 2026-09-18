@@ -1,5 +1,5 @@
 import { FLOOR, FLOOR_INSET, STAGE, round } from 'common/scene/layout';
-import { arrow, ellipse, floorLine, group, line, rect, shadow, text } from 'common/scene/primitives';
+import { arrow, ellipse, floorLine, group, line, rect, shadow } from 'common/scene/primitives';
 import { propFor } from 'common/scene/props/index';
 import type { FigureCount, PlaceRelation, PlaceSpec, Prop, PropId, SceneNode } from 'common/scene/types';
 
@@ -74,7 +74,9 @@ const PAIR_GAP_SHARE = 0.4;
  *  the distance is the relation. */
 const SPAN_INSET = 14;
 const SPAN_LIFT = 30;
-const LEVEL_OVERHANG = 20;
+const LEVEL_GAP = 10;
+const LEVEL_STOP = 20;
+const DROP_START = 16;
 const DROP_CLEAR = 12;
 const DROP_CAP = 11;
 const DROP_HEAD = 7;
@@ -100,13 +102,11 @@ const SPOT_CORE = 0.42;
 const SPOT_WASH = 0.22;
 const THERE_ARROW_LIFT = 26;
 
-/** The determiner ring and its word. */
+/** The determiner ring. Its word belongs in the guide outside the drawing. */
 const RING_PAD = 9;
 const RING_RADIUS = 12;
 const RING_WIDTH = 3;
 const RING_DASH = '9 7';
-const LABEL_LIFT = 13;
-const LABEL_SIZE = 15;
 
 /* ---- adjectives --------------------------------------------
    Colour changes the fill, size changes the scale. Nothing else
@@ -442,13 +442,13 @@ const GROUNDED: Readonly<Record<GroundedRelation, (ctx: GroundCtx) => Layout>> =
       marks: [
         measure(
           'mark-level',
-          pair.groundX,
+          pair.groundX + ctx.gw + LEVEL_GAP,
           ctx.gy,
-          pair.rowLeft + rowWidth(ctx, fit) + LEVEL_OVERHANG,
+          dropX - LEVEL_STOP,
           ctx.gy,
           '7 6',
         ),
-        ...dropMark(dropX, round(ctx.gy + 4), round(top - DROP_CLEAR)),
+        ...dropMark(dropX, round(ctx.gy + DROP_START), round(top - DROP_CLEAR)),
       ],
     };
   },
@@ -654,50 +654,6 @@ const frontShadow = (index: number, figure: Prop, spot: Spot): SceneNode =>
     fill: 'var(--shadow-ink)',
   });
 
-function determinerLabel(spec: PlaceSpec, ctx: Ctx, spots: readonly Spot[]): readonly SceneNode[] {
-  const first = spots[0];
-  const last = spots[spots.length - 1];
-  if (spec.count !== 1 || !first || !last) return [];
-
-  /* The ring is drawn inside the figure's own group, so its padding is scaled
-     with it; the label is not, and has to be placed in stage coordinates. */
-  const top = first.y - RING_PAD * first.scale;
-  const ringLeft = first.x - RING_PAD * first.scale;
-  const ringRight = last.x + (ctx.figure.box.w + RING_PAD) * last.scale;
-
-  return [
-    text('determiner-label', {
-      ...labelSpot(top, ringLeft, ringRight),
-      content: spec.determiner,
-      size: LABEL_SIZE,
-      fill: 'var(--accent)',
-      lang: 'en',
-    }),
-  ];
-}
-
-/**
- * Over the figure, unless the figure is at the top of the stage.
- *
- * `above` a tall ground leaves no room over the figure, and the two places
- * that are left are both worse than beside it: off the top of the viewBox is
- * unreadable, and under the ring is over the ground.
- */
-function labelSpot(
-  top: number,
-  ringLeft: number,
-  ringRight: number,
-): { readonly x: number; readonly y: number; readonly anchor: 'middle' | 'start' | 'end' } {
-  if (top - LABEL_LIFT >= LABEL_SIZE) {
-    return { x: round((ringLeft + ringRight) / 2), y: round(top - LABEL_LIFT), anchor: 'middle' };
-  }
-  const y = round(top + LABEL_SIZE);
-
-  return ringLeft - LABEL_LIFT > FLOOR_INSET
-    ? { x: round(ringLeft - LABEL_LIFT), y, anchor: 'end' }
-    : { x: round(ringRight + LABEL_LIFT), y, anchor: 'start' };
-}
-
 /**
  * A place scene, as a node tree.
  *
@@ -734,7 +690,6 @@ export function renderPlace(spec: PlaceSpec): readonly SceneNode[] {
     ...groundShadows(ground, other, layout),
     ...(layout.marks ?? []),
     ...(layout.behind === true ? [...figures, ...grounds] : [...grounds, ...shadows, ...figures]),
-    ...determinerLabel(spec, ctx, layout.figures),
   ];
 }
 

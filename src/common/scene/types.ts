@@ -343,12 +343,10 @@ export type SourceTable = {
 /**
  * A line of a topic's outline.
  *
- * English, and Tamil where the notes gave any. Most rows are glossed and
- * thirty-two are not — those are rows whose "title" is itself an English
- * example sentence, and the notes never translated them. Null rather than an
- * empty string, and never invented: constraint 3's rule that a missing Tamil
- * is a content error is about strings this app authored, and this file is a
- * transcription of somebody else's.
+ * English and Tamil. The original notes left some titles untranslated; the
+ * curriculum audit supplied and reviewed those labels, and validation now
+ * rejects a missing Tamil title. The nullable shape remains useful when this
+ * type represents an incomplete draft returned by validation tooling.
  *
  * `example` is null on the same terms.
  */

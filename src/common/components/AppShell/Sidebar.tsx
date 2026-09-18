@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { Link, useLocation } from 'react-router';
 
+import { Icon } from 'common/components/Icon/Icon';
 import { paths } from 'common/constants/routes';
 
 import styles from './styles.module.css';
@@ -37,6 +38,18 @@ export function Sidebar({ topics, activeTopicId, collapsed }: SidebarProps): JSX
 
   return (
     <aside className={styles.sidebar} id="sidebar" aria-label="Topics">
+      <h4>Explore</h4>
+      <Link
+        className={styles.allTopics}
+        to={paths.topics()}
+        aria-current={pathname === paths.topics() ? 'page' : undefined}
+      >
+        <span className={styles.navIcon} aria-hidden="true">
+          <Icon name="grid" />
+        </span>
+        <span className={labelClass}>All topics</span>
+      </Link>
+
       {topics.length > 0 ? (
         <>
           <h4>Topics</h4>
@@ -57,7 +70,6 @@ export function Sidebar({ topics, activeTopicId, collapsed }: SidebarProps): JSX
           </ul>
         </>
       ) : null}
-
     </aside>
   );
 }

@@ -17,10 +17,10 @@ describe('BrandMark', () => {
 });
 
 describe('BrandLockup', () => {
-  it('says the name in both scripts, with the Tamil tagged', () => {
+  it('keeps the brand name concise and leaves translations to the content', () => {
     render(<BrandLockup />);
 
     expect(screen.getByText(/Grammer-/)).toBeTruthy();
-    expect(screen.getByText('கிராமர்-வெர்ஸ்').getAttribute('lang')).toBe('ta');
+    expect(screen.queryByText('கிராமர்-வெர்ஸ்')).toBeNull();
   });
 });

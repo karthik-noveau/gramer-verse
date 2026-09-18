@@ -1,6 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Formation, baseRole, fromScene, noteFor } from 'common/components/Formation/Formation';
+import {
+  Formation,
+  baseRole,
+  fromScene,
+  noteFor,
+  sentencePattern,
+} from 'common/components/Formation/Formation';
 import { parseAlignment } from 'common/api/validate';
 import type { FormationSpec, PlaceSpec, PropId, SentenceTemplates } from 'common/scene/types';
 
@@ -76,6 +82,62 @@ describe('Formation', () => {
     expect(screen.getByRole('img').getAttribute('aria-label')).toBe(
       'The ball is in the box — பந்து பெட்டியில் உள்ளது',
     );
+  });
+
+  it('shows the English sentence formation below the diagram and lets it be hidden', () => {
+    render(<Formation spec={FUSED} />);
+
+    expect(sentencePattern(FUSED.enTokens).map((part) => part.label)).toEqual([
+      'Determiner',
+      'Subject',
+      'Verb',
+      'Preposition',
+      'Object',
+    ]);
+    const formation = screen.getByTestId('sentence-formation');
+    expect(formation.getAttribute('aria-label')).toBe(
+      'Determiner + Subject + Verb + Preposition + Object',
+    );
+    const labels = [...formation.querySelectorAll('text')]
+      .filter((node) => node.textContent !== '+')
+      .map((node) => ({ text: node.textContent, x: node.getAttribute('x') }));
+    const words = ['The', 'ball', 'is', 'in', 'the box'].map((word) => {
+      const node = screen.getByText(word, { selector: 'text' });
+      return { word, x: node.getAttribute('x') };
+    });
+
+    expect(labels.map((label) => label.x)).toEqual(words.map((word) => word.x));
+
+    fireEvent.click(screen.getByRole('button', { name: 'Hide sentence formation' }));
+    expect(screen.queryByTestId('sentence-formation')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Show sentence formation' })).toBeTruthy();
+  });
+
+  it('keeps verb labels simple while identifying the other sentence parts', () => {
+    expect(
+      sentencePattern([
+        { text: 'He', roles: ['figure'] },
+        { text: 'has been writing', roles: ['be'] },
+        { text: 'for an hour', roles: ['qual'] },
+      ]).map((part) => part.label),
+    ).toEqual(['Subject', 'Verb', 'Time Phrase']);
+
+    expect(
+      sentencePattern([
+        { text: 'Where', roles: ['det'] },
+        { text: 'did', roles: [] },
+        { text: 'you', roles: ['figure'] },
+        { text: 'play', roles: ['be'] },
+      ]).map((part) => part.label),
+    ).toEqual(['Question Word', 'Verb', 'Subject', 'Verb']);
+
+    expect(
+      sentencePattern([
+        { text: 'I', roles: ['figure'] },
+        { text: 'can', roles: ['be1'] },
+        { text: 'write', roles: ['be2'] },
+      ]).map((part) => part.label),
+    ).toEqual(['Subject', 'Verb', 'Verb']);
   });
 
   it('says the fusion and the orphan in one line, in Tamil', () => {

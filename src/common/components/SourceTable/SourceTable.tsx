@@ -4,6 +4,7 @@ import type { JSX } from 'react';
 import { Art, hasArt } from 'common/art/Art';
 import { Formation } from 'common/components/Formation/Formation';
 import { Table } from 'common/components/Table/Table';
+import { useSpeech } from 'common/hooks/useSpeech';
 import type { FormationSpec, SourceTable as SourceTableData } from 'common/scene/types';
 import { classNames } from 'common/utils/classNames';
 
@@ -215,15 +216,19 @@ export function SourceTable({
   formationOf,
   className,
 }: SourceTableProps): JSX.Element {
+  const speech = useSpeech();
+  const sourceRows = rows ?? table.rows;
+  const rowCount = sourceRows.filter((row) => !isHeading(row)).length;
   /* Short rows are filled before anything else looks at them, so every later
      step — the runs, the pictures, the alignments — sees the same shape the
      source meant. */
-  const all = normalise(rows ?? table.rows, table.columns.length);
+  const all = normalise(sourceRows, table.columns.length);
   const sections = sectionsOf(all);
 
   /* Which row is open, by the text of its cells — an index would move under it
      the moment the table above is filtered. */
   const [open, setOpen] = useState<string | null>(null);
+  const [showPattern, setShowPattern] = useState(true);
 
   /* The alignments are keyed by position among the rows that are rows. Group
      headings are not sentences and are not counted. */
@@ -236,11 +241,7 @@ export function SourceTable({
   const formationFor = (row: readonly string[]): FormationSpec | undefined =>
     formationOf?.(row, contentIndex.get(row) ?? -1);
 
-  /* The column appears wherever there is something to put in it — a drawing, a
-     formation button, or both. A table with neither gets no column: a heading
-     over four empty cells names nothing. That is main-verbs and auxiliary,
-     whose rows are verb forms rather than sentences, so there is nothing to
-     draw and nothing to align. */
+  /* The column appears wherever there is a drawing or a formation to open. */
   const drawsArt = ART_TOPICS.has(String(table.topicId)) && all.some((row) => artCell(row) !== null);
   const drawsFormation = formationOf !== undefined && all.some((row) => formationFor(row));
   const showViz = drawsArt || drawsFormation;
@@ -256,7 +257,7 @@ export function SourceTable({
             </span>
           </h3>
           <span className={styles.count}>
-            {(rows ?? table.rows).length} {(rows ?? table.rows).length === 1 ? 'row' : 'rows'}
+            {rowCount} {rowCount === 1 ? 'row' : 'rows'}
           </span>
         </div>
       ) : null}
@@ -285,9 +286,10 @@ export function SourceTable({
           {section.title ? <h4 className={styles.sectionTitle}>{section.title}</h4> : null}
           <Table
             caption={`${String(table.title.en)}${section.title ? ` · ${section.title}` : ''}`}
-            /* The caller printed the heading; a second copy over the table is
-               the page saying the same words twice. */
-            captionHidden={!heading}
+            /* SourceTable prints either its own heading or a section heading,
+               while callers that turn both off provide one above it. Keep the
+               caption for assistive technology without repeating it visually. */
+            captionHidden
             columns={[
               ...table.columns.map((column, c) => ({
                 key: String(c),
@@ -314,9 +316,6 @@ export function SourceTable({
                 ? [
                     {
                       key: 'viz',
-                      /* The picture and the formation button are one idea — the
-                         row, shown rather than written — so they sit under one
-                         heading instead of two blank cells. */
                       header: 'Visualization',
                       ...(styles.vizCell ? { className: styles.vizCell } : {}),
                       cell: (row: readonly string[]) => {
@@ -332,7 +331,11 @@ export function SourceTable({
                                 type="button"
                                 className={styles.open}
                                 aria-expanded={open === key}
-                                onClick={() => setOpen(open === key ? null : key)}
+                                onClick={() => {
+                                  const opening = open !== key;
+                                  setOpen(opening ? key : null);
+                                  if (opening) setShowPattern(true);
+                                }}
                               >
                                 formation
                                 <Caret open={open === key} />
@@ -367,7 +370,47 @@ export function SourceTable({
                   afterRow: (row: readonly string[]) => {
                     if (open !== row.join('|')) return null;
                     const spec = formationFor(row);
-                    return spec ? <Formation spec={spec} /> : null;
+                    return spec ? (
+                      <div className={styles.fmPanel}>
+                        <div className={styles.fmPanelInner}>
+                          <div
+                            className={styles.fmListen}
+                            role="group"
+                            aria-label="Listen to the formation sentence"
+                          >
+                          <button
+                              type="button"
+                              className={styles.listen}
+                              disabled={!speech.supported}
+                              onClick={() => speech.speak(spec.en)}
+                            >
+                              <span aria-hidden="true">▶</span> Hear
+                            </button>
+                            <button
+                              type="button"
+                              className={styles.listen}
+                              disabled={!speech.supported}
+                              onClick={() => speech.speak(spec.en, 'slow')}
+                            >
+                            <span aria-hidden="true">½×</span> Slow
+                          </button>
+                          <button
+                            type="button"
+                            className={styles.listen}
+                            aria-expanded={showPattern}
+                            onClick={() => setShowPattern((shown) => !shown)}
+                          >
+                            {showPattern ? 'Hide' : 'Show'} formation
+                          </button>
+                          </div>
+                          <Formation
+                            spec={spec}
+                            showPattern={showPattern}
+                            showPatternToggle={false}
+                          />
+                        </div>
+                      </div>
+                    ) : null;
                   },
                   ...(styles.fmRow ? { afterRowClassName: styles.fmRow } : {}),
                   /* One narrower, when the run above took it in. */
@@ -382,6 +425,7 @@ export function SourceTable({
         </div>
         );
       })}
+
     </section>
   );
 }

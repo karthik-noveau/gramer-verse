@@ -158,8 +158,8 @@
       "knob": "relation"
     },
     "why": {
-      "en": "The box has sides and a bottom, so the ball is held. English needs two words — in the box — and Tamil needs one: பெட்டியில்.",
-      "ta": "பெட்டிக்குப் பக்கங்களும் அடிப்பகுதியும் உள்ளன, எனவே பந்து அதற்குள் இருக்கிறது. ஆங்கிலத்தில் in the box என இரண்டு சொல்; தமிழில் பெட்டியில் என ஒரே சொல்."
+      "en": "The box has sides and a bottom, so the ball is held. English needs three words — in the box — and Tamil needs one: பெட்டியில்.",
+      "ta": "பெட்டிக்குப் பக்கங்களும் அடிப்பகுதியும் உள்ளன, எனவே பந்து அதற்குள் இருக்கிறது. ஆங்கிலத்தில் in the box என மூன்று சொற்கள்; தமிழில் பெட்டியில் என ஒரே சொல்."
     },
     "sentence": {
       "en": [
@@ -1294,8 +1294,8 @@
       ],
       "answer": "three",
       "explain": {
-        "en": "The ball and both things it sits between — between is the only place relation that needs two.",
-        "ta": "பந்து, மற்றும் அது எவற்றுக்கு நடுவில் உள்ளதோ அந்த இரண்டும். இரண்டு தேவைப்படும் ஒரே இட உறவு between மட்டுமே."
+        "en": "The ball and both things it sits between — between is the only relation in this lesson set that needs two reference objects.",
+        "ta": "பந்தும், அது எவற்றுக்கு நடுவில் உள்ளதோ அந்த இரண்டு பொருள்களும் வரையப்படும். இந்தப் பாடத் தொகுப்பில் இரண்டு குறிப்பு பொருள்கள் தேவைப்படும் ஒரே உறவு between ஆகும்."
       },
       "knob": null
     },
@@ -1579,8 +1579,8 @@
     ],
     "predict": null,
     "why": {
-      "en": "beside is near with the gap closed. Same picture, one measurement apart — which is why they are taught together.",
-      "ta": "இடைவெளி மூடப்பட்ட near தான் beside. ஒரே படம், ஒரே அளவு வேறுபாடு — அதனால்தான் இரண்டும் சேர்ந்து கற்பிக்கப்படுகின்றன."
+      "en": "beside is more specific than near: it means close to the side of something. That is why the two are compared together.",
+      "ta": "beside என்பது near-ஐ விடத் துல்லியமானது: ஒரு பொருளின் பக்கத்தில் அருகில் இருப்பதைக் குறிக்கிறது. அதனால்தான் இரண்டும் சேர்த்து ஒப்பிடப்படுகின்றன."
     },
     "sentence": {
       "en": [

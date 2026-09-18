@@ -57,7 +57,7 @@ export function Header({
         </Button>
       )}
 
-      <Link to={paths.landing()} aria-label="Grammer-Verse, home">
+      <Link className={styles.brandHome} to={paths.landing()} aria-label="Grammer-Verse, home">
         <BrandLockup />
       </Link>
 

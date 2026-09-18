@@ -48,6 +48,14 @@ describe('VisualizerPage', () => {
     expect(container.textContent).not.toMatch(/English:|Tamil:/);
   });
 
+  it('offers normal and slow voice playback for the visualized sentence', () => {
+    renderPage();
+
+    const listen = within(screen.getByRole('group', { name: 'Listen to the visualized sentence' }));
+    expect(listen.getByRole('button', { name: /Hear/ })).toBeTruthy();
+    expect(listen.getByRole('button', { name: /Slow/ })).toBeTruthy();
+  });
+
   describe('typing', () => {
     it('draws on Enter, with no submit button anywhere', () => {
       renderPage();
@@ -162,12 +170,8 @@ describe('VisualizerPage', () => {
     });
   });
 
-  it('leaves a trail back through prepositions', () => {
+  it('does not repeat page navigation as a breadcrumb', () => {
     renderPage();
-    const crumbs = screen.getByRole('navigation', { name: 'Breadcrumb' });
-
-    expect(within(crumbs).getByRole('link', { name: 'Prepositions' }).getAttribute('href')).toBe(
-      '/topics/prepositions',
-    );
+    expect(screen.queryByRole('navigation', { name: 'Breadcrumb' })).toBeNull();
   });
 });

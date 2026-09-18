@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
-import type { JSX } from 'react';
+import type { CSSProperties, JSX } from 'react';
 
 import { Art, hasArt } from 'common/art/Art';
 import { buildSentence } from 'common/scene/sentence';
 import type { Token } from 'common/scene/sentence';
 import { canTranslit, translitPhrase } from 'common/scene/translit';
 import type { SceneSpec, SentenceTemplates } from 'common/scene/types';
+import { useSpeech } from 'common/hooks/useSpeech';
 import { classNames } from 'common/utils/classNames';
 
 import styles from './styles.module.css';
@@ -27,6 +28,13 @@ import styles from './styles.module.css';
 
 /** How much text sits on the pictures. */
 export const STEPS = ['Pictures', '+ Tamil', '+ Pronunciation', '+ English'] as const;
+
+const COACH = [
+  { en: 'Look at the pictures. Tap each one to hear its English word.', ta: 'படங்களைப் பாருங்கள். ஆங்கிலச் சொல்லைக் கேட்க ஒவ்வொரு படத்தையும் தொடுங்கள்.' },
+  { en: 'Now connect each picture to its Tamil meaning.', ta: 'இப்போது ஒவ்வொரு படத்தையும் அதன் தமிழ் பொருளுடன் இணைத்துப் பாருங்கள்.' },
+  { en: 'Listen, then say the English sound aloud.', ta: 'உச்சரிப்பைக் கேட்டு, ஆங்கிலச் சொல்லை வாய்விட்டுச் சொல்லுங்கள்.' },
+  { en: 'Read the English sentence from left to right.', ta: 'இப்போது ஆங்கில வாக்கியத்தை இடமிருந்து வலமாக வாசியுங்கள்.' },
+] as const;
 
 export type PicWordsProps = {
   readonly scene: SceneSpec;
@@ -104,9 +112,19 @@ export function PicWords({ scene, templates, className }: PicWordsProps): JSX.El
      yet, and showing it straight away makes the pictures decoration. */
   const [step, setStep] = useState(0);
   const cards = useMemo(() => cardsOf(scene, templates), [scene, templates]);
+  const speech = useSpeech();
+  const coach = COACH[step] ?? COACH[0];
 
   return (
     <div className={classNames(styles.wrap, className)}>
+      <section className={styles.coach} aria-live="polite">
+        <span className={styles.coachStep}>{step + 1}/4</span>
+        <p className={styles.coachCopy}>
+          <strong className={styles.coachTa} lang="ta">{coach.ta}</strong>
+          <span>{coach.en}</span>
+        </p>
+      </section>
+
       <div className={styles.steps} role="group" aria-label="How much to show">
         {STEPS.map((label, index) => (
           <button
@@ -132,31 +150,41 @@ export function PicWords({ scene, templates, className }: PicWordsProps): JSX.El
             <li
               key={`${card.en}-${index}`}
               className={styles.card}
+              style={{ '--card-index': index } as CSSProperties}
               {...(card.knob ? { 'data-knob': card.knob } : {})}
             >
-              <span className={styles.art}>
-                {hasArt(card.word) ? (
-                  <Art word={card.word} size={44} />
-                ) : (
-                  /* `is` has no picture and needs none: it is the one word in
-                     the sentence that is not a thing. */
-                  <span className={styles.glyph} aria-hidden="true">
-                    =
-                  </span>
-                )}
-              </span>
+              <button
+                type="button"
+                className={styles.cardTap}
+                aria-label={`Hear “${card.en}”`}
+                disabled={!speech.supported}
+                onClick={() => speech.speak(card.en, step === 2 ? 'slow' : 'normal')}
+              >
+                <span className={styles.art}>
+                  {hasArt(card.word) ? (
+                    <Art word={card.word} size={44} />
+                  ) : (
+                    /* `is` has no picture and needs none: it is the one word in
+                       the sentence that is not a thing. */
+                    <span className={styles.glyph} aria-hidden="true">
+                      =
+                    </span>
+                  )}
+                </span>
 
-              {step >= 1 && card.ta ? (
-                <span className={styles.ta} lang="ta">
-                  {card.ta}
-                </span>
-              ) : null}
-              {say ? (
-                <span className={styles.say} lang="ta">
-                  {say}
-                </span>
-              ) : null}
-              {step >= 3 ? <span className={styles.en}>{card.en}</span> : null}
+                {step >= 1 && card.ta ? (
+                  <span className={classNames(styles.ta, styles.reveal)} lang="ta">
+                    {card.ta}
+                  </span>
+                ) : null}
+                {say ? (
+                  <span className={classNames(styles.say, styles.reveal)} lang="ta">
+                    {say}
+                  </span>
+                ) : null}
+                {step >= 3 ? <span className={classNames(styles.en, styles.reveal)}>{card.en}</span> : null}
+                <span className={styles.tapHint} aria-hidden="true">▶</span>
+              </button>
             </li>
           );
         })}

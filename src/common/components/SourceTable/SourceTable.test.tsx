@@ -89,8 +89,6 @@ describe('the Visualization column', () => {
     expect(screen.getAllByRole('img', { name: 'in' }).length).toBeGreaterThan(0);
   });
 
-  /* A table with nothing to put in the column gets no column: a heading over
-     four empty cells names nothing. */
   it('is left off a table with no drawings and no alignments', () => {
     render(<SourceTable table={TENSES} />);
 
@@ -105,6 +103,24 @@ describe('the Visualization column', () => {
     /* One per section — the source splits this table into present and past. */
     expect(screen.getAllByRole('columnheader', { name: 'Visualization' })).toHaveLength(2);
     expect(screen.queryAllByRole('img')).toEqual([]);
+  });
+});
+
+describe('row audio', () => {
+  it('shows normal and slow playback inside the opened formation panel', () => {
+    render(<SourceTable table={PREP} formationOf={(row) => spec(String(row[3]))} />);
+
+    expect(screen.queryByRole('group', { name: 'Listen to the formation sentence' })).toBeNull();
+    const formation = screen.getAllByRole('button', { name: /formation/ })[0];
+    if (!formation) throw new Error('no formation button');
+    fireEvent.click(formation);
+
+    const listen = within(
+      screen.getByRole('group', { name: 'Listen to the formation sentence' }),
+    );
+    expect(listen.getByRole('button', { name: /Hear/ })).toBeTruthy();
+    expect(listen.getByRole('button', { name: /Slow/ })).toBeTruthy();
+    expect(listen.getByRole('button', { name: 'Hide formation' })).toBeTruthy();
   });
 });
 

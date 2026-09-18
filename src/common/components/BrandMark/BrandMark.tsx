@@ -41,25 +41,13 @@ export type BrandLockupProps = {
   readonly className?: string;
 };
 
-/**
- * The mark, the name, and the name as a Tamil reader would say it.
- *
- * The prototype drew the Tamil as outlines because it shipped no Tamil
- * webfont and a wordmark that can render as tofu is not a wordmark. Engine 02
- * ships the font, so it is live text again — which means it can be selected,
- * searched, read aloud and re-sized.
- */
+/** The mark and product name. Translations belong to content, not the logo. */
 export function BrandLockup({ size = 26, className }: BrandLockupProps): JSX.Element {
   return (
     <span className={classNames(styles.lockup, className)}>
       <BrandMark size={size} />
-      <span className={styles.stack}>
-        <span className={styles.word}>
-          Grammer-<em>Verse</em>
-        </span>
-        <span className={styles.ta} lang="ta">
-          கிராமர்-வெர்ஸ்
-        </span>
+      <span className={styles.word}>
+        Grammer-<em>Verse</em>
       </span>
     </span>
   );

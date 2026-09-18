@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import type { JSX, KeyboardEvent } from 'react';
 
+import { Art, hasArt } from 'common/art/Art';
 import { Chip } from 'common/components/Chip/Chip';
 import type { Knob, Lesson } from 'common/scene/types';
 import { classNames } from 'common/utils/classNames';
@@ -142,6 +143,13 @@ function KnobGroup({ knob, lesson, knobs, onChange, locked }: KnobGroupProps): J
                 key={option.value}
                 label={String(option.label.en)}
                 ta={String(option.label.ta)}
+                leading={
+                  hasArt(option.value) ? (
+                    <span aria-hidden="true">
+                      <Art word={option.value} size={24} />
+                    </span>
+                  ) : undefined
+                }
                 pressed={pressed}
                 disabled={impossible}
                 aria-disabled={locked || undefined}

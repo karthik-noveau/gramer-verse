@@ -32,15 +32,11 @@ describe('TopicCard', () => {
     expect(screen.getByText('இடைச்சொல்')).toBeTruthy();
   });
 
-  /* Led by the question the topic answers: the summaries are answers with no
-     subject, and ten of them under ten headings read as fragments. */
-  it('says what the topic is, in both languages', () => {
+  it('does not repeat a topic explanation on the index card', () => {
     renderCard();
 
-    expect(screen.getByText('What are Prepositions? Where things are.')).toBeTruthy();
-    expect(
-      screen.getByText('இடைச்சொல் என்றால் என்ன? பொருள்கள் எங்கே இருக்கின்றன.'),
-    ).toBeTruthy();
+    expect(screen.queryByText(/What are Prepositions/)).toBeNull();
+    expect(screen.queryByText(/பொருள்கள் எங்கே இருக்கின்றன/)).toBeNull();
   });
 
   it('links to the topic, inside the app', () => {
@@ -61,11 +57,11 @@ describe('TopicCard', () => {
     expect(screen.getByText('1 lesson')).toBeTruthy();
   });
 
-  it('says a topic with none is not written yet, rather than showing an empty bar', () => {
-    /* Zero is a real answer, and it is not a failure. */
+  it('does not make a topic with reference content sound empty', () => {
     renderCard({ ...TOPIC, lessonIds: [] }, 0);
 
-    expect(screen.getByText('No lessons yet')).toBeTruthy();
+    expect(screen.queryByText('No lessons yet')).toBeNull();
+    expect(screen.queryByText('0 lessons')).toBeNull();
   });
 
   it('reports no progress, because there is none in this product', () => {

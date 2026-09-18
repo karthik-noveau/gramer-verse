@@ -75,13 +75,9 @@ describe('LessonPage', () => {
       expect(within(why).getByText(/sides/i)).toBeTruthy();
     });
 
-    it('leaves a trail back through the topic', () => {
+    it('does not repeat page navigation as a breadcrumb', () => {
       at('/lessons/prep-place-in');
-      const crumbs = screen.getByRole('navigation', { name: 'Breadcrumb' });
-
-      expect(crumbs.textContent).toContain('Topics');
-      expect(crumbs.textContent).toContain('Prepositions');
-      expect(crumbs.textContent).toContain('in');
+      expect(screen.queryByRole('navigation', { name: 'Breadcrumb' })).toBeNull();
     });
 
     it('keeps the source table behind a drawer rather than on the page', () => {

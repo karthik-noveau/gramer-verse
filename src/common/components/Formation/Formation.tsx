@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { JSX } from 'react';
 
 import { buildSentence } from 'common/scene/sentence';
@@ -54,19 +54,62 @@ const LABEL_TA: Readonly<Record<string, string>> = {
   join: 'இணைப்பு',
 };
 
+const LABEL_EN: Readonly<Record<string, string>> = {
+  det: 'Determiner',
+  figure: 'Subject',
+  rel: 'Preposition',
+  ground: 'Object',
+  be: 'Verb',
+  qual: 'Modifier',
+  ask: 'Question word',
+  join: 'Conjunction',
+};
+
 /** A repeat carries a trailing digit — two places in one sentence — and it is
  *  stripped before anything is looked up. */
 export const baseRole = (role: string): string => role.replace(/\d+$/, '');
 
 const colourOf = (role: string): string => COLOUR[baseRole(role)] ?? 'var(--muted)';
 
+const QUESTION = /^(what|when|where|why|who|whose|which|how(?:\s+(?:much|many|long|far|old|often))?)$/i;
+const ARTICLE = /^(a|an|the)$/i;
+const PRONOUN = /^(i|we|you|he|she|it|they)$/i;
+const MODAL = /^(can|could|will|would|may|might|must|shall|should|ought to)$/i;
+const AUXILIARY = /^(am|is|are|was|were|be|been|being|has|have|had|do|does|did|will)$/i;
+const TIME_PHRASE = /\b(now|today|tonight|yesterday|tomorrow|hour|day|week|month|year|morning|evening|since|ago)\b/i;
+
+/** A readable English grammar pattern derived from the diagram's own tokens. */
+export const sentencePattern = (tokens: readonly FormationToken[]): readonly {
+  readonly label: string;
+  readonly role: string;
+}[] =>
+  tokens.map((token, index) => {
+    const explicit = token.roles[0];
+    const text = token.text.trim();
+    const inferred = ARTICLE.test(text) ? 'det' : PRONOUN.test(text) ? 'figure' : '';
+    const role = baseRole(explicit ?? inferred);
+    const imperativeObject = role === 'figure' && index > 0 && baseRole(tokens[0]?.roles[0] ?? '') === 'be';
+
+    let label = LABEL_EN[role] ?? 'Word';
+    if (QUESTION.test(text)) label = 'Question Word';
+    else if (MODAL.test(text) || role === 'be') label = 'Verb';
+    else if (imperativeObject) label = 'Object';
+    else if (role === 'qual' && TIME_PHRASE.test(text)) label = 'Time Phrase';
+    else if (role === '' && AUXILIARY.test(text)) label = 'Verb';
+
+    return { label, role };
+  });
+
 /* ---- the geometry ------------------------------------------ */
 
 const WIDTH = 760;
-const HEIGHT = 172;
+const HEIGHT = 166;
 const PAD = 20;
-const TA_Y = 40;
-const EN_Y = 142;
+const TA_Y = 35;
+const EN_Y = 118;
+const PATTERN_TOP = 132;
+const PATTERN_HEIGHT = 24;
+const PATTERN_TEXT_Y = 148;
 
 type Placed = { readonly x: number; readonly token: FormationToken };
 
@@ -84,15 +127,33 @@ const layOut = (tokens: readonly FormationToken[]): readonly Placed[] =>
 const curve = (from: number, to: number): string =>
   `M${from},${TA_Y + 12} C${from},${TA_Y + 52} ${to},${EN_Y - 56} ${to},${EN_Y - 20}`;
 
+/** Keep each label visually attached to its word without letting long labels
+ *  dominate the row. The fixed viewBox makes this stable at every screen size. */
+const patternChipWidth = (label: string): number =>
+  Math.min(88, Math.max(46, Math.round(label.length * 5.6 + 20)));
+
 export type FormationProps = {
   readonly spec: FormationSpec;
   readonly className?: string | undefined;
+  readonly showPattern?: boolean | undefined;
+  readonly onTogglePattern?: (() => void) | undefined;
+  readonly showPatternToggle?: boolean | undefined;
 };
 
-export function Formation({ spec, className }: FormationProps): JSX.Element {
+export function Formation({
+  spec,
+  className,
+  showPattern,
+  onTogglePattern,
+  showPatternToggle = true,
+}: FormationProps): JSX.Element {
   const tamil = useMemo(() => layOut(spec.taTokens), [spec]);
   const english = useMemo(() => layOut(spec.enTokens), [spec]);
   const note = useMemo(() => noteParts(spec), [spec]);
+  const pattern = useMemo(() => sentencePattern(spec.enTokens), [spec]);
+  const [internalPattern, setInternalPattern] = useState(true);
+  const patternShown = showPattern ?? internalPattern;
+  const togglePattern = onTogglePattern ?? (() => setInternalPattern((shown) => !shown));
 
   return (
     <div className={classNames(styles.formation, className)}>
@@ -148,8 +209,93 @@ export function Formation({ spec, className }: FormationProps): JSX.Element {
           {english.map((placed, index) => (
             <Word key={`en-${index}`} placed={placed} y={EN_Y} lang="en" />
           ))}
+
+          {patternShown ? (
+            <g
+              aria-label={pattern.map((part) => part.label).join(' + ')}
+              data-testid="sentence-formation"
+            >
+              {english.map((placed, index) => {
+                const part = pattern[index];
+                const previous = english[index - 1];
+                const label = part?.label ?? 'Word';
+                const colour = part ? colourOf(part.role) : 'var(--muted)';
+                const chipWidth = patternChipWidth(label);
+                return (
+                  <g key={`pattern-${index}`}>
+                    {index > 0 && previous ? (
+                      <g aria-hidden="true">
+                        <circle
+                          cx={(previous.x + placed.x) / 2}
+                          cy={PATTERN_TOP + PATTERN_HEIGHT / 2}
+                          r={7}
+                          fill="var(--surface)"
+                          stroke="var(--line)"
+                        />
+                        <text
+                          x={(previous.x + placed.x) / 2}
+                          y={PATTERN_TEXT_Y}
+                          textAnchor="middle"
+                          fontFamily="var(--font)"
+                          fontSize={10}
+                          fontWeight={700}
+                          fill="var(--muted)"
+                        >
+                          +
+                        </text>
+                      </g>
+                    ) : null}
+                    <line
+                      x1={placed.x}
+                      y1={EN_Y + 7}
+                      x2={placed.x}
+                      y2={PATTERN_TOP}
+                      stroke={colour}
+                      strokeWidth={1.5}
+                      strokeOpacity={0.3}
+                      aria-hidden="true"
+                    />
+                    <rect
+                      x={placed.x - chipWidth / 2}
+                      y={PATTERN_TOP}
+                      width={chipWidth}
+                      height={PATTERN_HEIGHT}
+                      rx={PATTERN_HEIGHT / 2}
+                      fill={colour}
+                      fillOpacity={0.1}
+                      stroke={colour}
+                      strokeOpacity={0.28}
+                      aria-hidden="true"
+                    />
+                    <text
+                      x={placed.x}
+                      y={PATTERN_TEXT_Y}
+                      textAnchor="middle"
+                      fontFamily="var(--font)"
+                      fontSize={10}
+                      fontWeight={700}
+                      fill={colour}
+                    >
+                      {label}
+                    </text>
+                  </g>
+                );
+              })}
+            </g>
+          ) : null}
         </svg>
       </div>
+
+      {showPatternToggle ? (
+        <button
+          type="button"
+          className={styles.patternToggle}
+          aria-expanded={patternShown}
+          onClick={togglePattern}
+        >
+          {patternShown ? 'Hide' : 'Show'} sentence formation
+        </button>
+      ) : null}
     </div>
   );
 }

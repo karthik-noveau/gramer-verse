@@ -23,13 +23,11 @@ exists to prevent.
 `lessons/`, so a topic with no lessons yet carries an empty list. That is an
 empty state on its page, not an error.
 
-**Thirty-two lines of the outline in `curriculum.json` have no Tamil**, and
-that is the source's own gap: those rows are English example sentences the
-notes never glossed — *This is a pen*, *He is a student.* Constraint 3's rule
-that a missing Tamil string is a content error is about the strings this app
-wrote; this file is a transcription of somebody else's, and inventing a gloss
-here would be putting words into the notes' mouth. `validateCurriculum` carries
-them as `titleTa: null` and the topic page renders the English alone.
+The audited outline is bilingual throughout. `validateCurriculum` rejects a
+lesson label with missing Tamil and rejects a table row whose width does not
+exactly match its headings. These rules prevent incomplete translations and
+shifted cells from reaching learners while still keeping the original source
+mistakes documented in the corrections list.
 
 ## Deviations from the source notes
 
@@ -60,9 +58,9 @@ it departed; these are rendered at the foot of the reference page.
 
 | # | Where | The notes say | The app teaches |
 |---|---|---|---|
-| 1 | Tense forms | "He has been writing for an hour" is labelled present perfect. | That is present perfect continuous. Present perfect is has/have + past participle — "he has written". The row is left as the notes wrote it and flagged here; rewriting it would mean inventing an English and a Tamil sentence the notes do not contain. |
-| 2 | Auxiliary verb forms | "has been being", "had been being", "will have been being". | Not real English usage. Kept, because it is what the notes say and removing a row would hide the error rather than name it — the perfect continuous is has/have been + -ing. |
-| 3 | Modal verbs | may = fewer possibilities, might = more possibilities. | Reversed. "may" is the more likely of the two; "might" is the more tentative. |
+| 1 | Tense forms | "He has been writing for an hour" is labelled present perfect. | Corrected all twelve structures and examples. Present perfect is have/has + past participle; present perfect continuous is have/has been + verb-ing. |
+| 2 | Auxiliary verb forms | "has been being", "had been being", "will have been being". | Replaced the misleading aspect grid with the three primary auxiliaries: be, have and do. The rare, unsuitable-for-beginners forms were removed. |
+| 3 | Modal verbs | may = fewer possibilities, might = more possibilities. | Removed the fixed probability ranking. May, might and could can all express uncertain possibility; the choice also depends on context and formality. |
 | 4 | Prepositions of place | below example glossed "வெப்பநிலை சுழற்சி புள்ளியின் கீழே". | Corrected to "வெப்பநிலை பூஜ்ஜியத்திற்கு கீழே" — zero, not "cycle point". |
 | 5 | Main verbs | cried → அழைத்தேன். | அழைத்தேன் means "called". Corrected to அழுதேன். |
 | 6 | Conjunctions | the third column is headed "Conjunction", the same as the first. | It holds the English example sentence. Headed "English Example". |
@@ -75,7 +73,7 @@ it departed; these are rendered at the foot of the reference page.
 | 13 | Personal pronouns | reflexives written as two words — "Him self", "Them selves-" — and "My" for the first person. | Myself, Ourselves, Yourself, Yourselves, Himself, Herself, Itself, Themselves. |
 | 14 | Personal pronouns | "Then அவர்களுடைய" in the adjective column. | "Their" — a possessive adjective, not "then". |
 | 15 | Sentence formation | each Example cell runs the pattern, the English sentence and the Tamil together with no separator — "Subject + Main Verb + ObjectI play cricketநான் cricket விளையாடுறேன்". | Split into three columns. The port had kept only the pattern and the English, dropping every Tamil sentence in the topic. |
-| 16 | Sentence formation | the Yes / No present-tense row is glossed "நீ எங்கே cricket விளையாடுறா ?" — a where-question. | That Tamil belongs to the WH row above it. Left as written and flagged; correcting it would mean writing a Tamil sentence the notes do not contain. |
+| 16 | Sentence formation | the Yes / No present-tense row is glossed "நீ எங்கே cricket விளையாடுறா ?" — a where-question. | Corrected to "நீங்கள் கிரிக்கெட் விளையாடுகிறீர்களா?" and standardised all sentence examples to written Tamil. |
 | 17 | Exclamatory sentences | the second row, "Wow! It's amazing / வாவ்! இது அருமை!", was missing from the port. | Restored. The topic has 20 rows, not 19. |
 | 18 | Prepositions — other | `as` is glossed போல, and `like` போன்ற. | போல *is* "like". Glossing `as` with the word for `like` teaches the one confusion the relation scene exists to prevent, and the notes' own example uses the -ஆக ending — *டிரைவராக*. The app teaches `as` = ஆக. The source row is unchanged on the reference page. |
 

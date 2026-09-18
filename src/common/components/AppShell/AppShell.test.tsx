@@ -76,7 +76,8 @@ describe('AppShell', () => {
     renderShell();
     const sidebar = screen.getByRole('complementary', { name: 'Topics' });
 
-    expect(sidebar.querySelectorAll('a')).toHaveLength(TOPICS.length);
+    expect(sidebar.querySelectorAll('a')).toHaveLength(TOPICS.length + 1);
+    expect(within(sidebar).getByRole('link', { name: 'All topics' })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Prepositions' }).getAttribute('aria-current')).toBe('page');
   });
 
@@ -188,6 +189,7 @@ describe('AppShell', () => {
     const sidebar = screen.getByRole('complementary', { name: 'Topics' });
 
     expect(screen.queryByRole('link', { name: 'Tenses' })).toBeNull();
-    expect(within(sidebar).queryAllByRole('link')).toHaveLength(0);
+    expect(within(sidebar).getByRole('link', { name: 'All topics' })).toBeTruthy();
+    expect(within(sidebar).queryAllByRole('link')).toHaveLength(1);
   });
 });

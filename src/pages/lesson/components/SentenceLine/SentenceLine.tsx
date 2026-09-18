@@ -3,6 +3,7 @@ import type { JSX } from 'react';
 
 import { buildSentence, sentenceText, spaceBefore } from 'common/scene/sentence';
 import type { Token } from 'common/scene/sentence';
+import { useSpeech } from 'common/hooks/useSpeech';
 import type { SceneSpec, SentenceTemplates } from 'common/scene/types';
 import { classNames } from 'common/utils/classNames';
 
@@ -40,20 +41,48 @@ export function SentenceLine({
 }: SentenceLineProps): JSX.Element {
   const sentence = useMemo(() => buildSentence(scene, templates), [scene, templates]);
   const lit = useFlash(flash, scene);
+  const speech = useSpeech();
+  const english = sentenceText(sentence.en);
 
   return (
-    <p className={classNames(styles.sentence, className)}>
-      <span className={styles.line} lang="en">
-        {sentence.en.map((token, index) => (
-          <Word key={`${token.knob ?? 'fixed'}-${index}`} token={token} lit={lit} first={index === 0} />
-        ))}
-      </span>
-      <span className={classNames(styles.line, styles.ta)} lang="ta">
-        {sentence.ta.map((token, index) => (
-          <Word key={`${token.knob ?? 'fixed'}-${index}`} token={token} lit={lit} first={index === 0} />
-        ))}
-      </span>
-    </p>
+    <div className={classNames(styles.sentence, className)}>
+      <p className={styles.words}>
+        <span className={styles.line} lang="en">
+          {sentence.en.map((token, index) => (
+            <Word key={`${token.knob ?? 'fixed'}-${index}`} token={token} lit={lit} first={index === 0} />
+          ))}
+        </span>
+        <span className={classNames(styles.line, styles.ta)} lang="ta">
+          {sentence.ta.map((token, index) => (
+            <Word key={`${token.knob ?? 'fixed'}-${index}`} token={token} lit={lit} first={index === 0} />
+          ))}
+        </span>
+      </p>
+
+      <div className={styles.listen} role="group" aria-label="Listen to the English sentence">
+        <button
+          type="button"
+          className={styles.listenButton}
+          disabled={!speech.supported}
+          onClick={() => speech.speak(english)}
+        >
+          <span aria-hidden="true">▶</span>
+          <span>Hear</span>
+          <span className={styles.listenTa} lang="ta">கேளுங்கள்</span>
+        </button>
+        <button
+          type="button"
+          className={styles.listenButton}
+          disabled={!speech.supported}
+          onClick={() => speech.speak(english, 'slow')}
+        >
+          <span aria-hidden="true">½×</span>
+          <span>Slow</span>
+          <span className={styles.listenTa} lang="ta">மெதுவாக</span>
+        </button>
+        {speech.speaking ? <span className={styles.speaking}>Speaking…</span> : null}
+      </div>
+    </div>
   );
 }
 

@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 import type { JSX } from 'react';
 
-import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
 import { Button } from 'common/components/Button/Button';
-import { Card, CardNote } from 'common/components/Card/Card';
+import { Card } from 'common/components/Card/Card';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
 import { ErrorState } from 'common/components/ErrorState/ErrorState';
 import { paths } from 'common/constants/routes';
@@ -32,11 +31,8 @@ type Counted = { readonly topic: Topic; readonly lessons: number };
 export default function TopicsPage(): JSX.Element {
   const content = useContent();
 
-  /* Counted on read, from the topic's own list. Both the cards and the
-     subtitle read the same numbers, so the two can never disagree — the
-     prototype's old dashboard said "Ten topics" in English over "ஒன்பது" —
-     nine — in Tamil, because the number was typed twice and only one copy was
-     updated when conjunctions were split out. */
+  /* Count each topic's lessons from its own list so every card stays aligned
+     with the authored curriculum. */
   const counted = useMemo<readonly Counted[]>(() => {
     if (content.status !== 'ready') return [];
     return [...content.topics]
@@ -44,23 +40,10 @@ export default function TopicsPage(): JSX.Element {
       .map((topic) => ({ topic, lessons: topic.lessonIds.length }));
   }, [content]);
 
-  const lessons = counted.reduce((total, entry) => total + entry.lessons, 0);
-
   return (
     <>
-      <Breadcrumbs items={[{ label: 'Topics' }]} />
-
       <div className={styles.head}>
-        <h1>Start anywhere</h1>
-        <p className={styles.sub}>
-          {content.status === 'ready'
-            ? `${counted.length} topics, ${lessons} lessons. Nothing is locked.`
-            : 'Every topic, in teaching order.'}
-          <span className={styles.ta} lang="ta">
-            {' '}
-            எங்கிருந்தும் தொடங்கலாம்.
-          </span>
-        </p>
+        <h1>Start anywhere.</h1>
       </div>
 
       {content.status === 'loading' ? <Skeletons /> : null}
@@ -105,18 +88,10 @@ export default function TopicsPage(): JSX.Element {
 
       {/* The two things that are not a topic. They were the old dashboard's
           only other content, and they belong wherever the topics are. */}
-      <h2 className={styles.or}>Or</h2>
       <ul className={styles.pair}>
         <li>
           <Card to={paths.visualizer()}>
             <h3 className={styles.otherTitle}>Prepositions visualizer</h3>
-            <CardNote>
-              Pick a preposition and watch the picture. The place relations are a live scene
-              you can change.
-              <span className={styles.ta} lang="ta">
-                இடைச்சொல்லைப் படமாகப் பாருங்கள்.
-              </span>
-            </CardNote>
           </Card>
         </li>
       </ul>

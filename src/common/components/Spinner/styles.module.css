@@ -7,6 +7,16 @@
   animation: spin .8s linear infinite;
 }
 
+/* Page-level loading states should not look attached to the top-left corner.
+   The minimum keeps short shell pages stable while dvh follows mobile browser
+   chrome as it opens and closes. */
+.centered {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: max(12rem, calc(100dvh - var(--header-h) - var(--s-8)));
+}
+
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Not `animation: none`: a still ring reads as a broken image. It slows to

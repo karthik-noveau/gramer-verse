@@ -41,3 +41,16 @@
   padding-top: 2px;
 }
 .drawn { color: var(--accent); font-weight: 600; }
+
+@media (max-width: 480px) {
+  .inner {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--s-2);
+  }
+
+  .tag {
+    grid-column: 2;
+    padding-top: 0;
+    white-space: normal;
+  }
+}

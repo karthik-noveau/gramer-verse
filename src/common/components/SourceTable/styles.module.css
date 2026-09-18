@@ -45,6 +45,47 @@
    table is the source's, and this is a note in the margin of it. */
 .note { color: var(--accent); font-size: var(--fs-xs); font-weight: 600; white-space: nowrap; }
 
+.listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--soft);
+  font: 600 var(--fs-xs) / 1 var(--font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.listen:hover { border-color: var(--accent); color: var(--accent); }
+.listen[disabled] { opacity: .45; cursor: not-allowed; }
+
+.fmPanel {
+  display: grid;
+  grid-template-rows: 1fr;
+  animation: formation-open 320ms cubic-bezier(.16, 1, .3, 1) both;
+}
+.fmPanelInner { position: relative; min-height: 0; overflow: hidden; }
+.fmListen {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-4);
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+@media (max-width: 640px) {
+  .fmListen {
+    position: static;
+    padding: var(--s-3) var(--s-4) 0;
+  }
+}
+
 /* Opens the word-order diagram under the row it belongs to. Offered only for
    the rows that have one — a button that opens an empty frame is worse than no
    button. */
@@ -111,3 +152,12 @@
    viewBox, so scaling the box down scales the line too. */
 .caret svg { width: 7px; height: 10px; display: block; }
 .caretOpen { transform: rotate(90deg); }
+
+@keyframes formation-open {
+  from { grid-template-rows: 0fr; opacity: 0; }
+  to { grid-template-rows: 1fr; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fmPanel { animation: none; }
+}

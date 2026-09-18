@@ -2,6 +2,12 @@
    sentence said twice — not two paragraphs that happen to be adjacent. */
 .sentence {
   margin: 0;
+  display: grid;
+  gap: var(--s-2);
+}
+
+.words {
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -18,6 +24,36 @@
   color: var(--soft);
 }
 
+.listen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.listenButton {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--soft);
+  font: 600 var(--fs-xs) / 1.2 var(--font);
+  cursor: pointer;
+  transition: transform var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+.listenButton:hover { border-color: var(--accent); color: var(--ink); transform: translateY(-1px); }
+.listenButton:active { transform: translateY(1px); }
+.listenButton[disabled] { opacity: .45; cursor: not-allowed; }
+.listenTa { font-family: var(--tamil); font-weight: 500; color: var(--muted); }
+.speaking { color: var(--accent); font-size: var(--fs-xs); animation: speaking 1s ease-in-out infinite; }
+
+@keyframes speaking { 50% { opacity: .45; } }
+
 /* A word a knob owns is underlined, so it is visibly one of the things that
    can change before anything has changed. Dotted rather than solid: a solid
    underline reads as a link. */
@@ -28,20 +64,21 @@
 /* The word that just changed. Colour and weight as well as the wash, because a
    flash carried by colour alone is invisible to a learner who cannot see it. */
 .flash {
-  animation: flash .62s ease-out;
+  animation: flash .68s cubic-bezier(.2, .8, .25, 1);
   border-bottom-color: var(--accent);
   color: var(--accent);
   font-weight: 700;
 }
 
 @keyframes flash {
-  0%   { background: var(--accent-soft); }
-  70%  { background: var(--accent-soft); }
-  100% { background: transparent; }
+  0%   { background: var(--accent-soft); box-shadow: 0 0 0 0 var(--accent-soft); }
+  45%  { background: var(--accent-soft); box-shadow: 0 0 0 5px var(--accent-soft); }
+  100% { background: transparent; box-shadow: 0 0 0 8px transparent; }
 }
 
 /* The word still marks itself out — it keeps the colour and the weight — but
    nothing moves or blinks. */
 @media (prefers-reduced-motion: reduce) {
-  .flash { animation: none; }
+  .flash, .speaking { animation: none; }
+  .listenButton:hover, .listenButton:active { transform: none; }
 }

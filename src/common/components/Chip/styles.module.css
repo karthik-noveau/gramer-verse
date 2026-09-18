@@ -2,20 +2,54 @@
    something in a scene is one of these, so the pressed state carries the accent
    and nothing else in the row does. */
 .chip {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px var(--s-3); border-radius: var(--r-pill);
-  border: 1px solid var(--line); background: var(--surface); color: var(--soft);
-  font-size: var(--fs-sm); cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 6px var(--s-3);
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--soft);
+  font-size: var(--fs-sm);
+  line-height: 1.2;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
 }
-.chip:hover { border-color: var(--line-strong); color: var(--ink); }
+.chip:hover { border-color: var(--line-strong); color: var(--ink); transform: translateY(-1px); }
+.chip:active { transform: translateY(1px) scale(.98); }
 
 .chip[aria-pressed="true"] {
   background: var(--accent); border-color: var(--accent);
   color: var(--accent-ink); font-weight: 600;
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 24%, transparent);
 }
 .chip[disabled] { opacity: .4; cursor: not-allowed; }
 
-.ta { font-size: var(--fs-xs); opacity: .75; }
+.ta {
+  font-family: var(--tamil);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  line-height: 1.35;
+  opacity: .82;
+}
 
 .chip:has(.leading) { padding-left: 6px; }
-.leading { margin-right: 2px; }
+.leading {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1px;
+  line-height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip:hover, .chip:active { transform: none; }
+}

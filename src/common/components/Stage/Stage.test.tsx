@@ -80,12 +80,10 @@ describe('Stage', () => {
     warn.mockRestore();
   });
 
-  it('keeps the Tamil font attribute on the text it belongs to', () => {
-    const { container } = render(<Stage spec={{ ...PLACE, determiner: 'a' }} />);
-    const label = container.querySelector('text');
+  it('keeps grammar words outside the drawing', () => {
+    render(<Stage spec={{ ...PLACE, determiner: 'a' }} />);
 
-    expect(label?.getAttribute('font-size')).toBeTruthy();
-    expect(label?.getAttribute('text-anchor')).toBeTruthy();
+    expect(svgOf().querySelector('text')).toBeNull();
   });
 
   it('describes the picture in English on the image itself', () => {
@@ -104,6 +102,18 @@ describe('Stage', () => {
     /* Inside the figure, not floating in the page: a description that is not
        associated with its picture is read out as a stray line of Tamil. */
     expect(caption?.closest('figure')?.contains(svgOf())).toBe(true);
+  });
+
+  it('shows a bilingual grammar guide below a place picture when requested', () => {
+    const { container } = render(<Stage spec={PLACE} guide />);
+    const caption = container.querySelector('figcaption');
+
+    expect(caption?.className).not.toContain('sr-only');
+    expect(caption?.textContent).toContain('in');
+    expect(caption?.textContent).toContain('உள்ளே');
+    expect(caption?.textContent).toContain('the');
+    expect(caption?.textContent).toContain('குறிப்பிட்ட ஒன்று');
+    expect(svgOf().textContent).not.toContain('the');
   });
 
   it('keeps the svg out of the tab order — it is a picture, not a control', () => {

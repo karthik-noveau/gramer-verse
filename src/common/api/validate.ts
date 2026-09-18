@@ -466,15 +466,14 @@ export function validateCurriculum(
     const columns = table.cols ?? [];
     if (columns.length === 0) issues.add(`${path}.cols`, 'a table with no columns has no shape');
 
-    /* Short rows are the source's own: the common-prepositions table leaves
-       the last cell off a row that has nothing to say in it. A row with *more*
-       cells than columns is a table that lost a heading, and there is no
-       honest way to render it. */
+    /* Every row now has the table's exact width. A short row once shifted the
+       common-preposition cells under the wrong headings, which is especially
+       dangerous in learning material because it still looks plausible. */
     (table.rows ?? []).forEach((row, r) => {
-      if (row.length > columns.length) {
+      if (row.length !== columns.length) {
         issues.add(
           `${path}.rows[${r}]`,
-          `${row.length} cells in a table with ${columns.length} columns`,
+          `${row.length} cells in a table with exactly ${columns.length} columns`,
         );
       }
     });
@@ -500,11 +499,19 @@ export function validateCurriculum(
           if (!hasText(lesson.en)) {
             issues.add(`${path}.groups[${g}].lessons[${l}].en`, 'a line with no English');
           }
+          if (!hasText(lesson.ta)) {
+            issues.add(`${path}.groups[${g}].lessons[${l}].ta`, 'a line with no Tamil');
+          }
+          if (hasText(lesson.ex) !== hasText(lesson.exTa)) {
+            issues.add(
+              `${path}.groups[${g}].lessons[${l}]`,
+              'an example must have both English and Tamil',
+            );
+          }
           return {
             title: asNonEmpty(lesson.en ?? ''),
-            /* Glossed where the notes glossed it. Thirty-two rows are English
-               example sentences the notes never translated, and a blank there
-               is the source's, not a hole to fill. */
+            /* The audited curriculum is bilingual throughout. The nullable
+               type remains for callers validating an incomplete draft. */
             titleTa: hasText(lesson.ta) ? asNonEmpty(lesson.ta) : null,
             /* An absent example is a fact about the notes too. */
             example:
@@ -618,4 +625,3 @@ export function validateVerbs(
   issues.throwIfAny();
   return ids;
 }
-

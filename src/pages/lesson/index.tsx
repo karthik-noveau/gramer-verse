@@ -3,7 +3,6 @@ import type { JSX } from 'react';
 import { useParams } from 'react-router';
 
 import { tablesOfTopic } from 'common/api/content.api';
-import { Breadcrumbs } from 'common/components/Breadcrumbs/Breadcrumbs';
 import { Button } from 'common/components/Button/Button';
 import { Drawer } from 'common/components/Drawer/Drawer';
 import { EmptyState } from 'common/components/EmptyState/EmptyState';
@@ -43,7 +42,7 @@ export default function LessonPage(): JSX.Element {
   const content = useContent();
   const next = useContentStore((state) => getNextLesson(state, lessonId));
 
-  if (content.status === 'loading') return <Spinner label="Loading the lesson" />;
+  if (content.status === 'loading') return <Spinner label="Loading the lesson" centered />;
 
   if (content.status === 'error') {
     return (
@@ -67,19 +66,16 @@ export default function LessonPage(): JSX.Element {
      as it was typed, so the typo that caused it is still visible. */
   if (!lesson) {
     return (
-      <>
-        <Breadcrumbs items={[{ label: 'Topics', href: paths.topics() }, { label: 'Not found' }]} />
-        <EmptyState
-          title={`There is no lesson called “${lessonId ?? ''}”`}
-          body="The address may have been mistyped, or the lesson may not be written yet."
-          ta="இந்தப் பாடம் இல்லை."
-          action={
-            <Button variant="primary" to={paths.topics()}>
-              All topics
-            </Button>
-          }
-        />
-      </>
+      <EmptyState
+        title={`There is no lesson called “${lessonId ?? ''}”`}
+        body="The address may have been mistyped, or the lesson may not be written yet."
+        ta="இந்தப் பாடம் இல்லை."
+        action={
+          <Button variant="primary" to={paths.topics()}>
+            All topics
+          </Button>
+        }
+      />
     );
   }
 
@@ -121,7 +117,7 @@ function Workspace({ lesson, topic, next, nextTopic, curriculum }: WorkspaceProp
   /* The lesson is opened by an effect, so the first render has nothing to
      draw. A spinner rather than a half-built workspace: one frame of a page
      with no picture in it reads as a picture that failed. */
-  if (open.status !== 'open') return <Spinner label="Opening the lesson" />;
+  if (open.status !== 'open') return <Spinner label="Opening the lesson" centered />;
 
   /* The knob the question is about is hidden while it is unanswered — not
      disabled, because a disabled control still shows which option is set, and
@@ -132,14 +128,6 @@ function Workspace({ lesson, topic, next, nextTopic, curriculum }: WorkspaceProp
 
   return (
     <>
-      <Breadcrumbs
-        items={[
-          { label: 'Topics', href: paths.topics() },
-          ...(topic ? [{ label: String(topic.title.en), href: paths.topic(String(topic.id)) }] : []),
-          { label: String(lesson.title.en) },
-        ]}
-      />
-
       <div className={styles.lesson}>
         <div className={styles.main}>
           <header className={styles.head}>

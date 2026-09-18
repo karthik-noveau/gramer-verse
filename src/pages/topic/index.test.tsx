@@ -37,13 +37,21 @@ describe('TopicPage', () => {
 
       expect(heading.querySelector('[lang="en"]')?.textContent).toBe('Prepositions');
       expect(heading.querySelector('[lang="ta"]')?.textContent).toBe('இடைச்சொல்');
+      expect(
+        [...screen.getByRole('list', { name: 'Types' }).querySelectorAll('li')].map(
+          (item) => item.querySelector('[lang="en"]')?.textContent,
+        ),
+      ).toEqual(['Place', 'Direction', 'Time', 'Other roles']);
     });
 
     it('renders the topic’s source tables above the outline', () => {
       at('/topics/prepositions');
       const tables = screen.getAllByRole('table');
-
       expect(tables.length).toBeGreaterThanOrEqual(5);
+      expect(screen.queryByRole('heading', { name: 'What is in it' })).toBeNull();
+      expect(screen.getAllByRole('button', { name: 'Show more' })).toHaveLength(1);
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+
       /* The table comes first in the document, which is what "above" means to
          anything reading the page in order. */
       const outline = screen.getByRole('heading', { name: 'What is in it' });
@@ -52,6 +60,7 @@ describe('TopicPage', () => {
 
     it('renders group tabs, because this topic declares four', () => {
       at('/topics/prepositions');
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
 
       expect(screen.getAllByRole('tab')).toHaveLength(4);
       expect(screen.getByRole('tab', { name: 'Place' })).toBeTruthy();
@@ -60,6 +69,7 @@ describe('TopicPage', () => {
 
     it('shows the first group’s lines, and moves when a tab is pressed', () => {
       at('/topics/prepositions');
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
 
       expect(screen.getAllByText('under').length).toBeGreaterThan(0);
 
@@ -71,30 +81,37 @@ describe('TopicPage', () => {
 
     it('links the lines this app can draw and leaves the rest as text', () => {
       at('/topics/prepositions');
-      const lessons = screen
+      expect(
+        screen.queryAllByRole('link').filter((link) => link.getAttribute('href')?.startsWith('/lessons/')),
+      ).toHaveLength(0);
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+      const expandedLessons = screen
         .getAllByRole('link')
         .filter((link) => link.getAttribute('href')?.startsWith('/lessons/'));
 
       /* The thirteen place lessons are authored; the direction, time and other
          groups are not. */
-      expect(lessons.length).toBeGreaterThanOrEqual(10);
+      expect(expandedLessons.length).toBeGreaterThanOrEqual(10);
       expect(screen.getAllByText('Not drawn yet').length).toBeGreaterThan(0);
     });
 
-    it('starts at the first lesson of the topic — there is no resume', () => {
+    it('uses one page-level disclosure and no nested disclosures', () => {
       at('/topics/prepositions');
-      const start = screen.getByRole('link', { name: /^Start with/ });
 
-      expect(start.getAttribute('href')).toBe('/lessons/prep-place-in');
+      expect(screen.getAllByRole('button', { name: 'Show more' })).toHaveLength(1);
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+      expect(screen.getAllByRole('button', { name: 'Show less' })).toHaveLength(1);
+      expect(screen.queryByRole('button', { name: 'Show more' })).toBeNull();
     });
 
-    it('leaves a trail back to the topics', () => {
+    it('does not push a first lesson above the topic’s own outline', () => {
       at('/topics/prepositions');
-      const crumbs = screen.getByRole('navigation', { name: 'Breadcrumb' });
+      expect(screen.queryByRole('link', { name: /^Start with/ })).toBeNull();
+    });
 
-      expect(crumbs.textContent).toContain('Topics');
-      expect(crumbs.textContent).toContain('Prepositions');
-      expect(crumbs.querySelector('a')?.getAttribute('href')).toBe('/topics');
+    it('does not repeat page navigation as a breadcrumb', () => {
+      at('/topics/prepositions');
+      expect(screen.queryByRole('navigation', { name: 'Breadcrumb' })).toBeNull();
     });
   });
 
@@ -105,6 +122,8 @@ describe('TopicPage', () => {
       at('/topics/articles');
 
       expect(screen.queryAllByRole('tab')).toHaveLength(0);
+      expect(screen.queryByRole('list', { name: 'Types' })).toBeNull();
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
       expect(screen.getByRole('heading', { name: 'What is in it' })).toBeTruthy();
     });
 
@@ -112,6 +131,56 @@ describe('TopicPage', () => {
       at('/topics/articles');
 
       expect(screen.queryByRole('link', { name: /^Start with/ })).toBeNull();
+      expect(screen.getAllByRole('button', { name: 'Show more' })).toHaveLength(1);
+      expect(screen.queryByRole('heading', { name: 'What is in it' })).toBeNull();
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+      expect(screen.getByRole('heading', { name: 'What is in it' })).toBeTruthy();
+    });
+
+    it('does not repeat a table title that is the same as the page title', () => {
+      at('/topics/articles');
+
+      expect(screen.getAllByRole('heading', { name: /Articles/ })).toHaveLength(1);
+    });
+  });
+
+  describe('tenses — a compact comparison', () => {
+    it('starts with a familiar three-row table, then offers the full reference', () => {
+      at('/topics/tenses');
+
+      expect(screen.queryByText('What are Tenses?')).toBeNull();
+      expect(screen.queryByText('காலங்கள் என்றால் என்ன?')).toBeNull();
+      expect(screen.getByText(/^Use it to say whether/)).toBeTruthy();
+      expect(
+        [...screen.getByRole('list', { name: 'Types' }).querySelectorAll('li')].map(
+          (item) => item.querySelector('[lang="en"]')?.textContent,
+        ),
+      ).toEqual(['Present', 'Past', 'Future']);
+      expect(screen.queryByRole('heading', { name: /Past, present and future/ })).toBeNull();
+      expect(screen.queryByText(/That is enough for now/)).toBeNull();
+      expect(screen.getAllByRole('table')).toHaveLength(1);
+      expect(screen.getByRole('columnheader', { name: 'When?' })).toBeTruthy();
+      expect(
+        screen.getAllByRole('columnheader').map((header) => header.textContent),
+      ).toEqual(['Tense', 'When?', 'Example']);
+      expect(screen.getByText('Yesterday / before')).toBeTruthy();
+      expect(screen.getByText('Today / usually')).toBeTruthy();
+      expect(screen.getByText('Tomorrow / later')).toBeTruthy();
+      expect(screen.queryByRole('heading', { name: 'What is in it' })).toBeNull();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
+
+      expect(screen.getAllByRole('table')).toHaveLength(5);
+      expect(screen.getByText('In progress at the time we mention')).toBeTruthy();
+      expect(screen.getByText('Continued for a period up to that time')).toBeTruthy();
+      expect(screen.getByText(/does not mean “without mistakes/)).toBeTruthy();
+      expect(screen.getAllByRole('columnheader', { name: 'Example' })).toHaveLength(5);
+      expect(screen.getByText('Present perfect continuous')).toBeTruthy();
+      expect(screen.queryByRole('columnheader', { name: 'Visualization' })).toBeNull();
+      expect(screen.queryByRole('button', { name: /formation/ })).toBeNull();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Show less' }));
+      expect(screen.getAllByRole('table')).toHaveLength(1);
     });
   });
 

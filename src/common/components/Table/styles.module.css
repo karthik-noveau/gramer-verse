@@ -46,8 +46,26 @@
 .ta { display: block; color: var(--soft); }
 
 .sortable { cursor: pointer; user-select: none; }
-.table th[aria-sort="ascending"] .arrow::after  { content: " ▲"; opacity: .8; }
-.table th[aria-sort="descending"] .arrow::after { content: " ▼"; opacity: .8; }
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  flex: none;
+  opacity: 0;
+}
+.arrow::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+}
+.table th[aria-sort="ascending"] .arrow,
+.table th[aria-sort="descending"] .arrow { opacity: .8; }
+.table th[aria-sort="ascending"] .arrow::after  { transform: translateY(2px) rotate(225deg); }
+.table th[aria-sort="descending"] .arrow::after { transform: translateY(-2px) rotate(45deg); }
 .table thead th:focus-visible { outline: 2px solid var(--th-ink); outline-offset: -3px; }
 
 .sortButton {

@@ -8,10 +8,8 @@ import { useContentStore } from 'store/content.store';
 /* ============================================================
    /topics — the way in.
 
-   The one page that says how much there is, so most of what is
-   checked here is that the numbers come from the content. The
-   prototype's old dashboard said "Ten topics" over the Tamil for
-   nine, because the number was typed twice.
+   The topic index stays concise and builds every card directly
+   from the authored curriculum.
    ============================================================ */
 
 const renderPage = (): ReturnType<typeof render> =>
@@ -51,20 +49,12 @@ describe('TopicsPage', () => {
       expect(prepositions?.textContent).toContain('13 lessons');
     });
 
-    it('counts the totals rather than saying them', async () => {
+    it('keeps the introduction concise', () => {
       renderPage();
 
-      await waitFor(() =>
-        expect(screen.getByText(/topics, .* lessons/).textContent).toContain('10 topics'),
-      );
-      /* The same numbers the cards are built from. */
-      expect(screen.getByText(/topics, .* lessons/).textContent).toContain('13 lessons');
-    });
-
-    it('says the same thing in Tamil', () => {
-      renderPage();
-
-      expect(screen.getByText(/எங்கிருந்தும் தொடங்கலாம்/)).toBeTruthy();
+      expect(screen.getByRole('heading', { name: 'Start anywhere.' })).toBeTruthy();
+      expect(screen.queryByText(/Nothing is locked/)).toBeNull();
+      expect(screen.queryByText(/எங்கிருந்தும் தொடங்கலாம்/)).toBeNull();
     });
 
     it('offers the one thing that is not a topic, in one click', () => {

@@ -3,6 +3,27 @@
   gap: var(--s-3);
 }
 
+.coach {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-sunk);
+}
+.coachStep {
+  flex: 0 0 auto;
+  padding: 3px 8px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+}
+.coachCopy { display: flex; flex-direction: column; gap: 2px; margin: 0; color: var(--muted); font-size: var(--fs-xs); }
+.coachTa { color: var(--ink); font: 600 var(--fs-sm) / 1.5 var(--tamil); }
+
 /* Which step is showing. Chips rather than a slider: there are four of them
    and they are named, and a name is the whole point — a learner picks
    "+ Pronunciation" because they want to say it. */
@@ -22,12 +43,19 @@
   font-family: var(--font);
   cursor: pointer;
   white-space: nowrap;
+  transition: color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease),
+    background var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
 }
-.step:hover { border-color: var(--accent); color: var(--accent); }
+.step:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.step:active { transform: translateY(1px) scale(.98); }
 .stepOn {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-ink);
+  box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 28%, transparent);
 }
 
 .row {
@@ -52,7 +80,36 @@
   border: 2px solid var(--line);
   min-width: 88px;
   box-shadow: var(--shadow-1);
+  transform-origin: 50% 80%;
+  animation: card-in 460ms cubic-bezier(.16, 1, .3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 45ms);
+  transition: transform var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease),
+    border-color var(--t-base) var(--ease);
 }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+
+.cardTap {
+  display: grid;
+  justify-items: center;
+  gap: 5px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.cardTap[disabled] { cursor: default; }
+.tapHint {
+  color: var(--accent);
+  font-size: 9px;
+  line-height: 1;
+  opacity: .65;
+  transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
+}
+.cardTap:hover .tapHint { opacity: 1; transform: scale(1.22); }
 .card[data-knob='figure'] { border-color: var(--r-figure); }
 .card[data-knob='ground'] { border-color: var(--r-ground); }
 .card[data-knob='relation'] { border-color: var(--r-rel); }
@@ -85,4 +142,24 @@
 .en {
   font: 500 var(--fs-sm) / 1.2 var(--serif);
   color: var(--soft);
+}
+
+.reveal {
+  animation: label-in 340ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(10px) scale(.94); }
+  70%  { opacity: 1; transform: translateY(-2px) scale(1.01); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes label-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .reveal { animation: none; }
+  .card:hover, .step:hover, .step:active { transform: none; }
 }

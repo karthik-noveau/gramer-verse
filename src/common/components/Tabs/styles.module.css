@@ -17,3 +17,12 @@
 .tab[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 
 .panel[hidden] { display: none; }
+.panel:not([hidden]) { animation: panel-in 240ms cubic-bezier(.16, 1, .3, 1) both; }
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel:not([hidden]) { animation: none; }
+}
