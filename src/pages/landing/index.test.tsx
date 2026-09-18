@@ -81,7 +81,7 @@ describe('LandingPage', () => {
 
       fireEvent.click(screen.getByRole('button', { name: /behind/ }));
 
-      expect(screen.getByText('பந்து பெட்டிக்குப் பின்னால் உள்ளது.')).toBeTruthy();
+      expect(screen.getByLabelText('பந்து பெட்டிக்குப் பின்னால் உள்ளது.')).toBeTruthy();
       expect(screen.getByRole('button', { name: /behind/ }).getAttribute('aria-pressed')).toBe(
         'true',
       );
@@ -93,7 +93,7 @@ describe('LandingPage', () => {
       fireEvent.click(screen.getByRole('button', { name: /under/ }));
 
       expect(screen.getByText('the table.')).toBeTruthy();
-      expect(screen.getByText('பந்து மேசைக்குக் கீழே உள்ளது.')).toBeTruthy();
+      expect(screen.getByLabelText('பந்து மேசைக்குக் கீழே உள்ளது.')).toBeTruthy();
     });
   });
 

@@ -23,11 +23,11 @@ import styles from './styles.module.css';
    ============================================================ */
 
 const EXAMPLES = {
-  in: { ground: 'the box', ta: 'பந்து பெட்டியில் உள்ளது.' },
-  on: { ground: 'the box', ta: 'பந்து பெட்டியின் மேல் உள்ளது.' },
-  under: { ground: 'the table', ta: 'பந்து மேசைக்குக் கீழே உள்ளது.' },
-  behind: { ground: 'the box', ta: 'பந்து பெட்டிக்குப் பின்னால் உள்ளது.' },
-  beside: { ground: 'the box', ta: 'பந்து பெட்டியின் அருகில் உள்ளது.' },
+  in: { ground: 'the box', taPlace: 'பெட்டியில்' },
+  on: { ground: 'the box', taPlace: 'பெட்டியின் மேல்' },
+  under: { ground: 'the table', taPlace: 'மேசைக்குக் கீழே' },
+  behind: { ground: 'the box', taPlace: 'பெட்டிக்குப் பின்னால்' },
+  beside: { ground: 'the box', taPlace: 'பெட்டியின் அருகில்' },
 } as const;
 
 type DemoWord = keyof typeof EXAMPLES;
@@ -133,38 +133,68 @@ function Demo(): JSX.Element {
   return (
     <div className={styles.demo}>
       <div className={styles.demoIntro}>
-        <strong>Build the sentence</strong>
-        <span lang="ta">வாக்கியத்தை அமைக்கவும்</span>
+        <strong>One meaning. Two structures.</strong>
+        <span lang="ta">ஒரே பொருள். இரு அமைப்புகள்.</span>
       </div>
 
       <div className={styles.demoBuild} aria-live="polite">
-        <p
-          className={styles.pieces}
-          lang="en"
-          aria-label={`The ball is ${relation} ${example.ground}.`}
-        >
-          <span className={styles.piece}>
-            <strong>The ball</strong>
-            <small>Subject</small>
-          </span>
-          <span className={styles.piece}>
-            <strong>is</strong>
-            <small>Verb</small>
-          </span>
-          <span className={`${styles.piece} ${styles.activePiece}`}>
-            <strong>{relation}</strong>
-            <small>Preposition</small>
-          </span>
-          <span className={styles.piece}>
-            <strong>{example.ground}.</strong>
-            <small>Object</small>
-          </span>
-        </p>
-        <p className={styles.demoTa} lang="ta">{example.ta}</p>
+        <div className={styles.languageRow}>
+          <span className={styles.languageCode}>EN</span>
+          <p
+            className={styles.englishSentence}
+            lang="en"
+            aria-label={`The ball is ${relation} ${example.ground}.`}
+          >
+            <span className={`${styles.wordRole} ${styles.subjectRole}`}>
+              <strong>The ball</strong>
+              <small>Subject</small>
+            </span>
+            <span className={`${styles.wordRole} ${styles.verbRole}`}>
+              <strong>is</strong>
+              <small>Verb</small>
+            </span>
+            <span className={`${styles.wordRole} ${styles.relationRole}`}>
+              <strong>{relation}</strong>
+              <small>Preposition</small>
+            </span>
+            <span className={`${styles.wordRole} ${styles.objectRole}`}>
+              <strong>{example.ground}.</strong>
+              <small>Object</small>
+            </span>
+          </p>
+        </div>
+
+        <div className={styles.bridge} aria-hidden="true">
+          <span />
+          <small>same meaning · different order</small>
+          <span />
+        </div>
+
+        <div className={styles.languageRow}>
+          <span className={styles.languageCode}>TA</span>
+          <p
+            className={styles.tamilSentence}
+            lang="ta"
+            aria-label={`பந்து ${example.taPlace} உள்ளது.`}
+          >
+            <span className={`${styles.wordRole} ${styles.subjectRole}`}>
+              <strong>பந்து</strong>
+              <small>எழுவாய்</small>
+            </span>
+            <span className={`${styles.wordRole} ${styles.relationRole}`}>
+              <strong>{example.taPlace}</strong>
+              <small>இடம்</small>
+            </span>
+            <span className={`${styles.wordRole} ${styles.verbRole}`}>
+              <strong>உள்ளது.</strong>
+              <small>வினை</small>
+            </span>
+          </p>
+        </div>
       </div>
 
       <div className={styles.demoKnobs} role="group" aria-label="Preposition">
-        <span className={styles.hint}>Try another preposition</span>
+        <span className={styles.hint}>Change the place word</span>
         {WORDS.map((word) => (
           <Chip
             key={word}
