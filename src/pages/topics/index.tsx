@@ -90,7 +90,7 @@ export default function TopicsPage(): JSX.Element {
           only other content, and they belong wherever the topics are. */}
       <ul className={styles.pair}>
         <li>
-          <Card to={paths.visualizer()}>
+          <Card className={styles.visualizer ?? ''} to={paths.visualizer()}>
             <h3 className={styles.otherTitle}>Prepositions visualizer</h3>
           </Card>
         </li>

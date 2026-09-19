@@ -59,6 +59,16 @@
   --accent-soft:   #cdebd9;
   --accent-ink:    #ffffff;   /*  6.0:1 on --accent */
 
+  /* --- landing brand canvas -------------------------------
+     A fixed editorial palette for the front door. It stays the same in both
+     themes because this is brand artwork, not a page surface. Ivory and gold
+     keep the greens from reading as corporate. */
+  --brand-hero-deep:  #1d5b47;
+  --brand-hero-green: #31795c;
+  --brand-hero-jade:  #66b58d;
+  --brand-hero-gold:  #f0cf7a;
+  --brand-hero-ink:   #fffaf0;
+
   /* --- status ---------------------------------------------- */
   --warn:          #a8490b;   /*  4.9:1 on --bg — "cannot draw", not an error */
   --warn-soft:     #fbe8d5;
@@ -79,11 +89,11 @@
      tinted one competed with them. */
   --fm-bg:         #f5f5f5;   /* 1.09 on a row, cast 0 */
 
-  /* Table header bar — solid accent green with white caps. Same value in both
-     schemes: the bar is brand furniture, not a surface that follows the page. */
-  --th-bg:         #2f6f4f;
-  --th-ink:        #ffffff;   /*  6.0:1 on --th-bg */
-  --th-line:       #275c42;
+  /* Table headers continue the topic banner's brighter forest edge, so the
+     title, description, types and reference tables belong to one system. */
+  --th-bg:         #1e5c48;
+  --th-ink:        #fffaf0;   /*  7.5:1 on --th-bg */
+  --th-line:       #4b8b70;
 
   /* --- grammatical roles -----------------------------------
      One colour per grammatical job, used identically in the drawing, the
@@ -197,9 +207,9 @@
 
   --fm-bg:        #323232;   /* 1.23 on a row, 1.40 on the page, cast 0 */
 
-  --th-bg:        #2f6f4f;   /* unchanged — the header reads the same in both */
-  --th-ink:       #ffffff;
-  --th-line:      #275c42;
+  --th-bg:        #1e5c48;
+  --th-ink:       #fffaf0;   /* same fixed brand surface as the topic banner */
+  --th-line:      #4b8b70;
 
   /* The five role colours carried over from light sat at 2.4–3.3 on the dark
      planes — all five failing AA. They matter more here than a decorative

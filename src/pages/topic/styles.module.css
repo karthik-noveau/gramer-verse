@@ -7,17 +7,26 @@
    ============================================================ */
 
 .head {
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: var(--s-4);
   margin-bottom: var(--s-5);
+  padding: var(--s-6);
+  border-radius: calc(var(--r-lg) + 4px);
+  background:
+    radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--brand-hero-gold) 18%, transparent), transparent 18rem),
+    linear-gradient(138deg, var(--brand-hero-deep), var(--brand-hero-green));
+  box-shadow: var(--shadow-2);
 }
+.head > div { flex: 1; min-width: min(100%, 560px); }
 /* The accent on the topic's own name. Everywhere else the accent marks the
    thing that changed or the primary action; on a page that is about one topic,
    its name is that thing. The Tamil beside it stays muted so the pair still
    reads as a name and its gloss rather than as two headings. */
-.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); color: var(--accent); }
+.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); color: var(--brand-hero-gold); }
 
 /* Baseline-aligned, so the two scripts sit on one line rather than one being
    centred against the other's cap height. Wraps on a narrow screen instead of
@@ -34,10 +43,11 @@
   font-family: var(--tamil);
   font-size: var(--fs-md);
   font-weight: 400;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--brand-hero-ink) 70%, transparent);
 }
 
 .ta { font-family: var(--tamil); color: var(--muted); }
+.head .ta { color: color-mix(in srgb, var(--brand-hero-ink) 68%, transparent); }
 
 /* The English, then the Tamil under it — the same two scripts in the same
    order as the heading above. A little air between them, because they are two
@@ -55,8 +65,8 @@
   flex-direction: column;
   gap: var(--s-1);
   padding-left: var(--s-3);
-  border-left: 2px solid var(--accent);
-  color: var(--soft);
+  border-left: 2px solid var(--brand-hero-gold);
+  color: color-mix(in srgb, var(--brand-hero-ink) 86%, transparent);
 }
 
 .topicKindsBlock {
@@ -65,7 +75,7 @@
 }
 .topicKindsBlock > p {
   margin: 0 0 var(--s-3);
-  color: var(--ink);
+  color: var(--brand-hero-ink);
   font: 600 var(--fs-lg) / 1.2 var(--serif);
 }
 .topicKinds {
@@ -82,8 +92,9 @@
   gap: var(--s-2);
   padding: 10px var(--s-3);
   border-radius: var(--r-sm);
-  background: #fbfbfb;
-  color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--brand-hero-ink) 15%, transparent);
+  background: color-mix(in srgb, var(--brand-hero-ink) 8%, transparent);
+  color: var(--brand-hero-ink);
   font-size: var(--fs-sm);
   font-weight: 650;
 }
@@ -92,11 +103,11 @@
   align-self: center;
   width: 14px;
   height: 12px;
-  color: var(--accent);
+  color: var(--brand-hero-gold);
 }
 .typeArrow svg { display: block; width: 14px; height: 12px; }
 .topicKinds li span[lang='ta'] {
-  color: var(--muted);
+  color: color-mix(in srgb, var(--brand-hero-ink) 68%, transparent);
   font-family: var(--tamil);
   font-weight: 400;
   text-align: right;
@@ -108,7 +119,16 @@
 }
 
 .cta { margin-left: auto; display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.head .cta a {
+  border-color: var(--brand-hero-gold);
+  background: var(--brand-hero-gold);
+  color: var(--brand-hero-deep);
+}
 @media (max-width: 640px) { .cta { margin-left: 0; } }
+
+@media (max-width: 560px) {
+  .head { padding: var(--s-5); }
+}
 
 .tables { margin-bottom: var(--s-6); }
 
@@ -136,7 +156,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--s-1);
-  margin: var(--s-3) 0 0;
+  margin: var(--s-3) 0 var(--s-5);
   padding: var(--s-3) var(--s-4);
   border-left: 3px solid var(--accent);
   background: var(--accent-soft);

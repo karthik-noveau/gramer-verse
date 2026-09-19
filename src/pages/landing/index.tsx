@@ -4,7 +4,6 @@ import { Link } from 'react-router';
 
 import { BrandLockup, BrandMark } from 'common/components/BrandMark/BrandMark';
 import { Button } from 'common/components/Button/Button';
-import { Chip } from 'common/components/Chip/Chip';
 import { Icon } from 'common/components/Icon/Icon';
 import { paths } from 'common/constants/routes';
 import { useUiStore } from 'store/ui.store';
@@ -17,21 +16,9 @@ import styles from './styles.module.css';
    The only route outside the app shell: no sidebar, no topic
    nav, no breadcrumbs. It carries the brand and one way in.
 
-   Its pitch is an interactive sentence, not a screenshot. One
-   changed word updates both languages and keeps the grammar
-   visible without an automatic animation competing for attention.
+   The first screen is deliberately editorial rather than a demo:
+   one promise, one way in, then a short account of how learning works.
    ============================================================ */
-
-const EXAMPLES = {
-  in: { ground: 'the box', taPlace: 'பெட்டியில்' },
-  on: { ground: 'the box', taPlace: 'பெட்டியின் மேல்' },
-  under: { ground: 'the table', taPlace: 'மேசைக்குக் கீழே' },
-  behind: { ground: 'the box', taPlace: 'பெட்டிக்குப் பின்னால்' },
-  beside: { ground: 'the box', taPlace: 'பெட்டியின் அருகில்' },
-} as const;
-
-type DemoWord = keyof typeof EXAMPLES;
-const WORDS = Object.keys(EXAMPLES) as readonly DemoWord[];
 
 export default function LandingPage(): JSX.Element {
   return (
@@ -109,8 +96,8 @@ function Hero(): JSX.Element {
         </p>
         <p className={styles.meta}>Free to learn · no sign-up · nothing locked</p>
       </div>
-
-      <Demo />
+      <GrammarOrbit />
+      <CurriculumRibbon />
     </section>
   );
 }
@@ -124,87 +111,44 @@ function Eyebrow(): JSX.Element {
   );
 }
 
-/* ---- the pitch, working ------------------------------------ */
-
-function Demo(): JSX.Element {
-  const [relation, setRelation] = useState<DemoWord>('in');
-  const example = EXAMPLES[relation];
-
+function GrammarOrbit(): JSX.Element {
   return (
-    <div className={styles.demo}>
-      <div className={styles.demoIntro}>
-        <strong>One meaning. Two structures.</strong>
-        <span lang="ta">ஒரே பொருள். இரு அமைப்புகள்.</span>
-      </div>
-
-      <div className={styles.demoBuild} aria-live="polite">
-        <div className={styles.languageRow}>
-          <span className={styles.languageCode}>EN</span>
-          <p
-            className={styles.englishSentence}
-            lang="en"
-            aria-label={`The ball is ${relation} ${example.ground}.`}
-          >
-            <span className={`${styles.wordRole} ${styles.subjectRole}`}>
-              <strong>The ball</strong>
-              <small>Subject</small>
-            </span>
-            <span className={`${styles.wordRole} ${styles.verbRole}`}>
-              <strong>is</strong>
-              <small>Verb</small>
-            </span>
-            <span className={`${styles.wordRole} ${styles.relationRole}`}>
-              <strong>{relation}</strong>
-              <small>Preposition</small>
-            </span>
-            <span className={`${styles.wordRole} ${styles.objectRole}`}>
-              <strong>{example.ground}.</strong>
-              <small>Object</small>
-            </span>
-          </p>
-        </div>
-
-        <div className={styles.bridge} aria-hidden="true">
-          <span />
-          <small>same meaning · different order</small>
-          <span />
-        </div>
-
-        <div className={styles.languageRow}>
-          <span className={styles.languageCode}>TA</span>
-          <p
-            className={styles.tamilSentence}
-            lang="ta"
-            aria-label={`பந்து ${example.taPlace} உள்ளது.`}
-          >
-            <span className={`${styles.wordRole} ${styles.subjectRole}`}>
-              <strong>பந்து</strong>
-              <small>எழுவாய்</small>
-            </span>
-            <span className={`${styles.wordRole} ${styles.relationRole}`}>
-              <strong>{example.taPlace}</strong>
-              <small>இடம்</small>
-            </span>
-            <span className={`${styles.wordRole} ${styles.verbRole}`}>
-              <strong>உள்ளது.</strong>
-              <small>வினை</small>
-            </span>
-          </p>
-        </div>
-      </div>
-
-      <div className={styles.demoKnobs} role="group" aria-label="Preposition">
-        <span className={styles.hint}>Change the place word</span>
-        {WORDS.map((word) => (
-          <Chip
-            key={word}
-            label={word}
-            pressed={word === relation}
-            onClick={() => setRelation(word)}
-          />
-        ))}
-      </div>
+    <div className={styles.orbit} aria-hidden="true">
+      <span className={`${styles.orbitRing} ${styles.orbitRingOuter}`} />
+      <span className={`${styles.orbitRing} ${styles.orbitRingInner}`} />
+      <span className={`${styles.orbitDot} ${styles.orbitDotOne}`} />
+      <span className={`${styles.orbitDot} ${styles.orbitDotTwo}`} />
+      <span className={`${styles.orbitDot} ${styles.orbitDotThree}`} />
+      <span className={`${styles.orbitLabel} ${styles.orbitTenses}`}>Tenses</span>
+      <span className={`${styles.orbitLabel} ${styles.orbitVerbs}`}>Verbs</span>
+      <span className={`${styles.orbitLabel} ${styles.orbitNouns}`}>Nouns</span>
+      <span className={`${styles.orbitLabel} ${styles.orbitSentences}`}>Sentences</span>
+      <span className={styles.orbitCore}>
+        <BrandMark className={styles.orbitMark ?? ''} size={112} />
+        <small>Grammar, connected</small>
+      </span>
     </div>
+  );
+}
+
+const FOUNDATIONS = [
+  { en: 'Tenses', ta: 'காலங்கள்' },
+  { en: 'Verbs', ta: 'வினைச்சொல்' },
+  { en: 'Nouns', ta: 'பெயர்ச்சொல்' },
+  { en: 'Prepositions', ta: 'இடைச்சொல்' },
+  { en: 'Sentence formation', ta: 'வாக்கிய அமைப்பு' },
+] as const;
+
+function CurriculumRibbon(): JSX.Element {
+  return (
+    <ul className={styles.curriculum} aria-label="Curriculum preview">
+      {FOUNDATIONS.map((topic) => (
+        <li key={topic.en}>
+          <span>{topic.en}</span>
+          <span lang="ta">{topic.ta}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -237,7 +181,7 @@ function Steps(): JSX.Element {
           <h2>From first guess to real understanding.</h2>
           <p lang="ta">பதிலை மட்டும் அல்ல, வாக்கிய அமைப்பையும் புரிந்துகொள்ளுங்கள்.</p>
         </div>
-        <ol className={styles.steps}>
+        <ol className={styles.steps} aria-label="How learning works">
           {STEPS.map((step, index) => (
             <li className={styles.step} key={step.en}>
               <span className={styles.n}>{index + 1}</span>

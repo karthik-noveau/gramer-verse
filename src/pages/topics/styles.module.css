@@ -7,10 +7,29 @@
    product and a page must not invent a metric to fill space.
    ============================================================ */
 
-.head { margin-bottom: var(--s-4); }
+.head {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: var(--s-5);
+  padding: var(--s-6);
+  border-radius: calc(var(--r-lg) + 4px);
+  background:
+    radial-gradient(circle at 86% 10%, color-mix(in srgb, var(--brand-hero-gold) 20%, transparent), transparent 16rem),
+    linear-gradient(135deg, var(--brand-hero-deep), var(--brand-hero-green));
+  box-shadow: var(--shadow-2);
+}
+.head::after {
+  content: '';
+  position: absolute;
+  right: var(--s-6);
+  bottom: var(--s-5);
+  width: 54px;
+  height: 2px;
+  background: var(--brand-hero-gold);
+}
 .head h1 {
-  font: 500 var(--fs-md) / 1.5 var(--font);
-  color: var(--soft);
+  font: 600 var(--fs-xl) / 1.2 var(--serif);
+  color: var(--brand-hero-ink);
 }
 
 /* Three across on a desktop, two on a tablet, one on a phone. `auto-fill`
@@ -34,7 +53,16 @@
   list-style: none;
 }
 
-.otherTitle { font: 600 var(--fs-md) / 1.25 var(--serif); }
+.visualizer {
+  border-color: color-mix(in srgb, var(--brand-hero-gold) 58%, var(--line));
+  background: color-mix(in srgb, var(--brand-hero-gold) 12%, var(--surface));
+}
+.otherTitle { color: var(--brand-hero-deep); font: 600 var(--fs-md) / 1.25 var(--serif); }
+
+@media (max-width: 560px) {
+  .head { padding: var(--s-5); }
+  .head::after { right: var(--s-5); }
+}
 
 /* The shape of the answer while it is on its way. Same height as a card, so
    the page does not jump when the content lands. */

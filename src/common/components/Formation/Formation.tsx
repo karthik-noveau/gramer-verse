@@ -103,13 +103,13 @@ export const sentencePattern = (tokens: readonly FormationToken[]): readonly {
 /* ---- the geometry ------------------------------------------ */
 
 const WIDTH = 760;
-const HEIGHT = 166;
+const HEIGHT = 174;
 const PAD = 20;
 const TA_Y = 35;
 const EN_Y = 118;
-const PATTERN_TOP = 132;
-const PATTERN_HEIGHT = 24;
-const PATTERN_TEXT_Y = 148;
+const PATTERN_TOP = 134;
+const PATTERN_HEIGHT = 28;
+const PATTERN_TEXT_Y = 152;
 
 type Placed = { readonly x: number; readonly token: FormationToken };
 
@@ -130,7 +130,7 @@ const curve = (from: number, to: number): string =>
 /** Keep each label visually attached to its word without letting long labels
  *  dominate the row. The fixed viewBox makes this stable at every screen size. */
 const patternChipWidth = (label: string): number =>
-  Math.min(88, Math.max(46, Math.round(label.length * 5.6 + 20)));
+  Math.min(96, Math.max(54, Math.round(label.length * 6 + 22)));
 
 export type FormationProps = {
   readonly spec: FormationSpec;
@@ -221,28 +221,30 @@ export function Formation({
                 const label = part?.label ?? 'Word';
                 const colour = part ? colourOf(part.role) : 'var(--muted)';
                 const chipWidth = patternChipWidth(label);
+                const previousLabel = pattern[index - 1]?.label ?? 'Word';
+                const previousChipWidth = patternChipWidth(previousLabel);
+                const connectorY = PATTERN_TOP + PATTERN_HEIGHT / 2;
+                const connectorEnd = placed.x - chipWidth / 2 - 7;
                 return (
                   <g key={`pattern-${index}`}>
                     {index > 0 && previous ? (
                       <g aria-hidden="true">
-                        <circle
-                          cx={(previous.x + placed.x) / 2}
-                          cy={PATTERN_TOP + PATTERN_HEIGHT / 2}
-                          r={7}
-                          fill="var(--surface)"
-                          stroke="var(--line)"
+                        <line
+                          x1={previous.x + previousChipWidth / 2 + 7}
+                          y1={connectorY}
+                          x2={connectorEnd}
+                          y2={connectorY}
+                          stroke="var(--line-strong)"
+                          strokeWidth={1.5}
                         />
-                        <text
-                          x={(previous.x + placed.x) / 2}
-                          y={PATTERN_TEXT_Y}
-                          textAnchor="middle"
-                          fontFamily="var(--font)"
-                          fontSize={10}
-                          fontWeight={700}
-                          fill="var(--muted)"
-                        >
-                          +
-                        </text>
+                        <polyline
+                          points={`${connectorEnd - 5},${connectorY - 4} ${connectorEnd},${connectorY} ${connectorEnd - 5},${connectorY + 4}`}
+                          fill="none"
+                          stroke="var(--line-strong)"
+                          strokeWidth={1.5}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </g>
                     ) : null}
                     <line
@@ -260,11 +262,11 @@ export function Formation({
                       y={PATTERN_TOP}
                       width={chipWidth}
                       height={PATTERN_HEIGHT}
-                      rx={PATTERN_HEIGHT / 2}
+                      rx={7}
                       fill={colour}
-                      fillOpacity={0.1}
+                      fillOpacity={0.08}
                       stroke={colour}
-                      strokeOpacity={0.28}
+                      strokeOpacity={0.4}
                       aria-hidden="true"
                     />
                     <text
@@ -272,7 +274,7 @@ export function Formation({
                       y={PATTERN_TEXT_Y}
                       textAnchor="middle"
                       fontFamily="var(--font)"
-                      fontSize={10}
+                      fontSize={11.5}
                       fontWeight={700}
                       fill={colour}
                     >

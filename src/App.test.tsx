@@ -32,14 +32,14 @@ describe('routing', () => {
     expect(screen.getByRole('status')).toBeTruthy();
     /* Let the chunk land before the test ends: a suspended resource that
        resolves after the last assertion resolves outside act(). */
-    await screen.findByRole('heading', { level: 1, name: 'Start anywhere' });
+    await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' });
   });
 
   it.each([
     /* A regex: the headline breaks over two lines and italicises its last
        word, so its accessible name is assembled rather than typed. */
-    ['/', /English grammar/],
-    ['/topics', 'Start anywhere'],
+    ['/', /See how English is built/],
+    ['/topics', 'Start anywhere.'],
     /* A regex again: the topic heading carries the Tamil beside the English,
        so its accessible name is both. */
     ['/topics/prepositions', /Prepositions/],
@@ -59,12 +59,12 @@ describe('routing', () => {
     await screen.findByRole('heading', { level: 1 });
 
     expect(screen.queryByRole('complementary', { name: 'Topics' })).toBeNull();
-    expect(screen.getByRole('link', { name: 'Start' })).toBeTruthy();
+    expect(screen.getByRole('link', { name: 'Start learning' })).toBeTruthy();
   });
 
   it('renders the shell around every other page', async () => {
     at('/topics');
-    await screen.findByRole('heading', { level: 1, name: 'Start anywhere' });
+    await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' });
 
     expect(screen.getByRole('banner')).toBeTruthy();
     expect(screen.getByRole('main')).toBeTruthy();
@@ -73,7 +73,7 @@ describe('routing', () => {
 
   it('fills the sidebar from the content store', async () => {
     at('/topics');
-    await screen.findByRole('heading', { level: 1, name: 'Start anywhere' });
+    await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' });
 
     const sidebar = await screen.findByRole('complementary', { name: 'Topics' });
     await waitFor(() =>
@@ -151,7 +151,7 @@ describe('routing', () => {
     it('sends /dashboard to topics', async () => {
       at('/dashboard');
 
-      expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere' })).toBeTruthy();
+      expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' })).toBeTruthy();
     });
 
     it('sends /practice to the visualizer', async () => {
@@ -167,13 +167,13 @@ describe('routing', () => {
     it('ignores a trailing slash', async () => {
       at('/topics/');
 
-      expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere' })).toBeTruthy();
+      expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' })).toBeTruthy();
     });
 
     it('ignores case', async () => {
       at('/Topics');
 
-      expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere' })).toBeTruthy();
+      expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' })).toBeTruthy();
     });
   });
 });
