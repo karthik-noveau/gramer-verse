@@ -19,6 +19,8 @@ import type {
 } from 'common/scene/types';
 import { resolve } from 'pages/visualizer/utils/resolver';
 import type { Resolved } from 'pages/visualizer/utils/resolver';
+import { exampleForText, examplesFor } from 'pages/visualizer/utils/examples';
+import { useContentStore } from 'store/content.store';
 
 /* ============================================================
    visualizer.store.ts — the typed sentence, the chosen
@@ -29,8 +31,8 @@ import type { Resolved } from 'pages/visualizer/utils/resolver';
    agree about what is on the stage, and they only can if there
    is one answer to ask for.
 
-   The typed text is the learner's. Turning a knob changes the
-   picture and never rewrites what they wrote.
+   Custom text is the learner's and is never overwritten by the
+   controls. Preset examples follow diagram and group selections.
    ============================================================ */
 
 /** How a preposition is drawn. The place ones are a scene the knobs move; the
@@ -57,8 +59,7 @@ const OPENING: PlaceKnobs = {
 };
 
 export type VisualizerState = {
-  /** What is in the field. Never written to by anything but the learner and
-   *  the two buttons that fill it on purpose. */
+  /** The learner's draft. Group changes may replace a preset, never custom text. */
   readonly typed: string;
   /** The last thing that was submitted and could not be drawn. Cleared the
    *  moment the picture becomes something else. */
@@ -98,6 +99,11 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
    */
   submit: (text) => {
     const typed = text ?? get().typed;
+    const example = exampleForText(useContentStore.getState().curriculum, typed);
+    if (example && example.group !== 'prep-place') {
+      set({ typed, cannot: null, group: example.group, word: example.word });
+      return;
+    }
     const result = resolve(typed);
 
     if (result.status !== 'drawn') {
@@ -130,14 +136,23 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
    * than the picture going blank. Every chip in the picker draws something;
    * one that did not would be a control that appears broken.
    *
-   * It does not rewrite the field: the sentence there is the learner's, and
-   * having it silently replaced each time a chip is pressed is the page taking
-   * their work away.
+   * Custom text stays intact. A diagram's preset can follow its selected word
+   * so a time example is not left beside a direction diagram.
    */
   choose: (word, group) => {
     const state = get();
-    const place = fitGround(word, group ?? state.group, state.place);
-    set({ word, cannot: null, place, ...(group === undefined ? {} : { group }) });
+    const nextGroup = group ?? state.group;
+    const place = fitGround(word, nextGroup, state.place);
+    const curriculum = useContentStore.getState().curriculum;
+    const example = modeOf(word, nextGroup) === 'diagram'
+      ? examplesFor(curriculum, nextGroup).find((candidate) => candidate.word === word)
+      : undefined;
+    const replacePreset = example && (state.typed.trim() === '' || exampleForText(curriculum, state.typed));
+    set({
+      word, cannot: null, place,
+      ...(group === undefined ? {} : { group }),
+      ...(replacePreset ? { typed: example.en } : {}),
+    });
   },
 
   setGroup: (group) => {
@@ -147,7 +162,14 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
       set({ group, cannot: null });
       return;
     }
-    set({ group, cannot: null, word: first, place: fitGround(first, group, get().place) });
+    const state = get();
+    const curriculum = useContentStore.getState().curriculum;
+    const example = examplesFor(curriculum, group).find((candidate) => candidate.word === first);
+    const replacePreset = example && (state.typed.trim() === '' || exampleForText(curriculum, state.typed));
+    set({
+      group, cannot: null, word: first, place: fitGround(first, group, state.place),
+      ...(replacePreset ? { typed: example.en } : {}),
+    });
   },
 
   setKnob: (key, value) => {

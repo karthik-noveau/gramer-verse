@@ -1,51 +1,29 @@
-import { useMemo } from 'react';
-import type { FormEvent, JSX } from 'react';
-
-import { Chip } from 'common/components/Chip/Chip';
+import { useEffect, useMemo, useState } from 'react';
+import type { CSSProperties, JSX } from 'react';
+import { useSearchParams } from 'react-router';
 import { Formation, fromScene } from 'common/components/Formation/Formation';
-import { EmptyState } from 'common/components/EmptyState/EmptyState';
-import { Stage } from 'common/components/Stage/Stage';
+import { useContent } from 'common/hooks/useContent';
 import { useSpeech } from 'common/hooks/useSpeech';
 import { buildSentence, sentenceText } from 'common/scene/sentence';
-import type { PlaceSpec, SentenceTemplates } from 'common/scene/types';
-import { CannotDraw } from 'pages/visualizer/components/CannotDraw/CannotDraw';
+import type { SentenceTemplates } from 'common/scene/types';
+import { CannotDraw } from './components/CannotDraw/CannotDraw';
+import { SentencePicker } from './components/SentencePicker/SentencePicker';
+import type { SentencePickerProps } from './components/SentencePicker/SentencePicker';
+import { PLACE_MEANINGS, PrepositionPicture } from './components/PrepositionPicture/PrepositionPicture';
+import { examplesFor } from './utils/examples';
 import { WORDS, knobAllows, modeOf, selectScene, useVisualizerStore } from 'store/visualizer.store';
-import type { PlaceKnobs } from 'store/visualizer.store';
-
+import { LabIcon } from 'common/visual-learning/art';
+import { GROUPS } from './learning';
+import { CompareMode, PracticeMode } from './LearningModes';
+import { PanelHeader } from './PanelHeader';
+import { TimeExperiment } from './TimeExperiment';
+import { InteractiveRoom } from './InteractiveRoom';
+import { DEFAULT_ROOM_POSITION, roomSpec } from './room';
+import type { RoomPreview } from './room';
+import { POSITIONS } from 'common/visual-learning/data';
+import type { Position } from 'common/visual-learning/data';
 import styles from './styles.module.css';
 
-/* ============================================================
-   /topics/prepositions/visualizer — every preposition, drawn.
-
-   Under Prepositions rather than at the top level, because the
-   scene engine draws a figure against a ground and that is what
-   a preposition of place is. No other topic has anything for it
-   to stage.
-
-   Two columns. Reading on the left — what was typed, and the
-   sentence in both languages. Doing on the right — the picture
-   with the controls that move it directly under it.
-   ============================================================ */
-
-/** The five tables the source itself groups the prepositions into, which is
- *  the grouping the pictures here are keyed to. */
-const GROUPS: readonly { readonly id: string; readonly en: string; readonly ta: string }[] = [
-  { id: 'prep-place', en: 'Place', ta: 'இடம்' },
-  { id: 'prep-dir', en: 'Direction', ta: 'திசை' },
-  { id: 'prep-time', en: 'Time', ta: 'காலம்' },
-  { id: 'prep-other', en: 'Other roles', ta: 'மற்றவை' },
-];
-
-const EXAMPLES: readonly string[] = [
-  'the ball is in the box',
-  'a red apple is under the table',
-  'three cups are on the table',
-  'the cat is behind the chair',
-];
-
-/** The sentence under the picture, for a place scene. The lessons carry their
- *  own templates; this page has one sentence to say and says it the same way
- *  every time. */
 const TEMPLATE: SentenceTemplates = {
   en: [
     { slot: 'det' },
@@ -67,272 +45,155 @@ const TEMPLATE: SentenceTemplates = {
   ],
 };
 
-const KNOBS: readonly {
-  readonly key: keyof PlaceKnobs;
-  readonly en: string;
-  readonly ta: string;
-  readonly options: readonly { readonly value: string; readonly label: string }[];
-}[] = [
-  {
-    key: 'figure',
-    en: 'The thing',
-    ta: 'பொருள்',
-    options: [
-      { value: 'ball', label: 'ball' },
-      { value: 'apple', label: 'apple' },
-      { value: 'cup', label: 'cup' },
-      { value: 'book', label: 'book' },
-      { value: 'cat', label: 'cat' },
-    ],
-  },
-  {
-    key: 'ground',
-    en: 'The place',
-    ta: 'இடம்',
-    options: [
-      { value: 'box', label: 'box' },
-      { value: 'table', label: 'table' },
-      { value: 'chair', label: 'chair' },
-      { value: 'tree', label: 'tree' },
-    ],
-  },
-  {
-    key: 'determiner',
-    en: 'Which one',
-    ta: 'எது',
-    options: [
-      { value: 'a', label: 'a' },
-      { value: 'the', label: 'the' },
-    ],
-  },
-  {
-    key: 'count',
-    en: 'How many',
-    ta: 'எத்தனை',
-    options: [
-      { value: '1', label: 'one' },
-      { value: '2', label: 'two' },
-      { value: '3', label: 'three' },
-    ],
-  },
-  {
-    key: 'adjective',
-    en: 'What kind',
-    ta: 'எப்படி',
-    options: [
-      { value: '', label: '—' },
-      { value: 'red', label: 'red' },
-      { value: 'green', label: 'green' },
-      { value: 'big', label: 'big' },
-      { value: 'small', label: 'small' },
-    ],
-  },
-];
+
+type LearningMode = 'explore' | 'compare' | 'practice';
+const MODES = ['explore', 'compare', 'practice'] as const;
+const ROOM_WORDS: readonly string[] = POSITIONS.map((position) => position.id);
 
 export default function VisualizerPage(): JSX.Element {
-  const typed = useVisualizerStore((state) => state.typed);
-  const cannot = useVisualizerStore((state) => state.cannot);
-  const group = useVisualizerStore((state) => state.group);
-  const word = useVisualizerStore((state) => state.word);
-  const setTyped = useVisualizerStore((state) => state.setTyped);
-  const submit = useVisualizerStore((state) => state.submit);
-  const choose = useVisualizerStore((state) => state.choose);
-  const setGroup = useVisualizerStore((state) => state.setGroup);
-  const setKnob = useVisualizerStore((state) => state.setKnob);
+  const content = useContent();
+  const [params, setParams] = useSearchParams();
+  const [roomMode, setRoomMode] = useState(false);
+  const [roomPreview, setRoomPreview] = useState<RoomPreview | null>(null);
   const state = useVisualizerStore();
+  const { group, word, typed, cannot, choose, setGroup, setKnob, setTyped, submit } = state;
+  const requestedGroup = params.get('group');
+  const requestedWord = params.get('word');
+  const mode = (MODES as readonly string[]).includes(params.get('mode') ?? '') ? params.get('mode') as LearningMode : 'explore';
 
-  const scene = useMemo(() => selectScene(state), [state]);
-  const mode = modeOf(word, group);
-  const words = WORDS[group] ?? [];
+  useEffect(() => {
+    const target = GROUPS.find((item) => item.slug === requestedGroup)?.id ?? 'prep-place';
+    if (useVisualizerStore.getState().group !== target) setGroup(target);
+    const targetWord = requestedWord && WORDS[target]?.includes(requestedWord) ? requestedWord : WORDS[target]![0]!;
+    if (useVisualizerStore.getState().word !== targetWord) choose(targetWord, target);
+  }, [requestedGroup, requestedWord, setGroup, choose]);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    submit();
+  useEffect(() => {
+    const current = useVisualizerStore.getState();
+    if (content.status === 'ready' && !current.cannot && modeOf(current.word, current.group) === 'diagram') choose(current.word);
+  }, [content.status, choose]);
+
+  const updateUrl = (nextGroup: string, nextWord: string, nextMode: LearningMode = mode): void => {
+    const slug = GROUPS.find((item) => item.id === nextGroup)?.slug ?? 'place';
+    setParams({ group: slug, word: nextWord, ...(nextMode === 'explore' ? {} : { mode: nextMode }) }, { replace: true });
   };
+  const moveBall = (position: Position): void => {
+    const draft = useVisualizerStore.getState().typed;
+    submit(`the ball is ${position.id} ${position.ending}`);
+    setTyped(draft);
+    updateUrl('prep-place', position.id);
+  };
+  const selectWord = (next: string): void => {
+    const position = POSITIONS.find((item) => item.id === next);
+    if (roomMode && group === 'prep-place' && position) moveBall(position);
+    else { setRoomMode(false); choose(next); updateUrl(group, next); }
+  };
+  const selectGroup = (next: string): void => { setRoomMode(false); setGroup(next); updateUrl(next, useVisualizerStore.getState().word, 'explore'); };
+  const draw = (text: string): void => { setRoomMode(false); submit(text); const current = useVisualizerStore.getState(); updateUrl(current.group, current.word, 'explore'); };
+  const scene = useMemo(() => selectScene(state), [state]);
+  const preview = roomMode && group === 'prep-place' && mode === 'explore' ? roomPreview : null;
+  const displayedScene = useMemo(() => preview?.position ? roomSpec(preview.position) : scene, [preview, scene]);
+  const liveWord = preview ? preview.position?.id ?? '' : word;
+  const curriculum = content.status === 'ready' ? content.curriculum : null;
+  const examples = useMemo(() => examplesFor(curriculum, group), [curriculum, group]);
+  const example = examples.find((candidate) => candidate.word === word);
+  const formation = useMemo(() => preview && !preview.position ? undefined : displayedScene?.kind === 'place' ? fromScene(displayedScene, TEMPLATE) : example?.formation, [displayedScene, example, preview]);
+  const sentence = useMemo(() => {
+    if (preview && !preview.position) return { en: 'Move the ball around the box and table.', ta: 'பந்தைப் பெட்டி மற்றும் மேசையைச் சுற்றி நகர்த்துங்கள்.' };
+    if (displayedScene?.kind !== 'place') return example?.formation;
+    const built = buildSentence(displayedScene, TEMPLATE);
+    return { en: sentenceText(built.en), ta: sentenceText(built.ta) };
+  }, [displayedScene, example, preview]);
+  const words = WORDS[group] ?? [];
+  const groupInfo = GROUPS.find((item) => item.id === group) ?? GROUPS[0];
+  const roomPosition = POSITIONS.find((item) => item.id === word);
+  const showRoom = roomMode && scene?.kind === 'place' && roomPosition && scene.figure === 'ball' && scene.count === 1
+    && scene.adjective === null && scene.ground === (word === 'on' || word === 'under' ? 'table' : 'box')
+    && (word !== 'between' || scene.ground2 === 'table');
+  const availableWords = showRoom ? words.filter((candidate) => ROOM_WORDS.includes(candidate)) : words;
+  const wordIndex = availableWords.indexOf(word);
+  const modeNavigation = <div className={styles.modeSwitch} role="group" aria-label="Learning mode">
+    {MODES.map((item) => <button type="button" key={item} aria-pressed={mode === item} onClick={() => updateUrl(group, word, item)}>{item[0]!.toUpperCase() + item.slice(1)}</button>)}
+  </div>;
 
-  return (
-    <>
-      <h1 className={styles.title}>Preposition visualizer</h1>
-
-      {/* Above the thing it navigates rather than inside it. */}
-      <nav className={styles.groups} aria-label="Preposition group">
-        {GROUPS.map((entry) => (
-          <Chip
-            key={entry.id}
-            label={entry.en}
-            ta={entry.ta}
-            pressed={entry.id === group}
-            onClick={() => setGroup(entry.id)}
-          />
-        ))}
+  return <div className={styles.lab}>
+    <header className={styles.header}>
+      <h1>Preposition <em>visualizer</em></h1>
+      <nav className={styles.groups} aria-label="Preposition group" style={{ '--group-index': GROUPS.findIndex((entry) => entry.id === group) } as CSSProperties}>
+        {GROUPS.map((entry) => <button type="button" key={entry.id} aria-pressed={entry.id === group} onClick={() => selectGroup(entry.id)} aria-label={`${entry.en} ${entry.ta}`} title={entry.question}>
+          <LabIcon name={entry.icon} size={17} /><span>{entry.en}</span>
+        </button>)}
       </nav>
+    </header>
 
-      <div className={styles.columns}>
-        <div className={styles.reading}>
-          {/* No submit button: a form with a single text field submits on Enter
-              by itself, so a button is a second control for the one action the
-              field already performs. */}
-          <form className={styles.form} role="search" onSubmit={onSubmit}>
-            <label className="sr-only" htmlFor="sentence">
-              Sentence to draw
-            </label>
-            <input
-              className={styles.input}
-              id="sentence"
-              type="text"
-              value={typed}
-              placeholder="the ball is in the box"
-              autoComplete="off"
-              onChange={(event) => setTyped(event.target.value)}
-            />
-          </form>
-
-          <p className={styles.examples}>
-            {EXAMPLES.map((example) => (
-              <Chip
-                key={example}
-                label={example}
-                onClick={() => {
-                  setTyped(example);
-                  submit(example);
-                }}
-              />
-            ))}
-          </p>
-
-          {cannot ? (
-            <CannotDraw
-              className={styles.cannot}
-              unknown={cannot.unknown}
-              gaps={cannot.gaps}
-              verb={cannot.verb}
-              suggestion={cannot.suggestion}
-              onTry={(sentence) => {
-                setTyped(sentence);
-                submit(sentence);
-              }}
-            />
-          ) : null}
-
-          {scene?.kind === 'place' ? <Lines spec={scene} /> : null}
-
-          {/* How the two languages order it. The scene sentence needs no
-              authored alignment: it was built slot by slot, so every token
-              already knows its job. */}
-          {scene?.kind === 'place' ? (
-            <Formation className={styles.formation} spec={fromScene(scene, TEMPLATE)} />
-          ) : null}
+    {mode === 'explore' ? <>
+      <div className={styles.workspace}>
+        <PanelHeader navigation={modeNavigation}>
+          {displayedScene?.kind === 'place' ? <div className={styles.sceneSummary}>
+            {preview && !preview.position ? <span>Move the ball</span> : <><strong>{displayedScene.relation}</strong><span>{PLACE_MEANINGS[displayedScene.relation]}</span></>}
+          </div> : <span><i /> {groupInfo.en.toUpperCase()} IN FOCUS</span>}
+          {group === 'prep-place' && <div className={styles.sceneSwitch} role="group" aria-label="Scene interaction"><button type="button" aria-pressed={!showRoom} onClick={() => setRoomMode(false)}>Picture</button><button type="button" aria-pressed={Boolean(showRoom)} onClick={() => { if (!showRoom) { setRoomMode(true); moveBall(DEFAULT_ROOM_POSITION); } }}>Move the ball <span aria-hidden="true">↗</span></button></div>}
+          <div className={styles.sceneNavigation} role="group" aria-label="Preposition navigation">
+            <span>{String(wordIndex + 1).padStart(2, '0')} / {availableWords.length}</span>
+            <button type="button" aria-label="Previous preposition" onClick={() => selectWord(availableWords[(wordIndex + availableWords.length - 1) % availableWords.length]!)}>←</button>
+            <button type="button" aria-label="Next preposition" onClick={() => selectWord(availableWords[(wordIndex + 1) % availableWords.length]!)}>→</button>
+          </div>
+        </PanelHeader>
+        <div className={styles.visualColumn}>
+          <div className={styles.stage}>{showRoom ? <InteractiveRoom position={roomPosition} onChange={moveBall} onPreview={setRoomPreview} /> : scene && (scene.kind === 'timeline' ? <TimeExperiment key={word} word={word} spec={scene} english={sentence?.en} tamil={sentence?.ta} /> : <PrepositionPicture spec={scene} english={sentence?.en} tamil={sentence?.ta} showHeading={scene.kind !== 'place'} />)}</div>
+          <Lines key={group} english={sentence?.en ?? ''} tamil={sentence?.ta ?? ''} word={liveWord} live={Boolean(preview)} showPreview={!cannot} pickerProps={{ value: typed, examples: examples.map((candidate) => candidate.en), onChange: setTyped, onDraw: draw }} />
+          {cannot && <div className={styles.sentenceFeedback}><CannotDraw unknown={cannot.unknown} gaps={cannot.gaps} verb={cannot.verb} suggestion={cannot.suggestion} onTry={(text) => { setTyped(text); draw(text); }} /></div>}
         </div>
-
-        <aside className={styles.doing}>
-          <div className={styles.stage}>
-            {scene ? (
-              <Stage spec={scene} guide />
-            ) : (
-              <EmptyState
-                title="Nothing to draw"
-                body="Choose a preposition, or type a sentence."
-                icon="alert"
-              />
-            )}
-          </div>
-
-          <div className={styles.picker} role="group" aria-label="Preposition">
-            {words.map((candidate) => (
-              <Chip
-                key={candidate}
-                label={candidate}
-                pressed={candidate === word}
-                onClick={() => choose(candidate)}
-              />
-            ))}
-          </div>
-
-          {mode === 'scene' ? (
-            <section className={styles.build} aria-labelledby="build-head">
-              <h2 className={styles.buildHead} id="build-head">
-                Change the picture
-              </h2>
-              <div className={styles.knobs}>
-                {KNOBS.map((knob) => (
-                  <div className={styles.knob} key={knob.key} role="group" aria-label={`${knob.en} ${knob.ta}`}>
-                    <span className={styles.knobLabel}>
-                      <span lang="en">{knob.en}</span>
-                      <span className={styles.ta} lang="ta">
-                        {knob.ta}
-                      </span>
-                    </span>
-                    <div className={styles.knobOptions}>
-                      {knob.options.map((option) => (
-                        <Chip
-                          key={option.value || 'none'}
-                          label={option.label}
-                          pressed={String(state.place[knob.key] ?? '') === option.value}
-                          disabled={!knobAllows(state, knob.key, option.value)}
-                          onClick={() => setKnob(knob.key, option.value)}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ) : (
-            /* Said, rather than shown as a picker that does nothing. A knob
-               that changes nothing is worse than no knob. */
-            <p className={styles.diagramNote}>
-              <b>This one is a diagram, not a scene.</b> The picture shows what the word means;
-              the knobs move a figure against a ground, which is what a preposition of place is.
-              <span className={styles.ta} lang="ta">
-                {' '}
-                இது படவிளக்கம் — மாற்ற முடியாது.
-              </span>
-            </p>
-          )}
+        <aside className={styles.controls} aria-label="Explore the relationship">
+          <h2>{groupInfo.question}</h2><p className={styles.controlIntro}>{showRoom ? 'Pick up the ball to reveal the drop positions. Move to a faint ball and release.' : 'Choose a word and follow what changes in the picture.'}</p>
+          <div className={styles.picker} role="group" aria-label="Preposition">{words.map((candidate) => <button type="button" key={candidate} aria-pressed={liveWord === candidate} disabled={Boolean(showRoom) && !ROOM_WORDS.includes(candidate)} onClick={() => selectWord(candidate)}>{candidate}</button>)}</div>
+          {showRoom && <p className={styles.pickerHint}>Switch to Picture to explore the other words.</p>}
+          {!showRoom && scene?.kind === 'place' && <div className={styles.quantity} role="group" aria-label="How many"><span>How many</span><div>{['one', 'two', 'three'].map((label, index) => <button type="button" key={label} aria-pressed={state.place.count === index + 1} disabled={!knobAllows(state, 'count', String(index + 1))} onClick={() => { setRoomMode(false); setKnob('count', String(index + 1)); }}>{label}</button>)}</div></div>}
 
         </aside>
       </div>
-    </>
-  );
+      {formation && <section className={styles.formation} aria-labelledby="formation-title"><div className={styles.formationHeading}><h2 id="formation-title">Formation</h2><span>See how the relationship fits into a sentence.</span></div><Formation className={styles.formationBody} spec={formation} /></section>}
+    </> : mode === 'compare' ? <CompareMode key={group} group={group} state={state} curriculum={curriculum} showTamil navigation={modeNavigation} /> : <PracticeMode key={group} group={group} navigation={modeNavigation} onExplore={(next) => { choose(next); updateUrl(group, next, 'explore'); }} />}
+    <footer className={styles.labFooter}><span>Little experiments. Lasting understanding.</span><span>Place · Direction · Time · Relationships</span></footer>
+  </div>;
 }
 
-/**
- * The sentence, in both languages.
- *
- * Neither line is labelled: which language it is in is legible from the
- * script, and the label was the widest thing in a column with none to spare.
- * `lang` is on the line itself, so it is still announced correctly.
- */
-function Lines({ spec }: { readonly spec: PlaceSpec }): JSX.Element {
-  const sentence = useMemo(() => buildSentence(spec, TEMPLATE), [spec]);
+function Lines({ english, tamil, word, live, showPreview, pickerProps }: { readonly english: string; readonly tamil: string; readonly word: string; readonly live: boolean; readonly showPreview: boolean; readonly pickerProps: Omit<SentencePickerProps, 'preview'> }): JSX.Element {
   const speech = useSpeech();
-  const english = sentenceText(sentence.en);
 
   return (
-    <div className={styles.lines}>
-      <p className={styles.lineTa} lang="ta">
-        {sentenceText(sentence.ta)}
-      </p>
-      <p className={styles.lineEn} lang="en">
-        {english}
-      </p>
-      <div className={styles.listen} role="group" aria-label="Listen to the visualized sentence">
-        <button
-          type="button"
-          className={styles.listenButton}
-          disabled={!speech.supported}
-          onClick={() => speech.speak(english)}
-        >
-          <span aria-hidden="true">▶</span> Hear
-        </button>
-        <button
-          type="button"
-          className={styles.listenButton}
-          disabled={!speech.supported}
-          onClick={() => speech.speak(english, 'slow')}
-        >
-          <span aria-hidden="true">½×</span> Slow
-        </button>
+    <div className={styles.lines} data-live={live}>
+      {live && <span className={styles.liveSentenceLabel}>LIVE PREVIEW · RELEASE TO PLACE</span>}
+      <div className={styles.sentencePicker}>
+        <SentencePicker {...pickerProps} preview={showPreview && english ? <p className={styles.lineEn} lang="en">
+          {(word ? english.split(new RegExp(`(\\b${word}\\b)`, 'gi')) : [english]).map((part, i) => part.toLowerCase() === word ? <mark key={i}>{part}</mark> : part)}
+        </p> : undefined} />
+      </div>
+      {tamil && <p className={styles.lineTa} lang="ta">
+        {tamil}
+      </p>}
+      <div className={styles.sentenceActions}>
+        <div className={styles.listen} role="group" aria-label="Listen to the visualized sentence">
+          <button
+            type="button"
+            className={styles.listenButton}
+            disabled={!speech.supported || !english}
+            onClick={() => speech.speak(english)}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m11 5-5 4H3v6h3l5 4V5Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+              <path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg> Hear
+          </button>
+          <button
+            type="button"
+            className={styles.listenButton}
+            disabled={!speech.supported || !english}
+            onClick={() => speech.speak(english, 'slow')}
+          >
+            <span aria-hidden="true">½×</span> Slow
+          </button>
+        </div>
       </div>
     </div>
   );

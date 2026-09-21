@@ -17,7 +17,7 @@
   padding: var(--s-6);
   border-radius: calc(var(--r-lg) + 4px);
   background:
-    radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--brand-hero-gold) 18%, transparent), transparent 18rem),
+    radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--brand-hero-jade) 28%, transparent), transparent 18rem),
     linear-gradient(138deg, var(--brand-hero-deep), var(--brand-hero-green));
   box-shadow: var(--shadow-2);
 }
@@ -26,7 +26,7 @@
    thing that changed or the primary action; on a page that is about one topic,
    its name is that thing. The Tamil beside it stays muted so the pair still
    reads as a name and its gloss rather than as two headings. */
-.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); color: var(--brand-hero-gold); }
+.head h1 { font: 600 var(--fs-2xl) / 1.15 var(--serif); color: var(--brand-hero-ink); }
 
 /* Baseline-aligned, so the two scripts sit on one line rather than one being
    centred against the other's cap height. Wraps on a narrow screen instead of
@@ -87,8 +87,8 @@
 }
 .topicKinds li {
   display: grid;
-  grid-template-columns: 16px minmax(90px, 1fr) auto;
-  align-items: baseline;
+  grid-template-columns: 22px minmax(90px, 1fr) auto;
+  align-items: center;
   gap: var(--s-2);
   padding: 10px var(--s-3);
   border-radius: var(--r-sm);
@@ -101,11 +101,18 @@
 .typeArrow {
   display: inline-flex;
   align-self: center;
-  width: 14px;
-  height: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
   color: var(--brand-hero-gold);
 }
-.typeArrow svg { display: block; width: 14px; height: 12px; }
+.typeArrow svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--brand-gold-ink) 16%, transparent));
+}
 .topicKinds li span[lang='ta'] {
   color: color-mix(in srgb, var(--brand-hero-ink) 68%, transparent);
   font-family: var(--tamil);
@@ -114,14 +121,14 @@
 }
 
 @media (max-width: 480px) {
-  .topicKinds li { grid-template-columns: 16px minmax(0, 1fr); }
+  .topicKinds li { grid-template-columns: 22px minmax(0, 1fr); }
   .topicKinds li span[lang='ta'] { grid-column: 2; text-align: left; }
 }
 
 .cta { margin-left: auto; display: flex; gap: var(--s-2); flex-wrap: wrap; }
 .head .cta a {
-  border-color: var(--brand-hero-gold);
-  background: var(--brand-hero-gold);
+  border-color: var(--brand-hero-ink);
+  background: var(--brand-hero-ink);
   color: var(--brand-hero-deep);
 }
 @media (max-width: 640px) { .cta { margin-left: 0; } }
@@ -140,18 +147,6 @@
    fact about the notes, not a page that failed to load. */
 .none { color: var(--muted); font-size: var(--fs-sm); }
 
-/* The opening view intentionally has the same calm table language as Nouns:
-   three familiar time words, with the grammar name beside each one. */
-.tenseIntro {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-1);
-  margin: 0 0 var(--s-4);
-  color: var(--soft);
-  font-size: var(--fs-sm);
-}
-.tenseIntro strong { color: var(--ink); }
-.tenseIntro span { color: var(--muted); font-family: var(--tamil); }
 .perfectNote {
   display: flex;
   flex-direction: column;

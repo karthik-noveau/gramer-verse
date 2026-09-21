@@ -1,40 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32"
      role="img" aria-label="Grammer-Verse">
-  <!--
-    The mark is the first thing the product teaches: a ball inside a box.
-    That is the preposition "in", and every other lesson is built on it.
-
-    Two shapes, and each earns its place:
-
-      the container is a stroke with a gap in the top edge. The gap is the
-      ball's own width, so it reads as the way in rather than as a missing
-      line — and it is what stops the silhouette reading as a camera, which
-      is exactly what the previous mark did at every size;
-
-      the ball is solid accent, because the accent has one job in this design
-      system — mark the thing that moved — and the ball is the thing that
-      moves.
-
-    The frame is ink, not accent. The mark has to survive on the green table
-    header, and a green frame disappears there.
-
-    This file is the record, and the favicon. Where the mark must follow the
-    theme it is inlined instead, from assets/js/logo.js: an external file
-    cannot read the page's custom properties.
-  -->
+  <defs>
+    <linearGradient id="screen" x1="3" y1="3" x2="29" y2="29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#559a78"/>
+      <stop offset="1" stop-color="#1d5b47"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="4" y1="3" x2="28" y2="29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f3d788"/>
+      <stop offset="1" stop-color="#e8ba50"/>
+    </linearGradient>
+    <clipPath id="screen-clip"><rect x="2" y="2" width="28" height="28" rx="7"/></clipPath>
+  </defs>
+  <!-- A custom G on a modern learning laptop. The inline copy follows the app
+       theme; this standalone file uses the fixed brand palette. -->
   <style>
-    .frame { stroke: #17160f; }
-    .ball  { fill:   #2f6f4f; }
-    /* A favicon has no page to inherit from, so it reads the OS setting
-       directly. The inlined copy uses the app's own theme toggle instead. */
-    @media (prefers-color-scheme: dark) {
-      .frame { stroke: #f2f1ec; }
-      .ball  { fill:   #7dc4a0; }
+    .screen { fill: url(#screen); }
+    .base { fill: none; stroke: url(#gold); stroke-width: 1.5; stroke-linecap: round; }
+    .g { fill: none; stroke: #fffaf0; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+    .dot { fill: url(#gold); }
+    .sheen { fill: #fffaf02e; opacity: 0; animation: sheen 4.8s ease-in-out infinite; }
+    @keyframes sheen {
+      0%, 18% { opacity: 0; transform: translateX(0); }
+      28% { opacity: .45; }
+      52%, 100% { opacity: 0; transform: translateX(48px); }
     }
+    @media (prefers-reduced-motion: reduce) { .sheen { animation: none; } }
   </style>
-  <path class="frame"
-        d="M11 4 H7.5 A3.5 3.5 0 0 0 4 7.5 V24.5 A3.5 3.5 0 0 0 7.5 28 H24.5
-           A3.5 3.5 0 0 0 28 24.5 V7.5 A3.5 3.5 0 0 0 24.5 4 H21"
-        fill="none" stroke-width="3" stroke-linecap="round"/>
-  <circle class="ball" cx="16" cy="19" r="6"/>
+  <rect class="screen" x="2" y="2" width="28" height="28" rx="7"/>
+  <path class="sheen" d="M-14 2h7L9 30H2Z" clip-path="url(#screen-clip)"/>
+  <path class="g" d="M21.8 11.2a7 7 0 1 0 .1 9.3v-4.4h-5.3"/>
+  <circle class="dot" cx="21.9" cy="20.5" r="1.15"/>
+  <path class="base" d="M9 25h14"/>
 </svg>

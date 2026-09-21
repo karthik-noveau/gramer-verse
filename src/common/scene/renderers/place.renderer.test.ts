@@ -217,6 +217,37 @@ describe('renderPlace — every relation', () => {
     expect(figure?.right).toBeLessThanOrEqual(ground.right);
   });
 
+  it('in — puts the contents and their contact shadows between the cutaway walls', () => {
+    const nodes = renderPlace(sceneFor('in', { figure: id('ball') }));
+    expect(find(nodes, 'ground')?.children?.some((node) => node.id === 'interior')).toBe(true);
+    expect(indexOf(nodes, 'ground')).toBeLessThan(indexOf(nodes, 'shadow-figure-0'));
+    expect(indexOf(nodes, 'shadow-figure-0')).toBeLessThan(indexOf(nodes, 'figure-0'));
+    expect(indexOf(nodes, 'figure-0')).toBeLessThan(indexOf(nodes, 'ground-front'));
+    expect(find(nodes, 'ground-front')?.attrs.transform).toBe(find(nodes, 'ground')?.attrs.transform);
+  });
+
+  it.each([1, 2, 3] as const)('in — %i balls stay visible above the opaque wooden rim', (count) => {
+    const nodes = renderPlace(sceneFor('in', { figure: id('ball'), count }));
+    const at = placedAt(find(nodes, 'ground'));
+    const rim = at.y + prop('box').cutaway!.rimY!;
+    for (const figure of figureBoxes(nodes, 'ball')) {
+      expect(figure.top).toBeLessThan(rim);
+      expect(figure.bottom).toBeGreaterThan(rim);
+    }
+    const wall = find(nodes, 'ground-front')?.children?.find((node) => node.id === 'body');
+    expect(wall?.attrs.fill).toBe('var(--box-face)');
+    expect(wall?.attrs.opacity ?? 1).toBe(1);
+  });
+
+  it.each(['on', 'behind', 'in front of', 'beside'] as const)(
+    '%s — keeps the outside of the box opaque', (relation) => {
+      const nodes = renderPlace(sceneFor(relation, { ground: id('box') }));
+      expect(find(nodes, 'ground-front')).toBeUndefined();
+      expect(find(nodes, 'ground')?.children?.some((node) => node.id === 'body')).toBe(true);
+      expect(find(nodes, 'ground')?.children?.some((node) => node.id === 'interior')).toBe(true);
+    },
+  );
+
   it('on — a ground with no surface takes a sensible height, not its box top', () => {
     const nodes = renderPlace(sceneFor('on', { figure: id('cup'), ground: id('tree') }));
     const ground = boxOf(nodes, 'ground', prop('tree'));
@@ -283,6 +314,20 @@ describe('renderPlace — every relation', () => {
     expect(figure?.bottom).toBeGreaterThan(ground.top);
     expect(figure?.top).toBeLessThan(ground.top);
     expect(placedAt(find(nodes, 'figure-0')).scale).toBeLessThan(1);
+  });
+
+  it.each([1, 2, 3] as const)('behind — %i balls remain partly visible above the box', (count) => {
+    const nodes = renderPlace(sceneFor('behind', { figure: id('ball'), ground: id('box'), count }));
+    const box = prop('box');
+    const ground = boxOf(nodes, 'ground', box);
+    for (const figure of figureBoxes(nodes, 'ball')) {
+      const offset = (figure.left + figure.right - ground.left - ground.right) / 2;
+      const rearEdge = ground.top + (box.cutaway?.backY ?? 0) + offset * (box.surfaceSlope ?? 0);
+      const visible = rearEdge - figure.top;
+      expect(visible).toBeGreaterThan((figure.bottom - figure.top) * 0.4);
+      expect(visible).toBeLessThan((figure.bottom - figure.top) * 0.5);
+      expect(figure.bottom).toBeGreaterThan(rearEdge);
+    }
   });
 
   it('in front of — the figure is drawn over the ground, lower and larger', () => {

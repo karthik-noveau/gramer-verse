@@ -26,18 +26,12 @@ import styles from './styles.module.css';
    readiness. Every topic is a door.
    ============================================================ */
 
-type Counted = { readonly topic: Topic; readonly lessons: number };
-
 export default function TopicsPage(): JSX.Element {
   const content = useContent();
 
-  /* Count each topic's lessons from its own list so every card stays aligned
-     with the authored curriculum. */
-  const counted = useMemo<readonly Counted[]>(() => {
+  const topics = useMemo<readonly Topic[]>(() => {
     if (content.status !== 'ready') return [];
-    return [...content.topics]
-      .sort((a, b) => a.order - b.order)
-      .map((topic) => ({ topic, lessons: topic.lessonIds.length }));
+    return [...content.topics].sort((a, b) => a.order - b.order);
   }, [content]);
 
   return (
@@ -63,7 +57,7 @@ export default function TopicsPage(): JSX.Element {
         />
       ) : null}
 
-      {content.status === 'ready' && counted.length === 0 ? (
+      {content.status === 'ready' && topics.length === 0 ? (
         <EmptyState
           title="No topics yet"
           body="The curriculum is empty. Nothing is broken — there is simply nothing in it."
@@ -76,11 +70,11 @@ export default function TopicsPage(): JSX.Element {
         />
       ) : null}
 
-      {counted.length > 0 ? (
+      {topics.length > 0 ? (
         <ul className={styles.grid}>
-          {counted.map(({ topic, lessons: count }) => (
+          {topics.map((topic) => (
             <li key={String(topic.id)}>
-              <TopicCard topic={topic} lessons={count} />
+              <TopicCard topic={topic} />
             </li>
           ))}
         </ul>
@@ -91,7 +85,13 @@ export default function TopicsPage(): JSX.Element {
       <ul className={styles.pair}>
         <li>
           <Card className={styles.visualizer ?? ''} to={paths.visualizer()}>
-            <h3 className={styles.otherTitle}>Prepositions visualizer</h3>
+            <h3 className={styles.otherTitle}>Preposition visualizer</h3>
+            <p>Explore place, direction and time. Compare similar words, then test your understanding.</p>
+          </Card>
+        </li>
+        <li>
+          <Card to={paths.practice()}>
+            <h3 className={styles.otherTitle}>Conversation practice</h3>
           </Card>
         </li>
       </ul>

@@ -11,6 +11,8 @@ import { useContent } from 'common/hooks/useContent';
 import { useThemeAttribute } from 'common/hooks/useThemeAttribute';
 import { getLesson, useContentStore } from 'store/content.store';
 
+import styles from './App.module.css';
+
 /* Colours, then fonts, then overrides — overrides.css consumes the tokens the
    first two declare, and the reset must land after them. */
 import 'theme/colours.css';
@@ -27,7 +29,20 @@ function useSidebarTopics(): readonly SidebarTopic[] {
     if (content.status !== 'ready') return [];
     return [...content.topics]
       .sort((a, b) => a.order - b.order)
-      .map((topic) => ({ id: String(topic.id), n: topic.order, en: String(topic.title.en) }));
+      .map((topic) => ({
+        id: String(topic.id),
+        n: topic.order,
+        en: String(topic.title.en),
+        ta: String(topic.title.ta),
+        tables: content.curriculum.tables
+          .filter((table) => String(table.topicId) === String(topic.id))
+          .map((table) => ({
+            id: table.id,
+            en: String(table.title.en),
+            ta: String(table.title.ta),
+            terms: [...table.columns, ...table.rows.flat()],
+          })),
+      }));
   }, [content]);
 }
 
@@ -58,7 +73,9 @@ function Layout(): JSX.Element {
     <AppShell topics={topics} activeTopicId={activeTopicId}>
       <ErrorBoundary resetKey={pathname}>
         <Suspense fallback={<Spinner label="Loading the page" centered />}>
-          <Outlet />
+          <div key={pathname} className={styles.routeView}>
+            <Outlet />
+          </div>
         </Suspense>
       </ErrorBoundary>
     </AppShell>
@@ -86,7 +103,9 @@ export function AppRoutes(): JSX.Element {
           element={
             <ErrorBoundary resetKey={path}>
               <Suspense fallback={<Spinner label="Loading the page" centered />}>
-                <Page />
+                <div className={styles.routeView}>
+                  <Page />
+                </div>
               </Suspense>
             </ErrorBoundary>
           }

@@ -36,7 +36,7 @@ const FUSED = spec(
 );
 
 const curves = (container: HTMLElement): readonly SVGPathElement[] => [
-  ...container.querySelectorAll('path'),
+  ...container.querySelectorAll<SVGPathElement>('path[data-connection-role]'),
 ];
 
 describe('Formation', () => {
@@ -47,24 +47,76 @@ describe('Formation', () => {
     expect(curves(container)).toHaveLength(4);
   });
 
-  it('lands two curves on the fused Tamil word', () => {
+  it('separates the connection ports beneath a fused Tamil word', () => {
     /* English needs two words where Tamil has one, and that is the point of
        the picture rather than a glitch to tidy away. */
     const { container } = render(<Formation spec={FUSED} />);
-    const ends = curves(container).map((path) => path.getAttribute('d')?.split(' ')[0]);
-    const onFused = ends.filter((start) => start === ends[2]);
+    const fusedWord = screen.getByText('பெட்டியில்', { selector: 'text' });
+    const onFused = curves(container).filter((path) =>
+      path.getAttribute('data-source-x') === fusedWord.getAttribute('x'));
+    expect(onFused).toHaveLength(2);
+    const starts = onFused.map((path) => Number(path.getAttribute('d')?.match(/^M([\d.]+),/)?.[1]));
+    expect(Math.abs((starts[0] ?? 0) - (starts[1] ?? 0))).toBe(12);
+    expect(((starts[0] ?? 0) + (starts[1] ?? 0)) / 2).toBe(Number(fusedWord.getAttribute('x')));
+  });
 
-    expect(onFused.length).toBeGreaterThanOrEqual(2);
+  it('gives each connection a contrasting crossing outline and clear endpoints', () => {
+    const { container } = render(<Formation spec={FUSED} />);
+    for (const path of curves(container)) {
+      expect(path.getAttribute('stroke-width')).toBe('2');
+      expect(path.getAttribute('opacity')).toBe('0.85');
+      expect(path.getAttribute('stroke-linecap')).toBe('round');
+      const halo = path.previousElementSibling;
+      expect(halo?.getAttribute('d')).toBe(path.getAttribute('d'));
+      expect(halo?.getAttribute('stroke-width')).toBe('5');
+      expect(path.parentElement?.querySelectorAll('circle')).toHaveLength(2);
+    }
+  });
+
+  it('keeps reordered connections centered on their destination words', () => {
+    const question = spec('Shall we begin?', 'Shall:be1 | we:figure | begin:be2',
+      'நாம் தொடங்கலாமா?', 'நாம்:figure | தொடங்கலாமா:be1:be2');
+    const { container } = render(<Formation spec={question} />);
+    const paths = curves(container);
+    for (const path of paths) {
+      const role = path.getAttribute('data-connection-role');
+      const token = question.enTokens.find((candidate) => candidate.roles.includes(role!))!;
+      const word = screen.getByText(token.text, { selector: 'text' });
+      const endpoint = path.parentElement?.querySelector('circle:last-child');
+      expect(endpoint?.getAttribute('cx')).toBe(word.getAttribute('x'));
+      expect(path.getAttribute('d')).toContain('C');
+      expect(path.getAttribute('d')).not.toMatch(/[HQ]/);
+    }
   });
 
   it('captions the fused word, in Tamil, and captions nothing else', () => {
     const { container } = render(<Formation spec={FUSED} />);
     const captions = [...container.querySelectorAll('text')].filter(
-      (node) => node.getAttribute('font-size') === '11',
+      (node) => node.classList.contains('caption'),
     );
 
     expect(captions).toHaveLength(1);
     expect(captions[0]?.textContent).toBe('தொடர்பு + இடம்');
+  });
+
+  it('keeps longer sentences readable with connectors clear of both word rows', () => {
+    const long = spec('I had been writing for an hour before he arrived.',
+      'I:figure | had been writing:be1 | for an hour:qual | before:rel | he:figure2 | arrived:be2',
+      'அவர் வருவதற்கு முன் நான் ஒரு மணி நேரமாக எழுதிக்கொண்டிருந்தேன்.',
+      'அவர்:figure2 | வருவதற்கு:be2 | முன்:rel | நான்:figure | ஒரு மணி நேரமாக:qual | எழுதிக்கொண்டிருந்தேன்:be1');
+    const { container } = render(<Formation spec={long} />);
+    const paths = curves(container);
+    expect(paths).toHaveLength(6);
+    const wordY = Number(screen.getByText('I', { selector: 'text' }).getAttribute('y'));
+    for (const path of paths) {
+      const ports = path.parentElement?.querySelectorAll('circle');
+      const top = Number(ports?.[0]?.getAttribute('cy'));
+      const bottom = Number(ports?.[1]?.getAttribute('cy'));
+      expect(bottom - top).toBeGreaterThanOrEqual(92);
+      expect(wordY - bottom).toBeGreaterThanOrEqual(20);
+    }
+    const height = Number(screen.getByRole('img').getAttribute('viewBox')?.split(' ')[3]);
+    expect(height - wordY).toBeGreaterThanOrEqual(66);
   });
 
   it('draws no curve from a word with no counterpart', () => {
@@ -107,6 +159,30 @@ describe('Formation', () => {
     });
 
     expect(labels.map((label) => label.x)).toEqual(words.map((word) => word.x));
+    expect(formation.querySelectorAll('rect')).toHaveLength(labels.length);
+    expect(formation.querySelector('circle')).toBeNull();
+    const connectors = [...formation.querySelectorAll('text')]
+      .filter((node) => node.textContent === '+');
+    expect(connectors).toHaveLength(labels.length - 1);
+    for (const connector of connectors) {
+      expect(connector.getAttribute('aria-hidden')).toBe('true');
+      expect(connector.getAttribute('fill')).toBe('var(--muted)');
+    }
+    expect(formation.querySelector('line, path, polyline')).toBeNull();
+    const roleColours = ['det', 'figure', 'be', 'rel', 'ground'].map((role) => `var(--r-${role})`);
+    for (const [index, tag] of [...formation.querySelectorAll('rect')].entries()) {
+      const colour = roleColours[index];
+      expect(tag.getAttribute('fill')).toBe(`color-mix(in srgb, ${colour} 10%, var(--surface))`);
+      expect(tag.getAttribute('stroke')).toBe(colour);
+      expect(Number(tag.getAttribute('y')) - Number(screen.getByText('ball', { selector: 'text' }).getAttribute('y'))).toBe(28);
+      expect(tag.getAttribute('height')).toBe('22');
+      expect(tag.getAttribute('rx')).toBe('6');
+    }
+    const tagLabels = [...formation.querySelectorAll('text')].filter((node) => node.textContent !== '+');
+    for (const [index, label] of tagLabels.entries()) {
+      expect(label.getAttribute('fill')).toBe(roleColours[index]);
+      expect(label.getAttribute('font-weight')).toBe('600');
+    }
 
     fireEvent.click(screen.getByRole('button', { name: 'Hide sentence formation' }));
     expect(screen.queryByTestId('sentence-formation')).toBeNull();
@@ -138,6 +214,15 @@ describe('Formation', () => {
         { text: 'write', roles: ['be2'] },
       ]).map((part) => part.label),
     ).toEqual(['Subject', 'Verb', 'Verb']);
+  });
+
+  it('keeps the subject after an inverted modal instead of calling it an object', () => {
+    expect(sentencePattern(parseAlignment('Shall:be1 | we:figure | begin:be2')).map((part) => part.label))
+      .toEqual(['Verb', 'Subject', 'Verb']);
+    expect(sentencePattern(parseAlignment('Could:be1 | you:figure | help:be2 | me:ground')).map((part) => part.label))
+      .toEqual(['Verb', 'Subject', 'Verb', 'Object']);
+    expect(sentencePattern(parseAlignment('Bring:be | the book:figure')).map((part) => part.label))
+      .toEqual(['Verb', 'Object']);
   });
 
   it('says the fusion and the orphan in one line, in Tamil', () => {
@@ -182,10 +267,12 @@ describe('Formation', () => {
       'மேசை மற்றும் நாற்காலிக்கு இடையில்',
       'மேசை:ground | மற்றும்:join | நாற்காலிக்கு:ground2 | இடையில்:rel',
     );
-    const { container } = render(<Formation spec={two} />);
+    render(<Formation spec={two} />);
 
     expect(baseRole('ground2')).toBe('ground');
-    expect(container.querySelector('[fill="var(--muted)"][font-size="15"]')).toBeNull();
+    for (const word of ['the chair', 'நாற்காலிக்கு']) {
+      expect(screen.getByText(word, { selector: 'text' }).getAttribute('fill')).toBe('var(--r-ground)');
+    }
   });
 });
 

@@ -10,6 +10,13 @@ export type SidebarTopic = {
   readonly id: string;
   readonly n: number;
   readonly en: string;
+  readonly ta: string;
+  readonly tables?: readonly {
+    readonly id: string;
+    readonly en: string;
+    readonly ta: string;
+    readonly terms: readonly string[];
+  }[];
 };
 
 export type SidebarProps = {
@@ -48,6 +55,14 @@ export function Sidebar({ topics, activeTopicId, collapsed }: SidebarProps): JSX
           <Icon name="grid" />
         </span>
         <span className={labelClass}>All topics</span>
+      </Link>
+      <Link className={styles.allTopics} to={paths.practice()} aria-current={pathname === paths.practice() || pathname.startsWith(`${paths.practice()}/`) ? 'page' : undefined}>
+        <span className={styles.navIcon} aria-hidden="true"><Icon name="pencil" /></span>
+        <span className={labelClass}>Practice</span>
+      </Link>
+      <Link className={styles.allTopics} to={paths.visualizer()} aria-current={pathname === paths.visualizer() ? 'page' : undefined}>
+        <span className={styles.navIcon} aria-hidden="true"><Icon name="sun" /></span>
+        <span className={labelClass}>Visualizer</span>
       </Link>
 
       {topics.length > 0 ? (

@@ -9,7 +9,7 @@ import type { Prop, PropId, SceneNode } from 'common/scene/types';
    a `fill` — the adjective knob recolours a prop rather than
    swapping in a second one.
 
-   ball, apple and cup are ported unchanged from the prototype.
+   Highlights and shade are overlays, so adjective colours still work.
    ============================================================ */
 
 const id = (value: string): PropId => value as PropId;
@@ -36,12 +36,26 @@ export const ball: Prop = {
      recoloured ball keeps its seams. */
   draw: (fill?: string): readonly SceneNode[] => [
     circle('body', { cx: 37, cy: 37, r: 35, fill: fill ?? 'var(--prop-orange)' }),
-    path('seam-h', { d: 'M4,37 H70', stroke: 'var(--prop-detail)', strokeWidth: 4, opacity: 0.25 }),
+    path('shade', {
+      d: 'M60,11 A35,35 0 0 1 12,61 C44,71 71,39 60,11 Z',
+      fill: 'var(--prop-detail)',
+      opacity: 0.12,
+    }),
+    path('highlight', {
+      d: 'M12,28 C16,12 33,5 46,10 C28,9 19,19 17,31 Z',
+      fill: 'var(--prop-paper)',
+      opacity: 0.55,
+    }),
+    path('seam-h', { d: 'M3,33 C23,43 49,43 71,33', stroke: 'var(--prop-detail)', strokeWidth: 2.2, opacity: 0.35 }),
     path('seam-v', {
-      d: 'M37,2 A48,48 0 0 0 37,72',
+      d: 'M37,2 C15,20 15,54 37,72',
       stroke: 'var(--prop-detail)',
-      strokeWidth: 4,
-      opacity: 0.25,
+      strokeWidth: 2.2,
+      opacity: 0.35,
+    }),
+    circle('edge', {
+      cx: 37, cy: 37, r: 35,
+      stroke: 'var(--prop-detail)', strokeWidth: 1, opacity: 0.12,
     }),
   ],
 };

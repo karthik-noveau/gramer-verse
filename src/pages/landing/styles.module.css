@@ -6,11 +6,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse at 50% -8%, color-mix(in srgb, var(--accent-soft) 82%, transparent), transparent 48rem),
-    radial-gradient(circle at -4% 42%, color-mix(in srgb, var(--warn-soft) 48%, transparent), transparent 30rem),
-    radial-gradient(circle at 104% 68%, color-mix(in srgb, var(--info-soft) 42%, transparent), transparent 32rem),
-    var(--bg);
+  background: var(--bg);
   --home-max: 1180px;
 }
 
@@ -45,8 +41,10 @@
 }
 
 .lockup { color: inherit; text-decoration: none; }
+.practiceLink { padding: 8px; color: var(--soft); font-size: var(--fs-sm); font-weight: 600; }
 
 @media (max-width: 560px) {
+  .practiceLink { display: none; }
   .barInner { min-height: 64px; padding-inline: var(--s-4); gap: var(--s-2); }
   .barInner a { white-space: nowrap; }
   .lockup { min-width: 0; overflow: hidden; }
@@ -61,6 +59,7 @@
 
 .hero {
   position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-areas:
     'copy orbit'
@@ -75,26 +74,8 @@
   padding: clamp(var(--s-7), 8vw, 96px) var(--s-5) clamp(var(--s-8), 10vw, 128px);
   isolation: isolate;
   color: var(--brand-hero-ink);
-  background:
-    radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--brand-hero-gold) 18%, transparent), transparent 26rem),
-    radial-gradient(circle at 18% 112%, color-mix(in srgb, var(--brand-hero-jade) 74%, transparent), transparent 38rem),
-    linear-gradient(138deg, var(--brand-hero-deep), var(--brand-hero-green));
+  background: color-mix(in srgb, var(--brand-hero-deep) 82%, var(--brand-gold-ink));
   box-shadow: inset 0 -1px color-mix(in srgb, var(--brand-hero-ink) 16%, transparent);
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  z-index: -2;
-  inset: 0;
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--brand-hero-ink) 9%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--brand-hero-ink) 9%, transparent) 1px, transparent 1px);
-  background-size: 52px 52px;
-  -webkit-mask-image: radial-gradient(ellipse 62% 58% at 50% 44%, black 5%, transparent 76%);
-  mask-image: radial-gradient(ellipse 62% 58% at 50% 44%, black 5%, transparent 76%);
-  opacity: .8;
-  pointer-events: none;
 }
 
 .heroCopy {
@@ -104,6 +85,61 @@
   align-self: center;
   max-width: 560px;
   text-align: left;
+}
+
+/* Two broad waves and a fine box grid: the copy stays on the quiet side,
+   while the stronger pattern sits behind the orbit. */
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.waveStage {
+  position: absolute;
+  inset: 0;
+  transform-origin: 70% 50%;
+}
+.waveArt {
+  position: absolute;
+  top: -2%;
+  left: 0;
+  width: 108%;
+  max-width: none;
+  height: 104%;
+}
+.waveBack { fill: var(--brand-hero-green); fill-opacity: .55; }
+.waveFront { fill: var(--brand-hero-jade); fill-opacity: .1; }
+.waveLayer { stroke: none; }
+.waveParallax { transform-box: view-box; transform-origin: center; }
+.waveEdge {
+  fill: none;
+  stroke: var(--brand-hero-gold);
+  stroke-width: 1;
+  stroke-opacity: .2;
+  vector-effect: non-scaling-stroke;
+}
+.waveTrace {
+  fill: none;
+  stroke: var(--brand-hero-gold);
+  stroke-width: 1.75;
+  stroke-opacity: .45;
+  stroke-linecap: round;
+  stroke-dasharray: .12 1;
+  stroke-dashoffset: .12;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+}
+.boxPattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--brand-hero-ink) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--brand-hero-ink) 10%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 74% 78% at 76% 44%, black 12%, transparent 82%);
+  mask-image: radial-gradient(ellipse 74% 78% at 76% 44%, black 12%, transparent 82%);
 }
 
 .eyebrow {
@@ -162,10 +198,14 @@
 .cta a {
   border-color: var(--brand-hero-gold);
   background: var(--brand-hero-gold);
-  color: var(--brand-hero-deep);
+  color: var(--brand-gold-ink);
   box-shadow: 0 10px 28px color-mix(in srgb, var(--ink) 22%, transparent);
 }
-.cta a:hover { border-color: var(--brand-hero-gold); background: color-mix(in srgb, var(--brand-hero-gold) 86%, var(--brand-hero-ink)); }
+.cta a:hover {
+  border-color: var(--brand-hero-ink);
+  background: var(--brand-hero-ink);
+  color: var(--brand-hero-deep);
+}
 
 .orbit {
   grid-area: orbit;
@@ -173,72 +213,159 @@
   z-index: 1;
   align-self: center;
   justify-self: center;
-  width: min(38vw, 500px);
+  width: min(100%, 440px);
+  min-width: 0;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--brand-hero-gold) 13%, transparent), transparent 64%);
 }
 
 .orbitRing {
   position: absolute;
-  border: 1px solid color-mix(in srgb, var(--brand-hero-ink) 28%, transparent);
   border-radius: 50%;
 }
-.orbitRingOuter { inset: 5%; }
-.orbitRingInner { inset: 25%; border-style: dashed; opacity: .7; }
+.orbitRingOuter {
+  inset: 14%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--brand-hero-deep) 64%, transparent), transparent 72%);
+}
+.orbitPaths {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  pointer-events: none;
+}
+.orbitLine, .orbitEcho {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 200px 200px;
+  vector-effect: non-scaling-stroke;
+}
+.orbitLine { stroke: color-mix(in srgb, var(--brand-hero-gold) 62%, transparent); stroke-width: 1.5; }
+.orbitEcho { stroke: color-mix(in srgb, var(--brand-hero-ink) 8%, transparent); stroke-width: 1; }
+.orbitPulse {
+  position: absolute;
+  inset: 35%;
+  border: 1px solid color-mix(in srgb, var(--brand-hero-gold) 45%, transparent);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
 
 .orbitCore {
   position: absolute;
-  inset: 34%;
+  inset: 34% 30%;
   display: grid;
   place-items: center;
   align-content: center;
   gap: var(--s-2);
-  border: 1px solid color-mix(in srgb, var(--brand-hero-gold) 42%, transparent);
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--brand-hero-green) 78%, transparent);
-  box-shadow: 0 24px 70px color-mix(in srgb, var(--ink) 28%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  z-index: 3;
 }
 .orbitCore small {
-  color: color-mix(in srgb, var(--brand-hero-ink) 66%, transparent);
-  font-size: 10px;
+  color: color-mix(in srgb, var(--brand-hero-ink) 76%, transparent);
+  font-size: 11px;
+  letter-spacing: .025em;
   white-space: nowrap;
 }
-.orbitMark { width: min(7.5vw, 88px); height: auto; }
-.orbitMark path { stroke: var(--brand-hero-ink); }
-.orbitMark circle { fill: var(--brand-hero-gold); }
+.orbitMark {
+  width: 94px;
+  height: auto;
+  filter: drop-shadow(0 8px 14px color-mix(in srgb, var(--brand-hero-deep) 32%, transparent));
+}
 
 .orbitLabel {
   position: absolute;
-  padding: 7px 13px;
-  border: 1px solid color-mix(in srgb, var(--brand-hero-gold) 35%, transparent);
-  border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--brand-hero-deep) 76%, transparent);
-  color: var(--brand-hero-ink);
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--ink) 20%, transparent);
-  font: 600 var(--fs-sm) / 1 var(--serif);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 136px;
+  min-height: 56px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--brand-hero-ink) 80%, transparent);
+  border-radius: 14px;
+  background: var(--brand-hero-ink);
+  color: var(--brand-hero-deep);
+  box-shadow:
+    0 2px 4px color-mix(in srgb, var(--brand-hero-deep) 12%, transparent),
+    0 10px 24px color-mix(in srgb, var(--brand-hero-deep) 18%, transparent);
+  font: 600 13px / 1.2 var(--font);
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  z-index: 2;
 }
-.orbitTenses { top: 3%; left: 50%; transform: translateX(-50%); }
-.orbitVerbs { top: 43%; right: -1%; }
-.orbitNouns { right: 13%; bottom: 8%; }
-.orbitSentences { bottom: 12%; left: 4%; }
+.orbitLabel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 15%, #fff9 48%, transparent 80%);
+  transform: translateX(-140%);
+  opacity: 0;
+  pointer-events: none;
+}
+.orbitIcon {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--brand-hero-deep) 7%, transparent);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.orbitTenses { top: 24.5%; left: 24.5%; --card-delay: 640ms; --arrive-x: 28px; --arrive-y: 28px; --arrive-angle: -5deg; }
+.orbitVerbs { top: 24.5%; left: 75.5%; --card-delay: 800ms; --arrive-x: -28px; --arrive-y: 28px; --arrive-angle: 5deg; }
+.orbitNouns { top: 75.5%; left: 75.5%; --card-delay: 960ms; --arrive-x: -28px; --arrive-y: -28px; --arrive-angle: -5deg; }
+.orbitSentences { top: 75.5%; left: 24.5%; --card-delay: 1120ms; --arrive-x: 28px; --arrive-y: -28px; --arrive-angle: 5deg; }
 
+.orbitTrack {
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: rotate(var(--orbit-phase));
+}
+.orbitTrackOne { --orbit-phase: 0deg; --dot-delay: 1500ms; }
+.orbitTrackTwo { --orbit-phase: 120deg; --dot-delay: 1640ms; }
+.orbitTrackThree { --orbit-phase: 240deg; --dot-delay: 1780ms; }
 .orbitDot {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
   border: 2px solid var(--brand-hero-deep);
   border-radius: 50%;
   background: var(--brand-hero-gold);
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--brand-hero-gold) 14%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-hero-gold) 10%, transparent);
 }
-.orbitDotOne { top: 20%; right: 18%; }
-.orbitDotTwo { right: 27%; bottom: 14%; }
-.orbitDotThree { top: 51%; left: 4%; }
+
+.motionToggle {
+  position: absolute;
+  right: var(--s-5);
+  bottom: var(--s-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid color-mix(in srgb, var(--brand-hero-ink) 24%, transparent);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: color-mix(in srgb, var(--brand-hero-ink) 82%, transparent);
+  font: 500 var(--fs-xs) / 1.3 var(--font);
+  cursor: pointer;
+}
+.motionToggle svg { width: 14px; height: 14px; }
+.motionToggle:hover { background: color-mix(in srgb, var(--brand-hero-ink) 8%, transparent); }
+.motionToggle:focus-visible { outline: 2px solid var(--brand-hero-gold); outline-offset: 4px; }
 
 .curriculum {
   grid-area: ribbon;
@@ -285,8 +412,8 @@
   .headline, .tagline { margin-inline: auto; }
   .headline { max-width: 12ch; }
   .cta { justify-content: center; }
-  .orbit { width: min(70vw, 430px); }
-  .orbitMark { width: 76px; }
+  .orbit { width: min(100%, 400px); }
+  .orbitMark { width: 82px; }
   .curriculum { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .curriculum li { border-bottom: 1px solid color-mix(in srgb, var(--brand-hero-gold) 28%, transparent); }
   .curriculum li:nth-child(2n) { border-right: 0; }
@@ -298,11 +425,17 @@
   .headline { font-size: 48px; }
   .curriculum li { padding: var(--s-3); }
   .curriculum li > span:first-child { font-size: var(--fs-base); }
-  .hero::before { background-size: 38px 38px; opacity: .55; }
-  .orbit { width: min(88vw, 320px); }
-  .orbitLabel { padding: 6px 10px; font-size: var(--fs-xs); }
-  .orbitCore small { display: none; }
-  .orbitMark { width: 58px; }
+  .orbit { width: min(100%, 320px); }
+  .orbitLabel { width: 116px; min-height: 48px; padding: 8px; gap: 7px; border-radius: 12px; font-size: 12px; }
+  .orbitIcon { width: 24px; height: 24px; padding: 4px; border-radius: 7px; }
+  .orbitCore small { font-size: 9.5px; }
+  .orbitMark { width: 68px; }
+  .waveArt { left: -32%; width: 150%; }
+  .boxPattern {
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 90% 55% at 74% 58%, black 5%, transparent 90%);
+    mask-image: radial-gradient(ellipse 90% 55% at 74% 58%, black 5%, transparent 90%);
+  }
 }
 
 /* ---- learning promise ------------------------------------- */
@@ -404,3 +537,142 @@
 .footInner nav { display: flex; flex-wrap: wrap; gap: var(--s-5); }
 .footInner a { color: var(--soft); text-decoration: none; }
 .footInner a:hover { color: var(--accent); }
+
+/* Entrance motion runs once; only decorative elements continue moving.
+   Content stays readable when ambient motion is paused mid-entrance. */
+@media (prefers-reduced-motion: no-preference) {
+  .heroCopy > * { animation: home-reveal 750ms cubic-bezier(.16, 1, .3, 1) both; }
+  .heroCopy > :nth-child(2) { animation-delay: 100ms; }
+  .heroCopy > :nth-child(3) { animation-delay: 200ms; }
+  .heroCopy > :nth-child(4) { animation-delay: 320ms; }
+  .heroCopy > :nth-child(5) { animation-delay: 420ms; }
+  /* One mount sequence: center → drawn rings → clockwise cards → orbit dots.
+     The resting styles above remain fully visible without animation. */
+  .orbitMark { animation: orbit-logo-arrive 1000ms cubic-bezier(.22, .85, .25, 1) 140ms both; }
+  .orbitCore small { animation: home-reveal 650ms cubic-bezier(.16, 1, .3, 1) 740ms both; }
+  .orbitPulse { animation: orbit-pulse-out 1500ms ease-out 340ms both; }
+  .orbitLine { animation: orbit-draw 1550ms cubic-bezier(.45, 0, .2, 1) 320ms both; }
+  .orbitEcho { animation: orbit-draw-echo 1750ms cubic-bezier(.45, 0, .2, 1) 480ms both; }
+  .orbitLabel { animation: orbit-card-arrive 850ms cubic-bezier(.22, .85, .25, 1) var(--card-delay) both; }
+  .orbitLabel::after { animation: orbit-card-sheen 850ms ease-out calc(var(--card-delay) + 450ms) both; }
+  .orbitIcon { animation: orbit-icon-arrive 650ms ease-out calc(var(--card-delay) + 160ms) both; }
+  .orbitDot { animation: orbit-dot-arrive 450ms ease-out var(--dot-delay) both; }
+  .curriculum li { animation: home-reveal 650ms cubic-bezier(.16, 1, .3, 1) 500ms both; }
+  .curriculum li:nth-child(2) { animation-delay: 580ms; }
+  .curriculum li:nth-child(3) { animation-delay: 660ms; }
+  .curriculum li:nth-child(4) { animation-delay: 740ms; }
+  .curriculum li:nth-child(5) { animation-delay: 820ms; }
+
+  .orbitTrack { animation: orbit-revolve 42s linear 1500ms infinite; }
+  /* A single layered reveal and edge glint, then only slow, low-amplitude
+     movement. Nested transforms keep the entrance and ambient motion smooth. */
+  .waveStage { animation: background-arrive 2200ms cubic-bezier(.16, 1, .3, 1) both; }
+  .waveArt { animation: wave-drift 24s ease-in-out 2200ms infinite; }
+  .waveParallax { animation: wave-depth 30s ease-in-out 2200ms infinite; }
+  .waveTrace { animation: wave-glint 3000ms cubic-bezier(.4, 0, .25, 1) 400ms both; }
+  .boxPattern {
+    animation: grid-arrive 1800ms cubic-bezier(.16, 1, .3, 1) 200ms both,
+      grid-breathe 22s ease-in-out 2000ms infinite;
+  }
+  .orbitMark, .orbitCore small, .orbitPulse, .orbitLine, .orbitEcho,
+  .orbitLabel, .orbitLabel::after, .orbitIcon, .orbitDot, .orbitTrack,
+  .waveStage, .waveArt, .waveParallax, .waveTrace, .boxPattern {
+    animation-play-state: var(--home-motion, running);
+  }
+  .cta a { transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease; }
+  .cta a:hover { transform: translateY(-3px); }
+  .cta a:active { transform: translateY(0); }
+
+  .band[data-revealed='false'] :is(.bandHead, .step) { opacity: 0; transform: translateY(18px); }
+  .band[data-revealed='true'] :is(.bandHead, .step) {
+    animation: home-reveal 700ms cubic-bezier(.16, 1, .3, 1) both;
+  }
+  .band[data-revealed='true'] .step:nth-child(1) { animation-delay: 100ms; }
+  .band[data-revealed='true'] .step:nth-child(2) { animation-delay: 200ms; }
+  .band[data-revealed='true'] .step:nth-child(3) { animation-delay: 300ms; }
+}
+
+.home[data-motion-paused='true'] { --home-motion: paused; }
+/* Include the shared logo animation without changing the logo elsewhere. */
+.home[data-motion-paused='true'] svg * { animation-play-state: paused; }
+
+@keyframes home-reveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes orbit-logo-arrive {
+  0% { opacity: 0; transform: translateY(14px) scale(.65) rotate(-10deg); }
+  65% { opacity: 1; transform: translateY(-3px) scale(1.06) rotate(2deg); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+}
+@keyframes orbit-draw {
+  from { opacity: 0; stroke-dashoffset: 1; }
+  12% { opacity: 1; }
+  to { opacity: 1; stroke-dashoffset: 0; }
+}
+@keyframes orbit-draw-echo {
+  from { opacity: 0; stroke-dashoffset: -1; }
+  15% { opacity: 1; }
+  to { opacity: 1; stroke-dashoffset: 0; }
+}
+@keyframes orbit-pulse-out {
+  0% { opacity: 0; transform: scale(.6); }
+  20% { opacity: .65; }
+  100% { opacity: 0; transform: scale(2.7); }
+}
+@keyframes orbit-card-arrive {
+  0% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--arrive-x)), calc(-50% + var(--arrive-y))) scale(.86) rotate(var(--arrive-angle));
+    filter: blur(4px);
+  }
+  65% { opacity: 1; filter: blur(0); }
+  76% { transform: translate(-50%, -50%) scale(1.025) rotate(0deg); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); filter: blur(0); }
+}
+@keyframes orbit-card-sheen {
+  0% { opacity: 0; transform: translateX(-140%); }
+  25% { opacity: .6; }
+  100% { opacity: 0; transform: translateX(140%); }
+}
+@keyframes orbit-icon-arrive {
+  from { opacity: 0; transform: scale(.65) rotate(-12deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes orbit-dot-arrive {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+@keyframes orbit-revolve {
+  from { transform: rotate(var(--orbit-phase)); }
+  to { transform: rotate(calc(var(--orbit-phase) + 360deg)); }
+}
+@keyframes wave-drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-14px, 8px); }
+}
+@keyframes background-arrive {
+  from { opacity: 0; transform: translateX(32px) scale(1.025); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes wave-depth {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(12px, -6px); }
+}
+@keyframes wave-glint {
+  0% { opacity: 0; stroke-dashoffset: .12; }
+  20%, 65% { opacity: .65; }
+  100% { opacity: 0; stroke-dashoffset: -1; }
+}
+@keyframes grid-arrive {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes grid-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .82; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home *, .home *::before, .home *::after { animation: none !important; transition: none !important; }
+  .motionToggle { display: none; }
+}

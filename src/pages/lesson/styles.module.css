@@ -57,9 +57,10 @@
 
 .card {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--line) 84%, transparent);
   border-radius: var(--r-lg);
   padding: var(--s-4);
+  box-shadow: var(--shadow-1);
 }
 .cardTitle { font: 600 var(--fs-md) / 1.25 var(--serif); margin-bottom: var(--s-3); }
 .cardRow { display: flex; flex-wrap: wrap; gap: var(--s-2); }

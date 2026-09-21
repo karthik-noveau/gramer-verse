@@ -4,7 +4,7 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
-  border: 1px solid var(--line);
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
   border-radius: var(--r-lg);
   background: var(--surface);
   box-shadow: var(--shadow-1);
@@ -21,7 +21,7 @@
 }
 
 .table thead th {
-  font-size: var(--fs-sm); font-weight: 700; letter-spacing: .01em;
+  font-size: var(--fs-sm); font-weight: 700; letter-spacing: .025em;
   color: var(--th-ink); background: var(--th-bg);
   position: sticky; top: 0;
   border-bottom: 1px solid var(--th-line);

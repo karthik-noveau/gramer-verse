@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 import { Link } from 'react-router';
 
+import { BrandMark } from 'common/components/BrandMark/BrandMark';
 import { paths } from 'common/constants/routes';
 
 import styles from './styles.module.css';
@@ -10,9 +11,13 @@ import styles from './styles.module.css';
 export function Footer(): JSX.Element {
   return (
     <footer className={styles.footer}>
-      <span>Grammer-Verse — English grammar for Tamil speakers, drawn.</span>
+      <span className={styles.footerBrand}>
+        <BrandMark size={18} />
+        Grammer-Verse — English grammar for Tamil speakers, drawn.
+      </span>
       <span className={styles.spacer} />
       <Link to={paths.topics()}>Topics</Link>
+      <Link to={paths.practice()}>Practice</Link>
     </footer>
   );
 }

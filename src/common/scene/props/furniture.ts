@@ -1,5 +1,6 @@
 import { circle, path, rect } from 'common/scene/primitives';
 import type { Prop, PropId, SceneNode } from 'common/scene/types';
+import { WOODEN_BOX_BACK_Y, WOODEN_BOX_RIM_SLOPE, WOODEN_BOX_RIM_Y, WOODEN_BOX_SIZE, woodenBoxBack, woodenBoxFront } from './wooden-box';
 
 /* ============================================================
    furniture.ts — the things a figure is in, on, under or beside.
@@ -9,9 +10,8 @@ import type { Prop, PropId, SceneNode } from 'common/scene/types';
    the renderer's job, and it is what lets one table serve "on
    the table", "under the table" and "beside the table".
 
-   The geometry of table, box and chair is ported unchanged from
-   the prototype, where it was drawn and looked at. Do not
-   redraw what has already been verified by eye.
+   Containers can also draw a cutaway, with the contents between
+   their back and front walls rather than pasted onto the outside.
    ============================================================ */
 
 const id = (value: string): PropId => value as PropId;
@@ -40,19 +40,22 @@ export const table: Prop = {
   },
   draw: (fill?: string): readonly SceneNode[] => [
     rect('top', { x: 0, y: 0, w: 300, h: 16, r: 3, fill: fill ?? 'var(--prop-wood)' }),
-    rect('leg-l', { x: 18, y: 16, w: 16, h: 134, fill: 'var(--prop-wood-2)' }),
-    rect('leg-r', { x: 266, y: 16, w: 16, h: 134, fill: 'var(--prop-wood-2)' }),
-    rect('rail', { x: 34, y: 26, w: 232, h: 8, fill: 'var(--prop-wood-2)' }),
+    path('top-light', { d: 'M5,2 H295', stroke: 'var(--prop-card-light)', strokeWidth: 3, opacity: 0.65 }),
+    path('leg-l', { d: 'M18,16 H36 L31,147 Q31,150 28,150 H23 Q20,150 20,147 Z', fill: 'var(--prop-wood-2)' }),
+    path('leg-r', { d: 'M264,16 H282 L280,147 Q280,150 277,150 H272 Q269,150 269,147 Z', fill: 'var(--prop-wood-2)' }),
+    rect('rail', { x: 34, y: 22, w: 232, h: 16, r: 3, fill: 'var(--prop-wood-2)' }),
+    path('grain', { d: 'M48,28 H151 M165,28 H240', stroke: 'var(--prop-card)', strokeWidth: 2, opacity: 0.5 }),
   ],
 };
 
 export const box: Prop = {
   id: id('box'),
-  box: { w: 190, h: 150 },
-  surfaceY: 0,
+  box: WOODEN_BOX_SIZE,
+  surfaceY: WOODEN_BOX_RIM_Y,
+  surfaceSlope: WOODEN_BOX_RIM_SLOPE,
   /* Where a thing goes when it is IN the box. Wide and deep enough for the
      ball at full size, which is what "in" has to be able to show. */
-  inside: [18, 34, 154, 100],
+  inside: [42, 0, 128, 160],
   /* It sits flat on the floor, so nothing fits beneath it. "Under the box"
      would draw the figure inside the box, and a picture that contradicts its
      own sentence is the one thing this product must never do. */
@@ -68,12 +71,13 @@ export const box: Prop = {
       ablative: 'பெட்டியிலிருந்து',
     },
   },
-  draw: (fill?: string): readonly SceneNode[] => [
-    rect('body', { x: 0, y: 22, w: 190, h: 128, r: 4, fill: fill ?? 'var(--prop-card)' }),
-    /* Two flaps with a gap between them: the gap is the way in. */
-    rect('flap-l', { x: 0, y: 0, w: 86, h: 26, r: 4, fill: 'var(--prop-card-2)' }),
-    rect('flap-r', { x: 104, y: 0, w: 86, h: 26, r: 4, fill: 'var(--prop-card-2)' }),
-  ],
+  draw: (fill?: string): readonly SceneNode[] => [...woodenBoxBack(), ...woodenBoxFront(fill)],
+  cutaway: {
+    back: woodenBoxBack,
+    front: woodenBoxFront,
+    rimY: WOODEN_BOX_RIM_Y,
+    backY: WOODEN_BOX_BACK_Y,
+  },
 };
 
 export const chair: Prop = {
@@ -99,6 +103,7 @@ export const chair: Prop = {
     rect('slat-1', { x: 16, y: 22, w: 118, h: 12, r: 2, fill: 'var(--prop-wood-2)' }),
     rect('slat-2', { x: 16, y: 54, w: 118, h: 12, r: 2, fill: 'var(--prop-wood-2)' }),
     rect('seat', { x: 0, y: 96, w: 150, h: 16, r: 3, fill: fill ?? 'var(--prop-wood)' }),
+    path('seat-light', { d: 'M5,98 H145', stroke: 'var(--prop-card-light)', strokeWidth: 3, opacity: 0.65 }),
     rect('leg-l', { x: 10, y: 112, w: 14, h: 98, fill: 'var(--prop-wood-2)' }),
     rect('leg-r', { x: 126, y: 112, w: 14, h: 98, fill: 'var(--prop-wood-2)' }),
   ],

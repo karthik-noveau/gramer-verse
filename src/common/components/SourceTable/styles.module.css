@@ -133,11 +133,9 @@
    they are the part being read. */
 .vizCell { width: 1%; }
 
-/* --surface-sunk was 1.10 from the row above and 1.08 from the page: below the
-   threshold where a block this large reads as a separate surface at all, so
-   the opened panel dissolved into the background. --fm-bg sits clearly below
-   both. */
-.fmRow { background: var(--fm-bg); }
+/* A white canvas gives the coloured words and tags a clean backdrop.
+   The surface token follows dark mode without forcing a white panel there. */
+.fmRow { background: var(--surface); }
 
 /* Right when closed, down when open. The rotation is the state — the button
    says the same word either way, so the arrow is what tells you whether the

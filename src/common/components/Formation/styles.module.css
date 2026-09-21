@@ -40,27 +40,29 @@
    sentence sideways along with the picture that explains it. */
 .scroll { overflow-x: auto; }
 
-/* Capped at the width it is drawn for. Left to fill the panel it scaled the
-   whole viewBox up — a 760-wide drawing stretched across a wide table renders
-   its 15px words at 23 and opens a gap between the two rows to match, which is
-   the diagram shouting at one size on a phone and another on a desktop.
-   `min-width` keeps it readable the other way and the row scrolls. */
+/* The component supplies a minimum width based on the phrases it contains.
+   Narrow panels scroll the diagram instead of shrinking its words. */
 .svg {
   display: block;
   width: 100%;
-  min-width: 520px;
-  max-width: 760px;
   height: auto;
   margin-top: var(--s-2);
 }
 
+.word { font-size: var(--formation-word-size, 15px); }
+.caption { font-size: var(--formation-caption-size, 11px); }
+.connectionHalo { stroke: var(--formation-canvas, var(--surface)); }
+.connectionPort { stroke: var(--formation-canvas, var(--surface)); }
+/* Soft role-coloured tags echo the words without competing with the diagram. */
+.patternLabel { font-size: var(--formation-label-size, 11px); }
+
 .patternToggle {
-  align-self: flex-end;
+  align-self: var(--formation-toggle-align, flex-end);
   border: 0;
   background: transparent;
   padding: 3px 0;
   color: var(--accent);
-  font: 700 var(--fs-xs) / 1.2 var(--font);
+  font: 600 var(--fs-sm) / 1.4 var(--font);
   cursor: pointer;
 }
 .patternToggle:hover { text-decoration: underline; }

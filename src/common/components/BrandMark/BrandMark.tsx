@@ -1,20 +1,12 @@
+import { useId } from 'react';
 import type { JSX } from 'react';
 
 import { classNames } from 'common/utils/classNames';
 
 import styles from './styles.module.css';
 
-/* A ball inside a box: the preposition "in", which is the idea every other
-   lesson is built on. The gap in the top edge is the ball's own width, so it
-   reads as the way in rather than as a missing line — and it is what keeps the
-   silhouette from reading as a camera.
-
-   Inline rather than an <img>, because it follows the theme: the frame is
-   --ink and the ball --accent, and a linked file cannot read the page's custom
-   properties. assets/logos/brand-mark.svg is the record and the favicon. */
-const FRAME =
-  'M11 4 H7.5 A3.5 3.5 0 0 0 4 7.5 V24.5 A3.5 3.5 0 0 0 7.5 28 H24.5 ' +
-  'A3.5 3.5 0 0 0 28 24.5 V7.5 A3.5 3.5 0 0 0 24.5 4 H21';
+/* A compact learning laptop: the rounded tile is the screen, while one quiet
+   baseline suggests the keyboard deck without adding icon-scale clutter. */
 
 export type BrandMarkProps = {
   readonly size?: number;
@@ -22,6 +14,11 @@ export type BrandMarkProps = {
 };
 
 export function BrandMark({ size = 26, className }: BrandMarkProps): JSX.Element {
+  const gradientKey = useId().replaceAll(':', '');
+  const screenGradient = `gv-screen-${gradientKey}`;
+  const goldGradient = `gv-gold-${gradientKey}`;
+  const screenClip = `gv-clip-${gradientKey}`;
+
   return (
     <svg
       className={classNames(styles.mark, className)}
@@ -30,8 +27,38 @@ export function BrandMark({ size = 26, className }: BrandMarkProps): JSX.Element
       height={size}
       aria-hidden="true"
     >
-      <path d={FRAME} fill="none" strokeWidth="3" strokeLinecap="round" className={styles.frame} />
-      <circle cx="16" cy="19" r="6" className={styles.ball} />
+      <defs>
+        <linearGradient id={screenGradient} x1="3" y1="3" x2="29" y2="29" gradientUnits="userSpaceOnUse">
+          <stop className={styles.screenGlow} />
+          <stop offset="1" className={styles.screenDeep} />
+        </linearGradient>
+        <linearGradient id={goldGradient} x1="4" y1="3" x2="28" y2="29" gradientUnits="userSpaceOnUse">
+          <stop className={styles.goldGlow} />
+          <stop offset="1" className={styles.goldDeep} />
+        </linearGradient>
+        <clipPath id={screenClip}>
+          <rect x="2" y="2" width="28" height="28" rx="7" />
+        </clipPath>
+      </defs>
+      <rect
+        x="2"
+        y="2"
+        width="28"
+        height="28"
+        rx="7"
+        className={styles.screen}
+        data-screen="true"
+        style={{ fill: `url(#${screenGradient})` }}
+      />
+      <path d="M-14 2h7L9 30H2Z" className={styles.sheen} style={{ clipPath: `url(#${screenClip})` }} />
+      <path d="M21.8 11.2a7 7 0 1 0 .1 9.3v-4.4h-5.3" className={styles.grammer} data-monogram="true" />
+      <circle cx="21.9" cy="20.5" r="1.15" className={styles.punctuation} data-accent="true" style={{ fill: `url(#${goldGradient})` }} />
+      <path
+        d="M9 25h14"
+        className={styles.base}
+        data-base="true"
+        style={{ stroke: `url(#${goldGradient})` }}
+      />
     </svg>
   );
 }

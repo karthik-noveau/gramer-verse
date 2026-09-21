@@ -66,7 +66,8 @@
   --brand-hero-deep:  #1d5b47;
   --brand-hero-green: #31795c;
   --brand-hero-jade:  #66b58d;
-  --brand-hero-gold:  #f0cf7a;
+  --brand-hero-gold:  #e8ba50;
+  --brand-gold-ink:   #111512;
   --brand-hero-ink:   #fffaf0;
 
   /* --- status ---------------------------------------------- */
@@ -107,7 +108,7 @@
   --r-ground:      #2f6f4f;   /* the place     — இடம்      5.1:1 */
   --r-rel:         #1d4ed8;   /* the relation  — தொடர்பு   5.7:1 */
   --r-det:         #7a3ea1;   /* which one     — எது       5.9:1 */
-  --r-be:          #6c6a62;   /* is / are      — வினை      4.6:1 */
+  --r-be:          #096d88;   /* verb — வினை; teal distinguishes it from relation blue */
 
   /* Three more, for the tables the word-order diagram reaches beyond the
      scene: an adjective or adverb, a question word, a joiner. */
@@ -126,6 +127,8 @@
   --prop-wood-2:  #8a5b30;
   --prop-card:    #c89a5e;
   --prop-card-2:  #b3873f;
+  --prop-card-light: #e4bd82;
+  --prop-card-edge:  #8f693b;
   --prop-leaf:    #3f8f5a;
   --prop-bark:    #6f4b2a;
   --prop-brick:   #b4553e;
@@ -142,10 +145,48 @@
   --prop-cloth-2: #7a4b86;
   --prop-detail:  #1a1a1a;
 
+  /* Visual lab artwork keeps its studio lighting in both page themes. */
+  --lab-white: #fffdf7;
+  --lab-wall: #edf1e9;
+  --lab-floor: #e3e6db;
+  --lab-edge: #ced6c8;
+  --lab-arch: #dce4d6;
+  --lab-shadow: #354e3024;
+  --lab-green: #528b6b;
+  --lab-green-dark: #315f49;
+  --lab-table-top: #8ab39b;
+  --lab-wood: #c89662;
+  --lab-wood-dark: #956b43;
+  --lab-wood-light: #e7ba86;
+  --box-face: #c5a078;
+  --box-side: #987554;
+  --box-rim: #e3c69f;
+  --box-inside: #73573d;
+  --lab-ball: #ed8750;
+  --lab-ball-light: #ffcd86;
+  --lab-ball-dark: #ba4d2b;
+  --lab-pot: #c57656;
+  --lab-pot-dark: #844b39;
+  --lab-kitchen-wall: #f3ecdd;
+  --lab-sky: #d3e5e8;
+  --lab-sun: #eac671;
+  --lab-leaf-light: #b2c9a6;
+  --lab-lilac: #aaa0c1;
+  --lab-hair: #34423c;
+  --lab-skin: #cb916e;
+  --lab-skin-dark: #8b5641;
+  --lab-shirt: #d5a85e;
+  --lab-trousers: #416859;
+  --lab-trousers-light: #557c6b;
+  --lab-steam: #fffdf7;
+  --lab-rice: #f6dc9e;
+  --lab-blue-wall: #e7edf1;
+  --lab-blue: #537a99;
+
   /* --- shape ------------------------------------------------ */
-  --r-sm:  6px;
-  --r-md:  10px;
-  --r-lg:  14px;
+  --r-sm:  7px;
+  --r-md:  12px;
+  --r-lg:  18px;
   --r-pill: 99px;
 
   /* The ellipse under a thing standing on the floor of a scene. A token
@@ -158,12 +199,12 @@
      places and they had drifted to .45 and .5. */
   --scrim: rgba(23, 21, 15, .5);
 
-  --shadow-1: 0 1px 3px rgba(20, 26, 24, .12), 0 1px 1px rgba(20, 26, 24, .07);
-  --shadow-2: 0 6px 18px rgba(20, 26, 24, .15), 0 2px 5px rgba(20, 26, 24, .08);
-  --shadow-3: 0 18px 46px rgba(20, 26, 24, .24);
+  --shadow-1: 0 1px 2px rgba(20, 38, 30, .07), 0 8px 24px rgba(20, 38, 30, .055);
+  --shadow-2: 0 3px 8px rgba(20, 38, 30, .08), 0 18px 44px rgba(20, 38, 30, .11);
+  --shadow-3: 0 24px 64px rgba(20, 38, 30, .2);
 
   /* --- layout ----------------------------------------------- */
-  --header-h:   60px;
+  --header-h:   64px;
   --sidebar-w:  216px;
   --detail-w:   288px;
   --content-max: 1180px;
@@ -220,7 +261,7 @@
   --r-ground:     #5fc08d;   /*  5.8:1 / 8.0:1 */
   --r-rel:        #7aa5f5;   /*  5.2:1 / 7.3:1 */
   --r-det:        #c98ee8;   /*  5.2:1 / 7.3:1 */
-  --r-be:         #a3a099;   /*  4.9:1 / 6.9:1 */
+  --r-be:         #63c8e2;   /* brighter teal keeps verbs readable on dark surfaces */
   --r-qual:       #5ec8bd;   /*  6.4:1 / 9.0:1 */
   --r-ask:        #f08bbd;   /*  5.6:1 / 7.8:1 */
   --r-join:       #d4b458;   /*  6.4:1 / 8.9:1 */

@@ -17,10 +17,10 @@ const TOPIC: Topic = {
   lessonIds: ['prep-place-in', 'prep-place-on'] as LessonId[],
 };
 
-const renderCard = (topic = TOPIC, lessons = 2): ReturnType<typeof render> =>
+const renderCard = (topic = TOPIC): ReturnType<typeof render> =>
   render(
     <MemoryRouter>
-      <TopicCard topic={topic} lessons={lessons} />
+      <TopicCard topic={topic} />
     </MemoryRouter>,
   );
 
@@ -45,23 +45,10 @@ describe('TopicCard', () => {
     expect(screen.getByRole('link').getAttribute('href')).toBe('/topics/prepositions');
   });
 
-  it('counts the lessons it was given', () => {
+  it('keeps lesson counts inside the topic rather than ranking cards by them', () => {
     renderCard();
 
-    expect(screen.getByText('2 lessons')).toBeTruthy();
-  });
-
-  it('says one lesson rather than 1 lessons', () => {
-    renderCard(TOPIC, 1);
-
-    expect(screen.getByText('1 lesson')).toBeTruthy();
-  });
-
-  it('does not make a topic with reference content sound empty', () => {
-    renderCard({ ...TOPIC, lessonIds: [] }, 0);
-
-    expect(screen.queryByText('No lessons yet')).toBeNull();
-    expect(screen.queryByText('0 lessons')).toBeNull();
+    expect(screen.queryByText(/lessons?/i)).toBeNull();
   });
 
   it('reports no progress, because there is none in this product', () => {
@@ -72,7 +59,7 @@ describe('TopicCard', () => {
   });
 
   it('is never locked or dimmed', () => {
-    renderCard({ ...TOPIC, lessonIds: [] }, 0);
+    renderCard({ ...TOPIC, lessonIds: [] });
 
     expect(screen.getByRole('link').getAttribute('aria-disabled')).toBeNull();
   });

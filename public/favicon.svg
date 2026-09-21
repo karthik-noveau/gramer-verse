@@ -1,18 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="screen" x1="3" y1="3" x2="29" y2="29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#559a78"/>
+      <stop offset="1" stop-color="#1d5b47"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="4" y1="3" x2="28" y2="29" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f3d788"/>
+      <stop offset="1" stop-color="#e8ba50"/>
+    </linearGradient>
+    <clipPath id="screen-clip"><rect x="2" y="2" width="28" height="28" rx="7"/></clipPath>
+  </defs>
   <style>
-    .frame { stroke: #17160f; }
-    .ball { fill: #2f6f4f; }
-    @media (prefers-color-scheme: dark) {
-      .frame { stroke: #f2f1ec; }
-      .ball { fill: #7dc4a0; }
+    .screen { fill: url(#screen); }
+    .base { fill: none; stroke: url(#gold); stroke-width: 1.5; stroke-linecap: round; }
+    .g { fill: none; stroke: #fffaf0; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+    .dot { fill: url(#gold); }
+    .sheen { fill: #fffaf02e; opacity: 0; animation: sheen 4.8s ease-in-out infinite; }
+    @keyframes sheen {
+      0%, 18% { opacity: 0; transform: translateX(0); }
+      28% { opacity: .45; }
+      52%, 100% { opacity: 0; transform: translateX(48px); }
     }
+    @media (prefers-reduced-motion: reduce) { .sheen { animation: none; } }
   </style>
-  <path
-    class="frame"
-    d="M11 4H7.5A3.5 3.5 0 0 0 4 7.5v17A3.5 3.5 0 0 0 7.5 28h17a3.5 3.5 0 0 0 3.5-3.5v-17A3.5 3.5 0 0 0 24.5 4H21"
-    fill="none"
-    stroke-width="3"
-    stroke-linecap="round"
-  />
-  <circle class="ball" cx="16" cy="19" r="6" />
+  <rect class="screen" x="2" y="2" width="28" height="28" rx="7"/>
+  <path class="sheen" d="M-14 2h7L9 30H2Z" clip-path="url(#screen-clip)"/>
+  <path class="g" d="M21.8 11.2a7 7 0 1 0 .1 9.3v-4.4h-5.3"/>
+  <circle class="dot" cx="21.9" cy="20.5" r="1.15"/>
+  <path class="base" d="M9 25h14"/>
 </svg>

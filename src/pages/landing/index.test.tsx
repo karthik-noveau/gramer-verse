@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
 import LandingPage from 'pages/landing/index';
@@ -44,6 +44,51 @@ describe('LandingPage', () => {
 
     expect(start.getAttribute('href')).toBe('/topics');
     expect(open.getAttribute('href')).toBe('/topics');
+  });
+
+  it('lets visitors pause and resume the page animations', () => {
+    const { container } = renderPage();
+    fireEvent.click(screen.getByRole('button', { name: 'Pause animations' }));
+    expect(container.firstElementChild?.getAttribute('data-motion-paused')).toBe('true');
+    expect(screen.getByRole('heading', { level: 1 })).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Resume animations' }));
+    expect(container.firstElementChild?.getAttribute('data-motion-paused')).toBe('false');
+  });
+
+  it('keeps the decorative orbit out of the accessibility tree', () => {
+    renderPage();
+    expect(screen.getByText('Grammar, connected').closest('[aria-hidden="true"]')).toBeTruthy();
+  });
+
+  it('arranges four illustrated topic cards around the central brand', () => {
+    const { container } = renderPage();
+    const orbit = container.querySelector('.orbit');
+    expect(Array.from(orbit?.querySelectorAll('.orbitLabel') ?? [], (card) => card.textContent?.trim()))
+      .toEqual(['Tenses', 'Verbs', 'Nouns', 'Sentences']);
+    expect(orbit?.querySelectorAll('.orbitIcon')).toHaveLength(4);
+    expect(orbit?.querySelector('a, button, [tabindex]')).toBeNull();
+    expect(orbit?.querySelector('.orbitCore small')?.textContent).toBe('Grammar, connected');
+  });
+
+  it('provides normalized circular paths for the mount drawing animation', () => {
+    const { container } = renderPage();
+    const paths = container.querySelector('.orbitPaths');
+    expect(paths?.getAttribute('focusable')).toBe('false');
+    expect(paths?.querySelectorAll('circle[pathLength="1"]')).toHaveLength(2);
+    expect(container.querySelectorAll('.orbitPulse')).toHaveLength(1);
+  });
+
+  it('combines a decorative wave background with a box pattern', () => {
+    const { container } = renderPage();
+    const backdrop = container.querySelector('.heroBackdrop');
+    expect(backdrop?.getAttribute('aria-hidden')).toBe('true');
+    expect(backdrop?.querySelectorAll('.waveLayer')).toHaveLength(2);
+    expect(backdrop?.querySelectorAll('.boxPattern')).toHaveLength(1);
+    expect(backdrop?.querySelectorAll('.waveStage .waveParallax')).toHaveLength(1);
+    expect(backdrop?.querySelector('.waveTrace')?.getAttribute('pathLength')).toBe('1');
+    expect(backdrop?.querySelector('a, button, [tabindex]')).toBeNull();
+    expect(container.querySelector('.orbitBackdrop')).toBeNull();
+    expect(container.querySelectorAll('.orbitRing')).toHaveLength(1);
   });
 
   it('lists no topics — that is the page Start goes to', () => {

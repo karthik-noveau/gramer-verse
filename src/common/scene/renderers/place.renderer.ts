@@ -370,16 +370,33 @@ function spanMark(x0: number, x1: number, y: number): readonly SceneNode[] {
 
 /* ---- one rule per relation --------------------------------- */
 
+/** Each object follows the same tilted edge instead of floating over one end. */
+function followSurface(ctx: GroundCtx, figures: readonly Spot[]): readonly Spot[] {
+  const slope = ctx.ground.surfaceSlope ?? 0;
+  if (slope === 0) return figures;
+  return figures.map((spot) => ({
+    ...spot,
+    y: round(spot.y + (spot.x + ctx.figure.box.w * spot.scale / 2 - ctx.gx - ctx.gw / 2) * slope),
+  }));
+}
+
 function inside(ctx: GroundCtx, box: readonly [number, number, number, number]): readonly Spot[] {
   const [ix, iy, iw, ih] = box;
-  const fit = fitFor(ctx, Math.min(1, ih / ctx.fh), iw);
+  const rim = ctx.ground.cutaway?.rimY;
+  const visibleShare = .65;
+  const aboveRim = rim === undefined ? 1 : (rim - iy) / (ctx.fh * visibleShare);
+  const fit = fitFor(ctx, Math.min(1, ih / ctx.fh, aboveRim), iw);
 
-  return figureRow(ctx, {
-    baseY: ctx.gy + iy + ih / 2 + (ctx.fh * fit) / 2,
+  const figures = figureRow(ctx, {
+    /* Open crates partly hide each object behind the rim, including smaller rows. */
+    baseY: rim === undefined
+      ? ctx.gy + iy + (ctx.ground.cutaway ? ih : ih / 2 + (ctx.fh * fit) / 2)
+      : ctx.gy + rim + ctx.fh * fit * (1 - visibleShare),
     fit,
     centre: ctx.gx + ix + iw / 2,
     maxWidth: iw,
   });
+  return rim === undefined ? figures : followSurface(ctx, figures).map((spot) => ({ ...spot, y: Math.max(ctx.gy + iy, spot.y) }));
 }
 
 const GROUNDED: Readonly<Record<GroundedRelation, (ctx: GroundCtx) => Layout>> = {
@@ -388,11 +405,11 @@ const GROUNDED: Readonly<Record<GroundedRelation, (ctx: GroundCtx) => Layout>> =
   }),
 
   on: (ctx) => ({
-    figures: figureRow(ctx, {
+    figures: followSurface(ctx, figureRow(ctx, {
       baseY: ctx.gy + (ctx.ground.surfaceY ?? ON_FALLBACK_DROP),
       centre: ctx.gx + ctx.gw / 2,
-      maxWidth: ctx.gw,
-    }),
+      maxWidth: ctx.ground.cutaway ? ctx.ground.inside?.[2] ?? ctx.gw : ctx.gw,
+    })),
   }),
 
   /* Present at the place, not offset from it: on the ground's own edge, half
@@ -458,15 +475,21 @@ const GROUNDED: Readonly<Record<GroundedRelation, (ctx: GroundCtx) => Layout>> =
      the picture came out identical to under; sitting it at the ground's own
      top edge means the solid part covers its lower half and only the top
      shows. */
-  behind: (ctx) => ({
-    behind: true,
-    figures: figureRow(ctx, {
-      baseY: ctx.gy + (ctx.ground.surfaceY ?? 0) + ctx.fh * BEHIND_SINK,
-      fit: BEHIND_SCALE,
-      centre: ctx.gx + ctx.gw / 2,
-      maxWidth: ctx.gw,
-    }),
-  }),
+  behind: (ctx) => {
+    const fit = fitFor(ctx, BEHIND_SCALE, ctx.gw);
+    /* The box's rear edge is above its front rim. Use the actual
+       fitted height so smaller objects still peek out at every count. */
+    const edge = ctx.ground.cutaway?.backY ?? (ctx.ground.cutaway ? 0 : (ctx.ground.surfaceY ?? 0));
+    return {
+      behind: true,
+      figures: followSurface(ctx, figureRow(ctx, {
+        baseY: ctx.gy + edge + ctx.fh * fit * BEHIND_SINK,
+        fit,
+        centre: ctx.gx + ctx.gw / 2,
+        maxWidth: ctx.gw,
+      })),
+    };
+  },
 
   'in front of': (ctx) => ({
     frontShadow: true,
@@ -609,8 +632,8 @@ function layoutFor(spec: PlaceSpec, ctx: Ctx, ground: Prop | null): Layout | nul
 /** The ring that says which one. Solid for the definite, dashed for the
  *  indefinite, and a word beside it — a difference in line style alone is not
  *  something every learner can see, and neither is one in colour. */
-const determinerRing = (figure: Prop, indefinite: boolean): SceneNode =>
-  rect('determiner', {
+const determinerRing = (figure: Prop, indefinite: boolean): SceneNode => {
+  const marker = rect('determiner', {
     x: -RING_PAD,
     y: -RING_PAD,
     w: figure.box.w + RING_PAD * 2,
@@ -620,6 +643,8 @@ const determinerRing = (figure: Prop, indefinite: boolean): SceneNode =>
     strokeWidth: RING_WIDTH,
     dash: indefinite ? RING_DASH : '',
   });
+  return { ...marker, attrs: { ...marker.attrs, 'data-grammar': 'determiner' } };
+};
 
 function figureNodes(spec: PlaceSpec, ctx: Ctx, spots: readonly Spot[]): readonly SceneNode[] {
   const effect = adjectiveFor(spec.adjective);
@@ -640,17 +665,18 @@ function figureNodes(spec: PlaceSpec, ctx: Ctx, spots: readonly Spot[]): readonl
   );
 }
 
-const groundNode = (id: string, prop: Prop, at: Placed): SceneNode =>
-  group(id, prop.draw(), { x: at.x, y: at.y, scale: at.scale, role: 'ground' });
+const groundNode = (id: string, prop: Prop, at: Placed, cutaway = false): SceneNode =>
+  group(id, cutaway && prop.cutaway ? prop.cutaway.back() : prop.draw(), {
+    x: at.x, y: at.y, scale: at.scale, role: 'ground',
+  });
 
-/** The shadow a figure standing in front of the ground casts at its own feet,
- *  which is what stops "in front of" reading as a sticker on the ground. */
+/** A contact shadow at the figure's feet, including tabletops and interiors. */
 const frontShadow = (index: number, figure: Prop, spot: Spot): SceneNode =>
   ellipse(`shadow-figure-${index}`, {
     cx: round(spot.x + (figure.box.w * spot.scale) / 2),
-    cy: round(spot.y + figure.box.h * spot.scale + 3),
+    cy: round(spot.y + figure.box.h * spot.scale + 1),
     rx: round((figure.box.w * spot.scale) / 2),
-    ry: 7,
+    ry: round(4 * spot.scale + 1),
     fill: 'var(--shadow-ink)',
   });
 
@@ -679,10 +705,17 @@ export function renderPlace(spec: PlaceSpec): readonly SceneNode[] {
   if (layout === null) return [];
 
   const other = propFor(spec.ground2) ?? null;
+  const cutaway = spec.relation === 'in' ? ground?.cutaway : undefined;
   const figures = figureNodes(spec, ctx, layout.figures);
-  const grounds = groundNodes(ground, other, layout);
-  const shadows = layout.frontShadow
+  const grounds = groundNodes(ground, other, layout, cutaway !== undefined);
+  const groundedFigure = ['on', 'at', 'under', 'below', 'beside', 'near', 'between', 'here', 'there'].includes(spec.relation);
+  const shadows = layout.frontShadow || cutaway || groundedFigure
     ? layout.figures.map((spot, index) => frontShadow(index, figure, spot))
+    : [];
+  const foreground = cutaway && ground
+    ? [group('ground-front', cutaway.front(), {
+        ...(layout.ground ?? restingPlace(ground)), role: 'ground',
+      })]
     : [];
 
   return [
@@ -690,6 +723,7 @@ export function renderPlace(spec: PlaceSpec): readonly SceneNode[] {
     ...groundShadows(ground, other, layout),
     ...(layout.marks ?? []),
     ...(layout.behind === true ? [...figures, ...grounds] : [...grounds, ...shadows, ...figures]),
+    ...foreground,
   ];
 }
 
@@ -701,10 +735,10 @@ const restingPlace = (prop: Prop): Placed => ({
   scale: 1,
 });
 
-function groundNodes(ground: Prop | null, other: Prop | null, layout: Layout): readonly SceneNode[] {
+function groundNodes(ground: Prop | null, other: Prop | null, layout: Layout, cutaway = false): readonly SceneNode[] {
   if (ground === null) return [];
 
-  const nodes = [groundNode('ground', ground, layout.ground ?? restingPlace(ground))];
+  const nodes = [groundNode('ground', ground, layout.ground ?? restingPlace(ground), cutaway)];
 
   /* "between" has two of them, and the second is as much the ground as the
      first — same role, so lighting the word lights both. */

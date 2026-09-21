@@ -67,6 +67,7 @@ export function AppShell({ children, topics = [], activeTopicId }: AppShellProps
       </a>
 
       <Header
+        topics={topics}
         narrow={narrow}
         drawerOpen={drawerOpen}
         onToggleDrawer={toggleDrawer}

@@ -29,11 +29,18 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 82% -8%, color-mix(in srgb, var(--accent-soft) 42%, transparent), transparent 34rem),
+    var(--bg);
   color: var(--ink);
   font: var(--fs-base)/1.6 var(--font);
   -webkit-font-smoothing: antialiased;
   overflow-wrap: break-word;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
 }
 
 h1, h2, h3, h4, p, figure, ul, ol { margin: 0; }

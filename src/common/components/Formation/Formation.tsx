@@ -88,7 +88,10 @@ export const sentencePattern = (tokens: readonly FormationToken[]): readonly {
     const text = token.text.trim();
     const inferred = ARTICLE.test(text) ? 'det' : PRONOUN.test(text) ? 'figure' : '';
     const role = baseRole(explicit ?? inferred);
-    const imperativeObject = role === 'figure' && index > 0 && baseRole(tokens[0]?.roles[0] ?? '') === 'be';
+    const firstWord = tokens[0]?.text.trim() ?? '';
+    const invertedQuestion = MODAL.test(firstWord) || AUXILIARY.test(firstWord);
+    const imperativeObject = role === 'figure' && index > 0 && !invertedQuestion &&
+      baseRole(tokens[0]?.roles[0] ?? '') === 'be';
 
     let label = LABEL_EN[role] ?? 'Word';
     if (QUESTION.test(text)) label = 'Question Word';
@@ -103,34 +106,76 @@ export const sentencePattern = (tokens: readonly FormationToken[]): readonly {
 /* ---- the geometry ------------------------------------------ */
 
 const WIDTH = 760;
-const HEIGHT = 174;
 const PAD = 20;
 const TA_Y = 35;
-const EN_Y = 118;
-const PATTERN_TOP = 134;
-const PATTERN_HEIGHT = 28;
-const PATTERN_TEXT_Y = 152;
+const PATTERN_HEIGHT = 22;
+const patternWidth = (label: string): number => Math.max(54, label.length * 6 + 24);
 
 type Placed = { readonly x: number; readonly token: FormationToken };
+type Connection = { readonly role: string; readonly from: Placed; readonly to: Placed };
+type RoutedConnection = Connection & {
+  readonly fromX: number;
+  readonly toX: number;
+  readonly bend: number;
+};
 
-/** Spread evenly across the width, both rows on the same rule, so a word's
- *  place on the line means its place in the sentence and nothing else. */
-const layOut = (tokens: readonly FormationToken[]): readonly Placed[] =>
-  tokens.map((token, index) => ({
-    x: Math.round((PAD + ((WIDTH - 2 * PAD) / (tokens.length + 1)) * (index + 1)) * 10) / 10,
-    token,
+/** Reserve space for the whole phrase, including Tamil vowel signs, before
+ *  adding the gaps. Fused place phrases can be much longer
+ *  than the words on either side of them. */
+const tokenWidth = (token: FormationToken): number => Math.max(
+  96,
+  Array.from(token.text).reduce((width, letter) =>
+    width + (/\s/u.test(letter) ? 5 : /[\u0B80-\u0BFF]/u.test(letter) ? 12 : 10), 0),
+);
+
+const rowWidth = (tokens: readonly FormationToken[]): number =>
+  2 * PAD + tokens.reduce((width, token) => width + tokenWidth(token), 0) + (tokens.length + 1) * 28;
+
+const layOut = (tokens: readonly FormationToken[], width: number): readonly Placed[] => {
+  const occupied = tokens.reduce((total, token) => total + tokenWidth(token), 0);
+  const gap = Math.min(48, (width - 2 * PAD - occupied) / (tokens.length + 1));
+  let edge = PAD;
+
+  return tokens.map((token) => {
+    const span = tokenWidth(token);
+    const x = Math.round((edge + span / 2) * 10) / 10;
+    edge += span + gap;
+    return { x, token };
+  });
+};
+
+const CONNECTION_TOP = TA_Y + 14;
+const PORT_GAP = 12;
+
+/** Separate the ports beneath a fused word, ordered by their destination.
+ *  Each role remains traceable instead of merging into one shared stem. */
+const connectionPorts = (tamil: readonly Placed[], english: readonly Placed[]): readonly RoutedConnection[] => {
+  const links: Connection[] = tamil.flatMap((from) => from.token.roles.flatMap((role) => {
+    const to = english.find((candidate) => candidate.token.roles.includes(role));
+    return to ? [{ role, from, to }] : [];
   }));
 
-/** A vertical-tangent bezier, so lines that cross stay readable where they
- *  overlap: leaving each word straight down and arriving straight up means two
- *  curves meet at an angle rather than running together. */
-const curve = (from: number, to: number): string =>
-  `M${from},${TA_Y + 12} C${from},${TA_Y + 52} ${to},${EN_Y - 56} ${to},${EN_Y - 20}`;
+  return links.map((link, index) => {
+    const outgoing = links.filter((other) => other.from === link.from)
+      .sort((a, b) => a.to.x - b.to.x);
+    const incoming = links.filter((other) => other.to === link.to)
+      .sort((a, b) => a.from.x - b.from.x);
+    return {
+      ...link,
+      fromX: link.from.x + (outgoing.indexOf(link) - (outgoing.length - 1) / 2) * PORT_GAP,
+      toX: link.to.x + (incoming.indexOf(link) - (incoming.length - 1) / 2) * PORT_GAP,
+      bend: links.length > 1 ? .3 + .4 * index / (links.length - 1) : .5,
+    };
+  });
+};
 
-/** Keep each label visually attached to its word without letting long labels
- *  dominate the row. The fixed viewBox makes this stable at every screen size. */
-const patternChipWidth = (label: string): number =>
-  Math.min(96, Math.max(54, Math.round(label.length * 6 + 22)));
+/** Curves leave and arrive vertically, directly beneath their words. Varying
+ *  their bend heights spreads crossings without pushing endpoints sideways. */
+const connectionPath = (from: number, to: number, bend: number, bottom: number): string => {
+  if (from === to) return `M${from},${CONNECTION_TOP} V${bottom}`;
+  const controlY = Math.round((CONNECTION_TOP + (bottom - CONNECTION_TOP) * bend) * 10) / 10;
+  return `M${from},${CONNECTION_TOP} C${from},${controlY} ${to},${controlY} ${to},${bottom}`;
+};
 
 export type FormationProps = {
   readonly spec: FormationSpec;
@@ -147,8 +192,14 @@ export function Formation({
   onTogglePattern,
   showPatternToggle = true,
 }: FormationProps): JSX.Element {
-  const tamil = useMemo(() => layOut(spec.taTokens), [spec]);
-  const english = useMemo(() => layOut(spec.enTokens), [spec]);
+  const width = useMemo(() => Math.max(WIDTH, rowWidth(spec.taTokens), rowWidth(spec.enTokens)), [spec]);
+  const tamil = useMemo(() => layOut(spec.taTokens, width), [spec, width]);
+  const english = useMemo(() => layOut(spec.enTokens, width), [spec, width]);
+  const connections = useMemo(() => connectionPorts(tamil, english), [tamil, english]);
+  const connectionBottom = CONNECTION_TOP + 92 + Math.min(40, Math.max(0, connections.length - 4) * 8);
+  const englishY = connectionBottom + 22;
+  const patternTop = englishY + 28;
+  const height = patternTop + PATTERN_HEIGHT + 16;
   const note = useMemo(() => noteParts(spec), [spec]);
   const pattern = useMemo(() => sentencePattern(spec.enTokens), [spec]);
   const [internalPattern, setInternalPattern] = useState(true);
@@ -180,34 +231,60 @@ export function Formation({
       <div className={styles.scroll}>
         <svg
           className={styles.svg}
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          viewBox={`0 0 ${width} ${height}`}
+          style={{
+            minWidth: `calc(${width}px * var(--formation-scale, 1))`,
+            maxWidth: `max(${width}px, var(--formation-max-width, 760px))`,
+          }}
           role="img"
           aria-label={`${spec.en} — ${spec.ta}`}
           focusable="false"
         >
-          {tamil.flatMap((from) =>
-            from.token.roles.flatMap((role) => {
-              const to = english.find((candidate) => candidate.token.roles.includes(role));
-              if (!to) return [];
-
-              return [
+          {connections.map(({ role, from, to, fromX, toX, bend }) => {
+            const d = connectionPath(fromX, toX, bend, connectionBottom);
+            const colour = colourOf(role);
+            return (
+              <g key={`${role}-${from.x}`} aria-hidden="true">
+                {/* The canvas-coloured outline separates crossing paths without
+                    changing their meaning or introducing another colour. */}
                 <path
-                  key={`${role}-${from.x}`}
-                  d={curve(from.x, to.x)}
+                  className={styles.connectionHalo}
+                  d={d}
                   fill="none"
-                  stroke={colourOf(role)}
-                  strokeWidth={2.5}
-                  opacity={0.55}
-                />,
-              ];
-            }),
-          )}
+                  strokeWidth={5}
+                  strokeLinecap="round"
+                />
+                <path
+                  data-connection-role={role}
+                  data-source-x={from.x}
+                  data-target-x={to.x}
+                  d={d}
+                  fill="none"
+                  stroke={colour}
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  opacity={0.85}
+                />
+                {[[fromX, CONNECTION_TOP], [toX, connectionBottom]].map(([x, y], index) => (
+                  <circle
+                    key={index}
+                    className={styles.connectionPort}
+                    cx={x}
+                    cy={y}
+                    r={2.5}
+                    fill={colour}
+                    strokeWidth={1}
+                  />
+                ))}
+              </g>
+            );
+          })}
 
           {tamil.map((placed, index) => (
             <Word key={`ta-${index}`} placed={placed} y={TA_Y} lang="ta" captioned />
           ))}
           {english.map((placed, index) => (
-            <Word key={`en-${index}`} placed={placed} y={EN_Y} lang="en" />
+            <Word key={`en-${index}`} placed={placed} y={englishY} lang="en" />
           ))}
 
           {patternShown ? (
@@ -217,65 +294,49 @@ export function Formation({
             >
               {english.map((placed, index) => {
                 const part = pattern[index];
-                const previous = english[index - 1];
                 const label = part?.label ?? 'Word';
-                const colour = part ? colourOf(part.role) : 'var(--muted)';
-                const chipWidth = patternChipWidth(label);
-                const previousLabel = pattern[index - 1]?.label ?? 'Word';
-                const previousChipWidth = patternChipWidth(previousLabel);
-                const connectorY = PATTERN_TOP + PATTERN_HEIGHT / 2;
-                const connectorEnd = placed.x - chipWidth / 2 - 7;
+                const colour = colourOf(part?.role ?? '');
+                const chipWidth = patternWidth(label);
+                const previous = english[index - 1];
+                const previousWidth = patternWidth(pattern[index - 1]?.label ?? 'Word');
+                const connectorX = previous
+                  ? (previous.x + previousWidth / 2 + placed.x - chipWidth / 2) / 2
+                  : 0;
                 return (
                   <g key={`pattern-${index}`}>
-                    {index > 0 && previous ? (
-                      <g aria-hidden="true">
-                        <line
-                          x1={previous.x + previousChipWidth / 2 + 7}
-                          y1={connectorY}
-                          x2={connectorEnd}
-                          y2={connectorY}
-                          stroke="var(--line-strong)"
-                          strokeWidth={1.5}
-                        />
-                        <polyline
-                          points={`${connectorEnd - 5},${connectorY - 4} ${connectorEnd},${connectorY} ${connectorEnd - 5},${connectorY + 4}`}
-                          fill="none"
-                          stroke="var(--line-strong)"
-                          strokeWidth={1.5}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </g>
-                    ) : null}
-                    <line
-                      x1={placed.x}
-                      y1={EN_Y + 7}
-                      x2={placed.x}
-                      y2={PATTERN_TOP}
-                      stroke={colour}
-                      strokeWidth={1.5}
-                      strokeOpacity={0.3}
+                    {previous ? <text
+                      x={connectorX}
+                      y={patternTop + PATTERN_HEIGHT / 2}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontFamily="var(--font)"
+                      fontSize={15}
+                      fontWeight={400}
+                      fill="var(--muted)"
+                      opacity={0.75}
                       aria-hidden="true"
-                    />
+                    >+</text> : null}
                     <rect
                       x={placed.x - chipWidth / 2}
-                      y={PATTERN_TOP}
+                      y={patternTop}
                       width={chipWidth}
                       height={PATTERN_HEIGHT}
-                      rx={7}
-                      fill={colour}
-                      fillOpacity={0.08}
+                      rx={6}
+                      fill={`color-mix(in srgb, ${colour} 10%, var(--surface))`}
                       stroke={colour}
-                      strokeOpacity={0.4}
+                      strokeOpacity={0.35}
+                      strokeWidth={0.75}
                       aria-hidden="true"
                     />
                     <text
+                      className={styles.patternLabel}
                       x={placed.x}
-                      y={PATTERN_TEXT_Y}
+                      y={patternTop + PATTERN_HEIGHT / 2}
                       textAnchor="middle"
+                      dominantBaseline="central"
                       fontFamily="var(--font)"
-                      fontSize={11.5}
-                      fontWeight={700}
+                      fontSize={11}
+                      fontWeight={600}
                       fill={colour}
                     >
                       {label}
@@ -322,6 +383,7 @@ function Word({
           thing on the picture that needs saying. */}
       {captioned && roles.length > 1 ? (
         <text
+          className={styles.caption}
           x={placed.x}
           y={y - 17}
           textAnchor="middle"
@@ -335,6 +397,7 @@ function Word({
       ) : null}
 
       <text
+        className={styles.word}
         x={placed.x}
         y={y}
         textAnchor="middle"

@@ -3,18 +3,23 @@
   padding: var(--s-2) var(--s-4); border-radius: var(--r-pill);
   border: 1px solid var(--line); background: var(--surface); color: var(--soft);
   font-size: var(--fs-sm); font-weight: 600; cursor: pointer; text-decoration: none;
-  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+              transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
 }
 /* text-decoration on the hover too: `a:hover` in overrides.css outranks a plain
    `.btn`, so an anchor styled as a button underlines under the pointer unless
    the button says otherwise at the same weight. */
 .btn:hover { border-color: var(--line-strong); color: var(--ink); text-decoration: none; }
 
-.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.primary {
+  background: var(--accent); border-color: var(--accent); color: var(--accent-ink);
+  box-shadow: 0 7px 18px color-mix(in srgb, var(--accent) 22%, transparent);
+}
 /* The colour has to be restated: `.btn:hover` sets --ink and outranks the plain
    `.primary`, so without this the label turned dark ink on the green fill the
    moment the pointer touched it. */
 .primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-ink); }
+.btn:active { transform: translateY(1px); }
 
 .ghost { background: transparent; border-color: transparent; }
 .ghost:hover { background: var(--surface-sunk); }
@@ -32,4 +37,8 @@
 @media (max-width: 900px), (pointer: coarse) {
   .btn { min-height: 44px; }
   .icon { width: 44px; height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active { transform: none; }
 }

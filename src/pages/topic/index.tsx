@@ -134,8 +134,9 @@ function Topic({ topic, lessons, curriculum }: TopicProps): JSX.Element {
                 {groups.map((group) => (
                   <li key={String(group.title.en)}>
                     <span className={styles.typeArrow} aria-hidden="true">
-                      <svg viewBox="0 0 14 12">
-                        <path d="M1 6h10M8 2.5 11.5 6 8 9.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <svg viewBox="0 0 22 22">
+                        <circle cx="11" cy="11" r="9.25" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="m9 7.5 3.5 3.5L9 14.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                     <span lang="en">{typeLabel(String(group.title.en))}</span>
@@ -307,10 +308,6 @@ function BeginnerTenseGuide({ tables }: { readonly tables: readonly SourceTableD
 
       {showMore && kinds ? (
         <div className={styles.allTenses}>
-          <p className={styles.tenseIntro}>
-            These words describe <strong>the stage of the action</strong>, not when it happens.
-            <span lang="ta">இவை செயல் எந்த நிலையில் உள்ளது என்பதைச் சொல்கின்றன.</span>
-          </p>
           <SourceTable table={kinds} />
           <p className={styles.perfectNote}>
             <strong>Perfect</strong> does not mean “without mistakes.” It means the action is already

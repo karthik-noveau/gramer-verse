@@ -40,13 +40,13 @@ describe('TopicsPage', () => {
       expect(cards[0]?.textContent).toContain('1');
     });
 
-    it('counts the lessons of each topic from its own list', () => {
+    it('does not rank topics by exposing uneven lesson counts', () => {
       renderPage();
       const prepositions = screen
         .getAllByRole('link')
         .find((link) => link.getAttribute('href') === '/topics/prepositions');
 
-      expect(prepositions?.textContent).toContain('13 lessons');
+      expect(prepositions?.textContent).not.toMatch(/lessons?/i);
     });
 
     it('keeps the introduction concise', () => {
@@ -57,11 +57,12 @@ describe('TopicsPage', () => {
       expect(screen.queryByText(/எங்கிருந்தும் தொடங்கலாம்/)).toBeNull();
     });
 
-    it('offers the one thing that is not a topic, in one click', () => {
+    it('links to conversation practice and the prepositions visualizer', () => {
       renderPage();
       const hrefs = screen.getAllByRole('link').map((link) => link.getAttribute('href'));
 
       expect(hrefs).toContain('/topics/prepositions/visualizer');
+      expect(hrefs).toContain('/practice');
     });
 
     it('reports no progress of any kind', () => {

@@ -1,0 +1,37 @@
+.room { position: relative; overflow: hidden; background: var(--lab-wall); user-select: none; -webkit-user-select: none; }
+.canvas { display: block; width: 100%; height: auto; max-height: var(--room-canvas-height, none); }
+.hint { position: absolute; z-index: 1; top: 14px; left: 10px; right: 10px; display: flex; justify-content: center; align-items: center; gap: 6px; color: var(--lab-green-dark); font-size: 10px; pointer-events: none; }
+.liveReadout { position: absolute; z-index: 1; top: 39px; left: 50%; transform: translateX(-50%); max-width: calc(100% - 28px); width: max-content; padding: 7px 12px; font-size: 11px; line-height: 1.6; color: var(--lab-green-dark); pointer-events: none; text-align: center; }
+.liveReadout strong { color: var(--accent); }
+.ballPosition { transition: transform 280ms cubic-bezier(.18, .8, .3, 1); }
+.ballBounce { transform-origin: 0 24px; animation: ballHop 3.8s ease-in-out 280ms infinite; }
+.shadow { transition: cx 280ms ease-out, cy 280ms ease-out, rx 280ms ease-out, opacity 280ms ease-out; transform-box: fill-box; transform-origin: center; animation: shadowHop 3.8s ease-in-out 280ms infinite; }
+.room[data-dragging="true"] .ballPosition, .room[data-dragging="true"] .shadow { transition: none; }
+.room[data-dragging="true"] .ballBounce, .room[data-dragging="true"] .shadow { animation: none; }
+@keyframes ballHop {
+  0%, 22%, 100% { transform: translateY(0) scale(1); }
+  3% { transform: translateY(0) scale(1.035, .965); }
+  10% { transform: translateY(-6px) scale(.99, 1.01); }
+  17% { transform: translateY(0) scale(1.025, .975); }
+}
+@keyframes shadowHop {
+  0%, 22%, 100% { transform: scale(1); }
+  10% { transform: scale(.88); }
+}
+.handle { cursor: grab; touch-action: none; outline: none; }
+.room[data-dragging="true"], .room[data-dragging="true"] .handle { cursor: grabbing; }
+.handle:focus-visible .grabArea { stroke: var(--lab-green-dark); stroke-width: 2; stroke-dasharray: 4 5; }
+.room[data-dragging="true"] .handle:focus-visible .grabArea { stroke: none; }
+.grabArea { pointer-events: all; }
+.dropGuides { pointer-events: none; }
+.dropBall { opacity: .7; stroke: var(--lab-green-dark); stroke-width: 1.8; }
+.dropBall circle { fill: var(--lab-green); fill-opacity: .12; stroke-dasharray: 4 4; }
+.dropBall path { fill: none; stroke-width: 1.5; stroke-dasharray: 3 3; }
+.dropBall[data-active="true"] { opacity: .95; }
+.dropBall[data-active="true"] circle { fill-opacity: .2; }
+.labels { fill: var(--lab-green-dark); font: 9px var(--font); letter-spacing: 2px; opacity: .7; }
+@media (max-width: 480px) {
+  .hint { top: 10px; font-size: 8px; }
+  .liveReadout { top: 28px; padding: 4px 8px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .ballPosition, .shadow { transition: none; } .ballBounce, .shadow { animation: none; } }

@@ -11,6 +11,9 @@ export type RouteId =
   | 'topic'
   | 'lesson'
   | 'visualizer'
+  | 'visualLab'
+  | 'practice'
+  | 'practiceScenario'
   | 'notFound';
 
 export type RouteEntry = {
@@ -29,6 +32,9 @@ export type RouteEntry = {
 export const ROUTES: readonly RouteEntry[] = Object.freeze([
   { id: 'landing', path: '/', component: lazy(() => import('pages/landing')), outsideShell: true },
   { id: 'topics', path: '/topics', component: lazy(() => import('pages/topics')) },
+  { id: 'visualLab', path: '/visual-lab', component: lazy(() => import('pages/visual-lab')) },
+  { id: 'practice', path: '/practice', component: lazy(() => import('pages/practice')) },
+  { id: 'practiceScenario', path: '/practice/:scenarioId', component: lazy(() => import('pages/practice')) },
   /* Before `/topics/:topicId`, or "prepositions" would be read as a topic id
      and the visualizer would never be reached. */
   {
@@ -41,12 +47,10 @@ export const ROUTES: readonly RouteEntry[] = Object.freeze([
   { id: 'notFound', path: '*', component: lazy(() => import('pages/not-found')) },
 ]);
 
-/* Two addresses that used to be pages. They redirect rather than 404 because
-   they were linked from outside the app: the dashboard was folded into
-   /topics, and practice became the visualizer. */
+/* The old dashboard was folded into /topics. Practice now has its own
+   scenario catalogue. /visual-lab redirects into the preposition visualizer. */
 export const REDIRECTS: readonly { readonly from: string; readonly to: string }[] = Object.freeze([
   { from: '/dashboard', to: '/topics' },
-  { from: '/practice', to: '/topics/prepositions/visualizer' },
 ]);
 
 const pathOf = (id: RouteId): string => {
@@ -58,7 +62,10 @@ const pathOf = (id: RouteId): string => {
 export const paths = {
   landing: (): string => pathOf('landing'),
   topics: (): string => pathOf('topics'),
+  practice: (): string => pathOf('practice'),
+  practiceScenario: (scenarioId: string): string => `/practice/${encodeURIComponent(scenarioId)}`,
   topic: (topicId: string): string => `/topics/${topicId}`,
   lesson: (lessonId: string): string => `/lessons/${lessonId}`,
   visualizer: (): string => pathOf('visualizer'),
+  visualLab: (): string => pathOf('visualLab'),
 } as const;

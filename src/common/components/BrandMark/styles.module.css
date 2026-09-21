@@ -1,12 +1,54 @@
-/* The mark is a stroke, not a solid shape, so it needs its own box: the
-   width/height attributes set the drawn size and this keeps flex from
-   squeezing it. */
+/* Its explicit box keeps the compact mark from being squeezed in the header. */
 .mark { flex: none; display: block; overflow: visible; }
 
-/* The frame is ink, not accent: the mark has to survive on the green table
-   header, and a green frame disappears there. */
-.frame { stroke: var(--ink); }
-.ball  { fill: var(--accent); }
+.screenGlow { stop-color: color-mix(in srgb, var(--brand-hero-jade) 70%, var(--brand-hero-green)); }
+.screenDeep { stop-color: var(--brand-hero-deep); }
+.goldGlow { stop-color: color-mix(in srgb, var(--brand-hero-gold) 78%, var(--brand-hero-ink)); }
+.goldDeep { stop-color: var(--brand-hero-gold); }
+
+.screen {
+  fill: var(--brand-hero-green);
+  stroke: none;
+  filter: drop-shadow(0 2px 3px color-mix(in srgb, var(--ink) 14%, transparent));
+}
+.sheen {
+  fill: color-mix(in srgb, var(--brand-hero-ink) 18%, transparent);
+  opacity: 0;
+  animation: logo-sheen 4.8s ease-in-out infinite;
+}
+.grammer {
+  fill: none;
+  stroke: var(--brand-hero-ink);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.punctuation {
+  fill: var(--brand-hero-gold);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: punctuation-pulse 2.8s ease-in-out infinite;
+}
+.base {
+  fill: none;
+  stroke: var(--brand-hero-gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+@keyframes punctuation-pulse {
+  0%, 100% { opacity: .7; transform: scale(.86); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@keyframes logo-sheen {
+  0%, 18% { opacity: 0; transform: translateX(0); }
+  28% { opacity: .45; }
+  52% { opacity: 0; transform: translateX(48px); }
+  100% { opacity: 0; transform: translateX(48px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .punctuation,
+  .sheen { animation: none; }
+}
 
 .lockup { display: inline-flex; align-items: center; gap: var(--s-2); text-decoration: none; }
 

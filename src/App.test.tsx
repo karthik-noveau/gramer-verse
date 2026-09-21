@@ -45,6 +45,9 @@ describe('routing', () => {
     ['/topics/prepositions', /Prepositions/],
     ['/lessons/prep-place-in', 'in'],
     ['/topics/prepositions/visualizer', 'Preposition visualizer'],
+    ['/practice', 'Practice'],
+    ['/practice/book-a-room', 'Book a hotel room'],
+    ['/visual-lab', 'Preposition visualizer'],
   ] as readonly (readonly [string, string | RegExp])[])('%s renders its page', async (path, heading) => {
     at(path);
 
@@ -79,9 +82,10 @@ describe('routing', () => {
     await waitFor(() =>
       expect(within(sidebar).getByRole('link', { name: 'Prepositions' })).toBeTruthy(),
     );
-    /* The topic index, followed by ten individual topics. */
+    /* The topic index, practice, and ten individual topics. */
     expect(within(sidebar).getByRole('link', { name: 'All topics' })).toBeTruthy();
-    expect(sidebar.querySelectorAll('a')).toHaveLength(11);
+    expect(within(sidebar).getByRole('link', { name: 'Visualizer' })).toBeTruthy();
+    expect(sidebar.querySelectorAll('a')).toHaveLength(13);
   });
 
   it('marks the topic a lesson belongs to, which its URL does not say', async () => {
@@ -154,11 +158,11 @@ describe('routing', () => {
       expect(await screen.findByRole('heading', { level: 1, name: 'Start anywhere.' })).toBeTruthy();
     });
 
-    it('sends /practice to the visualizer', async () => {
+    it('opens the conversation practice catalogue at /practice', async () => {
       at('/practice');
 
       expect(
-        await screen.findByRole('heading', { level: 1, name: 'Preposition visualizer' }),
+        await screen.findByRole('heading', { level: 1, name: 'Practice' }),
       ).toBeTruthy();
     });
   });

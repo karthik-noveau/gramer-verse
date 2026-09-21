@@ -24,12 +24,12 @@
   grid-area: header;
   position: sticky; top: 0; z-index: 30;
   display: flex; align-items: center; gap: var(--s-3);
-  padding: 0 var(--s-4);
-  background: color-mix(in srgb, var(--surface) 94%, transparent);
-  border-bottom: 1px solid var(--line);
+  padding: 0 var(--s-5);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
   box-shadow: var(--shadow-1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
 }
 .spacer { flex: 1; }
 
@@ -54,6 +54,86 @@
   background: var(--accent-soft); color: var(--accent); font-weight: 700;
 }
 
+/* A compact way into the curriculum. Results float under the header so the
+   bar keeps its height and the page does not jump while someone types. */
+.topicSearch {
+  position: relative;
+  width: clamp(190px, 22vw, 280px);
+}
+.searchControl {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 38px;
+  padding: 0 var(--s-3);
+  border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--surface-sunk) 88%, transparent);
+  color: var(--muted);
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease);
+}
+.searchControl:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+  background: var(--surface);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-soft) 52%, transparent);
+}
+.searchControl input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--fs-sm);
+}
+.searchControl input::placeholder { color: var(--muted); opacity: .82; }
+.searchControl input::-webkit-search-cancel-button { cursor: pointer; }
+
+.searchResults {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + var(--s-2));
+  right: 0;
+  width: max(100%, 300px);
+  padding: var(--s-2);
+  border: 1px solid color-mix(in srgb, var(--line) 86%, transparent);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+  animation: search-results-in 180ms var(--ease) both;
+}
+.searchResult {
+  display: block;
+  gap: var(--s-4);
+  padding: 10px var(--s-3);
+  border-radius: var(--r-md);
+  color: var(--ink);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  text-decoration: none;
+}
+.searchResultBody {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+.searchResultBody small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.searchResult:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+.noSearchResults { padding: var(--s-3); color: var(--muted); font-size: var(--fs-sm); }
+
+@keyframes search-results-in {
+  from { opacity: 0; transform: translateY(-5px); }
+}
+
 /* ---- sidebar ----------------------------------------------- */
 .sidebar {
   grid-area: sidebar;
@@ -61,9 +141,9 @@
   align-self: start;
   height: calc(100vh - var(--header-h));
   overflow-y: auto;
-  padding: var(--s-3);
-  background: color-mix(in srgb, var(--surface) 88%, var(--accent-soft));
-  border-right: 1px solid var(--line);
+  padding: var(--s-4) var(--s-3);
+  background: color-mix(in srgb, var(--surface) 94%, var(--accent-soft));
+  border-right: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
 }
 .sidebar h4 {
   font-size: 10px; font-weight: 800; letter-spacing: .09em;
@@ -74,10 +154,11 @@
 .sidebar h4:first-child { margin-top: var(--s-2); }
 .sidebar a {
   display: flex; align-items: center; gap: var(--s-3);
-  padding: var(--s-2) var(--s-3); border-radius: var(--r-md);
+  padding: 9px var(--s-3); border-radius: var(--r-md);
   color: var(--soft); text-decoration: none; font-size: var(--fs-sm);
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
-.sidebar a:hover { background: var(--surface-sunk); color: var(--ink); text-decoration: none; }
+.sidebar a:hover { background: var(--surface-sunk); color: var(--ink); text-decoration: none; transform: translateX(2px); }
 .sidebar a[aria-current="page"] {
   background: var(--accent-soft); color: var(--accent); font-weight: 600;
 }
@@ -117,9 +198,10 @@
 /* ---- main + footer ----------------------------------------- */
 .main {
   grid-area: main;
-  padding: var(--s-4) var(--s-5) var(--s-6);
+  padding: var(--s-6) var(--s-6) var(--s-8);
   max-width: var(--content-max);
   width: 100%;
+  margin-inline: auto;
 }
 .footer {
   grid-area: footer;
@@ -128,6 +210,7 @@
   color: var(--muted); font-size: var(--fs-sm);
   display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center;
 }
+.footerBrand { display: inline-flex; align-items: center; gap: var(--s-2); }
 
 .skipLink {
   position: absolute; left: var(--s-4); top: -100px; z-index: 100;
@@ -166,6 +249,7 @@
   }
   .shell[data-drawer="open"] .sidebar { transform: none; }
   .topNav { display: none; }
+  .topicSearch { width: min(240px, 34vw); }
   .main { padding: var(--s-4) var(--s-4) var(--s-8); }
 
   .mobileNav {
@@ -184,6 +268,10 @@
   .footer { padding-bottom: 84px; }
 }
 
+@media (max-width: 720px) {
+  .topicSearch { display: none; }
+}
+
 @media (max-width: 480px) {
   .header {
     gap: var(--s-2);
@@ -196,7 +284,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .sidebar { transition: none; }
+  .sidebar a:hover { transform: none; }
   .scrim { animation: none; }
+  .searchResults { animation: none; }
 }
 
 @media (min-width: 1600px) {

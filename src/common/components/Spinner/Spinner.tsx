@@ -5,7 +5,7 @@ import { classNames } from 'common/utils/classNames';
 import styles from './styles.module.css';
 
 export type SpinnerProps = {
-  /** What is being waited for. Read out; never shown. */
+  /** What is being waited for. Read out, and shown for a page-level wait. */
   readonly label?: string;
   readonly className?: string;
   /** Centre the spinner in the available page area. */
@@ -20,7 +20,11 @@ export function Spinner({ label = 'Loading', className, centered = false }: Spin
   return (
     <span role="status" className={classNames(centered && styles.centered)}>
       <span className={classNames(styles.spinner, className)} aria-hidden="true" />
-      <span className="sr-only">{label}</span>
+      {centered ? (
+        <span className={styles.label}>{label}</span>
+      ) : (
+        <span className="sr-only">{label}</span>
+      )}
     </span>
   );
 }

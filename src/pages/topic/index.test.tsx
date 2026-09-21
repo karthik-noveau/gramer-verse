@@ -171,6 +171,7 @@ describe('TopicPage', () => {
       fireEvent.click(screen.getByRole('button', { name: 'Show more' }));
 
       expect(screen.getAllByRole('table')).toHaveLength(5);
+      expect(screen.queryByText(/These words describe/)).toBeNull();
       expect(screen.getByText('In progress at the time we mention')).toBeTruthy();
       expect(screen.getByText('Continued for a period up to that time')).toBeTruthy();
       expect(screen.getByText(/does not mean “without mistakes/)).toBeTruthy();

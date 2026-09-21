@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { JSX } from 'react';
 import { Link } from 'react-router';
 
@@ -21,11 +21,12 @@ import styles from './styles.module.css';
    ============================================================ */
 
 export default function LandingPage(): JSX.Element {
+  const [motionPaused, setMotionPaused] = useState(false);
   return (
-    <div className={styles.home}>
+    <div className={styles.home} data-motion-paused={motionPaused}>
       <BrandBar />
       <main id="main">
-        <Hero />
+        <Hero motionPaused={motionPaused} onToggleMotion={() => setMotionPaused((paused) => !paused)} />
         <Steps />
       </main>
       <Foot />
@@ -56,6 +57,7 @@ function BrandBar(): JSX.Element {
           <BrandLockup size={30} />
         </Link>
         <span className={styles.spacer} />
+        <Link className={styles.practiceLink} to={paths.practice()}>Practice</Link>
         <Button
           variant="ghost"
           iconOnly
@@ -74,9 +76,13 @@ function BrandBar(): JSX.Element {
 
 /* ---- the hero ---------------------------------------------- */
 
-function Hero(): JSX.Element {
+function Hero({ motionPaused, onToggleMotion }: {
+  readonly motionPaused: boolean;
+  readonly onToggleMotion: () => void;
+}): JSX.Element {
   return (
     <section className={styles.hero}>
+      <HeroBackdrop />
       <div className={styles.heroCopy}>
         <Eyebrow />
         <h1 className={styles.headline}>
@@ -98,7 +104,39 @@ function Hero(): JSX.Element {
       </div>
       <GrammarOrbit />
       <CurriculumRibbon />
+      <button
+        type="button"
+        className={styles.motionToggle}
+        onClick={onToggleMotion}
+        aria-label={motionPaused ? 'Resume animations' : 'Pause animations'}
+      >
+        <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+          {motionPaused
+            ? <path d="m5 3 7 5-7 5Z" fill="currentColor" />
+            : <path d="M5 4v8M11 4v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />}
+        </svg>
+        {motionPaused ? 'Resume motion' : 'Pause motion'}
+      </button>
     </section>
+  );
+}
+
+function HeroBackdrop(): JSX.Element {
+  const wave = 'M1030 -100 C650 160 1280 280 1050 500 S520 740 720 1040';
+  return (
+    <div className={styles.heroBackdrop} aria-hidden="true">
+      <div className={styles.waveStage}>
+        <svg className={styles.waveArt} viewBox="0 0 1440 900" preserveAspectRatio="none" focusable="false">
+          <path className={`${styles.waveLayer} ${styles.waveBack}`} d={`${wave} H1600 V-100Z`} />
+          <g className={styles.waveParallax}>
+            <path className={`${styles.waveLayer} ${styles.waveFront}`} d={`${wave} H1600 V-100Z`} transform="translate(120 -40)" />
+          </g>
+          <path className={styles.waveEdge} d={wave} />
+          <path className={styles.waveTrace} d={wave} pathLength="1" />
+        </svg>
+      </div>
+      <span className={styles.boxPattern} />
+    </div>
   );
 }
 
@@ -114,15 +152,32 @@ function Eyebrow(): JSX.Element {
 function GrammarOrbit(): JSX.Element {
   return (
     <div className={styles.orbit} aria-hidden="true">
-      <span className={`${styles.orbitRing} ${styles.orbitRingOuter}`} />
-      <span className={`${styles.orbitRing} ${styles.orbitRingInner}`} />
-      <span className={`${styles.orbitDot} ${styles.orbitDotOne}`} />
-      <span className={`${styles.orbitDot} ${styles.orbitDotTwo}`} />
-      <span className={`${styles.orbitDot} ${styles.orbitDotThree}`} />
-      <span className={`${styles.orbitLabel} ${styles.orbitTenses}`}>Tenses</span>
-      <span className={`${styles.orbitLabel} ${styles.orbitVerbs}`}>Verbs</span>
-      <span className={`${styles.orbitLabel} ${styles.orbitNouns}`}>Nouns</span>
-      <span className={`${styles.orbitLabel} ${styles.orbitSentences}`}>Sentences</span>
+      <span className={`${styles.orbitRing} ${styles.orbitRingOuter}`}>
+        <svg className={styles.orbitPaths} viewBox="0 0 400 400" focusable="false">
+          <circle className={styles.orbitEcho} cx="200" cy="200" r="230" pathLength="1" />
+          <circle className={styles.orbitLine} cx="200" cy="200" r="200" pathLength="1" />
+        </svg>
+      </span>
+      <span className={styles.orbitPulse} />
+      <span className={`${styles.orbitTrack} ${styles.orbitTrackOne}`}><span className={styles.orbitDot} /></span>
+      <span className={`${styles.orbitTrack} ${styles.orbitTrackTwo}`}><span className={styles.orbitDot} /></span>
+      <span className={`${styles.orbitTrack} ${styles.orbitTrackThree}`}><span className={styles.orbitDot} /></span>
+      <span className={`${styles.orbitLabel} ${styles.orbitTenses}`}>
+        <svg className={styles.orbitIcon} viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="8" /><path d="M12 7v5l3 2" /></svg>
+        Tenses
+      </span>
+      <span className={`${styles.orbitLabel} ${styles.orbitVerbs}`}>
+        <svg className={styles.orbitIcon} viewBox="0 0 24 24" focusable="false"><path d="m13 3-8 11h6l-1 7 9-12h-6z" /></svg>
+        Verbs
+      </span>
+      <span className={`${styles.orbitLabel} ${styles.orbitNouns}`}>
+        <svg className={styles.orbitIcon} viewBox="0 0 24 24" focusable="false"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9" /></svg>
+        Nouns
+      </span>
+      <span className={`${styles.orbitLabel} ${styles.orbitSentences}`}>
+        <svg className={styles.orbitIcon} viewBox="0 0 24 24" focusable="false"><path d="M5 6h14M5 12h14M5 18h9" /></svg>
+        Sentences
+      </span>
       <span className={styles.orbitCore}>
         <BrandMark className={styles.orbitMark ?? ''} size={112} />
         <small>Grammar, connected</small>
@@ -173,8 +228,25 @@ const STEPS: readonly { readonly en: string; readonly ta: string; readonly says:
 ];
 
 function Steps(): JSX.Element {
+  const section = useRef<HTMLElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    if (!section.current || typeof IntersectionObserver === 'undefined') {
+      setRevealed(true);
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      setRevealed(true);
+      observer.disconnect();
+    }, { threshold: 0.08 });
+    observer.observe(section.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.band}>
+    <section ref={section} className={styles.band} data-revealed={revealed}>
       <div className={styles.bandInner}>
         <div className={styles.bandHead}>
           <p className={styles.sectionLabel}>The learning rhythm</p>
@@ -213,6 +285,7 @@ function Foot(): JSX.Element {
         <span className={styles.spacer} />
         <nav aria-label="Footer">
           <Link to={paths.topics()}>Topics</Link>
+          <Link to={paths.practice()}>Practice</Link>
           <Link to={paths.visualizer()}>Visualizer</Link>
         </nav>
       </div>

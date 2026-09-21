@@ -6,9 +6,20 @@ import type { SidebarTopic } from 'common/components/AppShell/Sidebar';
 import { useUiStore } from 'store/ui.store';
 
 const TOPICS: readonly SidebarTopic[] = [
-  { id: 'tenses', n: 1, en: 'Tenses' },
-  { id: 'verbs', n: 2, en: 'Verbs' },
-  { id: 'prepositions', n: 5, en: 'Prepositions' },
+  {
+    id: 'tenses',
+    n: 1,
+    en: 'Tenses',
+    ta: 'காலங்கள்',
+    tables: [{
+      id: 'tense-reference',
+      en: 'Time and action type',
+      ta: 'காலமும் செயல் வகையும்',
+      terms: ['Tense', 'Present perfect', 'நிகழ்காலம்'],
+    }],
+  },
+  { id: 'verbs', n: 2, en: 'Verbs', ta: 'வினைச்சொல்' },
+  { id: 'prepositions', n: 5, en: 'Prepositions', ta: 'இடைச்சொல்' },
 ];
 
 /* jsdom's matchMedia never changes, so the width is driven by hand. */
@@ -76,7 +87,7 @@ describe('AppShell', () => {
     renderShell();
     const sidebar = screen.getByRole('complementary', { name: 'Topics' });
 
-    expect(sidebar.querySelectorAll('a')).toHaveLength(TOPICS.length + 1);
+    expect(sidebar.querySelectorAll('a')).toHaveLength(TOPICS.length + 3);
     expect(within(sidebar).getByRole('link', { name: 'All topics' })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Prepositions' }).getAttribute('aria-current')).toBe('page');
   });
@@ -86,6 +97,26 @@ describe('AppShell', () => {
     const nav = screen.getByRole('navigation', { name: 'Primary' });
 
     expect(nav.querySelector('[aria-current="page"]')?.textContent).toBe('Topics');
+  });
+
+  it('searches topics in English and Tamil', () => {
+    renderShell();
+    const search = screen.getByRole('searchbox', { name: 'Search topics and tables' });
+
+    fireEvent.focus(search);
+    fireEvent.change(search, { target: { value: 'verb' } });
+    const results = (): HTMLElement => document.getElementById('topic-search-results') as HTMLElement;
+    expect(within(results()).getByText('Verbs').closest('a')?.getAttribute('href')).toBe('/topics/verbs');
+
+    fireEvent.change(search, { target: { value: 'இடை' } });
+    expect(within(results()).getByText('Prepositions').closest('a')?.getAttribute('href')).toBe('/topics/prepositions');
+    expect(screen.queryByText('இடைச்சொல்')).toBeNull();
+
+    fireEvent.change(search, { target: { value: 'perfect' } });
+    expect(screen.getByText('Time and action type').closest('a')?.getAttribute('href')).toBe(
+      '/topics/tenses#tense-reference',
+    );
+    expect(screen.getByText(/Present perfect/)).toBeTruthy();
   });
 
   it('collapses the sidebar without losing the link names', () => {
@@ -174,7 +205,11 @@ describe('AppShell', () => {
     renderShell();
     const nav = screen.getByRole('navigation', { name: 'Mobile' });
 
-    expect([...nav.querySelectorAll('a')].map((a) => a.textContent)).toEqual(['Home', 'Topics']);
+    expect(within(nav).getByRole('link', { name: 'Home' })).toBeTruthy();
+    expect(within(nav).getByRole('link', { name: 'Topics' })).toBeTruthy();
+    expect(within(nav).getByRole('link', { name: 'Practice' })).toBeTruthy();
+    expect(within(nav).getByRole('link', { name: 'Visualizer' })).toBeTruthy();
+    expect(within(nav).getAllByRole('link')).toHaveLength(4);
   });
 
   it('renders an empty sidebar until the content store supplies topics', () => {
@@ -190,6 +225,7 @@ describe('AppShell', () => {
 
     expect(screen.queryByRole('link', { name: 'Tenses' })).toBeNull();
     expect(within(sidebar).getByRole('link', { name: 'All topics' })).toBeTruthy();
-    expect(within(sidebar).queryAllByRole('link')).toHaveLength(1);
+    expect(within(sidebar).getByRole('link', { name: 'Practice' })).toBeTruthy();
+    expect(within(sidebar).queryAllByRole('link')).toHaveLength(3);
   });
 });

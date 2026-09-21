@@ -2,25 +2,42 @@
   /* A span is inline by default and an inline box ignores width and height —
      without this the ring renders as a 3px sliver. */
   display: inline-block;
-  width: 26px; height: 26px; border-radius: 50%;
-  border: 3px solid var(--line); border-top-color: var(--accent);
-  animation: spin .8s linear infinite;
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+  border-top-color: var(--accent);
+  border-right-color: color-mix(in srgb, var(--accent) 62%, var(--line));
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-soft) 42%, transparent);
+  animation: spin .75s cubic-bezier(.55, .15, .45, .85) infinite;
 }
 
 /* Page-level loading states should not look attached to the top-left corner.
    The minimum keeps short shell pages stable while dvh follows mobile browser
    chrome as it opens and closes. */
 .centered {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4);
   width: 100%;
   min-height: max(12rem, calc(100dvh - var(--header-h) - var(--s-8)));
 }
 
+.label {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  animation: loading-label 1.2s var(--ease) infinite alternate;
+}
+
 @keyframes spin { to { transform: rotate(360deg); } }
+@keyframes loading-label { to { opacity: .48; } }
 
 /* Not `animation: none`: a still ring reads as a broken image. It slows to
    where it no longer flickers. */
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation-duration: 2.4s; }
+  .label { animation: none; }
 }

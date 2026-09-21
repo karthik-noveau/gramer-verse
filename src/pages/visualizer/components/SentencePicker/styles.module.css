@@ -1,0 +1,90 @@
+.form {
+  margin: 0;
+  min-width: 0;
+}
+
+.picker { position: relative; min-width: 0; }
+
+.field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 40px;
+}
+
+.input {
+  grid-area: 1 / 1;
+  width: 100%;
+  min-width: 0;
+  padding: 2px 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font: 500 clamp(20px, 1.8vw, 25px)/1.4 var(--serif);
+  letter-spacing: -.018em;
+  caret-color: transparent;
+  cursor: default;
+}
+.input:focus { outline: none; }
+.field[data-preview="true"] .input { color: transparent; }
+.preview { grid-area: 1 / 1; z-index: 1; display: flex; align-items: center; min-width: 0; padding: 2px 0; pointer-events: none; }
+.preview > p { min-width: 0; overflow-wrap: anywhere; }
+
+.toggle {
+  grid-area: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--surface-sunk);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.toggle:hover, .toggle[aria-expanded="true"] { background: var(--accent-soft); color: var(--accent); }
+.toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.options {
+  position: absolute;
+  bottom: calc(100% + var(--s-2));
+  inset-inline: 0;
+  z-index: 40;
+  max-height: 260px;
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--s-1);
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-2);
+}
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-sm);
+  color: var(--soft);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.option > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.option[aria-selected="true"] { color: var(--accent); font-weight: 600; }
+.option:hover, .option[data-active="true"] { background: var(--surface-sunk); color: var(--ink); }
+
+@media (max-width: 480px) {
+  .field { gap: 8px; }
+  .toggle { width: 32px; padding: 6px; }
+  .toggle > span { display: none; }
+}

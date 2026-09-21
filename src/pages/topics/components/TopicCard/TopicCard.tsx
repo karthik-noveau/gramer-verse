@@ -9,8 +9,10 @@ import styles from './styles.module.css';
 /* ============================================================
    TopicCard — one of the ten.
 
-   Number, title, and how many authored lessons are in it.
-   Nothing else: there is no progress in this product, so there
+   Number and title only. Lesson counts belong inside a topic;
+   showing one here made the only topic with authored lessons
+   look more important than the reference-first topics. There
+   is no progress in this product, so there
    is no bar to fill, no percentage and no "continue where you
    left off". A card that reported one would be inventing a
    metric to fill space.
@@ -18,12 +20,9 @@ import styles from './styles.module.css';
 
 export type TopicCardProps = {
   readonly topic: Topic;
-  /** Counted from the topic's own lesson list, on read. A stored count is one
-   *  content change away from being wrong. */
-  readonly lessons: number;
 };
 
-export function TopicCard({ topic, lessons }: TopicCardProps): JSX.Element {
+export function TopicCard({ topic }: TopicCardProps): JSX.Element {
   return (
     <Card to={paths.topic(String(topic.id))} className={styles.card}>
       <span className={styles.n} aria-hidden="true">
@@ -37,11 +36,6 @@ export function TopicCard({ topic, lessons }: TopicCardProps): JSX.Element {
         </span>
       </h3>
 
-      {/* A zero authored-lesson count says nothing about the tables and
-          examples already available on the topic page, so it is omitted. */}
-      {lessons > 0 ? (
-        <p className={styles.count}>{lessons} {lessons === 1 ? 'lesson' : 'lessons'}</p>
-      ) : null}
     </Card>
   );
 }

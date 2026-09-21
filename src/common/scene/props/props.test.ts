@@ -152,6 +152,14 @@ describe('the prop library', () => {
       expect(withinBox(PROPS[key] as Prop)).toBe(true);
     });
 
+    it('keeps both cutaway layers inside their container bounds', () => {
+      for (const prop of ALL) {
+        if (!prop.cutaway) continue;
+        expect(withinBox({ ...prop, draw: prop.cutaway.back })).toBe(true);
+        expect(withinBox({ ...prop, draw: prop.cutaway.front })).toBe(true);
+      }
+    });
+
     it.each(Object.keys(PROPS))('%s declares a box with real dimensions', (key) => {
       const prop = PROPS[key] as Prop;
 

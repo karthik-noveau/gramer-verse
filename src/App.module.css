@@ -1,0 +1,21 @@
+/* A route change should feel deliberate without holding the learner back.
+   The new page enters as soon as it exists; there is no artificial exit delay. */
+.routeView {
+  min-width: 0;
+  animation: route-enter 300ms cubic-bezier(.16, 1, .3, 1) both;
+}
+
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.998);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .routeView { animation: none; }
+}

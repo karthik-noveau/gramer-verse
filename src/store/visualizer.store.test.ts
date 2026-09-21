@@ -1,4 +1,6 @@
 import { modeOf, selectScene, useVisualizerStore } from 'store/visualizer.store';
+import { useContentStore } from 'store/content.store';
+import { examplesFor } from 'pages/visualizer/utils/examples';
 
 /* ============================================================
    visualizer.store.test.ts
@@ -12,11 +14,24 @@ import { modeOf, selectScene, useVisualizerStore } from 'store/visualizer.store'
 const store = (): ReturnType<typeof useVisualizerStore.getState> => useVisualizerStore.getState();
 const scene = (): ReturnType<typeof selectScene> => selectScene(useVisualizerStore.getState());
 
+beforeAll(async () => { await useContentStore.getState().load(); });
+
 beforeEach(() => {
   store().reset();
 });
 
 describe('submitting a sentence', () => {
+  it.each([
+    ['prep-dir', 'path'], ['prep-time', 'timeline'], ['prep-other', 'relation'],
+  ])('accepts every %s example without a place-only refusal', (group, kind) => {
+    for (const example of examplesFor(useContentStore.getState().curriculum, group as string)) {
+      store().submit(example.en);
+      expect(store().cannot).toBeNull();
+      expect(store().group).toBe(group);
+      expect(store().word).toBe(example.word);
+      expect(scene()?.kind).toBe(kind);
+    }
+  });
   it('draws it', () => {
     store().submit('a red apple is under the table');
 
@@ -55,6 +70,22 @@ describe('submitting a sentence', () => {
 });
 
 describe('the learner’s own text', () => {
+  it('updates presets for a new group and diagram word', () => {
+    store().setGroup('prep-dir');
+    expect(store().typed).toBe('He is going to school');
+    store().choose('across');
+    expect(store().typed).toBe('He ran across the road');
+    store().setGroup('prep-time');
+    expect(store().typed).toBe('I was born in 2000');
+  });
+
+  it('preserves a custom draft across groups and diagram words', () => {
+    store().setTyped('my own unfinished sentence');
+    store().setGroup('prep-dir');
+    store().choose('across');
+    store().setGroup('prep-time');
+    expect(store().typed).toBe('my own unfinished sentence');
+  });
   it('is not rewritten by pressing a word', () => {
     store().setTyped('the ball is in the box');
     store().choose('behind');

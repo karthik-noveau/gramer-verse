@@ -6,10 +6,13 @@ import { Button } from 'common/components/Button/Button';
 import { Icon } from 'common/components/Icon/Icon';
 import { paths } from 'common/constants/routes';
 import type { Theme } from 'store/ui.store';
+import type { SidebarTopic } from './Sidebar';
+import { TopicSearch } from './TopicSearch';
 
 import styles from './styles.module.css';
 
 export type HeaderProps = {
+  readonly topics: readonly SidebarTopic[];
   /** Below 900px the sidebar is a drawer, so the hamburger replaces the
    *  collapse button. Only one of the two is ever shown. */
   readonly narrow: boolean;
@@ -25,6 +28,7 @@ export type HeaderProps = {
    content ships with the app, not to it — and there is no account. The theme
    toggle is a plain button, so the header has no menus of its own. */
 export function Header({
+  topics,
   narrow,
   drawerOpen,
   onToggleDrawer,
@@ -63,8 +67,12 @@ export function Header({
 
       <span className={styles.spacer} />
 
+      <TopicSearch topics={topics} />
+
       <nav className={styles.topNav} aria-label="Primary">
-        <NavLink to={paths.topics()}>Topics</NavLink>
+        <NavLink to={paths.topics()} end>Topics</NavLink>
+        <NavLink to={paths.visualizer()}>Visualizer</NavLink>
+        <NavLink to={paths.practice()}>Practice</NavLink>
       </nav>
 
       <Button

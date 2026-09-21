@@ -86,6 +86,8 @@ export type Prop = {
    *  prop, and a missing field would be indistinguishable from an unfinished
    *  one. */
   readonly surfaceY: number | null;
+  /** Vertical change per horizontal pixel from the surface's midpoint. */
+  readonly surfaceSlope?: number;
   /** Where things go IN it: [x, y, w, h]. Null if it is not a container. */
   readonly inside: readonly [number, number, number, number] | null;
   /** Whether anything fits beneath it. A table stands on legs, so it has
@@ -94,6 +96,15 @@ export type Prop = {
   /** For actors: mouth, hand, foot, eye. Empty for objects. */
   readonly anchors: Readonly<Partial<Record<AnchorName, readonly [number, number]>>>;
   readonly draw: (fill?: string) => readonly SceneNode[];
+  /** A container whose contents sit between its back and front walls. */
+  readonly cutaway?: {
+    readonly back: () => readonly SceneNode[];
+    readonly front: () => readonly SceneNode[];
+    /** An opaque open container shows the contents peeking above this rim. */
+    readonly rimY?: number;
+    /** Rear edge at the midpoint, where objects behind the container peek out. */
+    readonly backY?: number;
+  };
   readonly word: PropWord;
 };
 

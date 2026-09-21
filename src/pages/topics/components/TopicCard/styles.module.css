@@ -10,20 +10,6 @@
   min-height: 154px;
   padding: var(--s-5);
 }
-.card::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 44px;
-  height: 3px;
-  background: var(--brand-hero-gold);
-  transform: scaleX(.35);
-  transform-origin: right;
-  transition: transform var(--t-base) var(--ease);
-}
-.card:hover::after { transform: scaleX(1); }
-
 .n {
   width: 26px;
   height: 26px;
@@ -49,13 +35,4 @@
   color: var(--muted);
   font-size: var(--fs-sm);
   font-weight: 400;
-}
-
-/* Pushed to the foot so the counts line up across a row of cards whose
-   summaries are different lengths. */
-.count {
-  margin: auto 0 0;
-  padding-top: var(--s-2);
-  color: var(--muted);
-  font-size: var(--fs-xs);
 }
